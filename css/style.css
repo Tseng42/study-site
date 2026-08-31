@@ -241,6 +241,86 @@ h1, h2, h3, h4 {
   pointer-events: none;
 }
 
+/* ---- Study plan card ---- */
+.plan-card {
+  background: var(--ink);
+  color: #fff;
+  border-radius: var(--radius-lg);
+  padding: 20px 24px;
+  margin-bottom: 24px;
+  box-shadow: var(--shadow-md);
+}
+.plan-card-top {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 10px;
+}
+.plan-card-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.plan-card-days {
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+.plan-card-days strong {
+  font-family: var(--font-numeric);
+  font-size: 1.4rem;
+  font-variant-numeric: tabular-nums;
+}
+.plan-card-phase {
+  display: inline-block;
+  margin-top: 2px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 2px 10px;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.15);
+}
+.plan-card-tip {
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 0.9rem;
+  margin: 0 0 14px;
+  line-height: 1.6;
+}
+.plan-card-focus {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.plan-card-focus-label {
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.65);
+  font-weight: 600;
+}
+.plan-focus-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.12);
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #fff;
+  transition: background 0.15s ease;
+}
+.plan-focus-chip:hover {
+  background: rgba(255, 255, 255, 0.22);
+}
+.plan-focus-reason {
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.7);
+}
+
 /* ---- Subject cards ---- */
 .subject-card-grid {
   display: grid;

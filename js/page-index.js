@@ -2,12 +2,14 @@ import { getAllSubjects, getSubject, getUnit, getQuestion } from './subjects-reg
 import { getSubjectProgress, getQuizResults, getWrongQuestions } from './storage.js';
 import { el, progressBar, subjectIcon, icon, blobDecoration } from './render.js';
 import { initHeader, formatRelativeDate } from './layout.js';
+import { getDaysRemaining, getStudyPhase, suggestFocusSubjects } from './study-plan.js';
 
 initHeader();
 
 const subjects = getAllSubjects();
 
 renderDashHeader();
+renderStudyPlanCard();
 renderSubjectCards();
 renderReviewList();
 renderStats();
@@ -29,6 +31,44 @@ function renderDashHeader() {
     ]),
     el('a', { href: 'wrongbook.html', class: 'btn-pill btn-pill-dark' }, [icon('flag', { size: 16 }), '前往錯題本']),
     blob
+  );
+}
+
+function renderStudyPlanCard() {
+  const container = document.getElementById('study-plan-card');
+  const days = getDaysRemaining();
+  const phase = getStudyPhase(days);
+  const focus = suggestFocusSubjects(subjects);
+
+  container.append(
+    el('div', { class: 'plan-card' }, [
+      el('div', { class: 'plan-card-top' }, [
+        el('div', { class: 'plan-card-icon' }, icon('clock', { size: 20 })),
+        el('div', {}, [
+          el('div', { class: 'plan-card-days' }, [
+            `距離學測還有 `,
+            el('strong', {}, `${days}`),
+            ` 天`,
+          ]),
+          el('div', { class: 'plan-card-phase' }, phase.label),
+        ]),
+      ]),
+      el('p', { class: 'plan-card-tip' }, phase.tip),
+      focus.length
+        ? el(
+            'div',
+            { class: 'plan-card-focus' },
+            [el('span', { class: 'plan-card-focus-label' }, '這週建議多花時間:')].concat(
+              focus.map((f) =>
+                el('a', { class: 'plan-focus-chip', href: `subject.html?subject=${f.subject.id}` }, [
+                  `${f.subject.name}`,
+                  el('span', { class: 'plan-focus-reason' }, `· ${f.reason}`),
+                ])
+              )
+            )
+          )
+        : null,
+    ])
   );
 }
 
