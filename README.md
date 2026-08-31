@@ -1,6 +1,6 @@
 # 學測複習站
 
-給高中生複習學測全科的靜態網站。純 HTML/CSS/JavaScript(ES Modules)寫成,不需要 npm 或建置工具,資料先用本地 JS 檔案管理,使用者的作答紀錄/進度/錯題本存在瀏覽器 localStorage。
+給高中生複習學測全科的靜態網站。純 HTML/CSS/JavaScript(ES Modules)寫成,不需要 npm 或建置工具,資料用本地 JS 檔案管理。使用者以 Google 帳號登入,作答紀錄/進度/錯題本存在瀏覽器 localStorage 作為離線可用的本機快取,並背景同步到 Firebase Firestore,換裝置登入同一帳號可看到同一份資料。
 
 ## 本機開發
 
@@ -26,9 +26,14 @@ unit.html          單元頁樣板(筆記 + 測驗)?subject=chinese&unit=ch-u1
 wrongbook.html      錯題本頁面
 css/style.css      全站樣式
 js/
-  storage.js         localStorage 存取封裝(進度/作答紀錄/錯題本)
+  firebase-init.js    Firebase 專案初始化(config、auth、firestore 實例)
+  auth.js             Google 登入 / 登出、登入前的全螢幕登入畫面
+  cloud-sync.js        localStorage 快照與 Firestore 之間的同步邏輯
+  storage.js          localStorage 存取封裝(進度/作答紀錄/錯題本),依登入帳號分開存放
+  study-plan.js        學測倒數天數與讀書階段/重點科目建議
   subjects-registry.js  統一的資料查詢入口
-  render.js           共用 DOM render 小工具
+  render.js           共用 DOM render 小工具(含圖示、圓形勾選等元件)
+  layout.js           共用頁首(品牌圖示、使用者選單)
   page-*.js           各頁面邏輯
 data/
   subjects-meta.js    科目清單(id/名稱/顏色)
@@ -37,7 +42,7 @@ data/
 
 ## 目前內容進度
 
-各科單元清單已經照高一到高三的完整範圍建好骨架(國文/英文依六個學期分組、數學依高一上~高二下+高三總複習分組、自然/社會依領域分組),但大部分單元還沒有寫筆記與測驗題,清單上會顯示「製作中」標記。之後只要把對應單元的 `note` 和 `quiz` 填上內容,標記就會自動消失。
+五科、共 111 個單元(國文 24、英文 24、數學 18、自然 24、社會 21)已全數寫上筆記與測驗題(共約 330 題單選題),涵蓋高一到高三完整範圍。日後若要調整內容,直接編輯對應 `data/*.js` 檔案裡的 `note`/`quiz` 即可,格式規則見下一節。
 
 ## 如何新增/擴充內容
 
@@ -50,7 +55,7 @@ export default {
     {
       id: 'ch-u1',              // 全站唯一,建議用「科目縮寫-uN」
       title: '單元標題',
-      category: null,            // 自然/社會用,如 '物理'、'歷史',其他科可留 null
+      category: '高一上',        // 分組標籤:國文/英文/數學用學期(高一上~高三下),自然/社會用領域(如 '物理'、'歷史')
       note: {
         sections: [
           { heading: '重點整理', content: ['條列重點1', '條列重點2'] },
@@ -73,9 +78,13 @@ export default {
 
 新增科目:在 `data/subjects-meta.js` 加一筆、建立對應資料檔,再到 `js/subjects-registry.js` import 並加進 `dataBySubject`。
 
-## 資料保存說明
+## 帳號與資料保存說明
 
-作答紀錄、進度、錯題本都存在瀏覽器的 localStorage,只存在「同一台電腦、同一個瀏覽器」裡。換電腦、換瀏覽器、或清除瀏覽器資料都會遺失紀錄,目前沒有雲端同步。三筆資料的 key 分別是 `studysite_progress`、`studysite_quizResults`、`studysite_wrongBookState`,格式細節見 `js/storage.js` 開頭的註解。
+- 進入任何頁面前都需要用 Google 帳號登入(見 `js/auth.js`),未登入會擋在全螢幕登入畫面。
+- 進度、作答紀錄、錯題本會先寫進瀏覽器 localStorage(依登入帳號的 uid 分開存放,同一台裝置可以給多個帳號使用而不互相汙染),讓畫面能立即反應、離線也能繼續用;背景會 debounce 同步一份完整快照到 Firestore(`users/{uid}` 文件),見 `js/cloud-sync.js`。
+- 登入時會比對本機與雲端的 `updatedAt` 時間戳,取較新的一份覆蓋另一份(last-write-wins),換裝置登入同一帳號就能接續進度。
+- Firestore 安全規則限制每個帳號只能讀寫自己 uid 底下的文件,規則內容見 Firebase 主控台的 Firestore → 規則分頁。
+- Firebase 專案用的是免費 Spark 方案(Authentication + Firestore 皆免費,不需信用卡),`js/firebase-init.js` 裡的 `firebaseConfig` 是公開識別碼而非密碼,可以放心留在版本控制裡。
 
 ## 部署到 GitHub Pages
 
