@@ -539,11 +539,18 @@ a.timeline-row:hover {
   border-radius: var(--radius-md);
 }
 
+/* ---- Profile page ---- */
+.profile-title {
+  font-size: 1.6rem;
+  margin: 0 0 20px;
+}
+
 /* ---- Stat tiles ---- */
 .stat-tile-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 10px;
+  margin-bottom: 16px;
 }
 .stat-tile {
   background: var(--surface-alt);
@@ -590,6 +597,28 @@ a.timeline-row:hover {
   font-size: 0.82rem;
   font-weight: 600;
   margin-top: 2px;
+}
+
+/* ---- Charts ---- */
+.chart-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin: 24px 0 32px;
+}
+.chart-card {
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  box-shadow: var(--shadow-sm);
+}
+.chart-card h2 {
+  font-size: 1rem;
+  margin: 0 0 14px;
+}
+.chart-canvas-wrap {
+  position: relative;
+  height: 220px;
 }
 
 /* ---- Right rail ---- */
@@ -867,6 +896,9 @@ a.timeline-row:hover {
 
 @media (max-width: 860px) {
   .dash-columns {
+    grid-template-columns: 1fr;
+  }
+  .chart-grid {
     grid-template-columns: 1fr;
   }
   .stat-tile-grid {

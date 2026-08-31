@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>個人資料 - 學測複習站</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="site-header">
+  <a href="index.html" class="brand">
+    <span class="brand-mark" id="brand-mark"></span>
+    學測複習站
+  </a>
+  <nav class="header-nav">
+    <a href="index.html" class="nav-pill" id="nav-home">首頁</a>
+    <a href="profile.html" class="nav-pill is-active" id="nav-profile">個人資料</a>
+    <a href="wrongbook.html" class="nav-pill" id="nav-wrongbook">錯題本</a>
+  </nav>
+  <div class="user-menu" id="user-menu"></div>
+</header>
+<main id="profile-content" class="container">
+  <h1 class="profile-title">個人資料</h1>
+  <div id="stats-tiles" class="stat-tile-grid"></div>
+  <div id="encourage-card"></div>
+  <div class="chart-grid">
+    <section class="chart-card">
+      <h2>各科完成度</h2>
+      <div class="chart-canvas-wrap"><canvas id="chart-completion"></canvas></div>
+    </section>
+    <section class="chart-card">
+      <h2>各科測驗正確率</h2>
+      <div class="chart-canvas-wrap"><canvas id="chart-accuracy"></canvas></div>
+    </section>
+  </div>
+  <div class="dash-columns">
+    <section class="dash-col">
+      <h2>近期需複習</h2>
+      <div id="review-list" class="timeline-list"></div>
+    </section>
+    <section class="dash-col">
+      <h2>最近測驗紀錄</h2>
+      <div id="recent-quizzes" class="rail-list"></div>
+    </section>
+  </div>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+<script type="module" src="js/page-profile.js"></script>
+</body>
+</html>
