@@ -139,6 +139,89 @@ h1, h2, h3, h4 {
   color: #fff;
 }
 
+.user-menu {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.user-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-full);
+  object-fit: cover;
+  flex-shrink: 0;
+}
+.user-avatar-fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--ink);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+.user-signout-btn {
+  color: var(--ink-muted);
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 4px 2px;
+}
+.user-signout-btn:hover {
+  color: var(--ink);
+}
+
+/* ---- Login gate ---- */
+.auth-gate {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg);
+  z-index: 100;
+  padding: 24px;
+}
+.auth-gate-card {
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  padding: 36px 32px;
+  max-width: 360px;
+  width: 100%;
+  text-align: center;
+}
+.auth-gate-icon {
+  width: 52px;
+  height: 52px;
+  margin: 0 auto 16px;
+  border-radius: var(--radius-md);
+  background: var(--ink);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.auth-gate-card h1 {
+  font-size: 1.3rem;
+  margin: 0 0 10px;
+}
+.auth-gate-desc {
+  color: var(--ink-muted);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin: 0 0 22px;
+}
+.auth-gate-card .btn-pill {
+  width: 100%;
+}
+.auth-gate-error {
+  color: var(--danger);
+  font-size: 0.82rem;
+  font-weight: 600;
+  margin: 12px 0 0;
+  min-height: 1em;
+}
+
 .site-footer {
   text-align: center;
   color: var(--ink-muted);

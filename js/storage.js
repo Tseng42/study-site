@@ -1,30 +1,47 @@
-// 封裝所有 localStorage 存取。之後如果要換成真的資料庫 API,
-// 只需要改這個檔案內部的實作,對外的函式名稱與回傳格式維持不變即可。
+// 封裝所有本機資料存取(localStorage,依登入帳號分開存放)。
+// 對外的函式名稱與回傳格式維持不變,雲端同步是額外掛上去的,
+// 這個檔案本身完全不知道 Firebase 的存在(見 cloud-sync.js)。
 
-const KEYS = {
-  progress: 'studysite_progress',
-  quizResults: 'studysite_quizResults',
-  wrongBookState: 'studysite_wrongBookState',
-};
+let activeUid = null;
+const listeners = [];
 
-function readJSON(key, fallback) {
+export function setActiveUser(uid) {
+  activeUid = uid;
+}
+
+// 每次本機資料被寫入時觸發,cloud-sync.js 用這個決定何時要推上雲端。
+export function onChange(fn) {
+  listeners.push(fn);
+}
+
+function notifyChange() {
+  for (const fn of listeners) fn();
+}
+
+function key(name) {
+  return `studysite_${name}_${activeUid || 'anon'}`;
+}
+
+function readJSON(name, fallback) {
   try {
-    const raw = localStorage.getItem(key);
+    const raw = localStorage.getItem(key(name));
     return raw ? JSON.parse(raw) : fallback;
   } catch {
     return fallback;
   }
 }
 
-function writeJSON(key, value) {
-  localStorage.setItem(key, JSON.stringify(value));
+function writeJSON(name, value) {
+  localStorage.setItem(key(name), JSON.stringify(value));
+  localStorage.setItem(key('updatedAt'), new Date().toISOString());
+  notifyChange();
 }
 
 // ---- 讀書進度 ----
 // { [subjectId]: { [unitId]: { completed: boolean, completedAt: string|null } } }
 
 export function getProgress() {
-  return readJSON(KEYS.progress, {});
+  return readJSON('progress', {});
 }
 
 export function setUnitCompleted(subjectId, unitId, completed) {
@@ -34,7 +51,7 @@ export function setUnitCompleted(subjectId, unitId, completed) {
     completed,
     completedAt: completed ? new Date().toISOString() : null,
   };
-  writeJSON(KEYS.progress, progress);
+  writeJSON('progress', progress);
 }
 
 export function isUnitCompleted(subjectId, unitId) {
@@ -60,16 +77,16 @@ export function getSubjectProgress(subjectId, totalUnits) {
 // }
 
 export function getQuizResults(subjectId, unitId) {
-  const all = readJSON(KEYS.quizResults, []);
+  const all = readJSON('quizResults', []);
   return all.filter(
     (r) => (!subjectId || r.subjectId === subjectId) && (!unitId || r.unitId === unitId)
   );
 }
 
 export function addQuizResult(record) {
-  const all = readJSON(KEYS.quizResults, []);
+  const all = readJSON('quizResults', []);
   all.push(record);
-  writeJSON(KEYS.quizResults, all);
+  writeJSON('quizResults', all);
 }
 
 // ---- 錯題本 ----
@@ -78,17 +95,17 @@ export function addQuizResult(record) {
 // 取出最近一次答錯、且尚未被標記「已熟練」的題目。
 
 function getWrongBookState() {
-  return readJSON(KEYS.wrongBookState, {});
+  return readJSON('wrongBookState', {});
 }
 
 export function markQuestionMastered(questionId, mastered = true) {
   const state = getWrongBookState();
   state[questionId] = { ...(state[questionId] || {}), mastered };
-  writeJSON(KEYS.wrongBookState, state);
+  writeJSON('wrongBookState', state);
 }
 
 export function getWrongQuestions() {
-  const results = readJSON(KEYS.quizResults, [])
+  const results = readJSON('quizResults', [])
     .slice()
     .sort((a, b) => new Date(a.takenAt) - new Date(b.takenAt));
   const state = getWrongBookState();
@@ -109,4 +126,27 @@ export function getWrongQuestions() {
   return Array.from(latestByQuestion.values()).filter(
     (q) => !q.isCorrect && !state[q.questionId]?.mastered
   );
+}
+
+// ---- 雲端同步用:整包快照存取(見 cloud-sync.js) ----
+
+export function getSnapshot() {
+  return {
+    progress: getProgress(),
+    quizResults: readJSON('quizResults', []),
+    wrongBookState: getWrongBookState(),
+    updatedAt: localStorage.getItem(key('updatedAt')) || null,
+  };
+}
+
+export function applySnapshot(snapshot) {
+  if (!snapshot) return;
+  localStorage.setItem(key('progress'), JSON.stringify(snapshot.progress || {}));
+  localStorage.setItem(key('quizResults'), JSON.stringify(snapshot.quizResults || []));
+  localStorage.setItem(key('wrongBookState'), JSON.stringify(snapshot.wrongBookState || {}));
+  if (snapshot.updatedAt) localStorage.setItem(key('updatedAt'), snapshot.updatedAt);
+}
+
+export function getLocalUpdatedAt() {
+  return localStorage.getItem(key('updatedAt'));
 }

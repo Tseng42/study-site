@@ -1,9 +1,14 @@
 import { getSubject } from './subjects-registry.js';
 import { isUnitCompleted, getSubjectProgress } from './storage.js';
 import { el, progressBar, icon, subjectIcon } from './render.js';
-import { initHeader } from './layout.js';
+import { initHeader, renderUserMenu } from './layout.js';
+import { ensureSignedIn } from './auth.js';
+import { initCloudSync } from './cloud-sync.js';
 
 initHeader();
+const user = await ensureSignedIn();
+await initCloudSync(user.uid);
+renderUserMenu(user);
 
 const params = new URLSearchParams(location.search);
 const subjectId = params.get('subject');

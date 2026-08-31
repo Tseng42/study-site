@@ -1,9 +1,14 @@
 import { getWrongQuestions, markQuestionMastered } from './storage.js';
 import { getQuestion, getUnit, getSubject } from './subjects-registry.js';
 import { el, icon } from './render.js';
-import { initHeader } from './layout.js';
+import { initHeader, renderUserMenu } from './layout.js';
+import { ensureSignedIn } from './auth.js';
+import { initCloudSync } from './cloud-sync.js';
 
 initHeader();
+const user = await ensureSignedIn();
+await initCloudSync(user.uid);
+renderUserMenu(user);
 render();
 
 function render() {

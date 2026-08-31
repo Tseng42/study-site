@@ -1,10 +1,15 @@
 import { getAllSubjects, getSubject, getUnit, getQuestion } from './subjects-registry.js';
 import { getSubjectProgress, getQuizResults, getWrongQuestions } from './storage.js';
 import { el, progressBar, subjectIcon, icon, blobDecoration } from './render.js';
-import { initHeader, formatRelativeDate } from './layout.js';
+import { initHeader, renderUserMenu, formatRelativeDate } from './layout.js';
 import { getDaysRemaining, getStudyPhase, suggestFocusSubjects } from './study-plan.js';
+import { ensureSignedIn } from './auth.js';
+import { initCloudSync } from './cloud-sync.js';
 
 initHeader();
+const user = await ensureSignedIn();
+await initCloudSync(user.uid);
+renderUserMenu(user);
 
 const subjects = getAllSubjects();
 

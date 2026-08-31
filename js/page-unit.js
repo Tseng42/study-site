@@ -1,9 +1,14 @@
 import { getUnit } from './subjects-registry.js';
 import { isUnitCompleted, setUnitCompleted, addQuizResult } from './storage.js';
 import { el, renderNoteSections, icon, circularCheck } from './render.js';
-import { initHeader } from './layout.js';
+import { initHeader, renderUserMenu } from './layout.js';
+import { ensureSignedIn } from './auth.js';
+import { initCloudSync } from './cloud-sync.js';
 
 initHeader();
+const user = await ensureSignedIn();
+await initCloudSync(user.uid);
+renderUserMenu(user);
 
 const params = new URLSearchParams(location.search);
 const subjectId = params.get('subject');
