@@ -67,7 +67,7 @@ function waitForLogin() {
         btn.disabled = false;
         btn.innerHTML = '';
         btn.append(icon('chevronRight', { size: 16 }), '使用 Google 登入');
-        errorEl.textContent = '登入失敗,請再試一次。';
+        errorEl.textContent = `登入失敗:${err.code || err.message || '請再試一次'}`;
       }
     });
   });
