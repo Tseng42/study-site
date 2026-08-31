@@ -68,19 +68,46 @@ function renderQuizIntro() {
   container.append(el('div', { class: 'quiz-mode-select' }, [practiceBtn, examBtn]));
 }
 
+const MAX_QUIZ_QUESTIONS = 8;
+
+// Fisher-Yates 洗牌,不修改原陣列。
+function shuffle(array) {
+  const copy = array.slice();
+  for (let i = copy.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copy[i], copy[j]] = [copy[j], copy[i]];
+  }
+  return copy;
+}
+
+// 每次作答都重新排題目順序、重新排每題選項順序(並同步校正正確答案的 index),
+// 題數超過上限時隨機抽一部分,讓每輪測驗「感覺不一樣」。
+function prepareQuestions(quiz) {
+  const picked = shuffle(quiz).slice(0, MAX_QUIZ_QUESTIONS);
+  return picked.map((q) => {
+    const optionOrder = shuffle(q.options.map((_, i) => i));
+    return {
+      ...q,
+      options: optionOrder.map((i) => q.options[i]),
+      answer: optionOrder.indexOf(q.answer),
+    };
+  });
+}
+
 function startQuiz(mode) {
   const container = document.getElementById('unit-quiz');
   container.innerHTML = '';
   container.append(el('h3', {}, mode === 'practice' ? '練習模式' : '測驗模式'));
 
-  const answers = new Array(unit.quiz.length).fill(null);
+  const questions = prepareQuestions(unit.quiz);
+  const answers = new Array(questions.length).fill(null);
   const questionRefs = [];
   const resultBar = el('div', { class: 'quiz-result-bar' });
   let finished = false;
 
   const form = el('div', { class: 'quiz-form' });
 
-  unit.quiz.forEach((q, index) => {
+  questions.forEach((q, index) => {
     const optionsWrap = el('div', { class: 'quiz-options' });
     const feedback = el('div', { class: 'quiz-feedback' });
 
@@ -122,7 +149,7 @@ function startQuiz(mode) {
         alert('還有題目尚未作答喔。');
         return;
       }
-      unit.quiz.forEach((_, index) => revealAnswer(index));
+      questions.forEach((_, index) => revealAnswer(index));
       finish();
       submitBtn.disabled = true;
     });
@@ -130,7 +157,7 @@ function startQuiz(mode) {
   }
 
   function revealAnswer(index) {
-    const q = unit.quiz[index];
+    const q = questions[index];
     const selected = answers[index];
     const { optionsWrap, feedback } = questionRefs[index];
 
@@ -156,14 +183,14 @@ function startQuiz(mode) {
     if (finished) return;
     finished = true;
 
-    const answerRecords = unit.quiz.map((q, index) => ({
+    const answerRecords = questions.map((q, index) => ({
       questionId: q.id,
       selected: answers[index],
       correct: q.answer,
       isCorrect: answers[index] === q.answer,
     }));
     const score = answerRecords.filter((a) => a.isCorrect).length;
-    const total = unit.quiz.length;
+    const total = questions.length;
 
     addQuizResult({
       id: crypto.randomUUID(),
