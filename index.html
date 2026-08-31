@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>學測複習站</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="site-header">
+  <a href="index.html" class="brand">
+    <span class="brand-mark" id="brand-mark"></span>
+    學測複習站
+  </a>
+  <nav class="header-nav">
+    <a href="index.html" class="nav-pill is-active" id="nav-home">首頁</a>
+    <a href="wrongbook.html" class="nav-pill" id="nav-wrongbook">錯題本</a>
+  </nav>
+</header>
+<main id="index-content" class="container">
+  <div class="dash-header" id="dash-header"></div>
+  <section id="subject-list" class="subject-card-grid"></section>
+  <div class="dash-columns">
+    <section class="dash-col">
+      <h2>近期需複習</h2>
+      <div id="review-list" class="timeline-list"></div>
+    </section>
+    <section class="dash-col">
+      <h2>學習統計</h2>
+      <div id="stats-tiles" class="stat-tile-grid"></div>
+      <div id="encourage-card"></div>
+      <section class="app-rail">
+        <h2>最近測驗紀錄</h2>
+        <div id="recent-quizzes" class="rail-list" style="margin-top: 14px;"></div>
+      </section>
+    </section>
+  </div>
+</main>
+<footer class="site-footer">作答紀錄、進度、錯題本都儲存在這台電腦的瀏覽器裡(localStorage),換瀏覽器或清除資料會遺失紀錄。</footer>
+<script type="module" src="js/page-index.js"></script>
+</body>
+</html>
