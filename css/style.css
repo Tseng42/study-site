@@ -900,6 +900,177 @@ a.timeline-row:hover {
   margin: 0 0 12px;
 }
 
+/* ---- Mock exam ---- */
+.mockexam-intro {
+  color: var(--ink-muted);
+  max-width: 640px;
+  line-height: 1.7;
+  margin: 0 0 28px;
+}
+.mockexam-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 16px;
+}
+.mockexam-card {
+  background: var(--card-color, var(--ink));
+  color: #fff;
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  box-shadow: var(--shadow-sm);
+}
+.mockexam-card-top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.mockexam-card-top h2 {
+  font-size: 1.1rem;
+  margin: 0;
+}
+.mockexam-card-meta {
+  margin: 2px 0 0;
+  font-size: 0.85rem;
+  font-weight: 600;
+  opacity: 0.9;
+}
+.mockexam-card-last {
+  font-size: 0.82rem;
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-sm);
+  padding: 8px 10px;
+  margin: 0;
+}
+.mockexam-card-last-empty {
+  opacity: 0.75;
+}
+.mockexam-card-disabled {
+  font-size: 0.82rem;
+  opacity: 0.8;
+  margin: 0;
+}
+.mockexam-card .btn-pill-dark {
+  background: rgba(0, 0, 0, 0.28);
+}
+
+/* ---- Mock exam: start screen ---- */
+.mockexam-start-card {
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: 28px;
+  text-align: center;
+  max-width: 440px;
+  margin: 0 auto;
+}
+.mockexam-start-card .subject-card-icon {
+  margin: 0 auto 14px;
+}
+.mockexam-start-list {
+  text-align: left;
+  color: var(--ink-muted);
+  font-size: 0.9rem;
+  line-height: 1.9;
+  margin: 16px 0 22px;
+  padding-left: 20px;
+}
+.mockexam-start-card .btn-pill {
+  width: 100%;
+}
+
+/* ---- Mock exam: running ---- */
+.mockexam-run-header {
+  position: sticky;
+  top: 64px;
+  z-index: 5;
+  background: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+  margin-bottom: 8px;
+}
+.mockexam-run-header h2 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+.mockexam-timer {
+  font-family: var(--font-numeric);
+  font-weight: 800;
+  font-size: 1.1rem;
+  background: var(--ink);
+  color: #fff;
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  font-variant-numeric: tabular-nums;
+}
+.mockexam-timer-low {
+  background: var(--danger);
+}
+
+/* ---- Mock exam: result ---- */
+.mockexam-result-card {
+  background: var(--ink);
+  color: #fff;
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  margin-bottom: 24px;
+}
+.mockexam-timeup-note {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin: 0 0 10px;
+}
+.mockexam-score-row {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+.mockexam-score-value {
+  font-family: var(--font-numeric);
+  font-weight: 800;
+  font-size: 2rem;
+}
+.mockexam-score-percent {
+  font-family: var(--font-numeric);
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.7);
+}
+.mockexam-band {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+.mockexam-band-value {
+  background: rgba(255, 255, 255, 0.15);
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+.mockexam-band-desc {
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 0.85rem;
+}
+.mockexam-band-disclaimer {
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 0.75rem;
+  margin: 12px 0 0;
+}
+.mockexam-result-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
 @media (max-width: 860px) {
   .dash-columns {
     grid-template-columns: 1fr;

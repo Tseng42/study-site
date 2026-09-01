@@ -4,6 +4,7 @@ import { el, renderNoteSections, icon, circularCheck } from './render.js';
 import { initHeader, renderUserMenu } from './layout.js';
 import { ensureSignedIn } from './auth.js';
 import { initCloudSync } from './cloud-sync.js';
+import { prepareQuestions } from './quiz-utils.js';
 
 initHeader();
 const user = await ensureSignedIn();
@@ -70,36 +71,12 @@ function renderQuizIntro() {
 
 const MAX_QUIZ_QUESTIONS = 8;
 
-// Fisher-Yates 洗牌,不修改原陣列。
-function shuffle(array) {
-  const copy = array.slice();
-  for (let i = copy.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [copy[i], copy[j]] = [copy[j], copy[i]];
-  }
-  return copy;
-}
-
-// 每次作答都重新排題目順序、重新排每題選項順序(並同步校正正確答案的 index),
-// 題數超過上限時隨機抽一部分,讓每輪測驗「感覺不一樣」。
-function prepareQuestions(quiz) {
-  const picked = shuffle(quiz).slice(0, MAX_QUIZ_QUESTIONS);
-  return picked.map((q) => {
-    const optionOrder = shuffle(q.options.map((_, i) => i));
-    return {
-      ...q,
-      options: optionOrder.map((i) => q.options[i]),
-      answer: optionOrder.indexOf(q.answer),
-    };
-  });
-}
-
 function startQuiz(mode) {
   const container = document.getElementById('unit-quiz');
   container.innerHTML = '';
   container.append(el('h3', {}, mode === 'practice' ? '練習模式' : '測驗模式'));
 
-  const questions = prepareQuestions(unit.quiz);
+  const questions = prepareQuestions(unit.quiz, MAX_QUIZ_QUESTIONS);
   const answers = new Array(questions.length).fill(null);
   const questionRefs = [];
   const resultBar = el('div', { class: 'quiz-result-bar' });

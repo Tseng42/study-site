@@ -128,6 +128,20 @@ export function getWrongQuestions() {
   );
 }
 
+// ---- 模擬考紀錄(每次模擬考一筆整體摘要,個別題目的對錯另外分散寫進 quizResults) ----
+// { id, subjectId, takenAt, score, total, percent, estimatedBand, minutesUsed }
+
+export function getMockExamHistory(subjectId) {
+  const all = readJSON('mockExamHistory', []);
+  return subjectId ? all.filter((r) => r.subjectId === subjectId) : all;
+}
+
+export function addMockExamResult(record) {
+  const all = readJSON('mockExamHistory', []);
+  all.push(record);
+  writeJSON('mockExamHistory', all);
+}
+
 // ---- 雲端同步用:整包快照存取(見 cloud-sync.js) ----
 
 export function getSnapshot() {
@@ -135,6 +149,7 @@ export function getSnapshot() {
     progress: getProgress(),
     quizResults: readJSON('quizResults', []),
     wrongBookState: getWrongBookState(),
+    mockExamHistory: readJSON('mockExamHistory', []),
     updatedAt: localStorage.getItem(key('updatedAt')) || null,
   };
 }
@@ -144,6 +159,7 @@ export function applySnapshot(snapshot) {
   localStorage.setItem(key('progress'), JSON.stringify(snapshot.progress || {}));
   localStorage.setItem(key('quizResults'), JSON.stringify(snapshot.quizResults || []));
   localStorage.setItem(key('wrongBookState'), JSON.stringify(snapshot.wrongBookState || {}));
+  localStorage.setItem(key('mockExamHistory'), JSON.stringify(snapshot.mockExamHistory || []));
   if (snapshot.updatedAt) localStorage.setItem(key('updatedAt'), snapshot.updatedAt);
 }
 
