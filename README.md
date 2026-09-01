@@ -20,23 +20,27 @@
 ## 專案結構
 
 ```
-index.html        首頁:科目總覽 + 整體進度
+index.html        首頁:科目總覽 + 整體進度 + 今日複習建議
 subject.html       科目頁樣板(單元列表)?subject=chinese
 unit.html          單元頁樣板(筆記 + 測驗)?subject=chinese&unit=ch-u1
+mockexam.html      模擬考(科目選擇 / 限時作答 / 結果)?subject=chinese
+profile.html       個人資料(學習統計 + 圖表 + 最近測驗紀錄)
 wrongbook.html      錯題本頁面
 css/style.css      全站樣式
 js/
   firebase-init.js    Firebase 專案初始化(config、auth、firestore 實例)
   auth.js             Google 登入 / 登出、登入前的全螢幕登入畫面
   cloud-sync.js        localStorage 快照與 Firestore 之間的同步邏輯
-  storage.js          localStorage 存取封裝(進度/作答紀錄/錯題本),依登入帳號分開存放
+  storage.js          localStorage 存取封裝(進度/作答紀錄/錯題本/模擬考紀錄),依登入帳號分開存放
   study-plan.js        學測倒數天數與讀書階段/重點科目建議
+  quiz-utils.js         測驗題目洗牌工具(單元練習、模擬考共用)
   subjects-registry.js  統一的資料查詢入口
   render.js           共用 DOM render 小工具(含圖示、圓形勾選等元件)
   layout.js           共用頁首(品牌圖示、使用者選單)
-  page-*.js           各頁面邏輯
+  page-*.js           各頁面邏輯(page-mockexam.js 是模擬考邏輯)
 data/
   subjects-meta.js    科目清單(id/名稱/顏色)
+  mock-exam-config.js  模擬考每科題數/限時設定、近年五標對照資料
   chinese.js, english.js, math.js, science.js, social.js  各科單元資料
 ```
 
@@ -109,3 +113,11 @@ npx firebase-tools deploy --only hosting
 ```
 
 `firebase.json`、`.firebaserc` 已經設定好(對應 `study-site-1ba0d` 專案),部署完成後網址是 `https://study-site-1ba0d.web.app`。GitHub Pages 可以繼續保留當備用,但實際使用建議都用這個 Firebase Hosting 網址。
+
+## 模擬考資料來源
+
+`data/mock-exam-config.js` 裡的考試時間、113/114 學年度五標(級分)資料,來源:
+- 各科考試時間:[114學測懶人包 - TVBS新聞網](https://news.tvbs.com.tw/life/2741903)
+- 113、114 學年度五標:[114學測五標公布 - 翻轉教育](https://flipedu.parenting.com.tw/article/009892)、[TVBS新聞網](https://news.tvbs.com.tw/life/2741903)
+
+模擬考題數跟真實學測不同(依我們題庫量調整),估計級分是用答對率簡單換算(分數/總分 × 15),不是正式的常模計算,正式級分需要當年全部考生一起考完才能算出來。之後若要更新五標資料或改用其他年度,直接編輯 `fiveStandardsReference` 物件即可。
