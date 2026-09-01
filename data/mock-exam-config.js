@@ -2,12 +2,18 @@
 // 真實學測時間(114 學年度,資料來源見 README):
 //   國文綜合測驗 90 分鐘、英文/數學A/數學B 各 100 分鐘、社會/自然各 110 分鐘。
 // 因為我們的題庫題數跟真實考試不同,時間是照「每題平均配速」換算,不是照抄真實題數與時間。
+//
+// typeBreakdown:依題型分別從題庫抽題,抽出來的題目會依「單選→多選→選填」分節呈現,
+// 跟真實考卷的分節方式一致。數學科的 6 單選+6 多選+5 選填+3(併入單選)= 20 題,
+// 是依 113、114 學年度學測數學A 官方確認的真實結構(資料來源見 README);
+// 其餘四科目前查不到官方逐題型的精確配題數,只確定「單選為主、有部分多選」這個大方向,
+// 所以是用目前題庫量抓的比例,不是官方精確數字,這點有跟使用者說明過。
 export const mockExamConfig = {
-  chinese: { questionCount: 30, minutes: 75, label: '國文' },
-  english: { questionCount: 30, minutes: 60, label: '英文' },
-  math: { questionCount: 20, minutes: 80, label: '數學(A)' },
-  science: { questionCount: 30, minutes: 65, label: '自然' },
-  social: { questionCount: 30, minutes: 70, label: '社會' },
+  chinese: { questionCount: 30, minutes: 75, label: '國文', typeBreakdown: { single: 26, multi: 4 } },
+  english: { questionCount: 30, minutes: 60, label: '英文', typeBreakdown: { single: 26, multi: 4 } },
+  math: { questionCount: 20, minutes: 80, label: '數學(A)', typeBreakdown: { single: 9, multi: 6, numeric: 5 } },
+  science: { questionCount: 30, minutes: 65, label: '自然', typeBreakdown: { single: 26, multi: 4 } },
+  social: { questionCount: 30, minutes: 70, label: '社會', typeBreakdown: { single: 26, multi: 4 } },
 };
 
 // 113、114 學年度學測正式五標(級分),用來讓模擬考的估計級分有真實對照,

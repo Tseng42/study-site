@@ -1,6 +1,25 @@
 import { getAllSubjects, getSubject } from './subjects-registry.js';
 import { addQuizResult, addMockExamResult, getMockExamHistory } from './storage.js';
-import { prepareQuestions } from './quiz-utils.js';
+import { prepareQuestions, renderAnswerField, gradeAnswer, markAnswerFeedback, typeLabel } from './quiz-utils.js';
+
+// 依 config.typeBreakdown(若有)分別從各題型抽題,維持「單選→多選→選填」的分節順序,
+// 跟真實考卷的結構一致;沒有設定 typeBreakdown 的話就整包題庫隨機抽。
+function drawExamQuestions(pool, config) {
+  if (!config.typeBreakdown) return prepareQuestions(pool, config.questionCount);
+
+  const byType = { single: [], multi: [], numeric: [] };
+  for (const q of pool) {
+    const t = q.type === 'multi' || q.type === 'numeric' ? q.type : 'single';
+    byType[t].push(q);
+  }
+  const order = ['single', 'multi', 'numeric'];
+  const picked = [];
+  for (const type of order) {
+    const count = config.typeBreakdown[type];
+    if (count) picked.push(...prepareQuestions(byType[type], count));
+  }
+  return picked;
+}
 import { mockExamConfig, fiveStandardsReference, describeBandLevel } from '../data/mock-exam-config.js';
 import { el, icon, subjectIcon } from './render.js';
 import { initHeader, renderUserMenu, formatRelativeDate } from './layout.js';
@@ -57,7 +76,7 @@ function renderPicker() {
         el('div', { class: 'subject-card-icon' }, subjectIcon(subject)),
         el('div', {}, [
           el('h2', {}, config?.label || subject.name),
-          el('p', { class: 'mockexam-card-meta' }, config ? `${config.questionCount} 題 · ${config.minutes} 分鐘` : ''),
+          el('p', { class: 'mockexam-card-meta' }, config ? `${config.questionCount} 題(含多選${config.typeBreakdown?.numeric ? '/選填' : ''})· ${config.minutes} 分鐘` : ''),
         ]),
       ]),
       lastAttempt
@@ -76,11 +95,17 @@ function renderStartScreen(subjectId) {
   const subject = getSubject(subjectId);
   const config = mockExamConfig[subjectId];
   const pool = buildExamPool(subject);
-  const actualCount = Math.min(config.questionCount, pool.length);
 
   const iconBox = el('div', { class: 'subject-card-icon' }, subjectIcon(subject));
   iconBox.style.background = subject.color;
   iconBox.style.color = '#fff';
+
+  const breakdownText = config.typeBreakdown
+    ? Object.entries(config.typeBreakdown)
+        .filter(([, count]) => count)
+        .map(([type, count]) => `${count} ${typeLabel(type)}`)
+        .join(' + ')
+    : `${config.questionCount} 單選`;
 
   container.innerHTML = '';
   container.append(
@@ -89,7 +114,7 @@ function renderStartScreen(subjectId) {
       iconBox,
       el('h1', {}, `${config.label} 模擬考`),
       el('ul', { class: 'mockexam-start-list' }, [
-        el('li', {}, `題數:${actualCount} 題(單選題)`),
+        el('li', {}, `題數:${config.questionCount} 題(${breakdownText})`),
         el('li', {}, `時間:${config.minutes} 分鐘,時間到會自動送出`),
         el('li', {}, '題目從全部單元題庫隨機抽取,每次考的題目跟順序都不一樣'),
         el('li', {}, '作答結果會計入錯題本跟個人資料的統計'),
@@ -103,7 +128,7 @@ function renderStartScreen(subjectId) {
   );
 
   document.getElementById('mockexam-begin-btn').addEventListener('click', () => {
-    const questions = prepareQuestions(pool, config.questionCount);
+    const questions = drawExamQuestions(pool, config);
     runExam(subject, config, questions);
   });
 }
@@ -118,22 +143,25 @@ function runExam(subject, config, questions) {
   ]);
 
   const answers = new Array(questions.length).fill(null);
+  const fields = [];
   const form = el('div', { class: 'quiz-form' });
 
+  let lastType = null;
   questions.forEach((q, index) => {
-    const optionsWrap = el('div', { class: 'quiz-options' });
-    q.options.forEach((opt, optIndex) => {
-      const optId = `mq${index}-opt${optIndex}`;
-      const radio = el('input', { type: 'radio', name: `mq${index}`, id: optId, value: optIndex });
-      radio.addEventListener('change', () => {
-        answers[index] = optIndex;
-      });
-      optionsWrap.append(el('div', { class: 'quiz-option-row' }, [radio, el('label', { for: optId }, opt)]));
+    const currentType = q.type || 'single';
+    if (currentType !== lastType) {
+      form.append(el('h3', { class: 'mockexam-section-heading' }, `${typeLabel(q.type)}題`));
+      lastType = currentType;
+    }
+
+    const field = renderAnswerField(q, index, (value) => {
+      answers[index] = value;
     });
+    fields.push(field);
     form.append(
       el('div', { class: 'quiz-question' }, [
         el('p', { class: 'quiz-question-text' }, `${index + 1}. ${q.question}`),
-        optionsWrap,
+        field.optionsWrap,
       ])
     );
   });
@@ -168,15 +196,16 @@ function runExam(subject, config, questions) {
     clearInterval(intervalId);
     submitBtn.disabled = true;
 
-    const results = questions.map((q, index) => ({
-      ...q,
-      selected: answers[index],
-      isCorrect: answers[index] === q.answer,
-    }));
-    const score = results.filter((r) => r.isCorrect).length;
+    const results = questions.map((q, index) => {
+      const userAnswer = answers[index];
+      const { isCorrect, creditFraction } = gradeAnswer(q, userAnswer);
+      return { ...q, userAnswer, isCorrect, creditFraction };
+    });
+    const scoreFraction = results.reduce((sum, r) => sum + r.creditFraction, 0);
+    const score = Math.round(scoreFraction * 10) / 10;
     const total = results.length;
-    const percent = total ? Math.round((score / total) * 100) : 0;
-    const estimatedBand = total ? Math.min(15, Math.round((score / total) * 15)) : 0;
+    const percent = total ? Math.round((scoreFraction / total) * 100) : 0;
+    const estimatedBand = total ? Math.min(15, Math.round((scoreFraction / total) * 15)) : 0;
 
     // 依原本所屬單元分組,各自寫進 quizResults,讓錯題本跟個人資料統計自動吃到這次模擬考的結果。
     const byUnit = new Map();
@@ -192,12 +221,12 @@ function runExam(subject, config, questions) {
         unitId,
         mode: 'mock',
         takenAt,
-        score: group.filter((r) => r.isCorrect).length,
+        score: Math.round(group.reduce((sum, r) => sum + r.creditFraction, 0) * 10) / 10,
         total: group.length,
         answers: group.map((r) => ({
           questionId: r.id,
-          selected: r.selected,
-          correct: r.answer,
+          selected: r.userAnswer instanceof Set ? Array.from(r.userAnswer) : r.userAnswer,
+          correct: r.type === 'multi' ? r.answers : r.type === 'numeric' ? r.answerText : r.answer,
           isCorrect: r.isCorrect,
         })),
       });
@@ -266,18 +295,30 @@ function renderResult(subject, config, results, summary) {
     const card = el('div', { class: 'wrong-card' });
     card.style.setProperty('--row-color', subject.color);
     card.append(
-      el('p', { class: 'wrong-meta' }, w.unitTitle),
+      el('p', { class: 'wrong-meta' }, `${w.unitTitle} · ${typeLabel(w.type)}`),
       el('p', { class: 'wrong-question' }, w.question)
     );
-    const optionsWrap = el('div', { class: 'quiz-options' });
-    w.options.forEach((opt, i) => {
-      const row = el('div', { class: 'quiz-option-row static' });
-      if (i === w.answer) row.classList.add('is-correct');
-      else if (i === w.selected) row.classList.add('is-wrong');
-      row.append(el('span', {}, opt));
-      optionsWrap.append(row);
-    });
-    card.append(optionsWrap);
+
+    if (w.type === 'numeric') {
+      card.append(
+        el('p', { class: 'feedback-wrong' }, `你的答案:${w.userAnswer || '(未作答)'}`),
+        el('p', { class: 'feedback-correct' }, `正確答案:${w.answerText}`)
+      );
+    } else {
+      const correctSet = w.type === 'multi' ? new Set(w.answers) : new Set([w.answer]);
+      const selectedSet =
+        w.type === 'multi' ? new Set(w.userAnswer || []) : new Set(w.userAnswer != null ? [w.userAnswer] : []);
+      const optionsWrap = el('div', { class: 'quiz-options' });
+      w.options.forEach((opt, i) => {
+        const row = el('div', { class: 'quiz-option-row static' });
+        if (correctSet.has(i)) row.classList.add('is-correct');
+        else if (selectedSet.has(i)) row.classList.add('is-wrong');
+        row.append(el('span', {}, opt));
+        optionsWrap.append(row);
+      });
+      card.append(optionsWrap);
+    }
+
     if (w.explanation) card.append(el('p', { class: 'feedback-explanation' }, w.explanation));
     container.append(card);
   }

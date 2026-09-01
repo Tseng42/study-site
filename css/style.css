@@ -813,10 +813,40 @@ a.timeline-row:hover {
   margin: 0 0 14px;
   font-family: var(--font-display);
 }
+.quiz-type-badge {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 2px 10px;
+  border-radius: var(--radius-full);
+  background: var(--surface-alt);
+  color: var(--ink-muted);
+  font-size: 0.72rem;
+  font-weight: 700;
+  font-family: var(--font-body);
+  vertical-align: middle;
+}
 .quiz-options {
   display: flex;
   flex-direction: column;
   gap: 8px;
+}
+.quiz-numeric-wrap {
+  margin-top: 4px;
+}
+.quiz-numeric-input {
+  width: 100%;
+  max-width: 220px;
+  padding: 12px 14px;
+  border-radius: var(--radius-md);
+  border: 1.5px solid var(--border);
+  font-size: 1rem;
+  font-family: var(--font-numeric);
+  background: var(--surface);
+  color: var(--ink);
+}
+.quiz-numeric-input:focus {
+  outline: none;
+  border-color: var(--ink);
 }
 .quiz-option-row {
   display: flex;
@@ -1010,6 +1040,18 @@ a.timeline-row:hover {
 }
 .mockexam-timer-low {
   background: var(--danger);
+}
+.mockexam-section-heading {
+  font-size: 1rem;
+  color: var(--ink-muted);
+  margin: 24px 0 10px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+}
+.mockexam-section-heading:first-child {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: none;
 }
 
 /* ---- Mock exam: result ---- */

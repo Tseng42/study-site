@@ -4,7 +4,7 @@ import { el, renderNoteSections, icon, circularCheck } from './render.js';
 import { initHeader, renderUserMenu } from './layout.js';
 import { ensureSignedIn } from './auth.js';
 import { initCloudSync } from './cloud-sync.js';
-import { prepareQuestions } from './quiz-utils.js';
+import { prepareQuestions, renderAnswerField, gradeAnswer, markAnswerFeedback, typeLabel } from './quiz-utils.js';
 
 initHeader();
 const user = await ensureSignedIn();
@@ -77,7 +77,8 @@ function startQuiz(mode) {
   container.append(el('h3', {}, mode === 'practice' ? '練習模式' : '測驗模式'));
 
   const questions = prepareQuestions(unit.quiz, MAX_QUIZ_QUESTIONS);
-  const answers = new Array(questions.length).fill(null);
+  const userAnswers = new Array(questions.length).fill(null);
+  const fields = [];
   const questionRefs = [];
   const resultBar = el('div', { class: 'quiz-result-bar' });
   let finished = false;
@@ -85,36 +86,24 @@ function startQuiz(mode) {
   const form = el('div', { class: 'quiz-form' });
 
   questions.forEach((q, index) => {
-    const optionsWrap = el('div', { class: 'quiz-options' });
     const feedback = el('div', { class: 'quiz-feedback' });
-
-    q.options.forEach((opt, optIndex) => {
-      const optId = `q${index}-opt${optIndex}`;
-      const radio = el('input', {
-        type: 'radio',
-        name: `q${index}`,
-        id: optId,
-        value: optIndex,
-      });
-      radio.addEventListener('change', () => {
-        answers[index] = optIndex;
-        if (mode === 'practice') revealAnswer(index);
-      });
-      const row = el('div', { class: 'quiz-option-row' }, [
-        radio,
-        el('label', { for: optId }, opt),
-      ]);
-      optionsWrap.append(row);
+    const field = renderAnswerField(q, index, (value) => {
+      userAnswers[index] = value;
+      if (mode === 'practice') revealAnswer(index);
     });
+    fields.push(field);
 
     const qCard = el('div', { class: 'quiz-question', id: `q-${index}` }, [
-      el('p', { class: 'quiz-question-text' }, `${index + 1}. ${q.question}`),
-      optionsWrap,
+      el('p', { class: 'quiz-question-text' }, [
+        `${index + 1}. ${q.question}`,
+        el('span', { class: 'quiz-type-badge' }, typeLabel(q.type)),
+      ]),
+      field.optionsWrap,
       feedback,
     ]);
 
     form.append(qCard);
-    questionRefs.push({ optionsWrap, feedback });
+    questionRefs.push({ feedback });
   });
 
   container.append(form, resultBar);
@@ -122,7 +111,7 @@ function startQuiz(mode) {
   if (mode === 'exam') {
     const submitBtn = el('button', { class: 'btn-pill btn-pill-dark' }, '送出測驗');
     submitBtn.addEventListener('click', () => {
-      if (answers.includes(null)) {
+      if (userAnswers.includes(null)) {
         alert('還有題目尚未作答喔。');
         return;
       }
@@ -135,23 +124,27 @@ function startQuiz(mode) {
 
   function revealAnswer(index) {
     const q = questions[index];
-    const selected = answers[index];
-    const { optionsWrap, feedback } = questionRefs[index];
+    const field = fields[index];
+    const userAnswer = userAnswers[index];
+    const { feedback } = questionRefs[index];
 
-    optionsWrap.querySelectorAll('input').forEach((r) => (r.disabled = true));
-    optionsWrap.querySelectorAll('.quiz-option-row').forEach((row, optIndex) => {
-      if (optIndex === q.answer) row.classList.add('is-correct');
-      else if (optIndex === selected) row.classList.add('is-wrong');
-    });
+    markAnswerFeedback(field, q, userAnswer);
+    const { isCorrect, creditFraction } = gradeAnswer(q, userAnswer);
 
     feedback.innerHTML = '';
-    const isCorrect = selected === q.answer;
+    let feedbackText = isCorrect ? '答對了!' : '答錯了。';
+    if (q.type === 'multi' && !isCorrect && creditFraction > 0) {
+      feedbackText = `部分正確(這題得 ${Math.round(creditFraction * 100)}% 分數)`;
+    }
     feedback.append(
-      el('p', { class: isCorrect ? 'feedback-correct' : 'feedback-wrong' }, isCorrect ? '答對了!' : '答錯了。')
+      el('p', { class: isCorrect ? 'feedback-correct' : 'feedback-wrong' }, feedbackText)
     );
+    if (q.type === 'numeric' && !isCorrect) {
+      feedback.append(el('p', { class: 'feedback-explanation' }, `正確答案:${q.answerText}`));
+    }
     if (q.explanation) feedback.append(el('p', { class: 'feedback-explanation' }, q.explanation));
 
-    if (mode === 'practice' && !finished && answers.every((a) => a !== null)) {
+    if (mode === 'practice' && !finished && userAnswers.every((a) => a !== null)) {
       finish();
     }
   }
@@ -160,13 +153,17 @@ function startQuiz(mode) {
     if (finished) return;
     finished = true;
 
-    const answerRecords = questions.map((q, index) => ({
+    const graded = questions.map((q, index) => {
+      const userAnswer = userAnswers[index];
+      return { q, userAnswer, ...gradeAnswer(q, userAnswer) };
+    });
+    const answerRecords = graded.map(({ q, userAnswer, isCorrect }) => ({
       questionId: q.id,
-      selected: answers[index],
-      correct: q.answer,
-      isCorrect: answers[index] === q.answer,
+      selected: userAnswer instanceof Set ? Array.from(userAnswer) : userAnswer,
+      correct: q.type === 'multi' ? q.answers : q.type === 'numeric' ? q.answerText : q.answer,
+      isCorrect,
     }));
-    const score = answerRecords.filter((a) => a.isCorrect).length;
+    const score = Math.round(graded.reduce((sum, g) => sum + g.creditFraction, 0) * 10) / 10;
     const total = questions.length;
 
     addQuizResult({
