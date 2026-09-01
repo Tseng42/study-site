@@ -98,3 +98,14 @@ git push -u origin main
 ```
 
 接著到 GitHub repository 的 Settings → Pages,Source 選擇 `main` branch、`/ (root)` 資料夾並儲存,幾分鐘後即可透過 `https://<你的帳號>.github.io/<repo名稱>/` 瀏覽。
+
+## 部署到 Firebase Hosting(建議的主要網址)
+
+GitHub Pages 的網域跟 Firebase Auth 登入交接用的網域(`*.firebaseapp.com`)不是同一個網域,部分手機瀏覽器的儲存空間隔離機制會擋掉這種跨網域登入交接,導致選完 Google 帳號、按下繼續後又被送回登入畫面(尤其容易發生在 Android)。改部署到 Firebase Hosting 就沒有這個問題,因為網站跟登入交接會在同一個網域下完成。
+
+```bash
+npx firebase-tools login    # 第一次使用需要登入 Firebase CLI
+npx firebase-tools deploy --only hosting
+```
+
+`firebase.json`、`.firebaserc` 已經設定好(對應 `study-site-1ba0d` 專案),部署完成後網址是 `https://study-site-1ba0d.web.app`。GitHub Pages 可以繼續保留當備用,但實際使用建議都用這個 Firebase Hosting 網址。
