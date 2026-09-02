@@ -1,5 +1,5 @@
 import { getAllSubjects, getSubject, getUnit, getQuestion } from './subjects-registry.js';
-import { getSubjectProgress, getQuizResults, getWrongQuestions, getExamDate, setExamDate } from './storage.js';
+import { getSubjectProgress, getQuizResults, getWrongQuestions, getExamDate, setExamDate, getMockExamHistory } from './storage.js';
 import { resolveExamDate, getDaysRemaining } from './study-plan.js';
 import { getAchievementState } from './achievements.js';
 import { el, icon } from './render.js';
@@ -35,6 +35,7 @@ try {
 }
 renderReviewList();
 renderRecentQuizzes();
+renderMockExamHistory();
 
 function subjectAccuracy(subjectId) {
   const results = getQuizResults(subjectId);
@@ -280,6 +281,51 @@ function renderRecentQuizzes() {
           'div',
           { class: 'timeline-row-meta' },
           `${subject?.name || ''} · ${formatRelativeDate(r.takenAt)} · ${r.score}/${r.total} 分`
+        ),
+      ])
+    );
+    container.append(row);
+  }
+}
+
+// 「模擬考紀錄」跟上面的「最近測驗紀錄」不一樣:後者是每個單元練習/測驗各自一筆,
+// 模擬考(含歷屆試題)則是一次考試一筆整體摘要(含估計級分),見 storage.js 的
+// addMockExamResult/getMockExamHistory。歷屆試題的 subjectId 是虛擬的 'math-real',
+// 不是真正的科目,所以標籤要特別處理,連結也導回歷屆試題頁而不是一般模擬考頁。
+function mockExamLabel(record) {
+  if (record.subjectId === 'math-real') return `數學A(歷屆試題)${record.examLabel ? ' · ' + record.examLabel : ''}`;
+  const subject = getSubject(record.subjectId);
+  return `${subject?.name || record.subjectId} 模擬考`;
+}
+
+function mockExamHref(record) {
+  return record.subjectId === 'math-real' ? 'real-exam.html' : 'mockexam.html';
+}
+
+function renderMockExamHistory() {
+  const container = document.getElementById('mockexam-history');
+  const records = getMockExamHistory()
+    .slice()
+    .sort((a, b) => new Date(b.takenAt) - new Date(a.takenAt))
+    .slice(0, 8);
+
+  if (!records.length) {
+    container.append(el('div', { class: 'timeline-row-empty' }, '還沒有模擬考紀錄,去模擬考頁面試試看吧。'));
+    return;
+  }
+
+  for (const r of records) {
+    const subject = r.subjectId === 'math-real' ? getSubject('math') : getSubject(r.subjectId);
+    const row = el('a', { class: 'timeline-row', href: mockExamHref(r) });
+    row.style.setProperty('--row-color', subject?.color || '#201c2b');
+    const writtenNote = r.writtenTotal ? ` · 非選 ${r.writtenScore}/${r.writtenTotal}` : '';
+    row.append(
+      el('div', { class: 'timeline-row-body' }, [
+        el('div', { class: 'timeline-row-title' }, mockExamLabel(r)),
+        el(
+          'div',
+          { class: 'timeline-row-meta' },
+          `${formatRelativeDate(r.takenAt)} · ${r.score}/${r.total} 分${writtenNote} · 估計 ${r.estimatedBand} 級分`
         ),
       ])
     );

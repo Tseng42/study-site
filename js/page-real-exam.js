@@ -10,6 +10,7 @@
 import { mathRealExams } from '../data/math-real-exams.js';
 import { getSubject } from './subjects-registry.js';
 import { addQuizResult, addMockExamResult } from './storage.js';
+import { describeBandLevel } from '../data/mock-exam-config.js';
 import { prepareQuestions, renderAnswerField, gradeAnswer, typeLabel } from './quiz-utils.js';
 import { el, icon, renderPassage } from './render.js';
 import { initHeader, renderUserMenu } from './layout.js';
@@ -191,6 +192,7 @@ function runExam(questions, examLabel) {
     const score = Math.round(scoreFraction * 10) / 10;
     const total = results.length;
     const percent = total ? Math.round((scoreFraction / total) * 100) : 0;
+    const autoFraction = total ? scoreFraction / total : 0;
 
     // 依題目實際出處的學年度分組寫進 quizResults,讓錯題本跟個人資料統計吃得到,
     // 也讓每個年度各自的作答紀錄可以獨立回查(見 subjects-registry.js 的虛擬單元)。
@@ -218,18 +220,35 @@ function runExam(questions, examLabel) {
       });
     }
 
-    addMockExamResult({
+    const minutesUsed = Math.round((MINUTES * 60 - Math.max(0, secondsLeft)) / 60);
+    const pendingRecord = {
       id: crypto.randomUUID(),
       subjectId: MOCK_HISTORY_ID,
+      examLabel,
       takenAt,
       score,
       total,
       percent,
-      estimatedBand: total ? Math.min(15, Math.round((scoreFraction / total) * 15)) : 0,
-      minutesUsed: Math.round((MINUTES * 60 - Math.max(0, secondsLeft)) / 60),
-    });
+      minutesUsed,
+    };
 
-    renderResult(results, writtenResults, { score, total, percent, timeUp, examLabel });
+    // 混合年份模式沒有非選擇題,分數當場就完整,直接存進模擬考紀錄。單一年份模式
+    // 含第19、20題(非選擇題),真正的分數要等使用者自行對完答案才算數(數學A官方
+    // 配分是選擇+選填占85分、非選擇題占15分,這裡用同樣的權重換算預估級分),所以
+    // 這種情況下先不存,等 renderResult 裡的自行對答案都回報完才真正存進歷史紀錄。
+    if (writtenResults.length === 0) {
+      addMockExamResult({ ...pendingRecord, estimatedBand: Math.min(15, Math.round(autoFraction * 15)) });
+    }
+
+    renderResult(results, writtenResults, {
+      score,
+      total,
+      percent,
+      autoFraction,
+      timeUp,
+      examLabel,
+      pendingRecord: writtenResults.length ? pendingRecord : null,
+    });
   }
 }
 
@@ -244,6 +263,14 @@ function renderResult(results, writtenResults, summary) {
   container.innerHTML = '';
 
   const wrongs = results.filter((r) => !r.isCorrect);
+  const hasWritten = writtenResults.length > 0;
+  // 每一格非選擇題的自行回報結果(true/false/null=尚未回報),全部回報完才能換算
+  // 包含非選擇題的最終級分並存進模擬考紀錄(見 finish() 裡 pendingRecord 的說明)。
+  const writtenOutcomes = new Array(writtenResults.length).fill(null);
+
+  const bandValueEl = el('span', { class: 'mockexam-band-value' });
+  const bandDescEl = el('span', { class: 'mockexam-band-desc' });
+  updateBandDisplay();
 
   container.append(
     el('div', { class: 'mockexam-result-card' }, [
@@ -252,8 +279,9 @@ function renderResult(results, writtenResults, summary) {
         el('div', { class: 'mockexam-score-value' }, `${summary.score} / ${summary.total}`),
         el('div', { class: 'mockexam-score-percent' }, `${summary.percent}%`),
       ]),
+      el('div', { class: 'mockexam-band' }, [bandValueEl, bandDescEl]),
       el('p', { class: 'mockexam-band-disclaimer' },
-        `${summary.examLabel} · 這只涵蓋單選＋多選＋選填部分,不能直接對照正式級分。${writtenResults.length ? '第18-20題混合題組另外列在下方,非選擇題需自行對答案。' : ''}`
+        `${summary.examLabel} · 這是依答對率換算的估計級分,不是正式級分。${hasWritten ? '第18-20題混合題組的非選擇題列在下方,自行對答案後才會併入級分。' : ''}`
       ),
     ])
   );
@@ -272,13 +300,23 @@ function renderResult(results, writtenResults, summary) {
     container.append(card);
   }
 
-  if (writtenResults.length) {
+  if (hasWritten) {
     container.append(
       el('h3', { class: 'real-exam-written-heading' }, '非選擇題(第18-20題混合題組,自行對答案)')
     );
-    for (const w of writtenResults) {
-      container.append(renderWrittenCard(w));
-    }
+    writtenResults.forEach((w, i) => {
+      container.append(renderWrittenCard(w, (isCorrect, reportRow) => {
+        writtenOutcomes[i] = isCorrect;
+        reportRow.innerHTML = '';
+        reportRow.append(
+          el('p', { class: isCorrect ? 'feedback-correct' : 'feedback-wrong' },
+            isCorrect ? '已記錄:答對了' : '已記錄:沒答對(已加入錯題本)'
+          )
+        );
+        reportWritten(w, isCorrect);
+        maybeFinalizeHistory();
+      }));
+    });
   }
 
   container.append(
@@ -287,6 +325,39 @@ function renderResult(results, writtenResults, summary) {
       el('a', { href: 'wrongbook.html', class: 'btn-pill btn-pill-dark' }, '前往錯題本'),
     ])
   );
+
+  function currentBand(includeWritten) {
+    if (!includeWritten) return Math.min(15, Math.round(summary.autoFraction * 15));
+    const writtenFraction = writtenOutcomes.filter(Boolean).length / writtenOutcomes.length;
+    return Math.min(15, Math.round((0.85 * summary.autoFraction + 0.15 * writtenFraction) * 15));
+  }
+
+  function updateBandDisplay() {
+    const allReported = hasWritten && writtenOutcomes.every((v) => v !== null);
+    const band = hasWritten && !allReported ? null : currentBand(hasWritten);
+    if (band == null) {
+      bandValueEl.textContent = '級分計算中';
+      bandDescEl.textContent = '請先完成下方非選擇題的自行對答案';
+    } else {
+      bandValueEl.textContent = `估計 ${band} 級分`;
+      bandDescEl.textContent = describeBandLevel('math', band) + (hasWritten ? '(已含非選擇題自行回報結果)' : '');
+    }
+  }
+
+  function maybeFinalizeHistory() {
+    if (!summary.pendingRecord || writtenOutcomes.some((v) => v === null)) {
+      updateBandDisplay();
+      return;
+    }
+    const writtenScore = writtenOutcomes.filter(Boolean).length;
+    addMockExamResult({
+      ...summary.pendingRecord,
+      writtenScore,
+      writtenTotal: writtenOutcomes.length,
+      estimatedBand: currentBand(true),
+    });
+    updateBandDisplay();
+  }
 }
 
 // 依題型畫出「正確答案」區塊:單選/多選標示選項對錯,選填(單一格/多格)直接列出答案。
@@ -313,8 +384,10 @@ function renderCorrectAnswerBlock(w) {
 }
 
 // 非選擇題(第19、20題)沒辦法自動判分:顯示題目跟官方滿分參考答案,讓使用者自己
-// 對照後回報「答對了/沒答對」,回報結果會寫進 quizResults,答錯的之後也會出現在錯題本。
-function renderWrittenCard(w) {
+// 對照後回報「答對了/沒答對」。onReport(isCorrect, reportRow) 由呼叫端(renderResult)
+// 決定回報後要做什麼 —— 寫進 quizResults、更新這題底下的文字、檢查是否所有非選擇題
+// 都回報完了(全部回報完才能換算包含非選擇題的最終級分並存進模擬考紀錄)。
+function renderWrittenCard(w, onReport) {
   const card = el('div', { class: 'wrong-card written-card' });
   card.style.setProperty('--row-color', subject?.color || '#201c2b');
   card.append(el('p', { class: 'wrong-meta' }, `非選 · ${w.sourceYear} 學年度第 ${w.origNo} 題`));
@@ -336,15 +409,15 @@ function renderWrittenCard(w) {
   const reportRow = el('div', { class: 'written-self-report' });
   const correctBtn = el('button', { class: 'btn-pill btn-pill-outline' }, '我答對了');
   const wrongBtn = el('button', { class: 'btn-pill btn-pill-outline' }, '我沒答對');
-  correctBtn.addEventListener('click', () => reportWritten(w, true, reportRow));
-  wrongBtn.addEventListener('click', () => reportWritten(w, false, reportRow));
+  correctBtn.addEventListener('click', () => onReport(true, reportRow));
+  wrongBtn.addEventListener('click', () => onReport(false, reportRow));
   reportRow.append(correctBtn, wrongBtn);
 
   card.append(revealBtn, explanationWrap, reportRow);
   return card;
 }
 
-function reportWritten(w, isCorrect, reportRow) {
+function reportWritten(w, isCorrect) {
   addQuizResult({
     id: crypto.randomUUID(),
     subjectId: SUBJECT_ID,
@@ -355,10 +428,4 @@ function reportWritten(w, isCorrect, reportRow) {
     total: 1,
     answers: [{ questionId: w.id, selected: w.userAnswer || null, correct: null, isCorrect }],
   });
-  reportRow.innerHTML = '';
-  reportRow.append(
-    el('p', { class: isCorrect ? 'feedback-correct' : 'feedback-wrong' },
-      isCorrect ? '已記錄:答對了' : '已記錄:沒答對(已加入錯題本)'
-    )
-  );
 }
