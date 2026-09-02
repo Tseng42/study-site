@@ -80,7 +80,7 @@ export function renderAnswerField(q, index, onChange, onCommit, showConfirmButto
       type: 'text',
       inputmode: 'decimal',
       class: 'quiz-numeric-input',
-      placeholder: '輸入答案後按 Enter 或點選其他地方',
+      placeholder: '輸入答案',
       'aria-label': `第 ${index + 1} 題作答欄`,
     });
     input.addEventListener('input', () => onChange(input.value));

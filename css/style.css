@@ -991,11 +991,11 @@ a.timeline-row:hover {
 }
 .quiz-numeric-input {
   width: 100%;
-  max-width: 220px;
-  padding: 12px 14px;
+  max-width: 280px;
+  padding: 16px 18px;
   border-radius: var(--radius-md);
   border: 1.5px solid var(--border);
-  font-size: 1rem;
+  font-size: 1.15rem;
   font-family: var(--font-numeric);
   background: var(--surface);
   color: var(--ink);
@@ -1003,6 +1003,10 @@ a.timeline-row:hover {
 .quiz-numeric-input:focus {
   outline: none;
   border-color: var(--ink);
+}
+.quiz-numeric-input::placeholder {
+  color: var(--ink-muted);
+  opacity: 0.6;
 }
 .quiz-option-row {
   display: flex;
