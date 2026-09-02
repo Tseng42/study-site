@@ -59,24 +59,36 @@ function renderQuizIntro() {
     return;
   }
 
-  container.append(el('h3', {}, `單元測驗(${unit.quiz.length} 題)`));
+  const total = unit.quiz.length;
+  container.append(el('h3', {}, `單元測驗(題庫共 ${total} 題)`));
+
+  const presetCounts = [8, 15, 25].filter((n) => n < total);
+  const countSelect = el('select', { class: 'quiz-count-select', id: 'quiz-count' }, [
+    ...presetCounts.map((n) => el('option', { value: String(n) }, `每次 ${n} 題`)),
+    el('option', { value: 'all' }, `全部 ${total} 題`),
+  ]);
+  countSelect.value = presetCounts.length ? String(presetCounts[Math.min(1, presetCounts.length - 1)]) : 'all';
+  const getCount = () => (countSelect.value === 'all' ? total : Number(countSelect.value));
 
   const practiceBtn = el('button', { class: 'btn-pill btn-pill-outline' }, '練習模式(即時看答案)');
   const examBtn = el('button', { class: 'btn-pill btn-pill-dark' }, '測驗模式(答完再看結果)');
-  practiceBtn.addEventListener('click', () => startQuiz('practice'));
-  examBtn.addEventListener('click', () => startQuiz('exam'));
+  practiceBtn.addEventListener('click', () => startQuiz('practice', getCount()));
+  examBtn.addEventListener('click', () => startQuiz('exam', getCount()));
 
-  container.append(el('div', { class: 'quiz-mode-select' }, [practiceBtn, examBtn]));
+  container.append(
+    el('div', { class: 'quiz-count-row' }, [el('label', { for: 'quiz-count' }, '每次題數:'), countSelect]),
+    el('div', { class: 'quiz-mode-select' }, [practiceBtn, examBtn])
+  );
 }
 
-const MAX_QUIZ_QUESTIONS = 8;
+const DEFAULT_QUIZ_QUESTIONS = 8;
 
-function startQuiz(mode) {
+function startQuiz(mode, count = DEFAULT_QUIZ_QUESTIONS) {
   const container = document.getElementById('unit-quiz');
   container.innerHTML = '';
   container.append(el('h3', {}, mode === 'practice' ? '練習模式' : '測驗模式'));
 
-  const questions = prepareQuestions(unit.quiz, MAX_QUIZ_QUESTIONS);
+  const questions = prepareQuestions(unit.quiz, count);
   const userAnswers = new Array(questions.length).fill(null);
   const fields = [];
   const questionRefs = [];
@@ -87,10 +99,17 @@ function startQuiz(mode) {
 
   questions.forEach((q, index) => {
     const feedback = el('div', { class: 'quiz-feedback' });
-    const field = renderAnswerField(q, index, (value) => {
-      userAnswers[index] = value;
-      if (mode === 'practice') revealAnswer(index);
-    });
+    const field = renderAnswerField(
+      q,
+      index,
+      (value) => {
+        userAnswers[index] = value;
+        if (mode === 'practice' && q.type !== 'numeric') revealAnswer(index);
+      },
+      () => {
+        if (mode === 'practice') revealAnswer(index);
+      }
+    );
     fields.push(field);
 
     const qCard = el('div', { class: 'quiz-question', id: `q-${index}` }, [

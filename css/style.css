@@ -795,6 +795,23 @@ a.timeline-row:hover {
 }
 
 /* ---- Quiz ---- */
+.quiz-count-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+.quiz-count-select {
+  padding: 8px 12px;
+  border-radius: var(--radius-md);
+  border: 1.5px solid var(--border);
+  background: var(--surface);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+}
 .quiz-mode-select {
   display: flex;
   gap: 10px;
