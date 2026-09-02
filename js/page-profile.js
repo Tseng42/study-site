@@ -14,8 +14,14 @@ const subjects = getAllSubjects();
 
 renderStats();
 renderEncourageCard();
-renderCompletionChart();
-renderAccuracyChart();
+// 圖表靠外部 CDN 載入的 Chart.js,萬一 CDN 掛掉或被擋,不能讓整段同步腳本
+// 中斷,導致後面的複習清單、測驗紀錄也一起消失 —— 那些其實比圖表更有用。
+try {
+  renderCompletionChart();
+  renderAccuracyChart();
+} catch (err) {
+  console.error('圖表渲染失敗', err);
+}
 renderReviewList();
 renderRecentQuizzes();
 

@@ -37,14 +37,19 @@ function render() {
       el('p', { class: 'wrong-question' }, question.question)
     );
 
-    const optionsWrap = el('div', { class: 'quiz-options' });
-    question.options.forEach((opt, i) => {
-      const row = el('div', { class: 'quiz-option-row static' });
-      if (i === question.answer) row.classList.add('is-correct');
-      row.append(el('span', {}, opt));
-      optionsWrap.append(row);
-    });
-    card.append(optionsWrap);
+    if (question.type === 'numeric') {
+      card.append(el('p', { class: 'feedback-correct' }, `正確答案:${question.answerText}`));
+    } else {
+      const correctSet = question.type === 'multi' ? new Set(question.answers) : new Set([question.answer]);
+      const optionsWrap = el('div', { class: 'quiz-options' });
+      question.options.forEach((opt, i) => {
+        const row = el('div', { class: 'quiz-option-row static' });
+        if (correctSet.has(i)) row.classList.add('is-correct');
+        row.append(el('span', {}, opt));
+        optionsWrap.append(row);
+      });
+      card.append(optionsWrap);
+    }
 
     if (question.explanation) {
       card.append(el('p', { class: 'feedback-explanation' }, question.explanation));

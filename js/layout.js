@@ -15,7 +15,13 @@ export function renderUserMenu(user) {
     : el('span', { class: 'user-avatar user-avatar-fallback' }, (user.displayName || '?').slice(0, 1));
 
   const signOutBtn = el('button', { class: 'user-signout-btn', title: '登出' }, '登出');
-  signOutBtn.addEventListener('click', () => signOutUser());
+  signOutBtn.addEventListener('click', async () => {
+    // 登出後整頁導回首頁重新載入,讓所有模組的登入狀態(尤其 cloud-sync.js
+    // 記住的 currentUid)徹底重置,避免登出後頁面繼續用舊帳號的狀態寫入資料。
+    signOutBtn.disabled = true;
+    await signOutUser();
+    location.href = 'index.html';
+  });
 
   container.append(avatar, signOutBtn);
 }

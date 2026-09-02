@@ -119,6 +119,17 @@ function renderStartScreen(subjectId) {
   const config = mockExamConfig[subjectId];
   const pool = buildExamPool(subject);
 
+  // renderPicker() 只給題庫足夠的科目連結按鈕,但這裡也可能被人直接輸入網址帶
+  // ?subject= 進來,所以要重複檢查,避免題庫太少時開出幾乎抽不到題目的模擬考。
+  if (pool.length < 5) {
+    container.innerHTML = '';
+    container.append(
+      el('a', { href: 'mockexam.html', class: 'back-link' }, [icon('chevronLeft', { size: 14 }), '回模擬考首頁']),
+      el('p', {}, `這個科目的題庫還太少(目前 ${pool.length} 題),晚點再來試試。`)
+    );
+    return;
+  }
+
   const iconBox = el('div', { class: 'subject-card-icon' }, subjectIcon(subject));
   iconBox.style.background = subject.color;
   iconBox.style.color = '#fff';
