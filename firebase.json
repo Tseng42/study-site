@@ -10,6 +10,14 @@
       "**/.*/**",
       "**/node_modules/**",
       "*.md"
+    ],
+    "headers": [
+      {
+        "source": "**/*.@(html|js|css|json)",
+        "headers": [
+          { "key": "Cache-Control", "value": "no-cache" }
+        ]
+      }
     ]
   }
 }
