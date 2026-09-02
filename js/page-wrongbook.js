@@ -1,6 +1,6 @@
 import { getWrongQuestions, markQuestionMastered } from './storage.js';
 import { getQuestion, getUnit, getSubject } from './subjects-registry.js';
-import { el, icon } from './render.js';
+import { el, icon, renderPassage } from './render.js';
 import { initHeader, renderUserMenu } from './layout.js';
 import { ensureSignedIn } from './auth.js';
 import { initCloudSync } from './cloud-sync.js';
@@ -33,9 +33,10 @@ function render() {
     const card = el('div', { class: 'wrong-card' });
     card.style.setProperty('--row-color', subject?.color || '#201c2b');
     card.append(
-      el('p', { class: 'wrong-meta' }, `${subject?.name || ''} · ${unit?.title || ''}`),
-      el('p', { class: 'wrong-question' }, question.question)
+      el('p', { class: 'wrong-meta' }, `${subject?.name || ''} · ${unit?.title || ''}`)
     );
+    if (question.passageId) card.append(renderPassage(question));
+    card.append(el('p', { class: 'wrong-question' }, question.question));
 
     if (question.type === 'numeric') {
       card.append(el('p', { class: 'feedback-correct' }, `正確答案:${question.answerText}`));

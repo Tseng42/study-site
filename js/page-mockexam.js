@@ -44,7 +44,7 @@ function drawExamQuestions(pool, config) {
   return prepareQuestions(pool, config.questionCount).map((q) => ({ ...q, sectionLabel: typeLabel(q.type) }));
 }
 import { mockExamConfig, fiveStandardsReference, describeBandLevel } from '../data/mock-exam-config.js';
-import { el, icon, subjectIcon } from './render.js';
+import { el, icon, subjectIcon, renderPassage } from './render.js';
 import { initHeader, renderUserMenu, formatRelativeDate } from './layout.js';
 import { ensureSignedIn } from './auth.js';
 import { initCloudSync } from './cloud-sync.js';
@@ -182,6 +182,7 @@ function runExam(subject, config, questions) {
   const answers = new Array(questions.length).fill(null);
   const fields = [];
   const form = el('div', { class: 'quiz-form' });
+  const shownPassages = new Set();
 
   let lastSection = null;
   questions.forEach((q, index) => {
@@ -189,6 +190,10 @@ function runExam(subject, config, questions) {
       const heading = config.categoryBreakdown ? q.sectionLabel : `${q.sectionLabel}題`;
       form.append(el('h3', { class: 'mockexam-section-heading' }, heading));
       lastSection = q.sectionLabel;
+    }
+    if (q.passageId && !shownPassages.has(q.passageId)) {
+      shownPassages.add(q.passageId);
+      form.append(renderPassage(q));
     }
 
     const field = renderAnswerField(q, index, (value) => {
@@ -332,10 +337,9 @@ function renderResult(subject, config, results, summary) {
     const card = el('div', { class: 'wrong-card' });
     card.style.setProperty('--row-color', subject.color);
     const metaPrefix = w.category ? `${w.category} · ` : '';
-    card.append(
-      el('p', { class: 'wrong-meta' }, `${metaPrefix}${w.unitTitle} · ${typeLabel(w.type)}`),
-      el('p', { class: 'wrong-question' }, w.question)
-    );
+    card.append(el('p', { class: 'wrong-meta' }, `${metaPrefix}${w.unitTitle} · ${typeLabel(w.type)}`));
+    if (w.passageId) card.append(renderPassage(w));
+    card.append(el('p', { class: 'wrong-question' }, w.question));
 
     if (w.type === 'numeric') {
       card.append(

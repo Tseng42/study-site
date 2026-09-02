@@ -933,6 +933,26 @@ a.timeline-row:hover {
   margin-bottom: 20px;
   flex-wrap: wrap;
 }
+.quiz-passage {
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 18px 20px;
+  margin-bottom: 10px;
+}
+.quiz-passage-title {
+  font-size: 0.95rem;
+  margin: 0 0 8px;
+}
+.quiz-passage p {
+  margin: 0 0 8px;
+  font-size: 0.92rem;
+  line-height: 1.75;
+  color: var(--ink);
+}
+.quiz-passage p:last-child {
+  margin-bottom: 0;
+}
 .quiz-question {
   background: var(--surface);
   border-radius: var(--radius-lg);

@@ -75,6 +75,19 @@ export function blobDecoration(color) {
   return wrapper.firstElementChild;
 }
 
+// 閱讀測驗題組的文章區塊。題目資料裡 passageTitle/passage 會重複存在同一組的
+// 每一題上(保持每題都是可以獨立抽取的物件,跟其他題型一致),畫面上由呼叫端
+// 自己追蹤同一個 passageId 只顯示一次,避免同一篇文章在同一次測驗裡重複出現。
+export function renderPassage(q) {
+  const box = el('div', { class: 'quiz-passage' });
+  if (q.passageTitle) box.append(el('h4', { class: 'quiz-passage-title' }, q.passageTitle));
+  (q.passage || '')
+    .split('\n')
+    .filter(Boolean)
+    .forEach((line) => box.append(el('p', {}, line)));
+  return box;
+}
+
 export function renderNoteSections(sections) {
   const container = el('div', { class: 'note-sections' });
   for (const section of sections) {

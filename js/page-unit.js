@@ -1,6 +1,6 @@
 import { getUnit } from './subjects-registry.js';
 import { isUnitCompleted, setUnitCompleted, addQuizResult } from './storage.js';
-import { el, renderNoteSections, icon, circularCheck } from './render.js';
+import { el, renderNoteSections, icon, circularCheck, renderPassage } from './render.js';
 import { initHeader, renderUserMenu } from './layout.js';
 import { ensureSignedIn } from './auth.js';
 import { initCloudSync } from './cloud-sync.js';
@@ -97,8 +97,14 @@ function startQuiz(mode, count = DEFAULT_QUIZ_QUESTIONS) {
   let finished = false;
 
   const form = el('div', { class: 'quiz-form' });
+  const shownPassages = new Set();
 
   questions.forEach((q, index) => {
+    if (q.passageId && !shownPassages.has(q.passageId)) {
+      shownPassages.add(q.passageId);
+      form.append(renderPassage(q));
+    }
+
     const feedback = el('div', { class: 'quiz-feedback' });
     const field = renderAnswerField(
       q,
