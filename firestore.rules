@@ -1,0 +1,13 @@
+rules_version = '2';
+
+// 整個網站只有一種資料形狀:每個登入使用者對應一份 users/{uid} 文件
+// (見 js/cloud-sync.js、js/storage.js 的 getSnapshot()/applySnapshot()),
+// 裡面存進度、測驗紀錄、錯題本、模擬考紀錄。沒有子集合、沒有跨使用者查詢。
+// 規則只允許「本人讀寫自己的那份文件」,其他一律預設拒絕。
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /users/{uid} {
+      allow read, write: if request.auth != null && request.auth.uid == uid;
+    }
+  }
+}
