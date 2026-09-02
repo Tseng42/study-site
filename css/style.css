@@ -605,6 +605,121 @@ a.timeline-row:hover {
   margin-top: 2px;
 }
 
+/* ---- Avatar achievement tier ring ---- */
+.user-avatar-link {
+  display: inline-flex;
+  border-radius: var(--radius-full);
+  padding: 2px;
+  transition: transform 0.15s ease;
+}
+.user-avatar-link:hover {
+  transform: scale(1.06);
+}
+.avatar-tier-bronze { box-shadow: 0 0 0 2px #c47a3d; }
+.avatar-tier-silver { box-shadow: 0 0 0 2px #a7adb6; }
+.avatar-tier-gold { box-shadow: 0 0 0 2px #e0a716; }
+.avatar-tier-diamond { box-shadow: 0 0 0 2px #45b8c9; }
+
+/* ---- Settings card (profile page) ---- */
+.settings-card {
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: 20px;
+  margin-bottom: 24px;
+}
+.settings-card h2 {
+  font-size: 1rem;
+  margin: 0 0 14px;
+}
+.exam-date-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.exam-date-row label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--ink-muted);
+}
+.exam-date-input {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface-alt);
+  color: var(--ink);
+}
+.exam-date-status {
+  display: block;
+  margin-top: 10px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+.exam-date-hint {
+  margin: 6px 0 0;
+  font-size: 0.78rem;
+  color: var(--ink-muted);
+}
+
+/* ---- Achievements ---- */
+.achievements-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 10px;
+  margin-bottom: 32px;
+}
+.achievement-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background: var(--surface);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  padding: 14px;
+  border-left: 4px solid var(--tier-color, var(--border));
+}
+.achievement-card.tier-bronze { --tier-color: #c47a3d; }
+.achievement-card.tier-silver { --tier-color: #a7adb6; }
+.achievement-card.tier-gold { --tier-color: #e0a716; }
+.achievement-card.tier-diamond { --tier-color: #45b8c9; }
+.achievement-card.is-locked {
+  opacity: 0.55;
+}
+.achievement-icon {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface-alt);
+  color: var(--ink-muted);
+}
+.achievement-card.is-earned .achievement-icon {
+  background: var(--tier-color, var(--ink));
+  color: #fff;
+}
+.achievement-title {
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+.achievement-desc {
+  font-size: 0.78rem;
+  color: var(--ink-muted);
+  margin-top: 2px;
+}
+.achievement-progress {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--tier-color, var(--ink-muted));
+  margin-top: 4px;
+}
+
 /* ---- Charts ---- */
 .chart-grid {
   display: grid;

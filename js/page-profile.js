@@ -1,5 +1,7 @@
 import { getAllSubjects, getSubject, getUnit, getQuestion } from './subjects-registry.js';
-import { getSubjectProgress, getQuizResults, getWrongQuestions } from './storage.js';
+import { getSubjectProgress, getQuizResults, getWrongQuestions, getExamDate, setExamDate } from './storage.js';
+import { resolveExamDate, getDaysRemaining } from './study-plan.js';
+import { getAchievementState } from './achievements.js';
 import { el, icon } from './render.js';
 import { initHeader, renderUserMenu, formatRelativeDate } from './layout.js';
 import { ensureSignedIn } from './auth.js';
@@ -14,6 +16,8 @@ const subjects = getAllSubjects();
 
 renderStats();
 renderEncourageCard();
+renderExamDateSettings();
+renderAchievements();
 // 圖表靠外部 CDN 載入的 Chart.js,萬一 CDN 掛掉或被擋,不能讓整段同步腳本
 // 中斷,導致後面的複習清單、測驗紀錄也一起消失 —— 那些其實比圖表更有用。
 try {
@@ -93,6 +97,62 @@ function renderEncourageCard() {
       ]),
     ])
   );
+}
+
+function toDateInputValue(date) {
+  const y = date.getFullYear();
+  const m = String(date.getMonth() + 1).padStart(2, '0');
+  const d = String(date.getDate()).padStart(2, '0');
+  return `${y}-${m}-${d}`;
+}
+
+function renderExamDateSettings() {
+  const container = document.getElementById('exam-date-form');
+  const input = el('input', {
+    type: 'date',
+    id: 'exam-date-input',
+    class: 'exam-date-input',
+    value: toDateInputValue(resolveExamDate()),
+  });
+  const saveBtn = el('button', { class: 'btn-pill btn-pill-outline' }, '儲存');
+  const statusText = el('span', { class: 'exam-date-status' }, `距離考試還有 ${getDaysRemaining()} 天`);
+  const hint = el('p', { class: 'exam-date-hint' }, '還沒設定過,目前用的是預設日期,設定後全站的倒數天數都會跟著改。');
+  hint.hidden = !!getExamDate();
+
+  saveBtn.addEventListener('click', () => {
+    if (!input.value) return;
+    setExamDate(input.value);
+    statusText.textContent = `距離考試還有 ${getDaysRemaining()} 天`;
+    hint.hidden = true;
+  });
+
+  container.append(
+    el('div', { class: 'exam-date-row' }, [
+      el('label', { for: 'exam-date-input' }, '目標考試日期'),
+      input,
+      saveBtn,
+    ]),
+    statusText,
+    hint
+  );
+}
+
+function renderAchievements() {
+  const container = document.getElementById('achievements-grid');
+  const achievements = getAchievementState();
+
+  for (const a of achievements) {
+    const card = el('div', { class: `achievement-card tier-${a.tier} ${a.earned ? 'is-earned' : 'is-locked'}` });
+    card.append(
+      el('div', { class: 'achievement-icon' }, icon(a.earned ? 'star' : 'lock', { size: 18 })),
+      el('div', { class: 'achievement-body' }, [
+        el('div', { class: 'achievement-title' }, a.title),
+        el('div', { class: 'achievement-desc' }, a.desc),
+        el('div', { class: 'achievement-progress' }, a.progress),
+      ])
+    );
+    container.append(card);
+  }
 }
 
 function baseChartOptions() {

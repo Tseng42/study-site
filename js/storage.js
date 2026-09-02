@@ -142,6 +142,23 @@ export function addMockExamResult(record) {
   writeJSON('mockExamHistory', all);
 }
 
+// ---- 讀書設定 ----
+// 目前只有目標考試日期('YYYY-MM-DD'),沒設定過就回傳 null,
+// 由 study-plan.js 決定要用什麼預設值。
+
+export function getExamDate() {
+  return readJSON('examDate', null);
+}
+
+export function setExamDate(dateString) {
+  writeJSON('examDate', dateString);
+}
+
+// 錯題本裡標記「已熟練」的題目數,成就徽章用。
+export function getMasteredCount() {
+  return Object.values(getWrongBookState()).filter((s) => s.mastered).length;
+}
+
 // ---- 雲端同步用:整包快照存取(見 cloud-sync.js) ----
 
 export function getSnapshot() {
@@ -150,6 +167,7 @@ export function getSnapshot() {
     quizResults: readJSON('quizResults', []),
     wrongBookState: getWrongBookState(),
     mockExamHistory: readJSON('mockExamHistory', []),
+    examDate: getExamDate(),
     updatedAt: localStorage.getItem(key('updatedAt')) || null,
   };
 }
@@ -160,6 +178,7 @@ export function applySnapshot(snapshot) {
   localStorage.setItem(key('quizResults'), JSON.stringify(snapshot.quizResults || []));
   localStorage.setItem(key('wrongBookState'), JSON.stringify(snapshot.wrongBookState || {}));
   localStorage.setItem(key('mockExamHistory'), JSON.stringify(snapshot.mockExamHistory || []));
+  if (snapshot.examDate) localStorage.setItem(key('examDate'), JSON.stringify(snapshot.examDate));
   if (snapshot.updatedAt) localStorage.setItem(key('updatedAt'), snapshot.updatedAt);
 }
 

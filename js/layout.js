@@ -1,5 +1,6 @@
 import { icon, el } from './render.js';
 import { signOutUser } from './auth.js';
+import { getAchievementState, getHighestTier, TIER_LABEL } from './achievements.js';
 
 export function initHeader() {
   const mark = document.getElementById('brand-mark');
@@ -14,6 +15,16 @@ export function renderUserMenu(user) {
     ? el('img', { src: user.photoURL, alt: '', class: 'user-avatar' })
     : el('span', { class: 'user-avatar user-avatar-fallback' }, (user.displayName || '?').slice(0, 1));
 
+  // 頭像外框顏色反映目前已解鎖的最高成就等級,點頭像可以直接到個人資料頁
+  // 看完整的成就徽章牆跟學習成效。
+  const tier = getHighestTier(getAchievementState());
+  const avatarLink = el(
+    'a',
+    { href: 'profile.html', class: 'user-avatar-link', title: tier ? `個人資料(已解鎖${TIER_LABEL[tier]}牌成就)` : '個人資料' },
+    avatar
+  );
+  if (tier) avatarLink.classList.add(`avatar-tier-${tier}`);
+
   const signOutBtn = el('button', { class: 'user-signout-btn', title: '登出' }, '登出');
   signOutBtn.addEventListener('click', async () => {
     // 登出後整頁導回首頁重新載入,讓所有模組的登入狀態(尤其 cloud-sync.js
@@ -23,7 +34,7 @@ export function renderUserMenu(user) {
     location.href = 'index.html';
   });
 
-  container.append(avatar, signOutBtn);
+  container.append(avatarLink, signOutBtn);
 }
 
 export function formatRelativeDate(isoString) {

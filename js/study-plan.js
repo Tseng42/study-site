@@ -1,8 +1,18 @@
-// 學測倒數與讀書節奏建議。EXAM_DATE 是這屆(115 學年度)學測第一天,
-// 每年放榜後可以直接更新這個常數,不用改其他程式碼。
-import { getSubjectProgress, getQuizResults } from './storage.js';
+// 學測倒數與讀書節奏建議。目標考試日期優先讀使用者在個人資料頁自訂的設定
+// (storage.js 的 examDate,會跟著帳號雲端同步);沒設定過的話用 DEFAULT_EXAM_DATE
+// 這個預設值(115 學年度學測第一天),每年放榜後可以直接更新這個常數。
+import { getSubjectProgress, getQuizResults, getExamDate } from './storage.js';
 
-const EXAM_DATE = new Date('2027-01-17T00:00:00+08:00');
+const DEFAULT_EXAM_DATE = new Date('2027-01-17T00:00:00+08:00');
+
+// 回傳目前實際生效的目標考試日期(使用者自訂或預設值),個人資料頁的
+// 設定表單也用這個函式決定日期欄位要顯示什麼初始值。
+export function resolveExamDate() {
+  const custom = getExamDate();
+  if (!custom) return DEFAULT_EXAM_DATE;
+  const parsed = new Date(`${custom}T00:00:00+08:00`);
+  return Number.isNaN(parsed.getTime()) ? DEFAULT_EXAM_DATE : parsed;
+}
 
 const PHASES = [
   {
@@ -38,7 +48,7 @@ const PHASES = [
 ];
 
 export function getDaysRemaining(today = new Date()) {
-  const ms = EXAM_DATE - today;
+  const ms = resolveExamDate() - today;
   return Math.max(0, Math.ceil(ms / (1000 * 60 * 60 * 24)));
 }
 
