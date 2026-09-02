@@ -37,10 +37,22 @@ function drawSection(pool, count, sectionLabel) {
   return prepareQuestions(pool, count).map((q) => ({ ...withMeta(q), sectionLabel }));
 }
 
+// 單一年份模式:完整重現該年度第壹部分(單選+多選+選填)與第貳部分(混合題/非選擇題)。
+// 第18-20題共用同一個情境(題組),彼此有「承上題」的關係,所以保持原始順序、不洗牌。
 function buildYearQuestions(yearSet) {
-  const singles = yearSet.questions.filter((q) => q.type !== 'multi');
-  const multis = yearSet.questions.filter((q) => q.type === 'multi');
-  return [...drawSection(singles, singles.length, '單選'), ...drawSection(multis, multis.length, '多選')];
+  const singles = yearSet.questions.filter((q) => q.origNo <= 6);
+  const multis = yearSet.questions.filter((q) => q.origNo >= 7 && q.origNo <= 12);
+  const fillIns = yearSet.questions.filter((q) => q.origNo >= 13 && q.origNo <= 17);
+  const mixedGroup = yearSet.questions
+    .filter((q) => q.origNo >= 18)
+    .sort((a, b) => a.origNo - b.origNo)
+    .map((q) => ({ ...withMeta(q), sectionLabel: '混合題' }));
+  return [
+    ...drawSection(singles, singles.length, '單選'),
+    ...drawSection(multis, multis.length, '多選'),
+    ...drawSection(fillIns, fillIns.length, '選填'),
+    ...mixedGroup,
+  ];
 }
 
 function buildMixedQuestions() {
@@ -55,7 +67,7 @@ function renderPicker() {
     el('a', { href: 'mockexam.html', class: 'back-link' }, [icon('chevronLeft', { size: 14 }), '回模擬考首頁']),
     el('h1', { class: 'profile-title' }, '歷屆試題模擬考'),
     el('p', { class: 'mockexam-intro' },
-      '收錄 111~115 學年度學測數學 A 考科「選擇(填)題」中的單選(第1-6題)與多選(第7-12題)部分,逐字轉錄自大考中心官方公布的正式試題與參考答案(依著作權法第9條第5款,依法舉行之考試試題不受著作權保護)。不含需要圖表原始資料才能忠實呈現或需人工閱卷的選填題、非選擇題部分,個別題目的省略原因見各年度說明。每題選項後方都會標注原始學年度與題號。'
+      '收錄 111~115 學年度學測數學 A 考科的完整題目:單選(第1-6題)、多選(第7-12題)、選填(第13-17題),以及第貳部分混合題/非選擇題(第18-20題),逐字轉錄自大考中心官方公布的正式試題、參考答案與非選擇題評分原則(依著作權法第9條第5款,依法舉行之考試試題不受著作權保護)。第19、20題是真正的手寫非選擇題,系統無法自動判分,會顯示官方滿分參考答案讓你自行對答案。少數依賴精確圖形數據才能作答的題目個別略過,原因見各年度說明。每題選項後方都會標注原始學年度與題號。'
     )
   );
 
@@ -110,7 +122,8 @@ function runExam(questions, examLabel) {
   let lastSection = null;
   questions.forEach((q, index) => {
     if (q.sectionLabel !== lastSection) {
-      form.append(el('h3', { class: 'mockexam-section-heading' }, `${q.sectionLabel}題`));
+      const heading = q.sectionLabel.endsWith('題') ? q.sectionLabel : `${q.sectionLabel}題`;
+      form.append(el('h3', { class: 'mockexam-section-heading' }, heading));
       lastSection = q.sectionLabel;
     }
     if (q.passageId && !shownPassages.has(q.passageId)) {
@@ -155,15 +168,24 @@ function runExam(questions, examLabel) {
 
   function finish(timeUp) {
     if (!timeUp) {
-      if (answers.includes(null) && !confirm('還有題目尚未作答,確定要送出嗎?')) return;
+      const hasUnanswered = questions.some((q, index) => q.type !== 'written' && answers[index] == null);
+      if (hasUnanswered && !confirm('還有題目尚未作答,確定要送出嗎?')) return;
     }
     clearInterval(intervalId);
     submitBtn.disabled = true;
 
-    const results = questions.map((q, index) => {
+    // 非選擇題(第19、20題)沒有標準答案可以自動判分,不計入分數,結算後另外
+    // 顯示官方滿分參考答案讓使用者自行對答案、自行回報對錯(見 renderResult)。
+    const results = [];
+    const writtenResults = [];
+    questions.forEach((q, index) => {
       const userAnswer = answers[index];
+      if (q.type === 'written') {
+        writtenResults.push({ ...q, userAnswer });
+        return;
+      }
       const { isCorrect, creditFraction } = gradeAnswer(q, userAnswer);
-      return { ...q, userAnswer, isCorrect, creditFraction };
+      results.push({ ...q, userAnswer, isCorrect, creditFraction });
     });
     const scoreFraction = results.reduce((sum, r) => sum + r.creditFraction, 0);
     const score = Math.round(scoreFraction * 10) / 10;
@@ -190,7 +212,7 @@ function runExam(questions, examLabel) {
         answers: group.map((r) => ({
           questionId: r.id,
           selected: r.userAnswer instanceof Set ? Array.from(r.userAnswer) : r.userAnswer,
-          correct: r.type === 'multi' ? r.answers : r.answer,
+          correct: correctAnswerOf(r),
           isCorrect: r.isCorrect,
         })),
       });
@@ -207,11 +229,18 @@ function runExam(questions, examLabel) {
       minutesUsed: Math.round((MINUTES * 60 - Math.max(0, secondsLeft)) / 60),
     });
 
-    renderResult(results, { score, total, percent, timeUp, examLabel });
+    renderResult(results, writtenResults, { score, total, percent, timeUp, examLabel });
   }
 }
 
-function renderResult(results, summary) {
+function correctAnswerOf(q) {
+  if (q.type === 'multi') return q.answers;
+  if (q.type === 'numeric') return q.answerText;
+  if (q.type === 'numeric-multi') return q.blanks.map((b) => b.answerText);
+  return q.answer;
+}
+
+function renderResult(results, writtenResults, summary) {
   container.innerHTML = '';
 
   const wrongs = results.filter((r) => !r.isCorrect);
@@ -223,11 +252,13 @@ function renderResult(results, summary) {
         el('div', { class: 'mockexam-score-value' }, `${summary.score} / ${summary.total}`),
         el('div', { class: 'mockexam-score-percent' }, `${summary.percent}%`),
       ]),
-      el('p', { class: 'mockexam-band-disclaimer' }, `${summary.examLabel} · 這只涵蓋單選＋多選部分,不能直接對照正式級分。`),
+      el('p', { class: 'mockexam-band-disclaimer' },
+        `${summary.examLabel} · 這只涵蓋單選＋多選＋選填部分,不能直接對照正式級分。${writtenResults.length ? '第18-20題混合題組另外列在下方,非選擇題需自行對答案。' : ''}`
+      ),
     ])
   );
 
-  container.append(el('h3', {}, wrongs.length ? `答錯的題目(${wrongs.length} 題)` : '全部答對了!'));
+  container.append(el('h3', {}, wrongs.length ? `答錯的題目(${wrongs.length} 題)` : '單選＋多選＋選填全部答對了!'));
 
   for (const w of wrongs) {
     const card = el('div', { class: 'wrong-card' });
@@ -235,22 +266,19 @@ function renderResult(results, summary) {
     card.append(el('p', { class: 'wrong-meta' }, `${typeLabel(w.type)} · ${w.sourceYear} 學年度第 ${w.origNo} 題`));
     if (w.passageId) card.append(renderPassage(w));
     card.append(el('p', { class: 'wrong-question' }, w.question));
-
-    const correctSet = w.type === 'multi' ? new Set(w.answers) : new Set([w.answer]);
-    const selectedSet =
-      w.type === 'multi' ? new Set(w.userAnswer || []) : new Set(w.userAnswer != null ? [w.userAnswer] : []);
-    const optionsWrap = el('div', { class: 'quiz-options' });
-    w.options.forEach((opt, i) => {
-      const row = el('div', { class: 'quiz-option-row static' });
-      if (correctSet.has(i)) row.classList.add('is-correct');
-      else if (selectedSet.has(i)) row.classList.add('is-wrong');
-      row.append(el('span', {}, opt));
-      optionsWrap.append(row);
-    });
-    card.append(optionsWrap);
+    card.append(renderCorrectAnswerBlock(w));
 
     if (w.explanation) card.append(el('p', { class: 'feedback-explanation' }, w.explanation));
     container.append(card);
+  }
+
+  if (writtenResults.length) {
+    container.append(
+      el('h3', { class: 'real-exam-written-heading' }, '非選擇題(第18-20題混合題組,自行對答案)')
+    );
+    for (const w of writtenResults) {
+      container.append(renderWrittenCard(w));
+    }
   }
 
   container.append(
@@ -258,5 +286,79 @@ function renderResult(results, summary) {
       el('a', { href: 'real-exam.html', class: 'btn-pill btn-pill-outline' }, '回歷屆試題首頁'),
       el('a', { href: 'wrongbook.html', class: 'btn-pill btn-pill-dark' }, '前往錯題本'),
     ])
+  );
+}
+
+// 依題型畫出「正確答案」區塊:單選/多選標示選項對錯,選填(單一格/多格)直接列出答案。
+function renderCorrectAnswerBlock(w) {
+  if (w.type === 'numeric') {
+    return el('p', { class: 'feedback-correct' }, `正確答案:${w.answerText}`);
+  }
+  if (w.type === 'numeric-multi') {
+    const text = w.blanks.map((b) => `${b.label}=${b.answerText}`).join('、');
+    return el('p', { class: 'feedback-correct' }, `正確答案:${text}`);
+  }
+  const correctSet = w.type === 'multi' ? new Set(w.answers) : new Set([w.answer]);
+  const selectedSet =
+    w.type === 'multi' ? new Set(w.userAnswer || []) : new Set(w.userAnswer != null ? [w.userAnswer] : []);
+  const optionsWrap = el('div', { class: 'quiz-options' });
+  w.options.forEach((opt, i) => {
+    const row = el('div', { class: 'quiz-option-row static' });
+    if (correctSet.has(i)) row.classList.add('is-correct');
+    else if (selectedSet.has(i)) row.classList.add('is-wrong');
+    row.append(el('span', {}, opt));
+    optionsWrap.append(row);
+  });
+  return optionsWrap;
+}
+
+// 非選擇題(第19、20題)沒辦法自動判分:顯示題目跟官方滿分參考答案,讓使用者自己
+// 對照後回報「答對了/沒答對」,回報結果會寫進 quizResults,答錯的之後也會出現在錯題本。
+function renderWrittenCard(w) {
+  const card = el('div', { class: 'wrong-card written-card' });
+  card.style.setProperty('--row-color', subject?.color || '#201c2b');
+  card.append(el('p', { class: 'wrong-meta' }, `非選 · ${w.sourceYear} 學年度第 ${w.origNo} 題`));
+  card.append(el('p', { class: 'wrong-question' }, w.question));
+  if (w.userAnswer && w.userAnswer.trim()) {
+    card.append(el('p', { class: 'written-your-note' }, `你寫的:${w.userAnswer}`));
+  }
+
+  const explanationWrap = el('div', { class: 'feedback-explanation-wrap' }, [
+    el('p', { class: 'feedback-explanation' }, w.explanation),
+  ]);
+  explanationWrap.hidden = true;
+  const revealBtn = el('button', { class: 'btn-pill btn-pill-outline' }, '顯示官方詳解');
+  revealBtn.addEventListener('click', () => {
+    explanationWrap.hidden = !explanationWrap.hidden;
+    revealBtn.textContent = explanationWrap.hidden ? '顯示官方詳解' : '隱藏詳解';
+  });
+
+  const reportRow = el('div', { class: 'written-self-report' });
+  const correctBtn = el('button', { class: 'btn-pill btn-pill-outline' }, '我答對了');
+  const wrongBtn = el('button', { class: 'btn-pill btn-pill-outline' }, '我沒答對');
+  correctBtn.addEventListener('click', () => reportWritten(w, true, reportRow));
+  wrongBtn.addEventListener('click', () => reportWritten(w, false, reportRow));
+  reportRow.append(correctBtn, wrongBtn);
+
+  card.append(revealBtn, explanationWrap, reportRow);
+  return card;
+}
+
+function reportWritten(w, isCorrect, reportRow) {
+  addQuizResult({
+    id: crypto.randomUUID(),
+    subjectId: SUBJECT_ID,
+    unitId: w.unitId,
+    mode: 'mock',
+    takenAt: new Date().toISOString(),
+    score: isCorrect ? 1 : 0,
+    total: 1,
+    answers: [{ questionId: w.id, selected: w.userAnswer || null, correct: null, isCorrect }],
+  });
+  reportRow.innerHTML = '';
+  reportRow.append(
+    el('p', { class: isCorrect ? 'feedback-correct' : 'feedback-wrong' },
+      isCorrect ? '已記錄:答對了' : '已記錄:沒答對(已加入錯題本)'
+    )
   );
 }

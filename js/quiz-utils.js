@@ -2,9 +2,13 @@
 // 確保「單選/多選/選填」三種題型不管在哪個頁面出現,行為都一致。
 //
 // 題目資料格式(type 省略時視為 'single',跟舊資料相容):
-//   單選 type:'single'  { options:[...4], answer: index }
-//   多選 type:'multi'   { options:[...n], answers: [index, ...] }
-//   選填 type:'numeric' { answerText: '3' }  // 純數字/簡短文字,去除空白後完全比對
+//   單選 type:'single'        { options:[...4], answer: index }
+//   多選 type:'multi'         { options:[...n], answers: [index, ...] }
+//   選填 type:'numeric'       { answerText: '3' }  // 純數字/簡短文字,去除空白後完全比對
+//   選填(多格) type:'numeric-multi' { blanks: [{ label:'a', answerText:'2' }, ...] }
+//              // 一題有好幾個獨立空格(如歷屆試題選填題的 a、b 兩個未知數),須全部答對才給分
+//   非選擇題 type:'written'   { explanation: '官方滿分參考答案與評分原則' }
+//              // 沒有標準化答案格式,系統不自動判分,使用者自行對照詳解後回報對錯
 import { el } from './render.js';
 
 // Fisher-Yates 洗牌,不修改原陣列。
@@ -19,7 +23,7 @@ export function shuffle(array) {
 
 // 洗掉一題的選項順序(單選/多選才有選項),並同步校正正確答案的 index。
 export function shuffleQuestionOptions(q) {
-  if (q.type === 'numeric') return { ...q };
+  if (q.type === 'numeric' || q.type === 'numeric-multi' || q.type === 'written') return { ...q };
 
   const optionOrder = shuffle(q.options.map((_, i) => i));
   const options = optionOrder.map((i) => q.options[i]);
@@ -61,6 +65,13 @@ export function gradeAnswer(q, userAnswer) {
     const isCorrect = userAnswer != null && normalize(userAnswer) === normalize(q.answerText);
     return { creditFraction: isCorrect ? 1 : 0, isCorrect };
   }
+  if (q.type === 'numeric-multi') {
+    // 官方選填題規則:一題有好幾個空格,須全部答對才給分,答錯不倒扣(沒有部分分數)。
+    const normalize = (s) => String(s ?? '').trim().replace(/\s+/g, '');
+    const answers = userAnswer || [];
+    const isCorrect = q.blanks.every((blank, i) => normalize(answers[i]) === normalize(blank.answerText));
+    return { creditFraction: isCorrect ? 1 : 0, isCorrect };
+  }
   const isCorrect = userAnswer === q.answer;
   return { creditFraction: isCorrect ? 1 : 0, isCorrect };
 }
@@ -95,6 +106,41 @@ export function renderAnswerField(q, index, onChange, onCommit, showConfirmButto
     });
     const wrap = el('div', { class: 'quiz-numeric-wrap' }, input);
     return { optionsWrap: wrap, getValue: () => input.value, inputs: [input] };
+  }
+
+  if (q.type === 'numeric-multi') {
+    const values = new Array(q.blanks.length).fill('');
+    const inputs = [];
+    const wrap = el('div', { class: 'quiz-numeric-multi-wrap' });
+    q.blanks.forEach((blank, i) => {
+      const input = el('input', {
+        type: 'text',
+        inputmode: 'text',
+        class: 'quiz-numeric-input quiz-numeric-input-small',
+        placeholder: blank.label,
+        'aria-label': `第 ${index + 1} 題 ${blank.label}`,
+      });
+      input.addEventListener('input', () => {
+        values[i] = input.value;
+        onChange([...values]);
+      });
+      input.addEventListener('blur', () => {
+        if (values.every((v) => v.trim() !== '')) onCommit?.();
+      });
+      inputs.push(input);
+      wrap.append(el('div', { class: 'quiz-numeric-multi-item' }, [el('span', { class: 'quiz-numeric-multi-label' }, blank.label), input]));
+    });
+    return { optionsWrap: wrap, getValue: () => [...values], inputs };
+  }
+
+  if (q.type === 'written') {
+    const textarea = el('textarea', {
+      class: 'quiz-written-textarea',
+      placeholder: '(選填)在這裡寫下你的解題過程或答案,方便等一下對照詳解',
+    });
+    textarea.addEventListener('input', () => onChange(textarea.value));
+    const wrap = el('div', { class: 'quiz-written-wrap' }, textarea);
+    return { optionsWrap: wrap, getValue: () => textarea.value, inputs: [textarea] };
   }
 
   if (q.type === 'multi') {
@@ -150,7 +196,7 @@ export function markAnswerFeedback(field, q, userAnswer) {
   const rows = field.optionsWrap.querySelectorAll('.quiz-option-row');
   field.inputs.forEach((input) => (input.disabled = true));
 
-  if (q.type === 'numeric') return;
+  if (q.type === 'numeric' || q.type === 'numeric-multi' || q.type === 'written') return;
 
   const correctSet = q.type === 'multi' ? new Set(q.answers) : new Set([q.answer]);
   const selectedSet = q.type === 'multi' ? new Set(userAnswer || []) : new Set(userAnswer != null ? [userAnswer] : []);
@@ -162,6 +208,7 @@ export function markAnswerFeedback(field, q, userAnswer) {
 
 export function typeLabel(type) {
   if (type === 'multi') return '多選';
-  if (type === 'numeric') return '選填';
+  if (type === 'numeric' || type === 'numeric-multi') return '選填';
+  if (type === 'written') return '非選';
   return '單選';
 }

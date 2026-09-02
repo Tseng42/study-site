@@ -40,6 +40,11 @@ function render() {
 
     if (question.type === 'numeric') {
       card.append(el('p', { class: 'feedback-correct' }, `正確答案:${question.answerText}`));
+    } else if (question.type === 'numeric-multi') {
+      const text = question.blanks.map((b) => `${b.label}=${b.answerText}`).join('、');
+      card.append(el('p', { class: 'feedback-correct' }, `正確答案:${text}`));
+    } else if (question.type === 'written') {
+      card.append(el('p', { class: 'feedback-correct' }, '非選擇題(自行對答案),詳見下方官方參考答案'));
     } else {
       const correctSet = question.type === 'multi' ? new Set(question.answers) : new Set([question.answer]);
       const optionsWrap = el('div', { class: 'quiz-options' });
