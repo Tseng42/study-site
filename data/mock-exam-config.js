@@ -1,19 +1,66 @@
-// 模擬考設定:每科題數上限、限時,依真實學測考試時間換算出的每題配速抓的。
-// 真實學測時間(114 學年度,資料來源見 README):
-//   國文綜合測驗 90 分鐘、英文/數學A/數學B 各 100 分鐘、社會/自然各 110 分鐘。
-// 因為我們的題庫題數跟真實考試不同,時間是照「每題平均配速」換算,不是照抄真實題數與時間。
+// 模擬考設定:題數、限時、題型/分科配題,都改成直接對齊 114 學年度學測「選擇題部分」的
+// 真實結構(資料來源見 README),題庫量足夠支撐真實題數,不再用配速換算縮減。
+// 每科都只涵蓋「選擇題」部分 —— 需要人工評閱的國寫、英文寫作、數學/自然/社會非選擇題
+// 無法在這種題庫網站上模擬,所以時間、題數都是選擇題部分單獨的真實數字,見各科 excludesNote。
 //
-// typeBreakdown:依題型分別從題庫抽題,抽出來的題目會依「單選→多選→選填」分節呈現,
-// 跟真實考卷的分節方式一致。數學科的 6 單選+6 多選+5 選填+3(併入單選)= 20 題,
-// 是依 113、114 學年度學測數學A 官方確認的真實結構(資料來源見 README);
-// 其餘四科目前查不到官方逐題型的精確配題數,只確定「單選為主、有部分多選」這個大方向,
-// 所以是用目前題庫量抓的比例,不是官方精確數字,這點有跟使用者說明過。
+// typeBreakdown:依題型(單選/多選/選填)分別從題庫抽題,抽出來的題目依「單選→多選→選填」
+// 分節呈現,跟真實考卷分節方式一致。
+// categoryBreakdown:社會/自然考科由歷史/地理/公民、物理/化學/生物/地科各科均分題數
+// (這是大考中心公開說明的配題原則),抽題時逐分類抽取、依分類分節呈現,
+// 分類內部再依 typeBreakdown 分單選/多選。
+//
+// 數學A 6 單選+6 多選+5 選填+3 混合題組(併入單選計分)= 20 題,100 分鐘:
+//   114 學測數學A 官方確認的真實結構。
+// 國文(國語文綜合測驗)25 題、90 分鐘;英文選擇題 45 題、100 分鐘:
+//   114 學測官方答案卷題號範圍。單選/多選細分沒有官方逐題型統計,依題庫可用量抓比例。
+// 社會選擇題 60 題(歷史/地理/公民各 20 題)、110 分鐘;
+// 自然選擇題 57 題(物理 14+化學 15+生物 14+地科 14)、110 分鐘:
+//   114 學測官方答案卷題號範圍,分科均分則依大考中心考試說明的配題原則。
 export const mockExamConfig = {
-  chinese: { questionCount: 30, minutes: 75, label: '國文', typeBreakdown: { single: 26, multi: 4 } },
-  english: { questionCount: 30, minutes: 60, label: '英文', typeBreakdown: { single: 26, multi: 4 } },
-  math: { questionCount: 20, minutes: 80, label: '數學(A)', typeBreakdown: { single: 9, multi: 6, numeric: 5 } },
-  science: { questionCount: 30, minutes: 65, label: '自然', typeBreakdown: { single: 26, multi: 4 } },
-  social: { questionCount: 30, minutes: 70, label: '社會', typeBreakdown: { single: 26, multi: 4 } },
+  chinese: {
+    questionCount: 25,
+    minutes: 90,
+    label: '國文(國語文綜合測驗)',
+    typeBreakdown: { single: 21, multi: 4 },
+    excludesNote: '只模擬選擇題(國綜)部分,不包含需要人工評閱的「國語文寫作測驗」(國寫,另計 90 分鐘)',
+  },
+  english: {
+    questionCount: 45,
+    minutes: 100,
+    label: '英文',
+    typeBreakdown: { single: 39, multi: 6 },
+    excludesNote: '只模擬選擇題部分,不包含「英文寫作」(中譯英+英文作文)',
+  },
+  math: {
+    questionCount: 20,
+    minutes: 100,
+    label: '數學(A)',
+    typeBreakdown: { single: 9, multi: 6, numeric: 5 },
+    excludesNote: '混合題組(占 3 小題)簡化併入單選計分',
+  },
+  science: {
+    questionCount: 57,
+    minutes: 110,
+    label: '自然',
+    categoryBreakdown: [
+      { category: '物理', count: 14, typeBreakdown: { single: 12, multi: 2 } },
+      { category: '化學', count: 15, typeBreakdown: { single: 13, multi: 2 } },
+      { category: '生物', count: 14, typeBreakdown: { single: 12, multi: 2 } },
+      { category: '地科', count: 14, typeBreakdown: { single: 12, multi: 2 } },
+    ],
+    excludesNote: '只模擬選擇題部分,不包含非選擇題(計算/簡答題組)',
+  },
+  social: {
+    questionCount: 60,
+    minutes: 110,
+    label: '社會',
+    categoryBreakdown: [
+      { category: '歷史', count: 20, typeBreakdown: { single: 17, multi: 3 } },
+      { category: '地理', count: 20, typeBreakdown: { single: 17, multi: 3 } },
+      { category: '公民', count: 20, typeBreakdown: { single: 17, multi: 3 } },
+    ],
+    excludesNote: '只模擬選擇題部分,不包含非選擇題',
+  },
 };
 
 // 113、114 學年度學測正式五標(級分),用來讓模擬考的估計級分有真實對照,

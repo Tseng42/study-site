@@ -2,11 +2,9 @@ import { getAllSubjects, getSubject } from './subjects-registry.js';
 import { addQuizResult, addMockExamResult, getMockExamHistory } from './storage.js';
 import { prepareQuestions, renderAnswerField, gradeAnswer, markAnswerFeedback, typeLabel } from './quiz-utils.js';
 
-// 依 config.typeBreakdown(若有)分別從各題型抽題,維持「單選→多選→選填」的分節順序,
-// 跟真實考卷的結構一致;沒有設定 typeBreakdown 的話就整包題庫隨機抽。
-function drawExamQuestions(pool, config) {
-  if (!config.typeBreakdown) return prepareQuestions(pool, config.questionCount);
-
+// 依 typeBreakdown 分別從各題型抽題,維持「單選→多選→選填」的分節順序,
+// 跟真實考卷的結構一致。每題都標上 sectionLabel,給 runExam 畫分節標題用。
+function drawByType(pool, typeBreakdown, sectionLabel) {
   const byType = { single: [], multi: [], numeric: [] };
   for (const q of pool) {
     const t = q.type === 'multi' || q.type === 'numeric' ? q.type : 'single';
@@ -15,10 +13,35 @@ function drawExamQuestions(pool, config) {
   const order = ['single', 'multi', 'numeric'];
   const picked = [];
   for (const type of order) {
-    const count = config.typeBreakdown[type];
-    if (count) picked.push(...prepareQuestions(byType[type], count));
+    const count = typeBreakdown[type];
+    if (count) {
+      picked.push(
+        ...prepareQuestions(byType[type], count).map((q) => ({
+          ...q,
+          sectionLabel: sectionLabel ?? typeLabel(q.type),
+        }))
+      );
+    }
   }
   return picked;
+}
+
+// 依 config 抽題:
+// - categoryBreakdown(社會/自然):依歷史/地理/公民、物理/化學/生物/地科逐分類抽題,
+//   分類內部再依 typeBreakdown 分單選/多選,分節標題用分類名稱,跟真實考卷分科分節一致。
+// - typeBreakdown(國文/英文/數學):整科題庫依單選/多選/選填抽題,分節標題用題型名稱。
+// - 都沒有的話:整包題庫隨機抽,不分節。
+function drawExamQuestions(pool, config) {
+  if (config.categoryBreakdown) {
+    const picked = [];
+    for (const cat of config.categoryBreakdown) {
+      const catPool = pool.filter((q) => q.category === cat.category);
+      picked.push(...drawByType(catPool, cat.typeBreakdown, cat.category));
+    }
+    return picked;
+  }
+  if (config.typeBreakdown) return drawByType(pool, config.typeBreakdown);
+  return prepareQuestions(pool, config.questionCount).map((q) => ({ ...q, sectionLabel: typeLabel(q.type) }));
 }
 import { mockExamConfig, fiveStandardsReference, describeBandLevel } from '../data/mock-exam-config.js';
 import { el, icon, subjectIcon } from './render.js';
@@ -46,7 +69,7 @@ function buildExamPool(subject) {
   const pool = [];
   for (const unit of subject.units) {
     for (const q of unit.quiz) {
-      pool.push({ ...q, unitId: unit.id, unitTitle: unit.title });
+      pool.push({ ...q, unitId: unit.id, unitTitle: unit.title, category: unit.category });
     }
   }
   return pool;
@@ -57,7 +80,7 @@ function renderPicker() {
   container.append(
     el('h1', { class: 'profile-title' }, '模擬考'),
     el('p', { class: 'mockexam-intro' },
-      '各科單獨計時作答,題目從該科所有單元的題庫中隨機抽取,每次組合都不一樣。時間長度依真實學測各科配速換算,題數則依我們目前的題庫量調整,跟正式考試不完全相同。'
+      '各科單獨計時作答,題目從該科所有單元的題庫中隨機抽取,每次組合都不一樣。題數、限時、單選/多選(社會、自然還會依歷史/地理/公民、物理/化學/生物/地科均分)都對齊真實學測選擇題部分的配置;需要人工評閱的寫作、非選擇題無法在這裡模擬,詳見各科說明。'
     )
   );
 
@@ -100,7 +123,9 @@ function renderStartScreen(subjectId) {
   iconBox.style.background = subject.color;
   iconBox.style.color = '#fff';
 
-  const breakdownText = config.typeBreakdown
+  const breakdownText = config.categoryBreakdown
+    ? config.categoryBreakdown.map((cat) => `${cat.category} ${cat.count}`).join(' + ')
+    : config.typeBreakdown
     ? Object.entries(config.typeBreakdown)
         .filter(([, count]) => count)
         .map(([type, count]) => `${count} ${typeLabel(type)}`)
@@ -115,8 +140,9 @@ function renderStartScreen(subjectId) {
       el('h1', {}, `${config.label} 模擬考`),
       el('ul', { class: 'mockexam-start-list' }, [
         el('li', {}, `題數:${config.questionCount} 題(${breakdownText})`),
-        el('li', {}, `時間:${config.minutes} 分鐘,時間到會自動送出`),
+        el('li', {}, `時間:${config.minutes} 分鐘,時間到會自動送出 —— 跟真實學測這科的考試時間相同`),
         el('li', {}, '題目從全部單元題庫隨機抽取,每次考的題目跟順序都不一樣'),
+        config.excludesNote ? el('li', {}, config.excludesNote) : null,
         el('li', {}, '作答結果會計入錯題本跟個人資料的統計'),
       ]),
       el(
@@ -146,12 +172,12 @@ function runExam(subject, config, questions) {
   const fields = [];
   const form = el('div', { class: 'quiz-form' });
 
-  let lastType = null;
+  let lastSection = null;
   questions.forEach((q, index) => {
-    const currentType = q.type || 'single';
-    if (currentType !== lastType) {
-      form.append(el('h3', { class: 'mockexam-section-heading' }, `${typeLabel(q.type)}題`));
-      lastType = currentType;
+    if (q.sectionLabel !== lastSection) {
+      const heading = config.categoryBreakdown ? q.sectionLabel : `${q.sectionLabel}題`;
+      form.append(el('h3', { class: 'mockexam-section-heading' }, heading));
+      lastSection = q.sectionLabel;
     }
 
     const field = renderAnswerField(q, index, (value) => {
@@ -294,8 +320,9 @@ function renderResult(subject, config, results, summary) {
   for (const w of wrongs) {
     const card = el('div', { class: 'wrong-card' });
     card.style.setProperty('--row-color', subject.color);
+    const metaPrefix = w.category ? `${w.category} · ` : '';
     card.append(
-      el('p', { class: 'wrong-meta' }, `${w.unitTitle} · ${typeLabel(w.type)}`),
+      el('p', { class: 'wrong-meta' }, `${metaPrefix}${w.unitTitle} · ${typeLabel(w.type)}`),
       el('p', { class: 'wrong-question' }, w.question)
     );
 
