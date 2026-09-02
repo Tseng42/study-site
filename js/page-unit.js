@@ -90,6 +90,7 @@ function startQuiz(mode, count = DEFAULT_QUIZ_QUESTIONS) {
 
   const questions = prepareQuestions(unit.quiz, count);
   const userAnswers = new Array(questions.length).fill(null);
+  const revealed = new Array(questions.length).fill(false);
   const fields = [];
   const questionRefs = [];
   const resultBar = el('div', { class: 'quiz-result-bar' });
@@ -104,11 +105,14 @@ function startQuiz(mode, count = DEFAULT_QUIZ_QUESTIONS) {
       index,
       (value) => {
         userAnswers[index] = value;
-        if (mode === 'practice' && q.type !== 'numeric') revealAnswer(index);
+        // 單選點一下就是確定答案,可以立刻判分;選填/多選要等使用者明確表示「這題答完了」
+        // (選填按 Enter/離開欄位,多選按確認答案)才判分,見 onCommit。
+        if (mode === 'practice' && q.type !== 'numeric' && q.type !== 'multi') revealAnswer(index);
       },
       () => {
         if (mode === 'practice') revealAnswer(index);
-      }
+      },
+      mode === 'practice'
     );
     fields.push(field);
 
@@ -147,6 +151,7 @@ function startQuiz(mode, count = DEFAULT_QUIZ_QUESTIONS) {
     const userAnswer = userAnswers[index];
     const { feedback } = questionRefs[index];
 
+    revealed[index] = true;
     markAnswerFeedback(field, q, userAnswer);
     const { isCorrect, creditFraction } = gradeAnswer(q, userAnswer);
 
@@ -163,7 +168,7 @@ function startQuiz(mode, count = DEFAULT_QUIZ_QUESTIONS) {
     }
     if (q.explanation) feedback.append(el('p', { class: 'feedback-explanation' }, q.explanation));
 
-    if (mode === 'practice' && !finished && userAnswers.every((a) => a !== null)) {
+    if (mode === 'practice' && !finished && revealed.every(Boolean)) {
       finish();
     }
   }

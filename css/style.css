@@ -850,6 +850,10 @@ a.timeline-row:hover {
 .quiz-numeric-wrap {
   margin-top: 4px;
 }
+.quiz-confirm-btn {
+  align-self: flex-start;
+  margin-top: 4px;
+}
 .quiz-numeric-input {
   width: 100%;
   max-width: 220px;

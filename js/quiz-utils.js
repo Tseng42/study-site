@@ -69,10 +69,12 @@ export function gradeAnswer(q, userAnswer) {
 // onChange(value) 會在使用者改變作答時呼叫(用來即時記錄目前輸入的值);
 // value 的形狀依題型而定(單選: index number;多選: Set<number>;選填: string)。
 // onCommit() 是「這題確定作答完畢,可以判分」的時機:
-// 單選/多選一點選項就是確定,所以直接在 onChange 當下處理;
-// 選填則要等使用者按 Enter 或離開欄位(blur)才算確定,避免打字打到一半就被判對錯。
+// 單選點一下就是確定,所以直接在 onChange 當下處理;
+// 選填要等使用者按 Enter 或離開欄位(blur)才算確定;
+// 多選需要勾選好幾個選項才算作答完畢,不能勾第一個就判分,
+// 所以在 showConfirmButton 為真時(練習模式)額外顯示「確認答案」按鈕,由使用者自己決定何時送出這題。
 // 回傳 { optionsWrap, getValue }。
-export function renderAnswerField(q, index, onChange, onCommit) {
+export function renderAnswerField(q, index, onChange, onCommit, showConfirmButton) {
   if (q.type === 'numeric') {
     const input = el('input', {
       type: 'text',
@@ -109,6 +111,19 @@ export function renderAnswerField(q, index, onChange, onCommit) {
       inputs.push(checkbox);
       wrap.append(el('div', { class: 'quiz-option-row' }, [checkbox, el('label', { for: optId }, opt)]));
     });
+    if (showConfirmButton) {
+      const confirmBtn = el(
+        'button',
+        { type: 'button', class: 'btn-pill btn-pill-outline quiz-confirm-btn' },
+        '確認答案'
+      );
+      confirmBtn.addEventListener('click', () => {
+        confirmBtn.disabled = true;
+        onCommit?.();
+      });
+      inputs.push(confirmBtn);
+      wrap.append(confirmBtn);
+    }
     return { optionsWrap: wrap, getValue: () => new Set(selected), inputs };
   }
 
