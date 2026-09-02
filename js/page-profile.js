@@ -14,6 +14,13 @@ renderUserMenu(user);
 
 const subjects = getAllSubjects();
 
+// 歷屆試題(unitId 形如 math-real-111)沒有對應的 unit.html 頁面可以連回去,
+// 點進去要導回歷屆試題模擬考頁,而不是導向一個查無單元的 unit.html。
+function unitHref(subjectId, unitId) {
+  if (unitId?.startsWith('math-real-')) return `real-exam.html?subject=${subjectId}`;
+  return `unit.html?subject=${subjectId}&unit=${unitId}`;
+}
+
 renderStats();
 renderEncourageCard();
 renderExamDateSettings();
@@ -232,7 +239,7 @@ function renderReviewList() {
 
     const row = el('a', {
       class: 'timeline-row',
-      href: `unit.html?subject=${w.subjectId}&unit=${w.unitId}`,
+      href: unitHref(w.subjectId, w.unitId),
     });
     row.style.setProperty('--row-color', subject?.color || '#201c2b');
     row.append(
@@ -263,7 +270,7 @@ function renderRecentQuizzes() {
     const unit = getUnit(r.subjectId, r.unitId);
     const row = el('a', {
       class: 'timeline-row',
-      href: `unit.html?subject=${r.subjectId}&unit=${r.unitId}`,
+      href: unitHref(r.subjectId, r.unitId),
     });
     row.style.setProperty('--row-color', subject?.color || '#201c2b');
     row.append(

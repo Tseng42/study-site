@@ -1269,6 +1269,18 @@ a.timeline-row:hover {
   margin-top: 20px;
 }
 
+/* ---- 歷屆試題模擬考 ---- */
+.real-exam-subheading {
+  font-size: 1.1rem;
+  margin: 32px 0 12px;
+}
+.real-exam-year-badge {
+  margin: 12px 0 0;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--ink-muted);
+}
+
 @media (max-width: 860px) {
   .dash-columns {
     grid-template-columns: 1fr;
