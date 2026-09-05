@@ -1,17 +1,32 @@
-// 歷屆試題模擬考:直接使用 data/math-real-exams.js 裡逐字轉錄的真實學測考題
+// 歷屆試題模擬考:直接使用 data/*-real-exams.js 裡逐字轉錄的真實學測考題
 // (依著作權法第9條第5款,考試試題不受著作權保護),不是原創改編題。
 //
-// 兩種模式(使用者透過 AskUserQuestion 確認「可以都要」):
-// - 單一年份:固定考同一學年度所有可收錄的題目,每次題目/選項順序重新洗牌。
-// - 混合年份:跨 111~115 學年度隨機抽 6 單選 + 6 多選,每次組合都不一樣。
+// 目前支援數學A跟社會兩科,用 ?subject=math(預設)或 ?subject=social 切換,
+// 兩科結構差異很大所以各自有自己的 buildYearQuestions/buildMixedQuestions:
+// - 數學A:第壹部分可以乾淨分成單選/多選/選填,第貳部分是一組共用情境的混合題組
+//   (18-20題,彼此有「承上題」關係,不可打亂順序)。
+// - 社會:65題左右本身就是一份連續的考卷,非選擇題(純寫答,或勾選+簡答的
+//   hybrid)穿插在選擇題之間,很多題還跟前後幾題共用同一段題幹(題組),所以整份
+//   考卷完全依原始題號順序作答,不打亂題目順序,只洗每題自己的選項順序。
+//
+// 兩種模式(數學A模式已由使用者透過 AskUserQuestion 確認「可以都要」,社會沿用
+// 相同設計):
+// - 單一年份:固定考同一學年度所有可收錄的題目,每次題目/選項順序重新洗牌
+//   (社會不打亂題目順序,只洗選項)。
+// - 混合年份:跨 111~115 學年度隨機抽題,每次組合都不一樣,只包含能自動判分的
+//   題型(不含純寫答的非選擇題)。
 // 每題都會標注原始學年度與題號(origNo),讓使用者知道這題出自哪一年。
 //
-// 目前只有數學(pilot,使用者要求先做一科驗證再考慮擴充其他科)。
+// 非選擇題(數學A的第19、20題;社會的 written/hybrid 簡答部分)沒有標準答案格式,
+// 系統無法自動判分,結算後顯示官方滿分參考答案,由使用者自行對答案、回報對錯。
+// 這部分的結果連同能自動判分的部分,依各科官方配分權重(config.autoWeight/
+// writtenWeight)換算成一個預估級分,寫進「模擬考紀錄」(見個人資料頁)。
 import { mathRealExams } from '../data/math-real-exams.js';
+import { socialRealExams } from '../data/social-real-exams.js';
 import { getSubject } from './subjects-registry.js';
 import { addQuizResult, addMockExamResult } from './storage.js';
 import { describeBandLevel } from '../data/mock-exam-config.js';
-import { prepareQuestions, renderAnswerField, gradeAnswer, typeLabel } from './quiz-utils.js';
+import { shuffle, prepareQuestions, shuffleQuestionOptions, renderAnswerField, gradeAnswer, typeLabel } from './quiz-utils.js';
 import { el, icon, renderPassage } from './render.js';
 import { initHeader, renderUserMenu } from './layout.js';
 import { ensureSignedIn } from './auth.js';
@@ -23,24 +38,65 @@ await initCloudSync(user.uid);
 renderUserMenu(user);
 
 const container = document.getElementById('real-exam-content');
-const SUBJECT_ID = 'math';
-const MOCK_HISTORY_ID = 'math-real'; // 跟一般數學模擬考的紀錄分開存放,避免混在一起
-const MINUTES = 50;
+
+const params = new URLSearchParams(location.search);
+const SUBJECT_KEY = params.get('subject') === 'social' ? 'social' : 'math';
+
+const CONFIGS = {
+  math: {
+    subjectId: 'math',
+    historyId: 'math-real',
+    subjectLabel: '數學A',
+    yearBadgeLabel: '學測數學A',
+    minutes: 50,
+    data: mathRealExams,
+    intro:
+      '收錄 111~115 學年度學測數學 A 考科的完整題目:單選(第1-6題)、多選(第7-12題)、選填(第13-17題),以及第貳部分混合題/非選擇題(第18-20題),逐字轉錄自大考中心官方公布的正式試題、參考答案與非選擇題評分原則(依著作權法第9條第5款,依法舉行之考試試題不受著作權保護)。第19、20題是真正的手寫非選擇題,系統無法自動判分,會顯示官方滿分參考答案讓你自行對答案。少數依賴精確圖形數據才能作答的題目個別略過,原因見各年度說明。每題選項後方都會標注原始學年度與題號。',
+    mixedDesc: '每次隨機跨 111~115 學年度抽 6 題單選 + 6 題多選,組合每次都不一樣',
+    writtenSectionTitle: '非選擇題(第18-20題混合題組,自行對答案)',
+    autoWeight: 0.85,
+    writtenWeight: 0.15,
+    buildYearQuestions: buildMathYearQuestions,
+    buildMixedQuestions: buildMathMixedQuestions,
+  },
+  social: {
+    subjectId: 'social',
+    historyId: 'social-real',
+    subjectLabel: '社會',
+    yearBadgeLabel: '學測社會',
+    minutes: 110,
+    data: socialRealExams,
+    intro:
+      '收錄 111~115 學年度學測社會考科(歷史/地理/公民與社會合一)的完整題目,逐字轉錄自大考中心官方公布的正式試題、選擇題參考答案與非選擇題滿分參考答案與評分原則(依著作權法第9條第5款,依法舉行之考試試題不受著作權保護)。非選擇題有兩種:純寫答的題目系統無法自動判分,交卷後自行對照官方答案回報對錯;有勾選部分的混合題,勾選部分會自動判分,簡答部分一樣自行對答案。少數依賴照片/地圖/圖表才能作答的題目個別略過,原因見各年度說明。每題選項後方都會標注原始學年度與題號,共用同一段題幹的題組會一起顯示。',
+    mixedDesc: '每次隨機跨 111~115 學年度抽約 20 題選擇題(依題組完整抽取,不含純寫答的非選擇題),組合每次都不一樣',
+    writtenSectionTitle: '非選擇題(自行對答案;有勾選部分的混合題,勾選部分已自動計分)',
+    autoWeight: 74 / 110,
+    writtenWeight: 36 / 110,
+    buildYearQuestions: buildSocialYearQuestions,
+    buildMixedQuestions: buildSocialMixedQuestions,
+  },
+};
+const config = CONFIGS[SUBJECT_KEY];
+
+const SUBJECT_ID = config.subjectId;
+const MOCK_HISTORY_ID = config.historyId; // 跟一般科目模擬考的紀錄分開存放,避免混在一起
+const MINUTES = config.minutes;
 const subject = getSubject(SUBJECT_ID);
 
 renderPicker();
 
 function withMeta(q) {
-  return { ...q, subjectId: SUBJECT_ID, unitId: `math-real-${q.sourceYear}` };
+  return { ...q, subjectId: SUBJECT_ID, unitId: `${MOCK_HISTORY_ID}-${q.sourceYear}` };
 }
 
 function drawSection(pool, count, sectionLabel) {
   return prepareQuestions(pool, count).map((q) => ({ ...withMeta(q), sectionLabel }));
 }
 
-// 單一年份模式:完整重現該年度第壹部分(單選+多選+選填)與第貳部分(混合題/非選擇題)。
-// 第18-20題共用同一個情境(題組),彼此有「承上題」的關係,所以保持原始順序、不洗牌。
-function buildYearQuestions(yearSet) {
+// 數學A單一年份模式:完整重現該年度第壹部分(單選+多選+選填)與第貳部分(混合題/
+// 非選擇題)。第18-20題共用同一個情境(題組),彼此有「承上題」的關係,所以保持
+// 原始順序、不洗牌。
+function buildMathYearQuestions(yearSet) {
   const singles = yearSet.questions.filter((q) => q.origNo <= 6);
   const multis = yearSet.questions.filter((q) => q.origNo >= 7 && q.origNo <= 12);
   const fillIns = yearSet.questions.filter((q) => q.origNo >= 13 && q.origNo <= 17);
@@ -56,38 +112,71 @@ function buildYearQuestions(yearSet) {
   ];
 }
 
-function buildMixedQuestions() {
+function buildMathMixedQuestions() {
   const allSingles = mathRealExams.flatMap((y) => y.questions.filter((q) => q.type !== 'multi'));
   const allMultis = mathRealExams.flatMap((y) => y.questions.filter((q) => q.type === 'multi'));
   return [...drawSection(allSingles, 6, '單選'), ...drawSection(allMultis, 6, '多選')];
+}
+
+// 社會單一年份模式:完整重現該年度的整份考卷,依原始題號順序排列(題組/非選擇題
+// 穿插其中,順序不能打亂),只洗每題自己的選項順序(單選/hybrid的勾選部分)。
+function buildSocialYearQuestions(yearSet) {
+  return yearSet.questions
+    .slice()
+    .sort((a, b) => a.origNo - b.origNo)
+    .map((q) => withMeta(shuffleQuestionOptions(q)));
+}
+
+// 社會混合年份模式:以「題組」為單位跨年抽題(共用同一段題幹的題目要嘛一起抽、
+// 要嘛都不抽,避免抽到沒有上下文的孤立題目),只抽能自動判分的題型(單選/hybrid),
+// 不含純寫答的非選擇題(承接題組脈絡意義不大,也沒有可自動判分的部分)。
+function buildSocialMixedQuestions() {
+  const units = [];
+  for (const yearSet of socialRealExams) {
+    const seenKeys = new Set();
+    for (const q of yearSet.questions) {
+      if (q.type === 'written') continue;
+      const key = q.passageId || q.id;
+      if (seenKeys.has(key)) continue;
+      seenKeys.add(key);
+      const group = q.passageId
+        ? yearSet.questions.filter((qq) => qq.passageId === q.passageId && qq.type !== 'written')
+        : [q];
+      units.push(group);
+    }
+  }
+  const picked = [];
+  for (const unit of shuffle(units)) {
+    if (picked.length >= 20) break;
+    picked.push(...unit);
+  }
+  return picked.map((q) => withMeta(shuffleQuestionOptions(q)));
 }
 
 function renderPicker() {
   container.innerHTML = '';
   container.append(
     el('a', { href: 'mockexam.html', class: 'back-link' }, [icon('chevronLeft', { size: 14 }), '回模擬考首頁']),
-    el('h1', { class: 'profile-title' }, '歷屆試題模擬考'),
-    el('p', { class: 'mockexam-intro' },
-      '收錄 111~115 學年度學測數學 A 考科的完整題目:單選(第1-6題)、多選(第7-12題)、選填(第13-17題),以及第貳部分混合題/非選擇題(第18-20題),逐字轉錄自大考中心官方公布的正式試題、參考答案與非選擇題評分原則(依著作權法第9條第5款,依法舉行之考試試題不受著作權保護)。第19、20題是真正的手寫非選擇題,系統無法自動判分,會顯示官方滿分參考答案讓你自行對答案。少數依賴精確圖形數據才能作答的題目個別略過,原因見各年度說明。每題選項後方都會標注原始學年度與題號。'
-    )
+    el('h1', { class: 'profile-title' }, `${config.subjectLabel}歷屆試題模擬考`),
+    el('p', { class: 'mockexam-intro' }, config.intro)
   );
 
   const mixGrid = el('div', { class: 'mockexam-grid' });
-  mixGrid.append(buildModeCard('混合年份模式', '每次隨機跨 111~115 學年度抽 6 題單選 + 6 題多選,組合每次都不一樣', () =>
-    startExam(buildMixedQuestions(), '混合年份')
+  mixGrid.append(buildModeCard('混合年份模式', config.mixedDesc, () =>
+    startExam(config.buildMixedQuestions(), '混合年份')
   ));
   container.append(mixGrid);
 
   container.append(
     el('h2', { class: 'real-exam-subheading' }, '單一年份模式'),
-    el('p', { class: 'mockexam-intro' }, '固定考同一學年度所有可收錄的題目,但每次題目順序與選項順序都會重新洗牌。')
+    el('p', { class: 'mockexam-intro' }, '固定考同一學年度所有可收錄的題目,但每次選項順序都會重新洗牌。')
   );
   const yearGrid = el('div', { class: 'mockexam-grid' });
-  for (const yearSet of mathRealExams) {
+  for (const yearSet of config.data) {
     const count = yearSet.questions.length;
     yearGrid.append(
       buildModeCard(`${yearSet.sourceYear} 學年度`, `共 ${count} 題`, () =>
-        startExam(buildYearQuestions(yearSet), `${yearSet.sourceYear} 學年度`)
+        startExam(config.buildYearQuestions(yearSet), `${yearSet.sourceYear} 學年度`)
       )
     );
   }
@@ -112,7 +201,7 @@ function runExam(questions, examLabel) {
 
   const timerEl = el('div', { class: 'mockexam-timer' });
   const header = el('div', { class: 'mockexam-run-header' }, [
-    el('h2', {}, `歷屆試題模擬考 · ${examLabel}`),
+    el('h2', {}, `${config.subjectLabel}歷屆試題模擬考 · ${examLabel}`),
     timerEl,
   ]);
 
@@ -122,7 +211,7 @@ function runExam(questions, examLabel) {
 
   let lastSection = null;
   questions.forEach((q, index) => {
-    if (q.sectionLabel !== lastSection) {
+    if (q.sectionLabel && q.sectionLabel !== lastSection) {
       const heading = q.sectionLabel.endsWith('題') ? q.sectionLabel : `${q.sectionLabel}題`;
       form.append(el('h3', { class: 'mockexam-section-heading' }, heading));
       lastSection = q.sectionLabel;
@@ -139,7 +228,7 @@ function runExam(questions, examLabel) {
       el('div', { class: 'quiz-question' }, [
         el('p', { class: 'quiz-question-text' }, `${index + 1}. ${q.question}`),
         field.optionsWrap,
-        el('p', { class: 'real-exam-year-badge' }, `${q.sourceYear} 學年度學測數學A 第 ${q.origNo} 題`),
+        el('p', { class: 'real-exam-year-badge' }, `${q.sourceYear} 學年度${config.yearBadgeLabel} 第 ${q.origNo} 題`),
       ])
     );
   });
@@ -175,14 +264,27 @@ function runExam(questions, examLabel) {
     clearInterval(intervalId);
     submitBtn.disabled = true;
 
-    // 非選擇題(第19、20題)沒有標準答案可以自動判分,不計入分數,結算後另外
-    // 顯示官方滿分參考答案讓使用者自行對答案、自行回報對錯(見 renderResult)。
+    // 純寫答的非選擇題沒有標準答案可以自動判分,不計入分數,結算後另外顯示官方
+    // 滿分參考答案讓使用者自行對答案、自行回報對錯(見 renderResult)。hybrid
+    // 題型的勾選部分可以自動判分(進 results),簡答部分則另外拆成一筆自行對答案
+    // 的項目(進 writtenResults),兩者共用同一個原始題號。
     const results = [];
     const writtenResults = [];
     questions.forEach((q, index) => {
       const userAnswer = answers[index];
       if (q.type === 'written') {
         writtenResults.push({ ...q, userAnswer });
+        return;
+      }
+      if (q.type === 'hybrid') {
+        const { isCorrect, creditFraction } = gradeAnswer(q, userAnswer);
+        results.push({ ...q, userAnswer: userAnswer?.choice ?? null, isCorrect, creditFraction });
+        writtenResults.push({
+          ...q,
+          id: `${q.id}-written`,
+          userAnswer: userAnswer?.written ?? '',
+          question: q.writtenPrompt ? `${q.question}\n\n【簡答部分】${q.writtenPrompt}` : q.question,
+        });
         return;
       }
       const { isCorrect, creditFraction } = gradeAnswer(q, userAnswer);
@@ -232,10 +334,10 @@ function runExam(questions, examLabel) {
       minutesUsed,
     };
 
-    // 混合年份模式沒有非選擇題,分數當場就完整,直接存進模擬考紀錄。單一年份模式
-    // 含第19、20題(非選擇題),真正的分數要等使用者自行對完答案才算數(數學A官方
-    // 配分是選擇+選填占85分、非選擇題占15分,這裡用同樣的權重換算預估級分),所以
-    // 這種情況下先不存,等 renderResult 裡的自行對答案都回報完才真正存進歷史紀錄。
+    // 混合年份模式不含非選擇題,分數當場就完整,直接存進模擬考紀錄。單一年份模式
+    // 含非選擇題,真正的分數要等使用者自行對完答案才算數(依各科官方配分權重換算
+    // 預估級分,見 config.autoWeight/writtenWeight),所以這種情況下先不存,等
+    // renderResult 裡的自行對答案都回報完才真正存進歷史紀錄。
     if (writtenResults.length === 0) {
       addMockExamResult({ ...pendingRecord, estimatedBand: Math.min(15, Math.round(autoFraction * 15)) });
     }
@@ -256,7 +358,7 @@ function correctAnswerOf(q) {
   if (q.type === 'multi') return q.answers;
   if (q.type === 'numeric') return q.answerText;
   if (q.type === 'numeric-multi') return q.blanks.map((b) => b.answerText);
-  return q.answer;
+  return q.answer; // single 與 hybrid 的勾選部分都是這個形狀
 }
 
 function renderResult(results, writtenResults, summary) {
@@ -281,12 +383,12 @@ function renderResult(results, writtenResults, summary) {
       ]),
       el('div', { class: 'mockexam-band' }, [bandValueEl, bandDescEl]),
       el('p', { class: 'mockexam-band-disclaimer' },
-        `${summary.examLabel} · 這是依答對率換算的估計級分,不是正式級分。${hasWritten ? '第18-20題混合題組的非選擇題列在下方,自行對答案後才會併入級分。' : ''}`
+        `${summary.examLabel} · 這是依答對率換算的估計級分,不是正式級分。${hasWritten ? '非選擇題列在下方,自行對答案後才會併入級分。' : ''}`
       ),
     ])
   );
 
-  container.append(el('h3', {}, wrongs.length ? `答錯的題目(${wrongs.length} 題)` : '單選＋多選＋選填全部答對了!'));
+  container.append(el('h3', {}, wrongs.length ? `答錯的題目(${wrongs.length} 題)` : '能自動判分的題目全部答對了!'));
 
   for (const w of wrongs) {
     const card = el('div', { class: 'wrong-card' });
@@ -301,9 +403,7 @@ function renderResult(results, writtenResults, summary) {
   }
 
   if (hasWritten) {
-    container.append(
-      el('h3', { class: 'real-exam-written-heading' }, '非選擇題(第18-20題混合題組,自行對答案)')
-    );
+    container.append(el('h3', { class: 'real-exam-written-heading' }, config.writtenSectionTitle));
     writtenResults.forEach((w, i) => {
       container.append(renderWrittenCard(w, (isCorrect, reportRow) => {
         writtenOutcomes[i] = isCorrect;
@@ -321,7 +421,7 @@ function renderResult(results, writtenResults, summary) {
 
   container.append(
     el('div', { class: 'mockexam-result-actions' }, [
-      el('a', { href: 'real-exam.html', class: 'btn-pill btn-pill-outline' }, '回歷屆試題首頁'),
+      el('a', { href: `real-exam.html?subject=${SUBJECT_KEY}`, class: 'btn-pill btn-pill-outline' }, '回歷屆試題首頁'),
       el('a', { href: 'wrongbook.html', class: 'btn-pill btn-pill-dark' }, '前往錯題本'),
     ])
   );
@@ -329,7 +429,7 @@ function renderResult(results, writtenResults, summary) {
   function currentBand(includeWritten) {
     if (!includeWritten) return Math.min(15, Math.round(summary.autoFraction * 15));
     const writtenFraction = writtenOutcomes.filter(Boolean).length / writtenOutcomes.length;
-    return Math.min(15, Math.round((0.85 * summary.autoFraction + 0.15 * writtenFraction) * 15));
+    return Math.min(15, Math.round((config.autoWeight * summary.autoFraction + config.writtenWeight * writtenFraction) * 15));
   }
 
   function updateBandDisplay() {
@@ -340,7 +440,7 @@ function renderResult(results, writtenResults, summary) {
       bandDescEl.textContent = '請先完成下方非選擇題的自行對答案';
     } else {
       bandValueEl.textContent = `估計 ${band} 級分`;
-      bandDescEl.textContent = describeBandLevel('math', band) + (hasWritten ? '(已含非選擇題自行回報結果)' : '');
+      bandDescEl.textContent = describeBandLevel(SUBJECT_ID, band) + (hasWritten ? '(已含非選擇題自行回報結果)' : '');
     }
   }
 
@@ -360,7 +460,8 @@ function renderResult(results, writtenResults, summary) {
   }
 }
 
-// 依題型畫出「正確答案」區塊:單選/多選標示選項對錯,選填(單一格/多格)直接列出答案。
+// 依題型畫出「正確答案」區塊:單選/多選/hybrid(勾選部分)標示選項對錯,
+// 選填(單一格/多格)直接列出答案。
 function renderCorrectAnswerBlock(w) {
   if (w.type === 'numeric') {
     return el('p', { class: 'feedback-correct' }, `正確答案:${w.answerText}`);
@@ -383,14 +484,15 @@ function renderCorrectAnswerBlock(w) {
   return optionsWrap;
 }
 
-// 非選擇題(第19、20題)沒辦法自動判分:顯示題目跟官方滿分參考答案,讓使用者自己
-// 對照後回報「答對了/沒答對」。onReport(isCorrect, reportRow) 由呼叫端(renderResult)
-// 決定回報後要做什麼 —— 寫進 quizResults、更新這題底下的文字、檢查是否所有非選擇題
+// 非選擇題沒辦法自動判分:顯示題目跟官方滿分參考答案,讓使用者自己對照後回報
+// 「答對了/沒答對」。onReport(isCorrect, reportRow) 由呼叫端(renderResult)決定
+// 回報後要做什麼 —— 寫進 quizResults、更新這題底下的文字、檢查是否所有非選擇題
 // 都回報完了(全部回報完才能換算包含非選擇題的最終級分並存進模擬考紀錄)。
 function renderWrittenCard(w, onReport) {
   const card = el('div', { class: 'wrong-card written-card' });
   card.style.setProperty('--row-color', subject?.color || '#201c2b');
   card.append(el('p', { class: 'wrong-meta' }, `非選 · ${w.sourceYear} 學年度第 ${w.origNo} 題`));
+  if (w.passageId) card.append(renderPassage(w));
   card.append(el('p', { class: 'wrong-question' }, w.question));
   if (w.userAnswer && w.userAnswer.trim()) {
     card.append(el('p', { class: 'written-your-note' }, `你寫的:${w.userAnswer}`));

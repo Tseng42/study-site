@@ -9,6 +9,11 @@
 //              // 一題有好幾個獨立空格(如歷屆試題選填題的 a、b 兩個未知數),須全部答對才給分
 //   非選擇題 type:'written'   { explanation: '官方滿分參考答案與評分原則' }
 //              // 沒有標準化答案格式,系統不自動判分,使用者自行對照詳解後回報對錯
+//   混合(勾選+寫答) type:'hybrid' { options:[...], answer: index, writtenPrompt: '效果(25字內)' }
+//              // 社會考科常見的非選擇題格式:同一題裡有一個可自動判分的勾選部分(用法
+//              // 跟單選一樣的 options/answer),外加一個沒有標準答案格式、系統不自動判分
+//              // 的簡答部分(writtenPrompt 是簡答欄位的提示文字,answer/explanation 仍然
+//              // 用來判斷勾選對錯跟顯示簡答部分的官方參考答案)
 import { el } from './render.js';
 
 // Fisher-Yates 洗牌,不修改原陣列。
@@ -70,6 +75,12 @@ export function gradeAnswer(q, userAnswer) {
     const normalize = (s) => String(s ?? '').trim().replace(/\s+/g, '');
     const answers = userAnswer || [];
     const isCorrect = q.blanks.every((blank, i) => normalize(answers[i]) === normalize(blank.answerText));
+    return { creditFraction: isCorrect ? 1 : 0, isCorrect };
+  }
+  if (q.type === 'hybrid') {
+    // 只有勾選部分自動判分;簡答部分沒有標準答案格式,由呼叫端另外走自行回報流程
+    // (見 page-real-exam.js 對 hybrid 題目的特殊處理),這裡不計入簡答對錯。
+    const isCorrect = userAnswer?.choice === q.answer;
     return { creditFraction: isCorrect ? 1 : 0, isCorrect };
   }
   const isCorrect = userAnswer === q.answer;
@@ -143,6 +154,33 @@ export function renderAnswerField(q, index, onChange, onCommit, showConfirmButto
     return { optionsWrap: wrap, getValue: () => textarea.value, inputs: [textarea] };
   }
 
+  if (q.type === 'hybrid') {
+    const state = { choice: null, written: '' };
+    const inputs = [];
+    const choiceWrap = el('div', { class: 'quiz-options' });
+    q.options.forEach((opt, optIndex) => {
+      const optId = `q${index}-opt${optIndex}`;
+      const radio = el('input', { type: 'radio', name: `q${index}`, id: optId, value: optIndex });
+      radio.addEventListener('change', () => {
+        state.choice = optIndex;
+        onChange({ ...state });
+      });
+      inputs.push(radio);
+      choiceWrap.append(el('div', { class: 'quiz-option-row' }, [radio, el('label', { for: optId }, opt)]));
+    });
+    const textarea = el('textarea', {
+      class: 'quiz-written-textarea',
+      placeholder: `(選填)${q.writtenPrompt || '寫下你的簡答'}`,
+    });
+    textarea.addEventListener('input', () => {
+      state.written = textarea.value;
+      onChange({ ...state });
+    });
+    inputs.push(textarea);
+    const wrap = el('div', { class: 'quiz-hybrid-wrap' }, [choiceWrap, textarea]);
+    return { optionsWrap: wrap, getValue: () => ({ ...state }), inputs };
+  }
+
   if (q.type === 'multi') {
     const selected = new Set();
     const inputs = [];
@@ -198,6 +236,16 @@ export function markAnswerFeedback(field, q, userAnswer) {
 
   if (q.type === 'numeric' || q.type === 'numeric-multi' || q.type === 'written') return;
 
+  if (q.type === 'hybrid') {
+    const correctSet = new Set([q.answer]);
+    const selectedSet = new Set(userAnswer?.choice != null ? [userAnswer.choice] : []);
+    rows.forEach((row, optIndex) => {
+      if (correctSet.has(optIndex)) row.classList.add('is-correct');
+      else if (selectedSet.has(optIndex)) row.classList.add('is-wrong');
+    });
+    return;
+  }
+
   const correctSet = q.type === 'multi' ? new Set(q.answers) : new Set([q.answer]);
   const selectedSet = q.type === 'multi' ? new Set(userAnswer || []) : new Set(userAnswer != null ? [userAnswer] : []);
   rows.forEach((row, optIndex) => {
@@ -210,5 +258,6 @@ export function typeLabel(type) {
   if (type === 'multi') return '多選';
   if (type === 'numeric' || type === 'numeric-multi') return '選填';
   if (type === 'written') return '非選';
+  if (type === 'hybrid') return '混合(勾選+簡答)';
   return '單選';
 }

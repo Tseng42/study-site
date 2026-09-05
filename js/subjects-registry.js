@@ -7,23 +7,30 @@ import math from '../data/math.js';
 import science from '../data/science.js';
 import social from '../data/social.js';
 import { mathRealExams } from '../data/math-real-exams.js';
+import { socialRealExams } from '../data/social-real-exams.js';
 
 const dataBySubject = { chinese, english, math, science, social };
 
-// 歷屆試題(見 data/math-real-exams.js)不是一般單元,不會出現在 subject.html
-// 的單元列表或進度統計裡,但錯題本/個人資料頁需要能依 unitId 反查回題目本身,
-// 所以在這裡另外準備一份「依年度分組」的虛擬單元,只給 getUnit/getQuestion 查詢用。
-const realExamUnitsBySubject = {
-  math: new Map(
-    mathRealExams.map((yearSet) => [
-      `math-real-${yearSet.sourceYear}`,
+// 歷屆試題(見 data/math-real-exams.js、data/social-real-exams.js)不是一般單元,
+// 不會出現在 subject.html 的單元列表或進度統計裡,但錯題本/個人資料頁需要能依
+// unitId 反查回題目本身,所以在這裡另外準備一份「依年度分組」的虛擬單元,只給
+// getUnit/getQuestion 查詢用。
+function buildRealExamUnits(realExams, historyId, subjectName) {
+  return new Map(
+    realExams.map((yearSet) => [
+      `${historyId}-${yearSet.sourceYear}`,
       {
-        id: `math-real-${yearSet.sourceYear}`,
-        title: `${yearSet.sourceYear} 學年度學測數學 A(歷屆試題)`,
+        id: `${historyId}-${yearSet.sourceYear}`,
+        title: `${yearSet.sourceYear} 學年度學測${subjectName}(歷屆試題)`,
         quiz: yearSet.questions,
       },
     ])
-  ),
+  );
+}
+
+const realExamUnitsBySubject = {
+  math: buildRealExamUnits(mathRealExams, 'math-real', '數學 A'),
+  social: buildRealExamUnits(socialRealExams, 'social-real', '社會'),
 };
 
 export function getAllSubjects() {
@@ -48,5 +55,15 @@ export function getUnit(subjectId, unitId) {
 
 export function getQuestion(subjectId, unitId, questionId) {
   const unit = getUnit(subjectId, unitId);
-  return unit?.quiz?.find((q) => q.id === questionId) || null;
+  const direct = unit?.quiz?.find((q) => q.id === questionId);
+  if (direct) return direct;
+  // hybrid 題型(勾選+簡答)的簡答部分,自行對答案時用 `{id}-written` 當作獨立的
+  // questionId(避免跟勾選部分的自動判分結果在錯題本裡互相覆蓋,見
+  // js/page-real-exam.js 的 finish()),這裡把它解回原本的 hybrid 題目本身,
+  // 讓錯題本能正確顯示題目內容與官方詳解。
+  if (questionId?.endsWith('-written')) {
+    const baseId = questionId.slice(0, -'-written'.length);
+    return unit?.quiz?.find((q) => q.id === baseId) || null;
+  }
+  return null;
 }

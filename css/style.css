@@ -1347,6 +1347,14 @@ a.timeline-row:hover {
   gap: 10px;
   flex-wrap: wrap;
 }
+.quiz-hybrid-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.quiz-hybrid-wrap .quiz-written-textarea {
+  min-height: 80px;
+}
 
 @media (max-width: 860px) {
   .dash-columns {

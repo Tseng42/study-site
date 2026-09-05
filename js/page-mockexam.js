@@ -113,21 +113,29 @@ function renderPicker() {
   }
   container.append(grid);
 
-  const realExamCard = el('div', { class: 'mockexam-card' });
-  const mathSubject = getSubject('math');
-  realExamCard.style.setProperty('--card-color', mathSubject?.color || '#201c2b');
-  realExamCard.append(
-    el('div', { class: 'mockexam-card-top' }, [
-      el('div', { class: 'subject-card-icon' }, icon('scroll', { size: 22 })),
-      el('div', {}, [
-        el('h2', {}, '數學 A(歷屆試題)'),
-        el('p', { class: 'mockexam-card-meta' }, '111~115 學年度真實學測考題,逐字轉錄'),
+  const REAL_EXAM_SUBJECTS = [
+    { subjectId: 'math', param: 'math', title: '數學 A(歷屆試題)' },
+    { subjectId: 'social', param: 'social', title: '社會(歷屆試題)' },
+  ];
+  const realExamGrid = el('div', { class: 'mockexam-grid' });
+  for (const { subjectId, param, title } of REAL_EXAM_SUBJECTS) {
+    const realSubject = getSubject(subjectId);
+    const realExamCard = el('div', { class: 'mockexam-card' });
+    realExamCard.style.setProperty('--card-color', realSubject?.color || '#201c2b');
+    realExamCard.append(
+      el('div', { class: 'mockexam-card-top' }, [
+        el('div', { class: 'subject-card-icon' }, icon('scroll', { size: 22 })),
+        el('div', {}, [
+          el('h2', {}, title),
+          el('p', { class: 'mockexam-card-meta' }, '111~115 學年度真實學測考題,逐字轉錄'),
+        ]),
       ]),
-    ]),
-    el('p', { class: 'mockexam-card-last mockexam-card-last-empty' }, '單一年份或跨年混合抽題,每次都不一樣'),
-    el('a', { class: 'btn-pill btn-pill-dark', href: 'real-exam.html' }, '前往歷屆試題模擬考')
-  );
-  container.append(el('h2', { class: 'real-exam-subheading' }, '真題模擬考(pilot)'), realExamCard);
+      el('p', { class: 'mockexam-card-last mockexam-card-last-empty' }, '單一年份或跨年混合抽題,每次都不一樣'),
+      el('a', { class: 'btn-pill btn-pill-dark', href: `real-exam.html?subject=${param}` }, '前往歷屆試題模擬考')
+    );
+    realExamGrid.append(realExamCard);
+  }
+  container.append(el('h2', { class: 'real-exam-subheading' }, '真題模擬考'), realExamGrid);
 }
 
 function renderStartScreen(subjectId) {

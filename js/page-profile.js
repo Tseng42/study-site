@@ -14,10 +14,12 @@ renderUserMenu(user);
 
 const subjects = getAllSubjects();
 
-// 歷屆試題(unitId 形如 math-real-111)沒有對應的 unit.html 頁面可以連回去,
-// 點進去要導回歷屆試題模擬考頁,而不是導向一個查無單元的 unit.html。
+// 歷屆試題(unitId 形如 math-real-111、social-real-111)沒有對應的 unit.html 頁面
+// 可以連回去,點進去要導回歷屆試題模擬考頁,而不是導向一個查無單元的 unit.html。
 function unitHref(subjectId, unitId) {
-  if (unitId?.startsWith('math-real-')) return `real-exam.html?subject=${subjectId}`;
+  if (unitId?.startsWith('math-real-') || unitId?.startsWith('social-real-')) {
+    return `real-exam.html?subject=${subjectId}`;
+  }
   return `unit.html?subject=${subjectId}&unit=${unitId}`;
 }
 
@@ -290,16 +292,24 @@ function renderRecentQuizzes() {
 
 // 「模擬考紀錄」跟上面的「最近測驗紀錄」不一樣:後者是每個單元練習/測驗各自一筆,
 // 模擬考(含歷屆試題)則是一次考試一筆整體摘要(含估計級分),見 storage.js 的
-// addMockExamResult/getMockExamHistory。歷屆試題的 subjectId 是虛擬的 'math-real',
-// 不是真正的科目,所以標籤要特別處理,連結也導回歷屆試題頁而不是一般模擬考頁。
+// addMockExamResult/getMockExamHistory。歷屆試題的 subjectId 是虛擬的
+// 'math-real'/'social-real',不是真正的科目,所以標籤要特別處理,連結也導回
+// 歷屆試題頁(帶對應的 ?subject=)而不是一般模擬考頁。
+const REAL_EXAM_HISTORY = {
+  'math-real': { subjectId: 'math', label: '數學A(歷屆試題)' },
+  'social-real': { subjectId: 'social', label: '社會(歷屆試題)' },
+};
+
 function mockExamLabel(record) {
-  if (record.subjectId === 'math-real') return `數學A(歷屆試題)${record.examLabel ? ' · ' + record.examLabel : ''}`;
+  const realExam = REAL_EXAM_HISTORY[record.subjectId];
+  if (realExam) return `${realExam.label}${record.examLabel ? ' · ' + record.examLabel : ''}`;
   const subject = getSubject(record.subjectId);
   return `${subject?.name || record.subjectId} 模擬考`;
 }
 
 function mockExamHref(record) {
-  return record.subjectId === 'math-real' ? 'real-exam.html' : 'mockexam.html';
+  const realExam = REAL_EXAM_HISTORY[record.subjectId];
+  return realExam ? `real-exam.html?subject=${realExam.subjectId}` : 'mockexam.html';
 }
 
 function renderMockExamHistory() {
@@ -315,7 +325,7 @@ function renderMockExamHistory() {
   }
 
   for (const r of records) {
-    const subject = r.subjectId === 'math-real' ? getSubject('math') : getSubject(r.subjectId);
+    const subject = REAL_EXAM_HISTORY[r.subjectId] ? getSubject(REAL_EXAM_HISTORY[r.subjectId].subjectId) : getSubject(r.subjectId);
     const row = el('a', { class: 'timeline-row', href: mockExamHref(r) });
     row.style.setProperty('--row-color', subject?.color || '#201c2b');
     const writtenNote = r.writtenTotal ? ` · 非選 ${r.writtenScore}/${r.writtenTotal}` : '';
