@@ -116,6 +116,7 @@ function renderPicker() {
   const REAL_EXAM_SUBJECTS = [
     { subjectId: 'math', param: 'math', title: '數學 A(歷屆試題)' },
     { subjectId: 'social', param: 'social', title: '社會(歷屆試題)' },
+    { subjectId: 'chinese', param: 'chinese', title: '國文(歷屆試題)' },
   ];
   const realExamGrid = el('div', { class: 'mockexam-grid' });
   for (const { subjectId, param, title } of REAL_EXAM_SUBJECTS) {

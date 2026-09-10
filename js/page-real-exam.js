@@ -1,13 +1,17 @@
 // 歷屆試題模擬考:直接使用 data/*-real-exams.js 裡逐字轉錄的真實學測考題
 // (依著作權法第9條第5款,考試試題不受著作權保護),不是原創改編題。
 //
-// 目前支援數學A跟社會兩科,用 ?subject=math(預設)或 ?subject=social 切換,
-// 兩科結構差異很大所以各自有自己的 buildYearQuestions/buildMixedQuestions:
+// 目前支援數學A、社會、國文三科,用 ?subject=math(預設)/?subject=social/
+// ?subject=chinese 切換,各科結構差異很大所以各自有自己的
+// buildYearQuestions/buildMixedQuestions:
 // - 數學A:第壹部分可以乾淨分成單選/多選/選填,第貳部分是一組共用情境的混合題組
 //   (18-20題,彼此有「承上題」關係,不可打亂順序)。
 // - 社會:65題左右本身就是一份連續的考卷,非選擇題(純寫答,或勾選+簡答的
 //   hybrid)穿插在選擇題之間,很多題還跟前後幾題共用同一段題幹(題組),所以整份
 //   考卷完全依原始題號順序作答,不打亂題目順序,只洗每題自己的選項順序。
+// - 國文(國綜):第壹部分是單選+多選(單選部分內有大量題組),第貳部分通常只有
+//   一個題組,裡面混合純寫答的非選題跟1~2題單選題。單選/多選確切題數配分每年
+//   略有不同,不依賴固定題號區間,而是動態判斷(見 buildChineseYearQuestions)。
 //
 // 兩種模式(數學A模式已由使用者透過 AskUserQuestion 確認「可以都要」,社會沿用
 // 相同設計):
@@ -23,6 +27,7 @@
 // writtenWeight)換算成一個預估級分,寫進「模擬考紀錄」(見個人資料頁)。
 import { mathRealExams } from '../data/math-real-exams.js';
 import { socialRealExams } from '../data/social-real-exams.js';
+import { chineseRealExams } from '../data/chinese-real-exams.js';
 import { getSubject } from './subjects-registry.js';
 import { addQuizResult, addMockExamResult } from './storage.js';
 import { describeBandLevel } from '../data/mock-exam-config.js';
@@ -40,7 +45,7 @@ renderUserMenu(user);
 const container = document.getElementById('real-exam-content');
 
 const params = new URLSearchParams(location.search);
-const SUBJECT_KEY = params.get('subject') === 'social' ? 'social' : 'math';
+const SUBJECT_KEY = ['social', 'chinese'].includes(params.get('subject')) ? params.get('subject') : 'math';
 
 const CONFIGS = {
   math: {
@@ -74,6 +79,22 @@ const CONFIGS = {
     writtenWeight: 36 / 110,
     buildYearQuestions: buildSocialYearQuestions,
     buildMixedQuestions: buildSocialMixedQuestions,
+  },
+  chinese: {
+    subjectId: 'chinese',
+    historyId: 'chinese-real',
+    subjectLabel: '國文',
+    yearBadgeLabel: '學測國文(國綜)',
+    minutes: 90,
+    data: chineseRealExams,
+    intro:
+      '收錄 111~115 學年度學測國文考科「國語文綜合能力測驗(國綜)」的完整題目(不含另外考申論寫作的「國寫」),逐字轉錄自大考中心官方公布的正式試題、選擇題參考答案與非選擇題滿分參考答案與評分原則(依著作權法第9條第5款,依法舉行之考試試題不受著作權保護)。第壹部分是單選+多選選擇題(常有共用題幹的題組),第貳部分通常是一個題組,裡面混合了純寫答的非選擇題與1~2題單選題,寫答部分系統無法自動判分,交卷後自行對照官方答案回報對錯。每年單選/多選確切題數配分略有不同。少數依賴圖像資料才能作答的題目個別略過,原因見各年度說明。',
+    mixedDesc: '每次隨機跨 111~115 學年度抽約 20 題選擇題(依題組完整抽取,不含純寫答的非選擇題),組合每次都不一樣',
+    writtenSectionTitle: '非選擇題(自行對答案)',
+    autoWeight: 0.8,
+    writtenWeight: 0.2,
+    buildYearQuestions: buildChineseYearQuestions,
+    buildMixedQuestions: buildChineseMixedQuestions,
   },
 };
 const config = CONFIGS[SUBJECT_KEY];
@@ -133,6 +154,47 @@ function buildSocialYearQuestions(yearSet) {
 function buildSocialMixedQuestions() {
   const units = [];
   for (const yearSet of socialRealExams) {
+    const seenKeys = new Set();
+    for (const q of yearSet.questions) {
+      if (q.type === 'written') continue;
+      const key = q.passageId || q.id;
+      if (seenKeys.has(key)) continue;
+      seenKeys.add(key);
+      const group = q.passageId
+        ? yearSet.questions.filter((qq) => qq.passageId === q.passageId && qq.type !== 'written')
+        : [q];
+      units.push(group);
+    }
+  }
+  const picked = [];
+  for (const unit of shuffle(units)) {
+    if (picked.length >= 20) break;
+    picked.push(...unit);
+  }
+  return picked.map((q) => withMeta(shuffleQuestionOptions(q)));
+}
+
+// 國文單一年份模式:完整重現該年度整份國綜考卷,依原始題號順序排列。單選/多選
+// 確切題數配分每年略有不同,不依賴固定題號區間,而是動態判斷:多選題自己
+// sectionLabel 標多選;第貳部分(混合題/非選擇題)是「含有非選題的那個題組」——
+// 只要某題跟某個 written 題共用 passageId,就跟著算進第貳部分,其餘單選題都算
+// 第壹部分的單選。這樣即使某年題號分界跟別年不同,也不用特別調整程式碼。
+function buildChineseYearQuestions(yearSet) {
+  const sorted = yearSet.questions.slice().sort((a, b) => a.origNo - b.origNo);
+  const writtenPassageIds = new Set(sorted.filter((q) => q.type === 'written' && q.passageId).map((q) => q.passageId));
+  return sorted.map((q) => {
+    let sectionLabel = '單選';
+    if (q.type === 'multi') sectionLabel = '多選';
+    else if (q.type === 'written' || (q.passageId && writtenPassageIds.has(q.passageId))) sectionLabel = '混合題/非選擇題';
+    return { ...withMeta(shuffleQuestionOptions(q)), sectionLabel };
+  });
+}
+
+// 國文混合年份模式:跟社會一樣以「題組」為單位跨年抽題(共用題幹的題目要嘛
+// 一起抽、要嘛都不抽),只抽能自動判分的題型,不含純寫答的非選擇題。
+function buildChineseMixedQuestions() {
+  const units = [];
+  for (const yearSet of chineseRealExams) {
     const seenKeys = new Set();
     for (const q of yearSet.questions) {
       if (q.type === 'written') continue;

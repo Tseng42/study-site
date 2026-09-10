@@ -48,7 +48,11 @@ argument-hint: "[subject e.g. 國文/英文/自然] [狀態: 開始/繼續/整�
 |---|---|---|
 | `rate_limit` 429,"resets HH:MMpm Asia/Taipei" | 平行派多個 agent(可能也有 session 累積用量因素) | 改依序派工;重派前用 `date -u` 換算台北時間確認已過 reset 時間 |
 | "Output blocked by content filtering policy" | 對政府考題 PDF 內容的 false positive | 直接重試,不用改內容 |
-| "Agent stalled: no progress for 600s" | agent 嘗試用不存在的圖片 zoom 功能 | prompt 裡明確告知沒有 zoom 工具,改用重新 `Read` 窄頁碼範圍 |
+| "Agent stalled: no progress for 600s" | agent 想「再三確認」某個看不清楚的字/詞,嘗試用不存在的 zoom/瀏覽器功能,或反覆重讀同一頁 | 見下方「反覆驗證迴圈」 |
+
+**一次寫入一整份大檔案也可能觸發 stall**——國文 112 學年度的 agent 曾經把所有 PDF 都讀完、內容也都對了,結果卡在最後一次性 Write 三十幾題的輸出檔案這個步驟。對策:prompt 裡要求 agent **分批寫檔案**——先 Write 一份只含前 10-12 題的檔案(收尾用 `];` 讓它本身是合法 JS),再用幾次 Edit 把剩下的題目接上去,而不是一次組出一大份內容再一次性寫入。
+
+**反覆驗證迴圈是最頑固的一種 stall,光在 prompt 裡寫一次「沒有 zoom 工具」不夠可靠**——國文 111 學年度曾經連續 3 次因為這個原因失敗(想確認某個生難字/引文的讀音或文字),即使 prompt 已經提醒過沒有 zoom 工具。實際有效的作法是在 prompt 裡把這條規則講得更具體、更強制:明確禁止呼叫任何 zoom/瀏覽器/圖片放大工具(這些工具根本不存在,呼叫了只會卡住),把「重新讀取同一窄頁碼範圍一次」訂為唯一允許的複查手段且只能一次,並明確授權「這裡辨識信心較低,加註解後直接往下走」──把「先寫個不確定但堪用的版本,然後前進」講成明確被允許、甚至是被期待的行為,而不是留給 agent 自己拿捏「要不要再確認一次」。同一批 prompt 裡最好把這段話放在最前面、獨立成一個「CRITICAL」區塊,不要埋在一長串其他說明中間。
 
 ## 資料 schema 慣例
 
