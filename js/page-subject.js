@@ -51,6 +51,7 @@ function render() {
       item.append(
         el('span', { class: `circular-check${done ? ' is-checked' : ''}` }, icon('check', { size: 12 })),
         el('span', { class: 'unit-title' }, unit.title),
+        unit.semester ? el('span', { class: 'unit-semester-badge' }, unit.semester) : null,
         hasContent
           ? el('span', { class: 'unit-quiz-count' }, unit.quiz?.length ? `${unit.quiz.length} 題測驗` : '')
           : el('span', { class: 'unit-badge-stub' }, '製作中')

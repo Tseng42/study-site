@@ -824,6 +824,16 @@ a.timeline-row:hover {
   border-radius: var(--radius-full);
   white-space: nowrap;
 }
+.unit-semester-badge {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--row-color, var(--ink-muted));
+  border: 1px solid currentColor;
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  white-space: nowrap;
+  opacity: 0.75;
+}
 
 /* ---- Circular check ---- */
 .circular-check-wrap {
