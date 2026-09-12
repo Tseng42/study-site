@@ -1,0 +1,19 @@
+{
+  "name": "學測複習站",
+  "short_name": "學測複習站",
+  "description": "國英數社自各科複習、單元練習、歷屆試題模擬考與錯題本",
+  "lang": "zh-Hant",
+  "start_url": "/index.html",
+  "scope": "/",
+  "id": "/index.html",
+  "display": "standalone",
+  "background_color": "#f1e9da",
+  "theme_color": "#201c2b",
+  "orientation": "portrait-primary",
+  "icons": [
+    { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/icon-192-maskable.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
+    { "src": "/icons/icon-512-maskable.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

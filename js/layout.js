@@ -2,6 +2,14 @@ import { icon, el } from './render.js';
 import { signOutUser } from './auth.js';
 import { getAchievementState, getHighestTier, TIER_LABEL } from './achievements.js';
 
+// 每個頁面都會 import 這個檔案來呼叫 initHeader(),所以在這裡註冊 service worker
+// 剛好能確保每個頁面載入時都會註冊到,不用每個 page-*.js 各自重複一次。
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/service-worker.js').catch(() => {});
+  });
+}
+
 export function initHeader() {
   const mark = document.getElementById('brand-mark');
   if (mark) mark.append(icon('book', { size: 18 }));
