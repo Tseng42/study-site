@@ -9,6 +9,7 @@ import social from '../data/social.js';
 import { mathRealExams } from '../data/math-real-exams.js';
 import { socialRealExams } from '../data/social-real-exams.js';
 import { chineseRealExams } from '../data/chinese-real-exams.js';
+import { englishRealExams } from '../data/english-real-exams.js';
 
 const dataBySubject = { chinese, english, math, science, social };
 
@@ -33,6 +34,7 @@ const realExamUnitsBySubject = {
   math: buildRealExamUnits(mathRealExams, 'math-real', '數學 A'),
   social: buildRealExamUnits(socialRealExams, 'social-real', '社會'),
   chinese: buildRealExamUnits(chineseRealExams, 'chinese-real', '國文'),
+  english: buildRealExamUnits(englishRealExams, 'english-real', '英文'),
 };
 
 export function getAllSubjects() {

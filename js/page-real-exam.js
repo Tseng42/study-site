@@ -1,8 +1,8 @@
 // 歷屆試題模擬考:直接使用 data/*-real-exams.js 裡逐字轉錄的真實學測考題
 // (依著作權法第9條第5款,考試試題不受著作權保護),不是原創改編題。
 //
-// 目前支援數學A、社會、國文三科,用 ?subject=math(預設)/?subject=social/
-// ?subject=chinese 切換,各科結構差異很大所以各自有自己的
+// 目前支援數學A、社會、國文、英文四科,用 ?subject=math(預設)/?subject=social/
+// ?subject=chinese/?subject=english 切換,各科結構差異很大所以各自有自己的
 // buildYearQuestions/buildMixedQuestions:
 // - 數學A:第壹部分可以乾淨分成單選/多選/選填,第貳部分是一組共用情境的混合題組
 //   (18-20題,彼此有「承上題」關係,不可打亂順序)。
@@ -12,6 +12,11 @@
 // - 國文(國綜):第壹部分是單選+多選(單選部分內有大量題組),第貳部分通常只有
 //   一個題組,裡面混合純寫答的非選題跟1~2題單選題。單選/多選確切題數配分每年
 //   略有不同,不依賴固定題號區間,而是動態判斷(見 buildChineseYearQuestions)。
+// - 英文:三段式固定結構——第壹部分選擇題(詞彙/綜合測驗/文意選填/篇章結構/
+//   閱讀測驗,皆單選)、第貳部分混合題(1題組,多選子題自動判分+填空/簡答子題
+//   自行對答案)、第參部分非選擇題(中譯英+英文作文)。每題資料裡直接標明
+//   `part` 欄位(大題名稱字串),前端直接拿來當區塊標題,不用像國文那樣動態判斷
+//   (見 buildEnglishYearQuestions)。
 //
 // 兩種模式(數學A模式已由使用者透過 AskUserQuestion 確認「可以都要」,社會沿用
 // 相同設計):
@@ -28,6 +33,7 @@
 import { mathRealExams } from '../data/math-real-exams.js';
 import { socialRealExams } from '../data/social-real-exams.js';
 import { chineseRealExams } from '../data/chinese-real-exams.js';
+import { englishRealExams } from '../data/english-real-exams.js';
 import { getSubject } from './subjects-registry.js';
 import { addQuizResult, addMockExamResult } from './storage.js';
 import { describeBandLevel } from '../data/mock-exam-config.js';
@@ -45,7 +51,7 @@ renderUserMenu(user);
 const container = document.getElementById('real-exam-content');
 
 const params = new URLSearchParams(location.search);
-const SUBJECT_KEY = ['social', 'chinese'].includes(params.get('subject')) ? params.get('subject') : 'math';
+const SUBJECT_KEY = ['social', 'chinese', 'english'].includes(params.get('subject')) ? params.get('subject') : 'math';
 
 const CONFIGS = {
   math: {
@@ -95,6 +101,22 @@ const CONFIGS = {
     writtenWeight: 0.2,
     buildYearQuestions: buildChineseYearQuestions,
     buildMixedQuestions: buildChineseMixedQuestions,
+  },
+  english: {
+    subjectId: 'english',
+    historyId: 'english-real',
+    subjectLabel: '英文',
+    yearBadgeLabel: '學測英文',
+    minutes: 100,
+    data: englishRealExams,
+    intro:
+      '收錄 111~115 學年度學測英文考科的完整題目,逐字轉錄自大考中心官方公布的正式試題、選擇題參考答案與非選擇題參考答案與評分原則(依著作權法第9條第5款,依法舉行之考試試題不受著作權保護)。第壹部分是詞彙/綜合測驗/文意選填/篇章結構/閱讀測驗五大題選擇題;第貳部分是一個混合題組,多選子題自動判分,填空/簡答子題自行對答案;第參部分是中譯英與英文作文,系統無法自動判分,交卷後自行對照官方答案回報對錯(英文作文原本會附照片當寫作提示,收錄時以文字描述照片內容取代)。選擇題全數收錄,少數選項原本是照片或地圖的題目(如 112 第 44 題)改用文字描述取代,並已在題目裡標明。',
+    mixedDesc: '每次隨機跨 111~115 學年度抽約 20 題選擇題(依題組完整抽取,不含混合題/非選擇題),組合每次都不一樣',
+    writtenSectionTitle: '非選擇題(混合題填空/簡答子題、中譯英、英文作文,自行對答案)',
+    autoWeight: 0.66,
+    writtenWeight: 0.34,
+    buildYearQuestions: buildEnglishYearQuestions,
+    buildMixedQuestions: buildEnglishMixedQuestions,
   },
 };
 const config = CONFIGS[SUBJECT_KEY];
@@ -215,6 +237,41 @@ function buildChineseMixedQuestions() {
   return picked.map((q) => withMeta(shuffleQuestionOptions(q)));
 }
 
+// 英文單一年份模式:完整重現該年度整份考卷,依原始題號順序排列。跟國文不同,
+// 英文每題資料本身就直接標了 part(詞彙題/綜合測驗/文意選填/篇章結構/閱讀測驗/
+// 混合題/非選擇題),不用動態判斷,直接拿來當 sectionLabel。
+function buildEnglishYearQuestions(yearSet) {
+  return yearSet.questions
+    .slice()
+    .sort((a, b) => a.origNo - b.origNo)
+    .map((q) => ({ ...withMeta(shuffleQuestionOptions(q)), sectionLabel: q.part }));
+}
+
+// 英文混合年份模式:跟社會/國文一樣以「題組」為單位跨年抽題,只抽第壹部分能
+// 自動判分的單選題型(不含混合題/非選擇題)。
+function buildEnglishMixedQuestions() {
+  const units = [];
+  for (const yearSet of englishRealExams) {
+    const seenKeys = new Set();
+    for (const q of yearSet.questions) {
+      if (q.type === 'written' || q.part === '混合題' || q.part === '非選擇題') continue;
+      const key = q.passageId || q.id;
+      if (seenKeys.has(key)) continue;
+      seenKeys.add(key);
+      const group = q.passageId
+        ? yearSet.questions.filter((qq) => qq.passageId === q.passageId && qq.type !== 'written')
+        : [q];
+      units.push(group);
+    }
+  }
+  const picked = [];
+  for (const unit of shuffle(units)) {
+    if (picked.length >= 20) break;
+    picked.push(...unit);
+  }
+  return picked.map((q) => withMeta(shuffleQuestionOptions(q)));
+}
+
 function renderPicker() {
   container.innerHTML = '';
   container.append(
@@ -274,7 +331,11 @@ function runExam(questions, examLabel) {
   let lastSection = null;
   questions.forEach((q, index) => {
     if (q.sectionLabel && q.sectionLabel !== lastSection) {
-      const heading = q.sectionLabel.endsWith('題') ? q.sectionLabel : `${q.sectionLabel}題`;
+      // 「單選」「多選」這種兩個字的簡短標籤才自動補「題」字;英文考科的
+      // 「綜合測驗」「文意選填」等四字大題名稱本身就是完整的官方名稱,不用
+      // (也不該)再加「題」。
+      const heading =
+        q.sectionLabel.length <= 2 && !q.sectionLabel.endsWith('題') ? `${q.sectionLabel}題` : q.sectionLabel;
       form.append(el('h3', { class: 'mockexam-section-heading' }, heading));
       lastSection = q.sectionLabel;
     }

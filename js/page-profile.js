@@ -17,7 +17,12 @@ const subjects = getAllSubjects();
 // 歷屆試題(unitId 形如 math-real-111、social-real-111)沒有對應的 unit.html 頁面
 // 可以連回去,點進去要導回歷屆試題模擬考頁,而不是導向一個查無單元的 unit.html。
 function unitHref(subjectId, unitId) {
-  if (unitId?.startsWith('math-real-') || unitId?.startsWith('social-real-') || unitId?.startsWith('chinese-real-')) {
+  if (
+    unitId?.startsWith('math-real-') ||
+    unitId?.startsWith('social-real-') ||
+    unitId?.startsWith('chinese-real-') ||
+    unitId?.startsWith('english-real-')
+  ) {
     return `real-exam.html?subject=${subjectId}`;
   }
   return `unit.html?subject=${subjectId}&unit=${unitId}`;
@@ -299,6 +304,7 @@ const REAL_EXAM_HISTORY = {
   'math-real': { subjectId: 'math', label: '數學A(歷屆試題)' },
   'social-real': { subjectId: 'social', label: '社會(歷屆試題)' },
   'chinese-real': { subjectId: 'chinese', label: '國文(歷屆試題)' },
+  'english-real': { subjectId: 'english', label: '英文(歷屆試題)' },
 };
 
 function mockExamLabel(record) {
