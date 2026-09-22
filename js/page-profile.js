@@ -21,7 +21,8 @@ function unitHref(subjectId, unitId) {
     unitId?.startsWith('math-real-') ||
     unitId?.startsWith('social-real-') ||
     unitId?.startsWith('chinese-real-') ||
-    unitId?.startsWith('english-real-')
+    unitId?.startsWith('english-real-') ||
+    unitId?.startsWith('science-real-')
   ) {
     return `real-exam.html?subject=${subjectId}`;
   }
@@ -305,6 +306,7 @@ const REAL_EXAM_HISTORY = {
   'social-real': { subjectId: 'social', label: '社會(歷屆試題)' },
   'chinese-real': { subjectId: 'chinese', label: '國文(歷屆試題)' },
   'english-real': { subjectId: 'english', label: '英文(歷屆試題)' },
+  'science-real': { subjectId: 'science', label: '自然(歷屆試題)' },
 };
 
 function mockExamLabel(record) {

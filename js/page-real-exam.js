@@ -34,6 +34,7 @@ import { mathRealExams } from '../data/math-real-exams.js';
 import { socialRealExams } from '../data/social-real-exams.js';
 import { chineseRealExams } from '../data/chinese-real-exams.js';
 import { englishRealExams } from '../data/english-real-exams.js';
+import { scienceRealExams } from '../data/science-real-exams.js';
 import { getSubject } from './subjects-registry.js';
 import { addQuizResult, addMockExamResult } from './storage.js';
 import { describeBandLevel } from '../data/mock-exam-config.js';
@@ -51,7 +52,7 @@ renderUserMenu(user);
 const container = document.getElementById('real-exam-content');
 
 const params = new URLSearchParams(location.search);
-const SUBJECT_KEY = ['social', 'chinese', 'english'].includes(params.get('subject')) ? params.get('subject') : 'math';
+const SUBJECT_KEY = ['social', 'chinese', 'english', 'science'].includes(params.get('subject')) ? params.get('subject') : 'math';
 
 const CONFIGS = {
   math: {
@@ -117,6 +118,22 @@ const CONFIGS = {
     writtenWeight: 0.34,
     buildYearQuestions: buildEnglishYearQuestions,
     buildMixedQuestions: buildEnglishMixedQuestions,
+  },
+  science: {
+    subjectId: 'science',
+    historyId: 'science-real',
+    subjectLabel: '自然',
+    yearBadgeLabel: '學測自然',
+    minutes: 110,
+    data: scienceRealExams,
+    intro:
+      '收錄 111~115 學年度學測自然考科(物理/化學/生物/地球科學合一)的題目,逐字轉錄自大考中心官方公布的正式試題、選擇題參考答案與非選擇題參考答案與評分原則(依著作權法第9條第5款,依法舉行之考試試題不受著作權保護)。自然科題目大量依賴圖表、照片與示意圖,能用文字忠實描述的圖表已轉成文字說明並標明是非官方描述;需要精確比對圖形細節才能作答的題目(如衛星雲圖、顯微照片、分子結構圖)則個別略過,原因見各年度說明,因此每年收錄題數略少於官方原始題數。',
+    mixedDesc: '每次隨機跨 111~115 學年度抽約 20 題選擇題(依題組完整抽取,不含純寫答的非選擇題),組合每次都不一樣',
+    writtenSectionTitle: '非選擇題(自行對答案)',
+    autoWeight: 0.75,
+    writtenWeight: 0.25,
+    buildYearQuestions: buildScienceYearQuestions,
+    buildMixedQuestions: buildScienceMixedQuestions,
   },
 };
 const config = CONFIGS[SUBJECT_KEY];
@@ -255,6 +272,41 @@ function buildEnglishMixedQuestions() {
     const seenKeys = new Set();
     for (const q of yearSet.questions) {
       if (q.type === 'written' || q.part === '混合題' || q.part === '非選擇題') continue;
+      const key = q.passageId || q.id;
+      if (seenKeys.has(key)) continue;
+      seenKeys.add(key);
+      const group = q.passageId
+        ? yearSet.questions.filter((qq) => qq.passageId === q.passageId && qq.type !== 'written')
+        : [q];
+      units.push(group);
+    }
+  }
+  const picked = [];
+  for (const unit of shuffle(units)) {
+    if (picked.length >= 20) break;
+    picked.push(...unit);
+  }
+  return picked.map((q) => withMeta(shuffleQuestionOptions(q)));
+}
+
+// 自然單一年份模式:完整重現該年度整份考卷(第壹部分選擇題,單選多選混排;第貳部分
+// 混合題或非選擇題),依原始題號順序排列,題組/非選題穿插其中不能打亂。每題資料本身
+// 直接標了 part(選擇題/混合題或非選擇題),直接拿來當區塊標題。
+function buildScienceYearQuestions(yearSet) {
+  return yearSet.questions
+    .slice()
+    .sort((a, b) => a.origNo - b.origNo)
+    .map((q) => ({ ...withMeta(shuffleQuestionOptions(q)), sectionLabel: q.part }));
+}
+
+// 自然混合年份模式:以「題組」為單位跨年抽題,只抽能自動判分的題型(單選/多選),
+// 不含純寫答的非選擇題。
+function buildScienceMixedQuestions() {
+  const units = [];
+  for (const yearSet of scienceRealExams) {
+    const seenKeys = new Set();
+    for (const q of yearSet.questions) {
+      if (q.type === 'written') continue;
       const key = q.passageId || q.id;
       if (seenKeys.has(key)) continue;
       seenKeys.add(key);
