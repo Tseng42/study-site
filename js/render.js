@@ -43,6 +43,7 @@ const ICON_PATHS = {
   clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/>',
   lock: '<rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/>',
   star: '<path d="M12 3l2.6 5.6 6.1.6-4.6 4.1 1.3 6-5.4-3.1-5.4 3.1 1.3-6-4.6-4.1 6.1-.6L12 3Z"/>',
+  question: '<path d="M9 8.5a3 3 0 1 1 4 2.8c-.9.4-1.5 1.1-1.5 2.2v.5"/><circle cx="12" cy="17.5" r="0.9" fill="currentColor" stroke="none"/>',
 };
 
 export function icon(name, { size = 20, strokeWidth = 1.75, className = '' } = {}) {

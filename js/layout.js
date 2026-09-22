@@ -1,6 +1,6 @@
 import { icon, el } from './render.js';
 import { signOutUser } from './auth.js';
-import { getAchievementState, getHighestTier, TIER_LABEL } from './achievements.js';
+import { getAchievementState, getHighestTier, getNewlyUnlockedIds, TIER_LABEL } from './achievements.js';
 
 // 每個頁面都會 import 這個檔案來呼叫 initHeader(),所以在這裡註冊 service worker
 // 剛好能確保每個頁面載入時都會註冊到,不用每個 page-*.js 各自重複一次。
@@ -24,14 +24,24 @@ export function renderUserMenu(user) {
     : el('span', { class: 'user-avatar user-avatar-fallback' }, (user.displayName || '?').slice(0, 1));
 
   // 頭像外框顏色反映目前已解鎖的最高成就等級,點頭像可以直接到個人資料頁
-  // 看完整的成就徽章牆跟學習成效。
-  const tier = getHighestTier(getAchievementState());
+  // 看完整的成就徽章牆跟學習成效。有新解鎖但還沒在個人資料頁看過的成就時,
+  // 頭像上加一個小紅點提示 —— 「看過」的判斷/清除在 page-profile.js 那邊做。
+  const achievementState = getAchievementState();
+  const tier = getHighestTier(achievementState);
+  const hasNew = getNewlyUnlockedIds(achievementState).length > 0;
   const avatarLink = el(
     'a',
-    { href: 'profile.html', class: 'user-avatar-link', title: tier ? `個人資料(已解鎖${TIER_LABEL[tier]}牌成就)` : '個人資料' },
+    {
+      href: 'profile.html',
+      class: 'user-avatar-link',
+      title: tier
+        ? `個人資料(已解鎖${TIER_LABEL[tier]}牌成就${hasNew ? '・有新解鎖的成就' : ''})`
+        : '個人資料',
+    },
     avatar
   );
   if (tier) avatarLink.classList.add(`avatar-tier-${tier}`);
+  if (hasNew) avatarLink.classList.add('avatar-has-new-achievement');
 
   const signOutBtn = el('button', { class: 'user-signout-btn', title: '登出' }, '登出');
   signOutBtn.addEventListener('click', async () => {

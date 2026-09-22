@@ -1,7 +1,7 @@
 import { getAllSubjects, getSubject, getUnit, getQuestion } from './subjects-registry.js';
-import { getSubjectProgress, getQuizResults, getWrongQuestions, getExamDate, setExamDate, getMockExamHistory } from './storage.js';
+import { getSubjectProgress, getQuizResults, getWrongQuestions, getExamDate, setExamDate, getMockExamHistory, markAchievementsSeen } from './storage.js';
 import { resolveExamDate, getDaysRemaining } from './study-plan.js';
-import { getAchievementState } from './achievements.js';
+import { getAchievementState, getNewlyUnlockedIds, CATEGORIES } from './achievements.js';
 import { el, icon } from './render.js';
 import { initHeader, renderUserMenu, formatRelativeDate } from './layout.js';
 import { ensureSignedIn } from './auth.js';
@@ -13,6 +13,19 @@ await initCloudSync(user.uid);
 renderUserMenu(user);
 
 const subjects = getAllSubjects();
+
+// 歷屆試題模擬考紀錄的 subjectId 是虛擬的「{科目}-real」,不是真正的科目,顯示用的
+// 標籤/連結要另外處理。這個 const 一定要放在 renderMockExamHistory() 被呼叫(見下面
+// 的 renderMockExamHistory();)之前 —— 之前放在檔案最後面,結果 renderMockExamHistory
+// 在它初始化之前就先執行了,只要有任何模擬考紀錄就會整個 throw TDZ 錯誤,「模擬考紀錄」
+// 區塊會整個空白、螢幕上完全看不出來哪裡壞了。
+const REAL_EXAM_HISTORY = {
+  'math-real': { subjectId: 'math', label: '數學A(歷屆試題)' },
+  'social-real': { subjectId: 'social', label: '社會(歷屆試題)' },
+  'chinese-real': { subjectId: 'chinese', label: '國文(歷屆試題)' },
+  'english-real': { subjectId: 'english', label: '英文(歷屆試題)' },
+  'science-real': { subjectId: 'science', label: '自然(歷屆試題)' },
+};
 
 // 歷屆試題(unitId 形如 math-real-111、social-real-111)沒有對應的 unit.html 頁面
 // 可以連回去,點進去要導回歷屆試題模擬考頁,而不是導向一個查無單元的 unit.html。
@@ -156,19 +169,52 @@ function renderExamDateSettings() {
 function renderAchievements() {
   const container = document.getElementById('achievements-grid');
   const achievements = getAchievementState();
+  // 先算好這次有哪些是「已解鎖但還沒看過」的,渲染完馬上標記已看過 ——
+  // 下次再進這個頁面就不會重複顯示 NEW 標籤/慶祝效果了。
+  const newlyUnlocked = new Set(getNewlyUnlockedIds(achievements));
 
-  for (const a of achievements) {
-    const card = el('div', { class: `achievement-card tier-${a.tier} ${a.earned ? 'is-earned' : 'is-locked'}` });
-    card.append(
-      el('div', { class: 'achievement-icon' }, icon(a.earned ? 'star' : 'lock', { size: 18 })),
-      el('div', { class: 'achievement-body' }, [
-        el('div', { class: 'achievement-title' }, a.title),
-        el('div', { class: 'achievement-desc' }, a.desc),
-        el('div', { class: 'achievement-progress' }, a.progress),
+  const earnedCount = achievements.filter((a) => a.earned).length;
+  const summaryEl = document.getElementById('achievements-summary');
+  if (summaryEl) summaryEl.textContent = `${earnedCount}/${achievements.length} 已解鎖`;
+
+  for (const cat of CATEGORIES) {
+    const items = achievements.filter((a) => a.category === cat.id);
+    if (!items.length) continue;
+    const catEarned = items.filter((a) => a.earned).length;
+
+    const section = el('div', { class: 'achievement-category' });
+    section.append(
+      el('div', { class: 'achievement-category-header' }, [
+        el('span', { class: 'achievement-category-icon' }, icon(cat.icon, { size: 16 })),
+        el('span', { class: 'achievement-category-label' }, cat.label),
+        el('span', { class: 'achievement-category-count' }, `${catEarned}/${items.length}`),
       ])
     );
-    container.append(card);
+
+    const grid = el('div', { class: 'achievements-grid' });
+    for (const a of items) {
+      const isMystery = a.secret && !a.earned;
+      const isNew = newlyUnlocked.has(a.id);
+      const card = el('div', {
+        class: `achievement-card tier-${a.tier} ${a.earned ? 'is-earned' : 'is-locked'} ${isMystery ? 'is-secret-locked' : ''} ${isNew ? 'is-new' : ''}`,
+      });
+      const cardIcon = isMystery ? 'question' : a.earned ? 'star' : 'lock';
+      card.append(
+        el('div', { class: 'achievement-icon' }, icon(cardIcon, { size: 18 })),
+        el('div', { class: 'achievement-body' }, [
+          el('div', { class: 'achievement-title' }, isMystery ? '？？？' : a.title),
+          el('div', { class: 'achievement-desc' }, isMystery ? '隱藏成就,達成後才會揭曉條件' : a.desc),
+          isMystery ? null : el('div', { class: 'achievement-progress' }, a.progress),
+        ])
+      );
+      if (isNew) card.append(el('span', { class: 'achievement-new-badge' }, 'NEW'));
+      grid.append(card);
+    }
+    section.append(grid);
+    container.append(section);
   }
+
+  markAchievementsSeen(achievements.filter((a) => a.earned).map((a) => a.id));
 }
 
 function baseChartOptions() {
@@ -300,14 +346,8 @@ function renderRecentQuizzes() {
 // 模擬考(含歷屆試題)則是一次考試一筆整體摘要(含估計級分),見 storage.js 的
 // addMockExamResult/getMockExamHistory。歷屆試題的 subjectId 是虛擬的
 // 'math-real'/'social-real',不是真正的科目,所以標籤要特別處理,連結也導回
-// 歷屆試題頁(帶對應的 ?subject=)而不是一般模擬考頁。
-const REAL_EXAM_HISTORY = {
-  'math-real': { subjectId: 'math', label: '數學A(歷屆試題)' },
-  'social-real': { subjectId: 'social', label: '社會(歷屆試題)' },
-  'chinese-real': { subjectId: 'chinese', label: '國文(歷屆試題)' },
-  'english-real': { subjectId: 'english', label: '英文(歷屆試題)' },
-  'science-real': { subjectId: 'science', label: '自然(歷屆試題)' },
-};
+// 歷屆試題頁(帶對應的 ?subject=)而不是一般模擬考頁。REAL_EXAM_HISTORY 本體定義在
+// 檔案前面(renderMockExamHistory() 呼叫點之前),這裡只用。
 
 function mockExamLabel(record) {
   const realExam = REAL_EXAM_HISTORY[record.subjectId];

@@ -159,6 +159,25 @@ export function getMasteredCount() {
   return Object.values(getWrongBookState()).filter((s) => s.mastered).length;
 }
 
+// ---- 成就徽章「已看過」狀態 ----
+// 純粹是本機 UI 用的一筆小狀態(判斷這次要不要顯示解鎖慶祝效果),不透過
+// writeJSON 寫入 —— 故意不觸發 notifyChange()/雲端同步,因為這不是使用者的
+// 讀書資料,沒必要每次看過成就都多推一次 Firestore。也不放進 getSnapshot()。
+export function getSeenAchievements() {
+  try {
+    const raw = localStorage.getItem(key('seenAchievements'));
+    return raw ? JSON.parse(raw) : [];
+  } catch {
+    return [];
+  }
+}
+
+export function markAchievementsSeen(ids) {
+  const seen = new Set(getSeenAchievements());
+  for (const id of ids) seen.add(id);
+  localStorage.setItem(key('seenAchievements'), JSON.stringify([...seen]));
+}
+
 // ---- 雲端同步用:整包快照存取(見 cloud-sync.js) ----
 
 export function getSnapshot() {
