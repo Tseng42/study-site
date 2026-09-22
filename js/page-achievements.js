@@ -48,7 +48,7 @@ function renderAchievements() {
       const card = el('div', {
         class: `achievement-card tier-${a.tier} ${a.earned ? 'is-earned' : 'is-locked'} ${isMystery ? 'is-secret-locked' : ''} ${isNew ? 'is-new' : ''}`,
       });
-      const cardIcon = isMystery ? 'question' : a.earned ? 'star' : 'lock';
+      const cardIcon = isMystery ? 'question' : a.icon || 'star';
       card.append(
         el('div', { class: 'achievement-icon' }, icon(cardIcon, { size: 18 })),
         el('div', { class: 'achievement-body' }, [
