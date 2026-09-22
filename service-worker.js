@@ -11,6 +11,7 @@ const APP_SHELL = [
   '/index.html',
   '/mockexam.html',
   '/profile.html',
+  '/achievements.html',
   '/real-exam.html',
   '/subject.html',
   '/unit.html',

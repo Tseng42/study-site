@@ -142,7 +142,10 @@ h1, h2, h3, h4 {
 .user-menu {
   display: flex;
   align-items: center;
-  gap: 10px;
+}
+.user-menu-wrap {
+  position: relative;
+  display: inline-flex;
 }
 .user-avatar {
   width: 32px;
@@ -160,21 +163,68 @@ h1, h2, h3, h4 {
   font-weight: 700;
   font-size: 0.85rem;
 }
-.user-signout-btn {
-  background: none;
+
+/* ---- 頭像下拉選單 ---- */
+.user-avatar-trigger {
+  display: inline-flex;
   border: none;
+  background: none;
+  border-radius: var(--radius-full);
+  padding: 2px;
   cursor: pointer;
+  transition: transform 0.15s ease;
+}
+.user-avatar-trigger:hover {
+  transform: scale(1.06);
+}
+.user-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 168px;
+  padding: 6px;
+  background: var(--surface);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+}
+.user-dropdown-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  width: 100%;
+  border: none;
+  background: none;
   font-family: var(--font-body);
-  color: var(--ink-muted);
+  color: var(--ink);
   font-size: 0.85rem;
   font-weight: 600;
-  padding: 6px 12px;
-  border-radius: var(--radius-full);
-  transition: background 0.15s ease, color 0.15s ease;
+  text-align: left;
+  text-decoration: none;
+  padding: 9px 10px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background 0.15s ease;
 }
-.user-signout-btn:hover {
+.user-dropdown-item:hover {
   background: var(--surface-alt);
-  color: var(--ink);
+}
+.user-dropdown-signout {
+  margin-top: 4px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border);
+  color: var(--ink-muted);
+}
+.user-dropdown-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-full);
+  background: var(--danger);
+  flex-shrink: 0;
 }
 
 /* ---- Login gate ---- */
@@ -606,15 +656,6 @@ a.timeline-row:hover {
 }
 
 /* ---- Avatar achievement tier ring ---- */
-.user-avatar-link {
-  display: inline-flex;
-  border-radius: var(--radius-full);
-  padding: 2px;
-  transition: transform 0.15s ease;
-}
-.user-avatar-link:hover {
-  transform: scale(1.06);
-}
 .avatar-tier-bronze { box-shadow: 0 0 0 2px #c47a3d; }
 .avatar-tier-silver { box-shadow: 0 0 0 2px #a7adb6; }
 .avatar-tier-gold { box-shadow: 0 0 0 2px #e0a716; }
@@ -693,6 +734,40 @@ a.timeline-row:hover {
 }
 .achievements-categories {
   margin-bottom: 32px;
+}
+/* 個人資料頁上的成就摘要卡(連去 achievements.html 的完整徽章牆),
+   借用 .achievement-card 同一套卡片外觀跟 tier 邊框色。 */
+.achievements-summary-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--surface);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  padding: 14px;
+  margin-bottom: 24px;
+  border-left: 4px solid var(--tier-color, var(--border));
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.15s ease;
+}
+.achievements-summary-link:hover {
+  transform: translateX(2px);
+}
+.achievements-summary-link.tier-bronze { --tier-color: #c47a3d; }
+.achievements-summary-link.tier-silver { --tier-color: #a7adb6; }
+.achievements-summary-link.tier-gold { --tier-color: #e0a716; }
+.achievements-summary-link.tier-diamond { --tier-color: #45b8c9; }
+.achievements-summary-link .achievement-icon {
+  background: var(--tier-color, var(--ink));
+  color: #fff;
+}
+.achievements-summary-link .achievement-body {
+  flex: 1;
+}
+.achievements-summary-arrow {
+  color: var(--ink-muted);
+  flex-shrink: 0;
 }
 .achievement-category {
   margin-bottom: 22px;

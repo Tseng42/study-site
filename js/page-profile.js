@@ -1,7 +1,7 @@
 import { getAllSubjects, getSubject, getUnit, getQuestion } from './subjects-registry.js';
-import { getSubjectProgress, getQuizResults, getWrongQuestions, getExamDate, setExamDate, getMockExamHistory, markAchievementsSeen } from './storage.js';
+import { getSubjectProgress, getQuizResults, getWrongQuestions, getExamDate, setExamDate, getMockExamHistory } from './storage.js';
 import { resolveExamDate, getDaysRemaining } from './study-plan.js';
-import { getAchievementState, getNewlyUnlockedIds, CATEGORIES } from './achievements.js';
+import { getAchievementState, getHighestTier, TIER_LABEL } from './achievements.js';
 import { el, icon } from './render.js';
 import { initHeader, renderUserMenu, formatRelativeDate } from './layout.js';
 import { ensureSignedIn } from './auth.js';
@@ -166,55 +166,28 @@ function renderExamDateSettings() {
   );
 }
 
+// 成就徽章牆本體已經獨立成 achievements.html(見 js/page-achievements.js),這裡
+// 只顯示一小列摘要(已解鎖幾個、目前最高 tier)+ 連結過去,不在個人資料頁一次
+// 攤開全部 39 個卡片。「已看過/NEW 標籤」的判斷也一起搬過去了,只有使用者真的
+// 點進完整徽章牆才算「看過」。
 function renderAchievements() {
-  const container = document.getElementById('achievements-grid');
+  const container = document.getElementById('achievements-summary-card');
+  if (!container) return;
   const achievements = getAchievementState();
-  // 先算好這次有哪些是「已解鎖但還沒看過」的,渲染完馬上標記已看過 ——
-  // 下次再進這個頁面就不會重複顯示 NEW 標籤/慶祝效果了。
-  const newlyUnlocked = new Set(getNewlyUnlockedIds(achievements));
-
   const earnedCount = achievements.filter((a) => a.earned).length;
-  const summaryEl = document.getElementById('achievements-summary');
-  if (summaryEl) summaryEl.textContent = `${earnedCount}/${achievements.length} 已解鎖`;
+  const tier = getHighestTier(achievements);
 
-  for (const cat of CATEGORIES) {
-    const items = achievements.filter((a) => a.category === cat.id);
-    if (!items.length) continue;
-    const catEarned = items.filter((a) => a.earned).length;
-
-    const section = el('div', { class: 'achievement-category' });
-    section.append(
-      el('div', { class: 'achievement-category-header' }, [
-        el('span', { class: 'achievement-category-icon' }, icon(cat.icon, { size: 16 })),
-        el('span', { class: 'achievement-category-label' }, cat.label),
-        el('span', { class: 'achievement-category-count' }, `${catEarned}/${items.length}`),
-      ])
-    );
-
-    const grid = el('div', { class: 'achievements-grid' });
-    for (const a of items) {
-      const isMystery = a.secret && !a.earned;
-      const isNew = newlyUnlocked.has(a.id);
-      const card = el('div', {
-        class: `achievement-card tier-${a.tier} ${a.earned ? 'is-earned' : 'is-locked'} ${isMystery ? 'is-secret-locked' : ''} ${isNew ? 'is-new' : ''}`,
-      });
-      const cardIcon = isMystery ? 'question' : a.earned ? 'star' : 'lock';
-      card.append(
-        el('div', { class: 'achievement-icon' }, icon(cardIcon, { size: 18 })),
-        el('div', { class: 'achievement-body' }, [
-          el('div', { class: 'achievement-title' }, isMystery ? '？？？' : a.title),
-          el('div', { class: 'achievement-desc' }, isMystery ? '隱藏成就,達成後才會揭曉條件' : a.desc),
-          isMystery ? null : el('div', { class: 'achievement-progress' }, a.progress),
-        ])
-      );
-      if (isNew) card.append(el('span', { class: 'achievement-new-badge' }, 'NEW'));
-      grid.append(card);
-    }
-    section.append(grid);
-    container.append(section);
-  }
-
-  markAchievementsSeen(achievements.filter((a) => a.earned).map((a) => a.id));
+  const link = el('a', { href: 'achievements.html', class: 'achievements-summary-link' });
+  link.append(
+    el('div', { class: 'achievement-icon' }, icon('star', { size: 18 })),
+    el('div', { class: 'achievement-body' }, [
+      el('div', { class: 'achievement-title' }, `${earnedCount}/${achievements.length} 已解鎖`),
+      el('div', { class: 'achievement-desc' }, tier ? `目前最高:${TIER_LABEL[tier]}牌成就` : '還沒解鎖任何成就'),
+    ]),
+    el('span', { class: 'achievements-summary-arrow' }, icon('chevronRight', { size: 16 }))
+  );
+  if (tier) link.classList.add(`tier-${tier}`);
+  container.append(link);
 }
 
 function baseChartOptions() {

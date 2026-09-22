@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>成就徽章 - 學測複習站</title>
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#201c2b">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="學測複習站">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="site-header">
+  <a href="index.html" class="brand">
+    <span class="brand-mark" id="brand-mark"></span>
+    學測複習站
+  </a>
+  <nav class="header-nav">
+    <a href="index.html" class="nav-pill" id="nav-home">首頁</a>
+    <a href="mockexam.html" class="nav-pill" id="nav-mockexam">模擬考</a>
+    <a href="wrongbook.html" class="nav-pill" id="nav-wrongbook">錯題本</a>
+  </nav>
+  <div class="user-menu" id="user-menu"></div>
+</header>
+<main class="container">
+  <a href="profile.html" class="back-link">回個人資料</a>
+  <h1 class="profile-title">成就徽章 <span id="achievements-summary" class="achievements-summary"></span></h1>
+  <div id="achievements-grid" class="achievements-categories"></div>
+</main>
+<script type="module" src="js/page-achievements.js"></script>
+</body>
+</html>
