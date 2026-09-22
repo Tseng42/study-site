@@ -182,7 +182,7 @@ h1, h2, h3, h4 {
   top: calc(100% + 8px);
   right: 0;
   z-index: 20;
-  display: flex;
+  display: none;
   flex-direction: column;
   gap: 2px;
   min-width: 168px;
@@ -190,6 +190,13 @@ h1, h2, h3, h4 {
   background: var(--surface);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-md);
+}
+/* 故意不靠 [hidden] 屬性切換顯示——.user-dropdown 這個 class 本身的
+   `display: flex`(開啟時要用)會蓋掉瀏覽器內建 [hidden]{display:none} 的樣式
+   (同層級的話 author stylesheet 贏過 user-agent stylesheet),導致 JS 切換
+   hidden 屬性完全沒視覺效果、點頭像看起來像沒反應。改用這個 class 來切換。 */
+.user-dropdown.is-open {
+  display: flex;
 }
 .user-dropdown-item {
   display: flex;

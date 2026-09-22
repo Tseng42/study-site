@@ -47,7 +47,6 @@ export function renderUserMenu(user) {
   if (hasNew) trigger.classList.add('avatar-has-new-achievement');
 
   const dropdown = el('div', { class: 'user-dropdown', role: 'menu' });
-  dropdown.hidden = true;
   const profileItem = el('a', { href: 'profile.html', class: 'user-dropdown-item', role: 'menuitem' }, '個人資料');
   const achievementsItem = el(
     'a',
@@ -65,17 +64,17 @@ export function renderUserMenu(user) {
   dropdown.append(profileItem, achievementsItem, signOutBtn);
 
   function closeDropdown() {
-    dropdown.hidden = true;
+    dropdown.classList.remove('is-open');
     trigger.setAttribute('aria-expanded', 'false');
   }
   function openDropdown() {
-    dropdown.hidden = false;
+    dropdown.classList.add('is-open');
     trigger.setAttribute('aria-expanded', 'true');
   }
   trigger.addEventListener('click', (e) => {
     e.stopPropagation();
-    if (dropdown.hidden) openDropdown();
-    else closeDropdown();
+    if (dropdown.classList.contains('is-open')) closeDropdown();
+    else openDropdown();
   });
   document.addEventListener('click', (e) => {
     if (!wrap.contains(e.target)) closeDropdown();
