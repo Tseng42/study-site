@@ -6,8 +6,44 @@ import { getAchievementState, getHighestTier, getNewlyUnlockedIds, TIER_LABEL } 
 // 剛好能確保每個頁面載入時都會註冊到,不用每個 page-*.js 各自重複一次。
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/service-worker.js').catch(() => {});
+    navigator.serviceWorker
+      .register('/service-worker.js')
+      .then((registration) => {
+        watchForUpdate(registration);
+        // 從主畫面加入的 PWA 常常是「從背景切回前景」而不是重新整理頁面,
+        // 瀏覽器自己排程的更新檢查不一定會剛好觸發到,切回前景時主動補問一次。
+        document.addEventListener('visibilitychange', () => {
+          if (document.visibilityState === 'visible') registration.update();
+        });
+      })
+      .catch(() => {});
   });
+}
+
+// 偵測到新版本的 service worker 裝好(且不是第一次安裝,是「舊版本已經在跑」時
+// 發現的新版),就顯示一個小提示條讓使用者自己決定何時重新整理——不強制蓋掉
+// 畫面(例如測驗寫到一半),但也不再是完全無聲更新。
+function watchForUpdate(registration) {
+  registration.addEventListener('updatefound', () => {
+    const newWorker = registration.installing;
+    if (!newWorker) return;
+    newWorker.addEventListener('statechange', () => {
+      if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+        showUpdateBanner();
+      }
+    });
+  });
+}
+
+function showUpdateBanner() {
+  if (document.getElementById('update-banner')) return;
+  const btn = el('button', { type: 'button', class: 'update-banner-btn' }, '重新整理');
+  btn.addEventListener('click', () => location.reload());
+  const banner = el('div', { id: 'update-banner', class: 'update-banner' }, [
+    el('span', { class: 'update-banner-text' }, '有新版本可以使用'),
+    btn,
+  ]);
+  document.body.append(banner);
 }
 
 export function initHeader() {
