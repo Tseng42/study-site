@@ -18,6 +18,7 @@ import { englishLessons3 } from '../data/english-lessons-3.js';
 import { englishLessons4 } from '../data/english-lessons-4.js';
 import { englishLessons5 } from '../data/english-lessons-5.js';
 import { englishLessons6 } from '../data/english-lessons-6.js';
+import { sciencePhysicsChapters } from '../data/science-chapters-physics.js';
 import { mathRealExams } from '../data/math-real-exams.js';
 import { socialRealExams } from '../data/social-real-exams.js';
 import { chineseRealExams } from '../data/chinese-real-exams.js';
@@ -68,7 +69,28 @@ const englishWithLessons = {
   ]),
 };
 
-const dataBySubject = { chinese: chineseWithLessons, english: englishWithLessons, math, science, social };
+// 社會、自然:依 108 課綱課本章節切細的「章節單元」(data/social-chapters-*.js、
+// science-chapters-*.js)跟原本的大單元並存(原單元的 id 與題目不變,舊紀錄仍有效)。
+// 排序:先依分類(歷史/地理/公民、物理/化學/生物/地科)分組,分類內依學期,同一學期章節單元排在
+// 原單元前面(例如台灣史先列「原住民族與史前」,再列荷治、清領…)。
+const SEMESTER_ORDER = ['高一', '高一上', '高一下', '高二上', '高二下', '高三上', '高三總複習'];
+
+function mergeChapterUnits(baseUnits, chapterUnits) {
+  const categoryOrder = [...new Set([...baseUnits, ...chapterUnits].map((u) => u.category))];
+  const rank = (u) => {
+    const s = SEMESTER_ORDER.indexOf(u.semester);
+    return s === -1 ? SEMESTER_ORDER.length : s;
+  };
+  return [...chapterUnits, ...baseUnits]
+    .map((unit, index) => ({ unit, index }))
+    .sort((a, b) => categoryOrder.indexOf(a.unit.category) - categoryOrder.indexOf(b.unit.category) || rank(a.unit) - rank(b.unit) || a.index - b.index)
+    .map(({ unit }) => unit);
+}
+
+const socialWithChapters = { ...social, units: mergeChapterUnits(social.units, []) };
+const scienceWithChapters = { ...science, units: mergeChapterUnits(science.units, [...sciencePhysicsChapters]) };
+
+const dataBySubject = { chinese: chineseWithLessons, english: englishWithLessons, math, science: scienceWithChapters, social: socialWithChapters };
 
 // 歷屆試題(見 data/math-real-exams.js、data/social-real-exams.js)不是一般單元,
 // 不會出現在 subject.html 的單元列表或進度統計裡,但錯題本/個人資料頁需要能依
