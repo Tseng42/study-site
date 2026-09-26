@@ -11,7 +11,8 @@
 //
 // 「已看過」哪些成就(用來判斷這次登入後有沒有新解鎖、要不要顯示慶祝效果)
 // 是唯一需要另外存一筆小狀態的地方,見 storage.js 的 getSeenAchievements/
-// markAchievementsSeen —— 這筆資料純粹是本機 UI 用的,不放進雲端同步快照。
+// markAchievementsSeen —— 這筆資料跟著帳號一起同步(換裝置登入才不會把所有已解鎖
+// 成就當成新解鎖再慶祝一次)。
 import { getAllSubjects } from './subjects-registry.js';
 import {
   getSubjectProgress,
@@ -172,13 +173,18 @@ export function computeStats() {
   const maxDaySubjects = dayList.reduce((max, d) => Math.max(max, d.subjects.size), 0);
 
   const mockHistory = getMockExamHistory();
-  const mockSubjectsCovered = new Set(mockHistory.map((m) => m.subjectId)).size;
-  const anyMockAtOrAboveMean = mockHistory.some((m) => bandAtOrAboveMean(m.subjectId.replace(/-real$/, ''), m.estimatedBand));
+  // 歷屆試題模擬考的紀錄 subjectId 是虛擬的「{科目}-real」,跟一般模擬考分開判斷:
+  // 「五科模擬考」只算一般模擬考(否則 math 跟 math-real 會被當成兩個不同科目)。
+  const ordinaryMockHistory = mockHistory.filter((m) => !m.subjectId.endsWith('-real'));
+  const mockSubjectsCovered = new Set(ordinaryMockHistory.map((m) => m.subjectId)).size;
+  // 含非選擇題、還沒自行對完答案的暫存紀錄(writtenPending)級分只算了選擇題部分,
+  // 不能拿來判定「達均標」,不然之後補完非選擇題級分掉下來,成就就變成假解鎖。
+  const hasFinalBand = (m) => !m.writtenPending;
+  const anyMockAtOrAboveMean = mockHistory.some((m) => hasFinalBand(m) && bandAtOrAboveMean(m.subjectId.replace(/-real$/, ''), m.estimatedBand));
 
-  // 歷屆試題模擬考的紀錄 subjectId 是虛擬的「{科目}-real」,跟一般模擬考分開判斷。
   const realExamHistory = mockHistory.filter((m) => m.subjectId.endsWith('-real'));
   const realExamSubjectsCovered = new Set(realExamHistory.map((m) => m.subjectId.replace(/-real$/, ''))).size;
-  const realExamAnyAtOrAboveMean = realExamHistory.some((m) => bandAtOrAboveMean(m.subjectId.replace(/-real$/, ''), m.estimatedBand));
+  const realExamAnyAtOrAboveMean = realExamHistory.some((m) => hasFinalBand(m) && bandAtOrAboveMean(m.subjectId.replace(/-real$/, ''), m.estimatedBand));
   const realExamAnyNearPerfectSingleYear = realExamHistory.some((m) => /^\d+ 學年度$/.test(m.examLabel || '') && m.percent >= 95);
   const yearsBySubject = new Map();
   for (const m of realExamHistory) {

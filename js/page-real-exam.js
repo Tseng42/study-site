@@ -36,7 +36,7 @@ import { chineseRealExams } from '../data/chinese-real-exams.js';
 import { englishRealExams } from '../data/english-real-exams.js';
 import { scienceRealExams } from '../data/science-real-exams.js';
 import { getSubject } from './subjects-registry.js';
-import { addQuizResult, addMockExamResult } from './storage.js';
+import { addQuizResult, addMockExamResult, updateMockExamResult } from './storage.js';
 import { describeBandLevel } from '../data/mock-exam-config.js';
 import { shuffle, prepareQuestions, shuffleQuestionOptions, renderAnswerField, gradeAnswer, typeLabel } from './quiz-utils.js';
 import { el, icon, renderPassage } from './render.js';
@@ -173,7 +173,9 @@ function buildMathYearQuestions(yearSet) {
 }
 
 function buildMathMixedQuestions() {
-  const allSingles = mathRealExams.flatMap((y) => y.questions.filter((q) => q.type !== 'multi'));
+  // 單選池只放真正的單選(未標 type 或 type: 'single'):選填(numeric/numeric-multi)
+  // 跟非選擇題(written/hybrid)雖然也不是 multi,但不能被當成單選抽進來。
+  const allSingles = mathRealExams.flatMap((y) => y.questions.filter((q) => !q.type || q.type === 'single'));
   const allMultis = mathRealExams.flatMap((y) => y.questions.filter((q) => q.type === 'multi'));
   return [...drawSection(allSingles, 6, '單選'), ...drawSection(allMultis, 6, '多選')];
 }
@@ -433,7 +435,7 @@ function runExam(questions, examLabel) {
 
   function finish(timeUp) {
     if (!timeUp) {
-      const hasUnanswered = questions.some((q, index) => q.type !== 'written' && answers[index] == null);
+      const hasUnanswered = questions.some((q, index) => isUnanswered(q, answers[index]));
       if (hasUnanswered && !confirm('還有題目尚未作答,確定要送出嗎?')) return;
     }
     clearInterval(intervalId);
@@ -510,12 +512,16 @@ function runExam(questions, examLabel) {
     };
 
     // 混合年份模式不含非選擇題,分數當場就完整,直接存進模擬考紀錄。單一年份模式
-    // 含非選擇題,真正的分數要等使用者自行對完答案才算數(依各科官方配分權重換算
-    // 預估級分,見 config.autoWeight/writtenWeight),所以這種情況下先不存,等
-    // renderResult 裡的自行對答案都回報完才真正存進歷史紀錄。
-    if (writtenResults.length === 0) {
-      addMockExamResult({ ...pendingRecord, estimatedBand: Math.min(15, Math.round(autoFraction * 15)) });
-    }
+    // 含非選擇題,真正的級分要等使用者自行對完答案才算數(依各科官方配分權重換算
+    // 預估級分,見 config.autoWeight/writtenWeight);但如果等到全部回報完才存,
+    // 中途離開頁面整筆考試紀錄就不見了。所以先存一筆只含選擇題成績的暫存紀錄
+    // (writtenPending),全部回報完再由 renderResult 的 maybeFinalizeHistory 補上。
+    const autoBand = Math.min(15, Math.round(autoFraction * 15));
+    addMockExamResult(
+      writtenResults.length
+        ? { ...pendingRecord, estimatedBand: autoBand, writtenPending: true }
+        : { ...pendingRecord, estimatedBand: autoBand }
+    );
 
     renderResult(results, writtenResults, {
       score,
@@ -524,9 +530,21 @@ function runExam(questions, examLabel) {
       autoFraction,
       timeUp,
       examLabel,
-      pendingRecord: writtenResults.length ? pendingRecord : null,
+      pendingRecordId: writtenResults.length ? pendingRecord.id : null,
     });
   }
+}
+
+// 各題型「還沒作答完」的判斷。選填多格要每一格都有填;hybrid 的勾選部分要有選
+// (簡答本來就是選填,不列入);純寫答的非選擇題不強制作答。
+function isUnanswered(q, answer) {
+  if (q.type === 'written') return false;
+  if (answer == null) return true;
+  if (q.type === 'numeric-multi') return answer.some((v) => !String(v ?? '').trim());
+  if (q.type === 'numeric') return !String(answer).trim();
+  if (q.type === 'hybrid') return answer.choice == null;
+  if (q.type === 'multi') return answer.size === 0;
+  return false;
 }
 
 function correctAnswerOf(q) {
@@ -620,16 +638,15 @@ function renderResult(results, writtenResults, summary) {
   }
 
   function maybeFinalizeHistory() {
-    if (!summary.pendingRecord || writtenOutcomes.some((v) => v === null)) {
+    if (!summary.pendingRecordId || writtenOutcomes.some((v) => v === null)) {
       updateBandDisplay();
       return;
     }
-    const writtenScore = writtenOutcomes.filter(Boolean).length;
-    addMockExamResult({
-      ...summary.pendingRecord,
-      writtenScore,
+    updateMockExamResult(summary.pendingRecordId, {
+      writtenScore: writtenOutcomes.filter(Boolean).length,
       writtenTotal: writtenOutcomes.length,
       estimatedBand: currentBand(true),
+      writtenPending: false,
     });
     updateBandDisplay();
   }

@@ -350,7 +350,11 @@ function renderMockExamHistory() {
     const subject = REAL_EXAM_HISTORY[r.subjectId] ? getSubject(REAL_EXAM_HISTORY[r.subjectId].subjectId) : getSubject(r.subjectId);
     const row = el('a', { class: 'timeline-row', href: mockExamHref(r) });
     row.style.setProperty('--row-color', subject?.color || '#201c2b');
-    const writtenNote = r.writtenTotal ? ` · 非選 ${r.writtenScore}/${r.writtenTotal}` : '';
+    const writtenNote = r.writtenPending
+      ? ' · 非選未對答案'
+      : r.writtenTotal
+        ? ` · 非選 ${r.writtenScore}/${r.writtenTotal}`
+        : '';
     row.append(
       el('div', { class: 'timeline-row-body' }, [
         el('div', { class: 'timeline-row-title' }, mockExamLabel(r)),

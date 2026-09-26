@@ -84,15 +84,19 @@ export function getQuizResults(subjectId, unitId) {
 }
 
 export function addQuizResult(record) {
+  reopenMasteredIfWrong(record);
   const all = readJSON('quizResults', []);
   all.push(record);
   writeJSON('quizResults', all);
 }
 
 // ---- 錯題本 ----
-// wrongBookState: { [questionId]: { mastered: boolean } }
+// wrongBookState: { [questionId]: { mastered: boolean, everMastered?: boolean } }
 // 錯題本內容不另外重複儲存題目,而是即時從 quizResults 彙整「每題最近一次作答結果」，
 // 取出最近一次答錯、且尚未被標記「已熟練」的題目。
+// 已標記熟練的題目之後如果又答錯,mastered 會被清掉、題目回到錯題本(見
+// reopenMasteredIfWrong);everMastered 記住「曾經熟練過」,讓成就用的熟練題數不會
+// 因為重新答錯就倒退。
 
 function getWrongBookState() {
   return readJSON('wrongBookState', {});
@@ -102,6 +106,19 @@ export function markQuestionMastered(questionId, mastered = true) {
   const state = getWrongBookState();
   state[questionId] = { ...(state[questionId] || {}), mastered };
   writeJSON('wrongBookState', state);
+}
+
+function reopenMasteredIfWrong(record) {
+  const state = getWrongBookState();
+  let changed = false;
+  for (const ans of record.answers || []) {
+    const entry = state[ans.questionId];
+    if (entry?.mastered && ans.isCorrect === false) {
+      state[ans.questionId] = { ...entry, mastered: false, everMastered: true };
+      changed = true;
+    }
+  }
+  if (changed) writeJSON('wrongBookState', state);
 }
 
 export function getWrongQuestions() {
@@ -142,6 +159,16 @@ export function addMockExamResult(record) {
   writeJSON('mockExamHistory', all);
 }
 
+// 歷屆試題含非選擇題時,先存一筆暫時的紀錄(writtenPending: true),使用者自行對完
+// 答案後再用這個函式補上最終級分,避免中途離開頁面整筆考試紀錄就不見。
+export function updateMockExamResult(id, patch) {
+  const all = readJSON('mockExamHistory', []);
+  const index = all.findIndex((r) => r.id === id);
+  if (index === -1) return;
+  all[index] = { ...all[index], ...patch };
+  writeJSON('mockExamHistory', all);
+}
+
 // ---- 讀書設定 ----
 // 目前只有目標考試日期('YYYY-MM-DD'),沒設定過就回傳 null,
 // 由 study-plan.js 決定要用什麼預設值。
@@ -154,28 +181,26 @@ export function setExamDate(dateString) {
   writeJSON('examDate', dateString);
 }
 
-// 錯題本裡標記「已熟練」的題目數,成就徽章用。
+// 錯題本裡標記過「已熟練」的題目數,成就徽章用。曾經熟練、之後又答錯而回到
+// 錯題本的題目仍然算(見 reopenMasteredIfWrong),所以已解鎖的成就不會倒退。
 export function getMasteredCount() {
-  return Object.values(getWrongBookState()).filter((s) => s.mastered).length;
+  return Object.values(getWrongBookState()).filter((s) => s.mastered || s.everMastered).length;
 }
 
 // ---- 成就徽章「已看過」狀態 ----
-// 純粹是本機 UI 用的一筆小狀態(判斷這次要不要顯示解鎖慶祝效果),不透過
-// writeJSON 寫入 —— 故意不觸發 notifyChange()/雲端同步,因為這不是使用者的
-// 讀書資料,沒必要每次看過成就都多推一次 Firestore。也不放進 getSnapshot()。
+// 用來判斷這次要不要顯示解鎖慶祝效果(NEW 標籤/頭像紅點)。跟著帳號一起同步
+// (見 getSnapshot/mergeSnapshot),不然換一台裝置登入,所有已解鎖的成就都會被當成
+// 「新解鎖」再慶祝一次。只有真的多看過新的成就時才會觸發同步,不會每次進成就頁都推。
 export function getSeenAchievements() {
-  try {
-    const raw = localStorage.getItem(key('seenAchievements'));
-    return raw ? JSON.parse(raw) : [];
-  } catch {
-    return [];
-  }
+  return readJSON('seenAchievements', []);
 }
 
 export function markAchievementsSeen(ids) {
   const seen = new Set(getSeenAchievements());
+  const sizeBefore = seen.size;
   for (const id of ids) seen.add(id);
-  localStorage.setItem(key('seenAchievements'), JSON.stringify([...seen]));
+  if (seen.size === sizeBefore) return;
+  writeJSON('seenAchievements', [...seen]);
 }
 
 // ---- 雲端同步用:整包快照存取(見 cloud-sync.js) ----
@@ -187,18 +212,71 @@ export function getSnapshot() {
     wrongBookState: getWrongBookState(),
     mockExamHistory: readJSON('mockExamHistory', []),
     examDate: getExamDate(),
+    seenAchievements: getSeenAchievements(),
     updatedAt: localStorage.getItem(key('updatedAt')) || null,
   };
 }
 
-export function applySnapshot(snapshot) {
-  if (!snapshot) return;
-  localStorage.setItem(key('progress'), JSON.stringify(snapshot.progress || {}));
-  localStorage.setItem(key('quizResults'), JSON.stringify(snapshot.quizResults || []));
-  localStorage.setItem(key('wrongBookState'), JSON.stringify(snapshot.wrongBookState || {}));
-  localStorage.setItem(key('mockExamHistory'), JSON.stringify(snapshot.mockExamHistory || []));
-  if (snapshot.examDate) localStorage.setItem(key('examDate'), JSON.stringify(snapshot.examDate));
-  if (snapshot.updatedAt) localStorage.setItem(key('updatedAt'), snapshot.updatedAt);
+// 測驗/模擬考紀錄是「只增不減」的清單,每筆有唯一 id,合併時取聯集;同一個 id
+// 兩邊內容不同(例如暫存的模擬考紀錄後來補上非選擇題成績),以 preferred 那份為準。
+function unionRecords(preferred = [], other = []) {
+  const ids = new Set(preferred.map((r) => r.id));
+  return [...preferred, ...other.filter((r) => !ids.has(r.id))].sort(
+    (a, b) => new Date(a.takenAt) - new Date(b.takenAt)
+  );
+}
+
+function mergeProgress(preferred = {}, other = {}) {
+  const merged = {};
+  for (const subjectId of new Set([...Object.keys(other), ...Object.keys(preferred)])) {
+    merged[subjectId] = { ...(other[subjectId] || {}), ...(preferred[subjectId] || {}) };
+  }
+  return merged;
+}
+
+// 把雲端快照併進本機(取代原本「誰的 updatedAt 新就整份蓋掉另一份」的做法 ——
+// 那樣兩邊各自有不同紀錄時,輸的那邊整份消失,例如新裝置在跟雲端比對完成前就先
+// 作答,或兩台裝置都離線用過)。updatedAt 較新的那份在有衝突時優先;回傳 true 代表
+// 合併結果含有雲端沒有的內容,呼叫端要再推一次上雲端。
+export function mergeSnapshot(remote) {
+  if (!remote) return false;
+  const local = getSnapshot();
+  const remoteNewer = (remote.updatedAt || '') > (local.updatedAt || '');
+  const preferred = remoteNewer ? remote : local;
+  const other = remoteNewer ? local : remote;
+
+  const merged = {
+    progress: mergeProgress(preferred.progress, other.progress),
+    quizResults: unionRecords(preferred.quizResults, other.quizResults),
+    wrongBookState: { ...(other.wrongBookState || {}), ...(preferred.wrongBookState || {}) },
+    mockExamHistory: unionRecords(preferred.mockExamHistory, other.mockExamHistory),
+    examDate: preferred.examDate || other.examDate || null,
+    seenAchievements: [...new Set([...(local.seenAchievements || []), ...(remote.seenAchievements || [])])],
+  };
+
+  const comparable = (s) =>
+    JSON.stringify([
+      s.progress || {},
+      s.quizResults || [],
+      s.wrongBookState || {},
+      s.mockExamHistory || [],
+      s.examDate || null,
+      [...(s.seenAchievements || [])].sort(),
+    ]);
+  const hasNewForRemote = comparable(merged) !== comparable(remote);
+  // 合併後有雲端沒有的內容時,updatedAt 要更新成現在,其他裝置才會發現雲端有新資料。
+  merged.updatedAt = hasNewForRemote
+    ? new Date().toISOString()
+    : remote.updatedAt || local.updatedAt || null;
+
+  localStorage.setItem(key('progress'), JSON.stringify(merged.progress));
+  localStorage.setItem(key('quizResults'), JSON.stringify(merged.quizResults));
+  localStorage.setItem(key('wrongBookState'), JSON.stringify(merged.wrongBookState));
+  localStorage.setItem(key('mockExamHistory'), JSON.stringify(merged.mockExamHistory));
+  if (merged.examDate) localStorage.setItem(key('examDate'), JSON.stringify(merged.examDate));
+  localStorage.setItem(key('seenAchievements'), JSON.stringify(merged.seenAchievements));
+  if (merged.updatedAt) localStorage.setItem(key('updatedAt'), merged.updatedAt);
+  return hasNewForRemote;
 }
 
 export function getLocalUpdatedAt() {
