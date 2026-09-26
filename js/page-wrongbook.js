@@ -3,7 +3,7 @@ import { getReviewableWrongQuestions } from './wrong-utils.js';
 import { getQuestion, getUnit, getSubject } from './subjects-registry.js';
 import { prepareQuestions } from './quiz-utils.js';
 import { runQuiz } from './quiz-runner.js';
-import { el, icon, renderPassage } from './render.js';
+import { el, icon, renderPassage, renderRichText } from './render.js';
 import { initHeader, renderUserMenu, showBanner, formatRelativeDate } from './layout.js';
 import { ensureSignedIn } from './auth.js';
 import { initCloudSync } from './cloud-sync.js';
@@ -181,7 +181,7 @@ function buildCard(w) {
     el('p', { class: 'wrong-meta' }, `${subject?.name || ''} · ${unit?.title || ''} · ${formatRelativeDate(w.lastAttemptAt)}答錯`)
   );
   if (question.passageId) card.append(renderPassage(question));
-  card.append(el('p', { class: 'wrong-question' }, question.question));
+  card.append(renderRichText(question.question, { className: 'wrong-question' }));
   // hybrid 題的簡答部分是另外自行對答案的(id 結尾 -written),要讓人看得出這張卡片問的是哪一段。
   if (w.questionId.endsWith('-written') && question.writtenPrompt) {
     card.append(el('p', { class: 'wrong-question' }, `【簡答部分】${question.writtenPrompt}`));

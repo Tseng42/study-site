@@ -45,7 +45,7 @@ function drawExamQuestions(pool, config) {
   return prepareQuestions(pool, config.questionCount).map((q) => ({ ...q, sectionLabel: typeLabel(q.type) }));
 }
 import { mockExamConfig, fiveStandardsReference, describeBandLevel } from '../data/mock-exam-config.js';
-import { el, icon, subjectIcon, renderPassage } from './render.js';
+import { el, icon, subjectIcon, renderPassage, renderRichText } from './render.js';
 import { initHeader, renderUserMenu, formatRelativeDate, renderExamDraftNotice } from './layout.js';
 import { ensureSignedIn } from './auth.js';
 import { initCloudSync } from './cloud-sync.js';
@@ -254,7 +254,7 @@ function runExam(subject, config, questions, resume = null) {
 
     const field = renderAnswerField(q, index, (value) => session.onAnswer(index, value), undefined, false, session.initialAnswer(index));
     const card = el('div', { class: 'quiz-question' }, [
-      el('p', { class: 'quiz-question-text' }, `${index + 1}. ${q.question}`),
+      renderRichText(`${index + 1}. ${q.question}`, { className: 'quiz-question-text' }),
       field.optionsWrap,
     ]);
     form.append(card);
@@ -383,7 +383,7 @@ function renderResult(subject, config, results, summary) {
     const metaPrefix = w.category ? `${w.category} · ` : '';
     card.append(el('p', { class: 'wrong-meta' }, `${metaPrefix}${w.unitTitle} · ${typeLabel(w.type)}`));
     if (w.passageId) card.append(renderPassage(w));
-    card.append(el('p', { class: 'wrong-question' }, w.question));
+    card.append(renderRichText(w.question, { className: 'wrong-question' }));
 
     if (w.type === 'numeric') {
       card.append(

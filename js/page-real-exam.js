@@ -40,7 +40,7 @@ import { addQuizResult, addMockExamResult, updateMockExamResult, getExamDraft } 
 import { createExamSession } from './exam-ui.js';
 import { describeBandLevel } from '../data/mock-exam-config.js';
 import { shuffle, prepareQuestions, shuffleQuestionOptions, renderAnswerField, gradeAnswer, typeLabel, isAnswered, correctAnswerOf } from './quiz-utils.js';
-import { el, icon, renderPassage } from './render.js';
+import { el, icon, renderPassage, renderRichText } from './render.js';
 import { initHeader, renderUserMenu, renderExamDraftNotice } from './layout.js';
 import { ensureSignedIn } from './auth.js';
 import { initCloudSync } from './cloud-sync.js';
@@ -425,7 +425,7 @@ function runExam(questions, examLabel, resume = null) {
 
     const field = renderAnswerField(q, index, (value) => session.onAnswer(index, value), undefined, false, session.initialAnswer(index));
     const card = el('div', { class: 'quiz-question' }, [
-      el('p', { class: 'quiz-question-text' }, `${index + 1}. ${q.question}`),
+      renderRichText(`${index + 1}. ${q.question}`, { className: 'quiz-question-text' }),
       field.optionsWrap,
       el('p', { class: 'real-exam-year-badge' }, `${q.sourceYear} 學年度${config.yearBadgeLabel} 第 ${q.origNo} 題`),
     ]);
@@ -582,7 +582,7 @@ function renderResult(results, writtenResults, summary) {
     card.style.setProperty('--row-color', subject?.color || '#201c2b');
     card.append(el('p', { class: 'wrong-meta' }, `${typeLabel(w.type)} · ${w.sourceYear} 學年度第 ${w.origNo} 題`));
     if (w.passageId) card.append(renderPassage(w));
-    card.append(el('p', { class: 'wrong-question' }, w.question));
+    card.append(renderRichText(w.question, { className: 'wrong-question' }));
     card.append(renderCorrectAnswerBlock(w));
 
     if (w.explanation) card.append(el('p', { class: 'feedback-explanation' }, w.explanation));
@@ -679,7 +679,7 @@ function renderWrittenCard(w, onReport) {
   card.style.setProperty('--row-color', subject?.color || '#201c2b');
   card.append(el('p', { class: 'wrong-meta' }, `非選 · ${w.sourceYear} 學年度第 ${w.origNo} 題`));
   if (w.passageId) card.append(renderPassage(w));
-  card.append(el('p', { class: 'wrong-question' }, w.question));
+  card.append(renderRichText(w.question, { className: 'wrong-question' }));
   if (w.userAnswer && w.userAnswer.trim()) {
     card.append(el('p', { class: 'written-your-note' }, `你寫的:${w.userAnswer}`));
   }

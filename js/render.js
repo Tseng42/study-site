@@ -91,16 +91,98 @@ export function blobDecoration(color) {
   return wrapper.firstElementChild;
 }
 
+// ---- 題目/文章裡的表格 ----
+// 歷屆試題的題幹跟文章是純文字,表格用「一列一行、欄位之間用 ' | ' 隔開」的格式寫
+// (第一列是表頭)。連續兩行以上都有 ' | ' 的區塊畫成真正的 <table>,其餘每一行各自是
+// 一個段落。文字裡的絕對值符號(|x|)前後沒有空白,不會被誤認成表格。
+// 儲存格裡真的要出現 | 的話寫成 \|;儲存格內容是 << 代表跟左邊那格合併(colspan)。
+const isTableLine = (line) => /\s\|\s/.test(line);
+const BACKSLASH = String.fromCharCode(92);
+
+function splitCells(s) {
+  const cells = [];
+  let cur = '';
+  for (let i = 0; i < s.length; i++) {
+    const ch = s[i];
+    if (ch === BACKSLASH && s[i + 1] === '|') {
+      cur += '|';
+      i++;
+    } else if (ch === '|') {
+      cells.push(cur.trim());
+      cur = '';
+    } else {
+      cur += ch;
+    }
+  }
+  cells.push(cur.trim());
+  return cells;
+}
+
+function parseTableRow(line) {
+  let s = line.trim();
+  // 兩頭都有 | 的寫法(| a | b |)先把最外面的 | 拿掉;只有開頭有 |(第一欄留空)則保留空欄。
+  if (s.startsWith('|') && s.endsWith('|') && !s.endsWith(BACKSLASH + '|')) s = s.slice(1, -1);
+  const cells = [];
+  for (const text of splitCells(s)) {
+    if (text === '<<' && cells.length) cells[cells.length - 1].span += 1;
+    else cells.push({ text, span: 1 });
+  }
+  return cells;
+}
+
+function buildTable(lines) {
+  const rows = lines.map(parseTableRow);
+  const widthOf = (r) => r.reduce((sum, c) => sum + c.span, 0);
+  const width = Math.max(...rows.map(widthOf));
+  const pad = (r) => r.concat(new Array(width - widthOf(r)).fill(null).map(() => ({ text: '', span: 1 })));
+  const attrs = (c, extra = {}) => (c.span > 1 ? { ...extra, colspan: String(c.span) } : extra);
+  const [head, ...body] = rows;
+  const thead = el('thead', {}, el('tr', {}, pad(head).map((c) => el('th', attrs(c, { scope: 'col' }), c.text))));
+  const tbody = el(
+    'tbody',
+    {},
+    body.map((r) =>
+      el('tr', {}, pad(r).map((c, i) => (i === 0 ? el('th', attrs(c, { scope: 'row' }), c.text) : el('td', attrs(c), c.text))))
+    )
+  );
+  return el('div', { class: 'exam-table-wrap' }, el('table', { class: 'exam-table' }, [thead, tbody]));
+}
+
+// 把一段文字畫成「段落 + 表格」:每個非空的行是一個 className 的 <p>,表格區塊是 <table>。
+// badge(可選)接在第一個段落後面(題型標籤用)。
+export function renderRichText(text, { className = '', badge = null } = {}) {
+  const wrap = el('div', { class: 'rich-text' });
+  const lines = String(text ?? '').split('\n');
+  let badgePlaced = !badge;
+  for (let i = 0; i < lines.length; ) {
+    if (isTableLine(lines[i])) {
+      let j = i;
+      while (j < lines.length && isTableLine(lines[j])) j++;
+      if (j - i >= 2) {
+        wrap.append(buildTable(lines.slice(i, j)));
+        i = j;
+        continue;
+      }
+    }
+    const line = lines[i++];
+    if (!line.trim()) continue;
+    const p = el('p', { class: className }, line);
+    if (!badgePlaced) {
+      p.append(badge);
+      badgePlaced = true;
+    }
+    wrap.append(p);
+  }
+  return wrap;
+}
+
 // 閱讀測驗題組的文章區塊。題目資料裡 passageTitle/passage 會重複存在同一組的
 // 每一題上(保持每題都是可以獨立抽取的物件,跟其他題型一致),畫面上由呼叫端
 // 自己追蹤同一個 passageId 只顯示一次,避免同一篇文章在同一次測驗裡重複出現。
 export function renderPassage(q) {
   const box = el('div', { class: 'quiz-passage' });
   if (q.passageTitle) box.append(el('h4', { class: 'quiz-passage-title' }, q.passageTitle));
-  (q.passage || '')
-    .split('\n')
-    .filter(Boolean)
-    .forEach((line) => box.append(el('p', {}, line)));
+  box.append(renderRichText(q.passage || ''));
   return box;
 }
 
