@@ -76,7 +76,7 @@ function renderStudyPlanCard() {
 function renderSubjectCards() {
   const container = document.getElementById('subject-list');
   for (const subject of subjects) {
-    const progress = getSubjectProgress(subject.id, subject.units.length);
+    const progress = getSubjectProgress(subject.id, subject.units);
     const card = el('a', { class: 'subject-card', href: `subject.html?subject=${subject.id}` });
     card.style.setProperty('--card-color', subject.color);
     card.append(

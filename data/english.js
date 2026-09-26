@@ -1,4 +1,6 @@
-// 英文科單元資料,依高一上~高三下六個學期分組(category 欄位)。
+// 英文科「專題」單元資料(原本依技巧分類、放在高一上~高三下六個學期,category 欄位為冊次)。
+// 課文單元(一課一個主題)在 english-lessons-*.js,由 js/subjects-registry.js 合併:每一冊
+// 先列課文再列專題。這裡的單元 id 與題目 id 維持不變,舊的作答紀錄與完成標記仍然有效。
 // note 為 null 或 quiz 為空陣列代表「內容製作中」。
 //
 // 筆記內容為統整多家出版社講義常見重點後,以原創文字重寫的條列筆記,不逐字照抄任何單一出版社的講義文字。
@@ -9,7 +11,7 @@ export default {
     {
       id: 'en-u1',
       title: '動詞時態總複習',
-      category: '高一上',
+      category: '第一冊(高一上)',
       note: {
         sections: [
           {
@@ -341,7 +343,7 @@ export default {
     {
       id: 'en-u2',
       title: '閱讀測驗答題技巧',
-      category: '高一上',
+      category: '第一冊(高一上)',
       note: {
         sections: [
           {
@@ -631,7 +633,7 @@ export default {
     {
       id: 'en-u3',
       title: '詞性與句子結構',
-      category: '高一上',
+      category: '第一冊(高一上)',
       note: {
         sections: [
           {
@@ -942,7 +944,7 @@ export default {
     {
       id: 'en-u4',
       title: '常用連接詞與轉折語',
-      category: '高一上',
+      category: '第一冊(高一上)',
       note: {
         sections: [
           {
@@ -1260,7 +1262,7 @@ export default {
     {
       id: 'en-u5',
       title: '被動語態與假設語氣',
-      category: '高一下',
+      category: '第二冊(高一下)',
       note: {
         sections: [
           {
@@ -1571,7 +1573,7 @@ export default {
     {
       id: 'en-u6',
       title: '關係子句與分詞構句',
-      category: '高一下',
+      category: '第二冊(高一下)',
       note: {
         sections: [
           {
@@ -1872,7 +1874,7 @@ export default {
     {
       id: 'en-u7',
       title: '字彙記憶策略(字根字首字尾)',
-      category: '高一下',
+      category: '第二冊(高一下)',
       note: {
         sections: [
           {
@@ -2176,7 +2178,7 @@ export default {
     {
       id: 'en-u8',
       title: '翻譯基礎與中英句構差異',
-      category: '高一下',
+      category: '第二冊(高一下)',
       note: {
         sections: [
           {
@@ -2475,7 +2477,7 @@ export default {
     {
       id: 'en-u9',
       title: '比較級與最高級深化',
-      category: '高二上',
+      category: '第三冊(高二上)',
       note: {
         sections: [
           {
@@ -2783,7 +2785,7 @@ export default {
     {
       id: 'en-u10',
       title: '不定詞與動名詞用法',
-      category: '高二上',
+      category: '第三冊(高二上)',
       note: {
         sections: [
           {
@@ -3100,7 +3102,7 @@ export default {
     {
       id: 'en-u11',
       title: '克漏字答題技巧',
-      category: '高二上',
+      category: '第三冊(高二上)',
       note: {
         sections: [
           {
@@ -3397,7 +3399,7 @@ export default {
     {
       id: 'en-u12',
       title: '主題式閱讀:自然科學類',
-      category: '高二上',
+      category: '第三冊(高二上)',
       note: {
         sections: [
           {
@@ -3922,7 +3924,7 @@ export default {
     {
       id: 'en-u13',
       title: '名詞子句與間接問句',
-      category: '高二下',
+      category: '第四冊(高二下)',
       note: {
         sections: [
           {
@@ -4231,7 +4233,7 @@ export default {
     {
       id: 'en-u14',
       title: '倒裝句與強調句',
-      category: '高二下',
+      category: '第四冊(高二下)',
       note: {
         sections: [
           {
@@ -4538,7 +4540,7 @@ export default {
     {
       id: 'en-u15',
       title: '主題式閱讀:社會人文類',
-      category: '高二下',
+      category: '第四冊(高二下)',
       note: {
         sections: [
           {
@@ -5061,7 +5063,7 @@ export default {
     {
       id: 'en-u16',
       title: '摘要寫作技巧',
-      category: '高二下',
+      category: '第四冊(高二下)',
       note: {
         sections: [
           {
@@ -5359,7 +5361,7 @@ export default {
     {
       id: 'en-u17',
       title: '學測文意選填技巧',
-      category: '高三上',
+      category: '第五冊(高三上)',
       note: {
         sections: [
           {
@@ -5661,7 +5663,7 @@ export default {
     {
       id: 'en-u18',
       title: '學測閱讀測驗題型總整理',
-      category: '高三上',
+      category: '第五冊(高三上)',
       note: {
         sections: [
           {
@@ -5961,7 +5963,7 @@ export default {
     {
       id: 'en-u19',
       title: '翻譯句型總複習',
-      category: '高三上',
+      category: '第五冊(高三上)',
       note: {
         sections: [
           {
@@ -6261,7 +6263,7 @@ export default {
     {
       id: 'en-u20',
       title: '英文作文架構(起承轉合)',
-      category: '高三上',
+      category: '第五冊(高三上)',
       note: {
         sections: [
           {
@@ -6559,7 +6561,7 @@ export default {
     {
       id: 'en-u21',
       title: '混合題型模擬練習',
-      category: '高三下',
+      category: '第六冊(高三下)',
       note: {
         sections: [
           {
@@ -6862,7 +6864,7 @@ export default {
     {
       id: 'en-u22',
       title: '歷屆試題主題字彙整理',
-      category: '高三下',
+      category: '第六冊(高三下)',
       note: {
         sections: [
           {
@@ -7167,7 +7169,7 @@ export default {
     {
       id: 'en-u23',
       title: '作文範文分析',
-      category: '高三下',
+      category: '第六冊(高三下)',
       note: {
         sections: [
           {
@@ -7478,7 +7480,7 @@ export default {
     {
       id: 'en-u24',
       title: '考前總複習與答題節奏',
-      category: '高三下',
+      category: '第六冊(高三下)',
       note: {
         sections: [
           {

@@ -6,13 +6,69 @@ import english from '../data/english.js';
 import math from '../data/math.js';
 import science from '../data/science.js';
 import social from '../data/social.js';
+import { chineseLessons1 } from '../data/chinese-lessons-1.js';
+import { chineseLessons2 } from '../data/chinese-lessons-2.js';
+import { chineseLessons3 } from '../data/chinese-lessons-3.js';
+import { chineseLessons4 } from '../data/chinese-lessons-4.js';
+import { chineseLessons5 } from '../data/chinese-lessons-5.js';
+import { chineseLessons6 } from '../data/chinese-lessons-6.js';
+import { englishLessons1 } from '../data/english-lessons-1.js';
+import { englishLessons2 } from '../data/english-lessons-2.js';
+import { englishLessons3 } from '../data/english-lessons-3.js';
+import { englishLessons4 } from '../data/english-lessons-4.js';
+import { englishLessons5 } from '../data/english-lessons-5.js';
+import { englishLessons6 } from '../data/english-lessons-6.js';
 import { mathRealExams } from '../data/math-real-exams.js';
 import { socialRealExams } from '../data/social-real-exams.js';
 import { chineseRealExams } from '../data/chinese-real-exams.js';
 import { englishRealExams } from '../data/english-real-exams.js';
 import { scienceRealExams } from '../data/science-real-exams.js';
 
-const dataBySubject = { chinese, english, math, science, social };
+// 國文、英文依課本「冊次」編排:每一冊先列課文單元(chinese-lessons-*.js、
+// english-lessons-*.js,一課一個單元),再列該冊的專題單元(chinese.js、english.js
+// 原本按技巧分類的單元,id 與題目維持不變,舊的作答紀錄與完成標記仍然有效)。
+const VOLUME_ORDER = [
+  '第一冊(高一上)',
+  '第二冊(高一下)',
+  '第三冊(高二上)',
+  '第四冊(高二下)',
+  '第五冊(高三上)',
+  '第六冊(高三下)',
+];
+
+function mergeTextbookUnits(topicalUnits, lessonUnits) {
+  const withTag = topicalUnits.map((u) => ({ ...u, tag: '專題' }));
+  return [...lessonUnits, ...withTag]
+    .map((unit, index) => ({ unit, index }))
+    .sort((a, b) => VOLUME_ORDER.indexOf(a.unit.category) - VOLUME_ORDER.indexOf(b.unit.category) || a.index - b.index)
+    .map(({ unit }) => unit);
+}
+
+const chineseWithLessons = {
+  ...chinese,
+  units: mergeTextbookUnits(chinese.units, [
+    ...chineseLessons1,
+    ...chineseLessons2,
+    ...chineseLessons3,
+    ...chineseLessons4,
+    ...chineseLessons5,
+    ...chineseLessons6,
+  ]),
+};
+
+const englishWithLessons = {
+  ...english,
+  units: mergeTextbookUnits(english.units, [
+    ...englishLessons1,
+    ...englishLessons2,
+    ...englishLessons3,
+    ...englishLessons4,
+    ...englishLessons5,
+    ...englishLessons6,
+  ]),
+};
+
+const dataBySubject = { chinese: chineseWithLessons, english: englishWithLessons, math, science, social };
 
 // 歷屆試題(見 data/math-real-exams.js、data/social-real-exams.js)不是一般單元,
 // 不會出現在 subject.html 的單元列表或進度統計裡,但錯題本/個人資料頁需要能依

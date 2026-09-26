@@ -287,7 +287,7 @@ export function computeStats() {
   }
 
   const subjectDetails = getAllSubjects().map((s) => {
-    const progress = getSubjectProgress(s.id, s.units.length);
+    const progress = getSubjectProgress(s.id, s.units);
     let answered = 0;
     let correct = 0;
     for (const r of resultsBySubject.get(s.id) || []) {

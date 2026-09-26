@@ -22,7 +22,7 @@ if (!subject) {
 
 function render() {
   document.title = `${subject.name} - 學測複習站`;
-  const progress = getSubjectProgress(subject.id, subject.units.length);
+  const progress = getSubjectProgress(subject.id, subject.units);
 
   const hero = document.getElementById('subject-header');
   hero.className = 'subject-hero';
@@ -51,7 +51,7 @@ function render() {
       item.append(
         el('span', { class: `circular-check${done ? ' is-checked' : ''}` }, icon('check', { size: 12 })),
         el('span', { class: 'unit-title' }, unit.title),
-        ...(unit.semester ? [el('span', { class: 'unit-semester-badge' }, unit.semester)] : []),
+        ...(unit.tag || unit.semester ? [el('span', { class: 'unit-semester-badge' }, unit.tag || unit.semester)] : []),
         hasContent
           ? el('span', { class: 'unit-quiz-count' }, unit.quiz?.length ? `${unit.quiz.length} 題測驗` : '')
           : el('span', { class: 'unit-badge-stub' }, '製作中')

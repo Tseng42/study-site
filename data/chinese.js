@@ -1,7 +1,8 @@
-// 國文科單元資料,依高一上~高三下六個學期分組(category 欄位)。
+// 國文科「專題」單元資料(原本依技巧分類、放在高一上~高三下六個學期,category 欄位為冊次)。
+// 課文單元(一課一個單元)在 chinese-lessons-*.js,由 js/subjects-registry.js 合併:每一冊
+// 先列課文再列專題。這裡的單元 id 與題目 id 維持不變,舊的作答紀錄與完成標記仍然有效。
 // 每個單元: { id, title, category, note: { sections: [...] } | null, quiz: [...] }
 // note 為 null 或 quiz 為空陣列代表「內容製作中」,頁面會自動顯示對應提示與「製作中」標記。
-//
 // 筆記內容為統整多家出版社講義常見重點後,以原創文字重寫的條列筆記,
 // 不逐字照抄任何單一出版社的講義文字;文言文範文本身(公共領域古文)則據實收錄。
 export default {
@@ -11,7 +12,7 @@ export default {
     {
       id: 'ch-u1',
       title: '文言文閱讀技巧',
-      category: '高一上',
+      category: '第一冊(高一上)',
       note: {
         sections: [
           {
@@ -313,7 +314,7 @@ export default {
     {
       id: 'ch-u2',
       title: '字音字形辨析',
-      category: '高一上',
+      category: '第一冊(高一上)',
       note: {
         sections: [
           {
@@ -619,7 +620,7 @@ export default {
     {
       id: 'ch-u3',
       title: '現代散文閱讀與賞析',
-      category: '高一上',
+      category: '第一冊(高一上)',
       note: {
         sections: [
           {
@@ -916,7 +917,7 @@ export default {
     {
       id: 'ch-u4',
       title: '應用文寫作(書信/便條/柬帖)',
-      category: '高一上',
+      category: '第一冊(高一上)',
       note: {
         sections: [
           {
@@ -1226,7 +1227,7 @@ export default {
     {
       id: 'ch-u5',
       title: '詩詞格律與賞析',
-      category: '高一下',
+      category: '第二冊(高一下)',
       note: {
         sections: [
           {
@@ -1524,7 +1525,7 @@ export default {
     {
       id: 'ch-u6',
       title: '小說敘事技巧與賞析',
-      category: '高一下',
+      category: '第二冊(高一下)',
       note: {
         sections: [
           {
@@ -1821,7 +1822,7 @@ export default {
     {
       id: 'ch-u7',
       title: '文法與句子結構分析',
-      category: '高一下',
+      category: '第二冊(高一下)',
       note: {
         sections: [
           {
@@ -2121,7 +2122,7 @@ export default {
     {
       id: 'ch-u8',
       title: '修辭技巧總整理',
-      category: '高一下',
+      category: '第二冊(高一下)',
       note: {
         sections: [
           {
@@ -2438,7 +2439,7 @@ export default {
     {
       id: 'ch-u9',
       title: '先秦諸子思想與文選',
-      category: '高二上',
+      category: '第三冊(高二上)',
       note: {
         sections: [
           {
@@ -2739,7 +2740,7 @@ export default {
     {
       id: 'ch-u10',
       title: '史傳文學閱讀',
-      category: '高二上',
+      category: '第三冊(高二上)',
       note: {
         sections: [
           {
@@ -3036,7 +3037,7 @@ export default {
     {
       id: 'ch-u11',
       title: '論說文寫作技巧',
-      category: '高二上',
+      category: '第三冊(高二上)',
       note: {
         sections: [
           {
@@ -3338,7 +3339,7 @@ export default {
     {
       id: 'ch-u12',
       title: '國學常識(經史子集概說)',
-      category: '高二上',
+      category: '第三冊(高二上)',
       note: {
         sections: [
           {
@@ -3645,7 +3646,7 @@ export default {
     {
       id: 'ch-u13',
       title: '唐宋古文賞析',
-      category: '高二下',
+      category: '第四冊(高二下)',
       note: {
         sections: [
           {
@@ -3941,7 +3942,7 @@ export default {
     {
       id: 'ch-u14',
       title: '詞曲格律與賞析',
-      category: '高二下',
+      category: '第四冊(高二下)',
       note: {
         sections: [
           {
@@ -4242,7 +4243,7 @@ export default {
     {
       id: 'ch-u15',
       title: '議論文結構與論證',
-      category: '高二下',
+      category: '第四冊(高二下)',
       note: {
         sections: [
           {
@@ -4542,7 +4543,7 @@ export default {
     {
       id: 'ch-u16',
       title: '文學史發展脈絡(先秦至唐宋)',
-      category: '高二下',
+      category: '第四冊(高二下)',
       note: {
         sections: [
           {
@@ -4845,7 +4846,7 @@ export default {
     {
       id: 'ch-u17',
       title: '明清小品文與筆記小說',
-      category: '高三上',
+      category: '第五冊(高三上)',
       note: {
         sections: [
           {
@@ -5141,7 +5142,7 @@ export default {
     {
       id: 'ch-u18',
       title: '現代小說與散文選讀',
-      category: '高三上',
+      category: '第五冊(高三上)',
       note: {
         sections: [
           {
@@ -5437,7 +5438,7 @@ export default {
     {
       id: 'ch-u19',
       title: '混合題型閱讀測驗技巧',
-      category: '高三上',
+      category: '第五冊(高三上)',
       note: {
         sections: [
           {
@@ -5738,7 +5739,7 @@ export default {
     {
       id: 'ch-u20',
       title: '文學史發展脈絡(元明清至現代)',
-      category: '高三上',
+      category: '第五冊(高三上)',
       note: {
         sections: [
           {
@@ -6040,7 +6041,7 @@ export default {
     {
       id: 'ch-u21',
       title: '學測選擇題總複習',
-      category: '高三下',
+      category: '第六冊(高三下)',
       note: {
         sections: [
           {
@@ -6336,7 +6337,7 @@ export default {
     {
       id: 'ch-u22',
       title: '混合題型與寫作策略',
-      category: '高三下',
+      category: '第六冊(高三下)',
       note: {
         sections: [
           {
@@ -6770,7 +6771,7 @@ export default {
     {
       id: 'ch-u23',
       title: '跨領域閱讀理解',
-      category: '高三下',
+      category: '第六冊(高三下)',
       note: {
         sections: [
           {
@@ -7072,7 +7073,7 @@ export default {
     {
       id: 'ch-u24',
       title: '歷屆試題主題整理',
-      category: '高三下',
+      category: '第六冊(高三下)',
       note: {
         sections: [
           {

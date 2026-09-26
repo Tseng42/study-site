@@ -59,13 +59,16 @@ export function isUnitCompleted(subjectId, unitId) {
   return !!progress[subjectId]?.[unitId]?.completed;
 }
 
-export function getSubjectProgress(subjectId, totalUnits) {
+// units 是這個科目目前「現存」的單元陣列。只算現存單元的完成標記,單元重新編排後
+// 留在舊紀錄裡、已經不存在的單元 id 才不會把完成數灌到超過總數。
+export function getSubjectProgress(subjectId, units) {
   const progress = getProgress()[subjectId] || {};
-  const completed = Object.values(progress).filter((u) => u.completed).length;
+  const total = units.length;
+  const completed = units.filter((u) => progress[u.id]?.completed).length;
   return {
     completed,
-    total: totalUnits,
-    percent: totalUnits ? Math.round((completed / totalUnits) * 100) : 0,
+    total,
+    percent: total ? Math.round((completed / total) * 100) : 0,
   };
 }
 

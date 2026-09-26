@@ -59,7 +59,7 @@ export function getStudyPhase(daysRemaining) {
 // 依「完成度低優先、其次正確率低優先」排序,挑出最值得花時間的 1-2 科。
 export function suggestFocusSubjects(subjects, limit = 2) {
   const stats = subjects.map((subject) => {
-    const progress = getSubjectProgress(subject.id, subject.units.length);
+    const progress = getSubjectProgress(subject.id, subject.units);
     const results = getQuizResults(subject.id);
     let correct = 0;
     let answered = 0;
