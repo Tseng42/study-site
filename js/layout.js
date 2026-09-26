@@ -1,6 +1,8 @@
 import { icon, el } from './render.js';
 import { signOutUser } from './auth.js';
 import { getAchievementState, getHighestTier, getNewlyUnlockedIds, TIER_LABEL } from './achievements.js';
+import { listExamDrafts, clearExamDraft } from './storage.js';
+import { isAnswered, deserializeAnswer } from './quiz-utils.js';
 
 // 每個頁面都會 import 這個檔案來呼叫 initHeader(),所以在這裡註冊 service worker
 // 剛好能確保每個頁面載入時都會註冊到,不用每個 page-*.js 各自重複一次。
@@ -66,7 +68,19 @@ export function initHeader() {
   if (mark) mark.append(icon('book', { size: 18 }));
   trackHeaderHeight();
   markCurrentNav();
+  addNavIcons();
   showLoadingPlaceholder();
+}
+
+// 手機版導覽列移到畫面底部(拇指好按,CSS 見 style.css 的 .header-nav),每個分頁配一個圖示。
+// 桌面版 .nav-pill-icon 是隱藏的,還是原本純文字的導覽列。
+const NAV_ICONS = { 'nav-home': 'home', 'nav-mockexam': 'clock', 'nav-wrongbook': 'flag' };
+function addNavIcons() {
+  for (const [id, name] of Object.entries(NAV_ICONS)) {
+    const link = document.getElementById(id);
+    if (!link || link.querySelector('.nav-pill-icon')) continue;
+    link.replaceChildren(el('span', { class: 'nav-pill-icon' }, icon(name, { size: 22 })), el('span', { class: 'nav-pill-label' }, link.textContent));
+  }
 }
 
 // 手機版導覽列比桌機版矮,而且模擬考的計時列、測驗的進度列都要 sticky 貼在導覽列
@@ -162,6 +176,39 @@ export function renderUserMenu(user) {
   });
 
   wrap.append(trigger, dropdown);
+  container.append(wrap);
+}
+
+// 「你有一份考試還沒交卷」提醒(首頁、模擬考頁用):列出這個帳號所有作答到一半的考試暫存
+// (見 storage.js 的 saveExamDraft),可以直接繼續或放棄。沒有暫存就什麼都不畫。
+export function renderExamDraftNotice(container) {
+  const drafts = listExamDrafts();
+  if (!drafts.length) return;
+  const wrap = el('div', { class: 'draft-notices' });
+  for (const draft of drafts) {
+    const countable = draft.questions.map((q, i) => i).filter((i) => draft.questions[i].type !== 'written');
+    const answered = countable.filter((i) => isAnswered(draft.questions[i], deserializeAnswer(draft.questions[i], draft.answers?.[i]))).length;
+    const minutesLeft = Math.ceil((draft.endsAt - Date.now()) / 60000);
+    const timeText = minutesLeft > 0 ? `剩 ${minutesLeft} 分鐘(離開的時候計時不會暫停)` : '時間已到,繼續會直接交卷計分';
+    const dropBtn = el('button', { type: 'button', class: 'btn-pill btn-pill-outline' }, '放棄');
+    const notice = el('div', { class: 'draft-notice' }, [
+      el('div', { class: 'draft-notice-body' }, [
+        el('p', { class: 'draft-notice-title' }, `還沒交卷:${draft.title}`),
+        el('p', { class: 'draft-notice-meta' }, `已作答 ${answered}/${countable.length} · ${timeText}`),
+      ]),
+      el('div', { class: 'draft-notice-actions' }, [
+        el('a', { href: draft.href, class: 'btn-pill btn-pill-dark' }, minutesLeft > 0 ? '繼續作答' : '交卷看成績'),
+        dropBtn,
+      ]),
+    ]);
+    dropBtn.addEventListener('click', () => {
+      if (!confirm(`放棄「${draft.title}」?已經作答的內容會被丟掉,也不會計分。`)) return;
+      clearExamDraft(draft.kind, draft.subjectKey);
+      notice.remove();
+      if (!wrap.children.length) wrap.remove();
+    });
+    wrap.append(notice);
+  }
   container.append(wrap);
 }
 

@@ -95,8 +95,10 @@ export function gradeAnswer(q, userAnswer) {
 // 選填要等使用者按 Enter 或離開欄位(blur)才算確定;
 // 多選需要勾選好幾個選項才算作答完畢,不能勾第一個就判分,
 // 所以在 showConfirmButton 為真時(練習模式)額外顯示「確認答案」按鈕,由使用者自己決定何時送出這題。
+// initial 是還原用的初始作答(模擬考中斷後從暫存續考,見 storage.js 的 saveExamDraft),
+// 形狀跟 onChange 的 value 一樣;不給就是空白作答欄。
 // 回傳 { optionsWrap, getValue }。
-export function renderAnswerField(q, index, onChange, onCommit, showConfirmButton) {
+export function renderAnswerField(q, index, onChange, onCommit, showConfirmButton, initial = null) {
   if (q.type === 'numeric') {
     const input = el('input', {
       type: 'text',
@@ -105,6 +107,7 @@ export function renderAnswerField(q, index, onChange, onCommit, showConfirmButto
       placeholder: '輸入答案',
       'aria-label': `第 ${index + 1} 題作答欄`,
     });
+    if (initial != null) input.value = String(initial);
     input.addEventListener('input', () => onChange(input.value));
     input.addEventListener('keydown', (e) => {
       if (e.key === 'Enter') {
@@ -120,7 +123,7 @@ export function renderAnswerField(q, index, onChange, onCommit, showConfirmButto
   }
 
   if (q.type === 'numeric-multi') {
-    const values = new Array(q.blanks.length).fill('');
+    const values = q.blanks.map((_, i) => String(initial?.[i] ?? ''));
     const inputs = [];
     const wrap = el('div', { class: 'quiz-numeric-multi-wrap' });
     q.blanks.forEach((blank, i) => {
@@ -131,6 +134,7 @@ export function renderAnswerField(q, index, onChange, onCommit, showConfirmButto
         placeholder: blank.label,
         'aria-label': `第 ${index + 1} 題 ${blank.label}`,
       });
+      input.value = values[i];
       input.addEventListener('input', () => {
         values[i] = input.value;
         onChange([...values]);
@@ -149,18 +153,20 @@ export function renderAnswerField(q, index, onChange, onCommit, showConfirmButto
       class: 'quiz-written-textarea',
       placeholder: '(選填)在這裡寫下你的解題過程或答案,方便等一下對照詳解',
     });
+    if (initial != null) textarea.value = String(initial);
     textarea.addEventListener('input', () => onChange(textarea.value));
     const wrap = el('div', { class: 'quiz-written-wrap' }, textarea);
     return { optionsWrap: wrap, getValue: () => textarea.value, inputs: [textarea] };
   }
 
   if (q.type === 'hybrid') {
-    const state = { choice: null, written: '' };
+    const state = { choice: initial?.choice ?? null, written: initial?.written ?? '' };
     const inputs = [];
     const choiceWrap = el('div', { class: 'quiz-options' });
     q.options.forEach((opt, optIndex) => {
       const optId = `q${index}-opt${optIndex}`;
       const radio = el('input', { type: 'radio', name: `q${index}`, id: optId, value: optIndex });
+      radio.checked = state.choice === optIndex;
       radio.addEventListener('change', () => {
         state.choice = optIndex;
         onChange({ ...state });
@@ -172,6 +178,7 @@ export function renderAnswerField(q, index, onChange, onCommit, showConfirmButto
       class: 'quiz-written-textarea',
       placeholder: `(選填)${q.writtenPrompt || '寫下你的簡答'}`,
     });
+    textarea.value = state.written;
     textarea.addEventListener('input', () => {
       state.written = textarea.value;
       onChange({ ...state });
@@ -182,12 +189,13 @@ export function renderAnswerField(q, index, onChange, onCommit, showConfirmButto
   }
 
   if (q.type === 'multi') {
-    const selected = new Set();
+    const selected = new Set(initial || []);
     const inputs = [];
     const wrap = el('div', { class: 'quiz-options' });
     q.options.forEach((opt, optIndex) => {
       const optId = `q${index}-opt${optIndex}`;
       const checkbox = el('input', { type: 'checkbox', id: optId, value: optIndex });
+      checkbox.checked = selected.has(optIndex);
       checkbox.addEventListener('change', () => {
         if (checkbox.checked) selected.add(optIndex);
         else selected.delete(optIndex);
@@ -215,10 +223,11 @@ export function renderAnswerField(q, index, onChange, onCommit, showConfirmButto
   // 單選(預設)
   const inputs = [];
   const wrap = el('div', { class: 'quiz-options' });
-  let value = null;
+  let value = initial ?? null;
   q.options.forEach((opt, optIndex) => {
     const optId = `q${index}-opt${optIndex}`;
     const radio = el('input', { type: 'radio', name: `q${index}`, id: optId, value: optIndex });
+    radio.checked = value === optIndex;
     radio.addEventListener('change', () => {
       value = optIndex;
       onChange(value);
@@ -252,6 +261,24 @@ export function markAnswerFeedback(field, q, userAnswer) {
     if (correctSet.has(optIndex)) row.classList.add('is-correct');
     else if (selectedSet.has(optIndex)) row.classList.add('is-wrong');
   });
+}
+
+// 一題的正確答案(寫進作答紀錄的 correct 欄位用):多選是 index 陣列、選填是答案字串,
+// 單選跟 hybrid 的勾選部分是 index。
+export function correctAnswerOf(q) {
+  if (q.type === 'multi') return q.answers;
+  if (q.type === 'numeric') return q.answerText;
+  if (q.type === 'numeric-multi') return q.blanks.map((b) => b.answerText);
+  return q.answer;
+}
+
+// 作答內容存進 localStorage 前後的轉換:多選用 Set,JSON 存不了,存成陣列、讀回來再包回 Set。
+export function serializeAnswer(answer) {
+  return answer instanceof Set ? Array.from(answer) : answer;
+}
+export function deserializeAnswer(q, saved) {
+  if (saved == null) return null;
+  return q.type === 'multi' ? new Set(saved) : saved;
 }
 
 // 這題「作答完成了沒」,給送出前的未作答提醒、作答進度計數用:單選要有選、多選至少勾

@@ -1,6 +1,8 @@
 import { markQuestionMastered } from './storage.js';
 import { getReviewableWrongQuestions } from './wrong-utils.js';
 import { getQuestion, getUnit, getSubject } from './subjects-registry.js';
+import { prepareQuestions } from './quiz-utils.js';
+import { runQuiz } from './quiz-runner.js';
 import { el, icon, renderPassage } from './render.js';
 import { initHeader, renderUserMenu, showBanner, formatRelativeDate } from './layout.js';
 import { ensureSignedIn } from './auth.js';
@@ -19,10 +21,14 @@ const list = document.getElementById('wrongbook-list');
 summary.className = 'wrongbook-summary';
 const moreWrap = el('div', { class: 'wrongbook-more' });
 list.after(moreWrap);
+// 錯題重練的畫面(見 startRetest),跟下面的錯題清單二選一顯示。
+const retestBox = el('div', { class: 'wrongbook-retest' });
+summary.before(retestBox);
 
 let entries = loadEntries();
 let activeSubject = 'all';
 let rendered = 0; // 目前畫面上有幾張卡片(篩選後清單的前 rendered 筆)
+let retestCount = '10'; // 重練題數下拉選單記住上次的選擇('all' 或數字)
 
 function loadEntries() {
   return getReviewableWrongQuestions().sort((a, b) => new Date(b.lastAttemptAt) - new Date(a.lastAttemptAt));
@@ -80,6 +86,72 @@ function renderSummary() {
     for (const [subjectId, count] of counts) addChip(subjectId, getSubject(subjectId)?.name || subjectId, count);
     summary.append(chips);
   }
+
+  const pool = retestPool();
+  if (pool.length) {
+    const counts5 = [5, 10, 20].filter((n) => n < pool.length);
+    const select = el('select', { class: 'quiz-count-select', 'aria-label': '重練題數' }, [
+      ...counts5.map((n) => el('option', { value: String(n) }, `${n} 題`)),
+      el('option', { value: 'all' }, `全部 ${pool.length} 題`),
+    ]);
+    select.value = [...select.options].some((o) => o.value === retestCount) ? retestCount : counts5.includes(10) ? '10' : 'all';
+    retestCount = select.value;
+    select.addEventListener('change', () => {
+      retestCount = select.value;
+    });
+    const startBtn = el('button', { class: 'btn-pill btn-pill-dark' }, '開始重練');
+    startBtn.addEventListener('click', () => startRetest(retestCount === 'all' ? pool.length : Number(retestCount)));
+    summary.append(
+      el('div', { class: 'retest-row' }, [el('span', { class: 'retest-label' }, '重練這些錯題:'), select, startBtn]),
+      el('p', { class: 'retest-hint' }, '隨機抽題重新作答,即時看答案。答對的題目會離開錯題本,答錯的會留著。')
+    );
+  }
+}
+
+// 目前篩選條件下可以重練的錯題。純寫答的非選擇題(跟 hybrid 的簡答部分)要自己對答案,
+// 沒辦法在這裡自動判分,不放進重練。
+function retestPool() {
+  return filtered()
+    .filter((w) => !w.questionId.endsWith('-written'))
+    .map((w) => ({ ...getQuestion(w.subjectId, w.unitId, w.questionId), _loc: { subjectId: w.subjectId, unitId: w.unitId } }))
+    .filter((q) => ['single', 'multi', 'numeric', 'numeric-multi', undefined].includes(q.type));
+}
+
+// 把錯題清單換成一份即時判分的測驗。作答結果照一般作答紀錄存(依題目原本的單元),
+// 所以答對的題目「最近一次作答是對的」,自然就從錯題本消失;答錯的留著。
+function startRetest(n) {
+  const pool = retestPool();
+  if (!pool.length) {
+    leaveRetest();
+    return;
+  }
+  summary.innerHTML = '';
+  list.innerHTML = '';
+  moreWrap.innerHTML = '';
+  window.scrollTo(0, 0);
+  const backBtn = el('button', { class: 'btn-pill btn-pill-outline' }, '回錯題本');
+  backBtn.addEventListener('click', leaveRetest);
+  runQuiz(retestBox, {
+    title: '錯題重練',
+    questions: prepareQuestions(pool, n),
+    mode: 'practice',
+    recordMode: 'retest',
+    locate: (q) => q._loc,
+    restart: () => {
+      entries = loadEntries();
+      startRetest(n);
+    },
+    extraActions: () => [backBtn],
+    finishNote: (wrongCount, total) =>
+      wrongCount ? `答對 ${total - wrongCount} 題,已離開錯題本;${wrongCount} 題答錯,留在錯題本。` : `${total} 題全部答對,都已離開錯題本!`,
+  });
+}
+
+function leaveRetest() {
+  retestBox.innerHTML = '';
+  entries = loadEntries();
+  renderAll();
+  window.scrollTo(0, 0);
 }
 
 // 從篩選後的清單再多畫 count 張卡片,順便更新底下「再顯示」按鈕。

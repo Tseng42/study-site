@@ -74,7 +74,7 @@ export function getSubjectProgress(subjectId, units) {
 
 // ---- 測驗作答紀錄(每次測驗一筆,累加不覆蓋) ----
 // {
-//   id, subjectId, unitId, mode: 'practice'|'exam', takenAt,
+//   id, subjectId, unitId, mode: 'practice'|'exam'|'retest'|'mock', takenAt,
 //   score, total,
 //   answers: [{ questionId, selected, correct, isCorrect }]
 // }
@@ -183,6 +183,82 @@ export function updateMockExamResult(id, patch) {
   if (index === -1) return;
   all[index] = { ...all[index], ...patch };
   writeJSON('mockExamHistory', all);
+}
+
+// ---- 進行中的模擬考暫存(只存這台裝置,不同步) ----
+// 模擬考/歷屆試題作答到一半,題目跟作答內容每次變動都存一份,不小心重新整理、關掉分頁或
+// 離開頁面之後可以接著考(計時是用「結束時間」算的,離開的這段時間不會暫停)。
+// 不走 writeJSON:不觸發雲端同步、也不更新 updatedAt——考到一半的暫存沒必要跟著帳號
+// 跑到別的裝置,而且題目全文很大。題目(考試開始時存一次)跟作答(每次變動存一次)分成
+// 兩個 key,作答內容小,才能頻繁存。kind 是 'mock'(題庫模擬考)或 'real'(歷屆試題)。
+const DRAFT_MAX_AGE_MS = 7 * 24 * 3600 * 1000;
+
+function draftKeys(kind, subjectKey) {
+  return { main: key(`examDraft_${kind}_${subjectKey}`), answers: key(`examDraftA_${kind}_${subjectKey}`) };
+}
+
+// 回傳有沒有存成功(localStorage 滿了會失敗,呼叫端要改用離開頁面警告當備案)。
+export function saveExamDraft(kind, subjectKey, draft) {
+  const keys = draftKeys(kind, subjectKey);
+  try {
+    localStorage.setItem(keys.main, JSON.stringify({ ...draft, kind, subjectKey }));
+    localStorage.removeItem(keys.answers);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+export function saveExamDraftAnswers(kind, subjectKey, answers) {
+  try {
+    localStorage.setItem(draftKeys(kind, subjectKey).answers, JSON.stringify(answers));
+  } catch {
+    // 存不進去就算了,下次變動再試。
+  }
+}
+
+export function clearExamDraft(kind, subjectKey) {
+  const keys = draftKeys(kind, subjectKey);
+  localStorage.removeItem(keys.main);
+  localStorage.removeItem(keys.answers);
+}
+
+export function getExamDraft(kind, subjectKey) {
+  const keys = draftKeys(kind, subjectKey);
+  let main = null;
+  try {
+    main = JSON.parse(localStorage.getItem(keys.main));
+  } catch {
+    main = null;
+  }
+  if (!main || !Array.isArray(main.questions)) return null;
+  if (Date.now() - (main.startedAt || 0) > DRAFT_MAX_AGE_MS) {
+    clearExamDraft(kind, subjectKey);
+    return null;
+  }
+  let answers = [];
+  try {
+    answers = JSON.parse(localStorage.getItem(keys.answers)) || [];
+  } catch {
+    answers = [];
+  }
+  return { ...main, answers };
+}
+
+// 目前這個帳號所有還沒交卷的考試暫存(首頁、模擬考頁用來提醒「你有一份考試還沒交卷」)。
+export function listExamDrafts() {
+  const prefix = 'studysite_examDraft_';
+  const suffix = `_${activeUid || 'anon'}`;
+  const drafts = [];
+  // 先收集 key 再處理:getExamDraft 遇到過期的暫存會直接刪掉,邊走邊刪會讓 index 亂掉。
+  const allKeys = Array.from({ length: localStorage.length }, (_, i) => localStorage.key(i));
+  for (const k of allKeys) {
+    if (!k || !k.startsWith(prefix) || !k.endsWith(suffix)) continue;
+    const [kind, subjectKey] = k.slice(prefix.length, k.length - suffix.length).split('_');
+    const draft = kind && subjectKey ? getExamDraft(kind, subjectKey) : null;
+    if (draft) drafts.push(draft);
+  }
+  return drafts.sort((a, b) => b.startedAt - a.startedAt);
 }
 
 // ---- 讀書設定 ----

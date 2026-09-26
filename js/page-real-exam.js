@@ -36,11 +36,12 @@ import { chineseRealExams } from '../data/chinese-real-exams.js';
 import { englishRealExams } from '../data/english-real-exams.js';
 import { scienceRealExams } from '../data/science-real-exams.js';
 import { getSubject } from './subjects-registry.js';
-import { addQuizResult, addMockExamResult, updateMockExamResult } from './storage.js';
+import { addQuizResult, addMockExamResult, updateMockExamResult, getExamDraft } from './storage.js';
+import { createExamSession } from './exam-ui.js';
 import { describeBandLevel } from '../data/mock-exam-config.js';
-import { shuffle, prepareQuestions, shuffleQuestionOptions, renderAnswerField, gradeAnswer, typeLabel, isAnswered } from './quiz-utils.js';
+import { shuffle, prepareQuestions, shuffleQuestionOptions, renderAnswerField, gradeAnswer, typeLabel, isAnswered, correctAnswerOf } from './quiz-utils.js';
 import { el, icon, renderPassage } from './render.js';
-import { initHeader, renderUserMenu } from './layout.js';
+import { initHeader, renderUserMenu, renderExamDraftNotice } from './layout.js';
 import { ensureSignedIn } from './auth.js';
 import { initCloudSync } from './cloud-sync.js';
 
@@ -143,7 +144,10 @@ const MOCK_HISTORY_ID = config.historyId; // 跟一般科目模擬考的紀錄�
 const MINUTES = config.minutes;
 const subject = getSubject(SUBJECT_ID);
 
-renderPicker();
+// ?resume=1:從「你有一份考試還沒交卷」提醒點進來,直接接著上次的那一份考。
+const resumeDraft = params.get('resume') === '1' ? getExamDraft('real', SUBJECT_KEY) : null;
+if (resumeDraft) runExam(resumeDraft.questions, resumeDraft.examLabel, resumeDraft);
+else renderPicker();
 
 function withMeta(q) {
   return { ...q, subjectId: SUBJECT_ID, unitId: `${MOCK_HISTORY_ID}-${q.sourceYear}` };
@@ -330,7 +334,10 @@ function renderPicker() {
   container.innerHTML = '';
   container.append(
     el('a', { href: 'mockexam.html', class: 'back-link' }, [icon('chevronLeft', { size: 14 }), '回模擬考首頁']),
-    el('h1', { class: 'profile-title' }, `${config.subjectLabel}歷屆試題模擬考`),
+    el('h1', { class: 'profile-title' }, `${config.subjectLabel}歷屆試題模擬考`)
+  );
+  renderExamDraftNotice(container);
+  container.append(
     el('p', { class: 'mockexam-intro' },
       `111~115 學年度學測${config.subjectLabel}真題,限時 ${MINUTES} 分鐘,時間到會自動送出。單一年份模式重現整份考卷(有非選擇題的科目,交卷後自行對照官方答案),混合年份模式跨年抽選擇題。`
     ),
@@ -370,37 +377,31 @@ function buildModeCard(title, desc, onStart) {
 }
 
 function startExam(questions, examLabel) {
+  if (getExamDraft('real', SUBJECT_KEY) && !confirm(`${config.subjectLabel}有一份還沒交卷的歷屆試題,開始新的會放棄它,確定嗎?`)) return;
   runExam(questions, examLabel);
 }
 
-function runExam(questions, examLabel) {
+// resume 是續考的暫存(getExamDraft 的結果),全新的考試不給。
+function runExam(questions, examLabel, resume = null) {
   container.innerHTML = '';
   // 換成新畫面之後要回到最上面:考卷很長、按「開始作答/送出」的時候頁面已經捲到很下面,
   // 不捲回去的話,會停在考卷/成績單的中段(成績跟第一題都看不到)。
   window.scrollTo(0, 0);
+  document.body.classList.add('is-exam-running');
 
-  const timerEl = el('div', { class: 'mockexam-timer' });
-  const answeredEl = el('span', { class: 'mockexam-answered' });
-  const header = el('div', { class: 'mockexam-run-header' }, [
-    el('h2', {}, `${config.subjectLabel}歷屆試題模擬考 · ${examLabel}`),
-    el('div', { class: 'mockexam-run-status' }, [answeredEl, timerEl]),
-  ]);
+  const session = createExamSession({
+    kind: 'real',
+    subjectKey: SUBJECT_KEY,
+    title: `${config.subjectLabel}歷屆試題模擬考 · ${examLabel}`,
+    minutes: MINUTES,
+    questions,
+    resume,
+    href: `real-exam.html?subject=${SUBJECT_KEY}&resume=1`,
+    extra: { examLabel },
+    onTimeUp: () => finish(true),
+  });
+  const answers = session.answers;
 
-  const answers = new Array(questions.length).fill(null);
-  // 純寫答的非選擇題不強迫作答,不列入「已作答 x/N」的分母。
-  const countable = questions.map((q, i) => i).filter((i) => questions[i].type !== 'written');
-  const updateAnswered = () => {
-    const done = countable.filter((i) => isAnswered(questions[i], answers[i])).length;
-    answeredEl.textContent = `已作答 ${done}/${countable.length}`;
-  };
-  updateAnswered();
-
-  // 計時中不小心關掉分頁、按到導覽列連結或上一頁,整場作答會直接消失,先問一聲。
-  const warnBeforeLeaving = (e) => {
-    e.preventDefault();
-    e.returnValue = '';
-  };
-  window.addEventListener('beforeunload', warnBeforeLeaving);
   const form = el('div', { class: 'quiz-form' });
   const shownPassages = new Set();
 
@@ -415,46 +416,27 @@ function runExam(questions, examLabel) {
       form.append(el('h3', { class: 'mockexam-section-heading' }, heading));
       lastSection = q.sectionLabel;
     }
+    let passageEl = null;
     if (q.passageId && !shownPassages.has(q.passageId)) {
       shownPassages.add(q.passageId);
-      form.append(renderPassage(q));
+      passageEl = renderPassage(q);
+      form.append(passageEl);
     }
 
-    const field = renderAnswerField(q, index, (value) => {
-      answers[index] = value;
-      updateAnswered();
-    });
-    form.append(
-      el('div', { class: 'quiz-question' }, [
-        el('p', { class: 'quiz-question-text' }, `${index + 1}. ${q.question}`),
-        field.optionsWrap,
-        el('p', { class: 'real-exam-year-badge' }, `${q.sourceYear} 學年度${config.yearBadgeLabel} 第 ${q.origNo} 題`),
-      ])
-    );
+    const field = renderAnswerField(q, index, (value) => session.onAnswer(index, value), undefined, false, session.initialAnswer(index));
+    const card = el('div', { class: 'quiz-question' }, [
+      el('p', { class: 'quiz-question-text' }, `${index + 1}. ${q.question}`),
+      field.optionsWrap,
+      el('p', { class: 'real-exam-year-badge' }, `${q.sourceYear} 學年度${config.yearBadgeLabel} 第 ${q.origNo} 題`),
+    ]);
+    form.append(card);
+    session.setAnchor(index, passageEl || card);
   });
 
   const submitBtn = el('button', { class: 'btn-pill btn-pill-dark' }, '送出');
   submitBtn.addEventListener('click', () => finish(false));
 
-  container.append(header, form, submitBtn);
-
-  let secondsLeft = MINUTES * 60;
-  updateTimerDisplay();
-  const intervalId = setInterval(() => {
-    secondsLeft -= 1;
-    updateTimerDisplay();
-    if (secondsLeft <= 0) {
-      clearInterval(intervalId);
-      finish(true);
-    }
-  }, 1000);
-
-  function updateTimerDisplay() {
-    const m = Math.max(0, Math.floor(secondsLeft / 60));
-    const s = Math.max(0, secondsLeft % 60);
-    timerEl.textContent = `剩餘 ${m}:${String(s).padStart(2, '0')}`;
-    timerEl.classList.toggle('mockexam-timer-low', secondsLeft <= 60);
-  }
+  container.append(session.header, form, submitBtn);
 
   function finish(timeUp) {
     if (!timeUp) {
@@ -464,8 +446,9 @@ function runExam(questions, examLabel) {
         if (!confirm(`還有 ${missing.length} 題尚未作答(第 ${shown}${missing.length > 10 ? ' 題…' : ' 題'}),確定要送出嗎?`)) return;
       }
     }
-    window.removeEventListener('beforeunload', warnBeforeLeaving);
-    clearInterval(intervalId);
+    const secondsLeft = session.secondsLeft();
+    session.finish();
+    document.body.classList.remove('is-exam-running');
     submitBtn.disabled = true;
 
     // 純寫答的非選擇題沒有標準答案可以自動判分,不計入分數,結算後另外顯示官方
@@ -560,13 +543,6 @@ function runExam(questions, examLabel) {
       pendingRecordId: writtenResults.length ? pendingRecord.id : null,
     });
   }
-}
-
-function correctAnswerOf(q) {
-  if (q.type === 'multi') return q.answers;
-  if (q.type === 'numeric') return q.answerText;
-  if (q.type === 'numeric-multi') return q.blanks.map((b) => b.answerText);
-  return q.answer; // single 與 hybrid 的勾選部分都是這個形狀
 }
 
 function renderResult(results, writtenResults, summary) {

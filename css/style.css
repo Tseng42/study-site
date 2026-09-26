@@ -133,6 +133,9 @@ h1, h2, h3, h4 {
   font-size: 0.9rem;
   color: var(--ink-muted);
 }
+.nav-pill-icon {
+  display: none;
+}
 .nav-pill:hover {
   background: var(--surface-alt);
   color: var(--ink);
@@ -1712,6 +1715,124 @@ a.timeline-row:hover {
   min-height: 80px;
 }
 
+/* ---- 考試進行中:答案卡 ---- */
+.sheet-toggle {
+  padding: 6px 14px;
+  font-size: 0.85rem;
+}
+.answer-sheet {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 6;
+  background: var(--surface);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  padding: 14px;
+  max-height: min(60vh, 420px);
+  overflow-y: auto;
+}
+.answer-sheet.is-open {
+  display: block;
+}
+.sheet-legend {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 10px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--ink-muted);
+}
+.sheet-legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.sheet-dot {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 4px;
+  border: 1.5px solid var(--border);
+}
+.sheet-dot.is-answered {
+  background: var(--ink);
+  border-color: var(--ink);
+}
+.sheet-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
+  gap: 6px;
+}
+.sheet-num {
+  height: 36px;
+  border-radius: 10px;
+  border: 1.5px solid var(--border);
+  background: var(--surface);
+  color: var(--ink);
+  font-family: var(--font-numeric);
+  font-size: 0.85rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+}
+.sheet-num:hover {
+  border-color: var(--ink);
+}
+.sheet-num.is-answered {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: #fff;
+}
+.sheet-num.is-optional {
+  border-style: dashed;
+  color: var(--ink-muted);
+}
+.sheet-next {
+  width: 100%;
+  margin-top: 12px;
+}
+
+/* ---- 「還沒交卷」提醒 ---- */
+.draft-notices {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0 0 20px;
+}
+.draft-notice {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px 16px;
+  padding: 14px 16px;
+  background: var(--surface);
+  border-radius: var(--radius-md);
+  border-left: 4px solid var(--danger);
+  box-shadow: var(--shadow-sm);
+}
+.draft-notice-title {
+  margin: 0;
+  font-weight: 700;
+}
+.draft-notice-meta {
+  margin: 2px 0 0;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--ink-muted);
+}
+.draft-notice-actions {
+  display: flex;
+  gap: 8px;
+}
+.draft-notice-actions .btn-pill {
+  padding: 9px 18px;
+  font-size: 0.88rem;
+}
+
 /* ---- 頁面載入中提示(layout.js 的 initHeader 放進去、renderUserMenu 拿掉) ---- */
 .page-loading {
   padding: 48px 0;
@@ -1799,6 +1920,7 @@ a.timeline-row:hover {
   margin: 0;
 }
 .quiz-question,
+.quiz-passage,
 .quiz-result-bar {
   scroll-margin-top: calc(var(--header-h) + 64px);
 }
@@ -1892,6 +2014,24 @@ a.timeline-row:hover {
 }
 
 /* ---- 錯題本:篩選/載入更多 ---- */
+.retest-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 4px 0 6px;
+}
+.retest-label {
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--ink);
+}
+.retest-hint {
+  margin: 0 0 20px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--ink-muted);
+}
 .wrongbook-more {
   display: flex;
   justify-content: center;
@@ -1947,13 +2087,51 @@ a.timeline-row:hover {
     flex-wrap: nowrap;
     gap: 10px;
   }
-  /* 手機版把品牌文字收起來只留圖示,導覽列就能排成單行(原本兩行、超過 110px 高
-     而且是 sticky,佔掉將近七分之一的螢幕高度)。 */
-  .brand-name {
+  /* 手機版導覽列(首頁/模擬考/錯題本)移到畫面底部,拇指好按;上方標題列只剩品牌跟頭像,
+     不會再佔兩行(原本超過 110px 高、而且是 sticky)。考試進行中(body.is-exam-running)
+     把底部導覽列藏起來,免得考到一半誤觸離開。 */
+  :root {
+    --tabbar-h: 62px;
+  }
+  body {
+    padding-bottom: calc(var(--tabbar-h) + env(safe-area-inset-bottom, 0px));
+  }
+  body.is-exam-running {
+    padding-bottom: 0;
+  }
+  body.is-exam-running .header-nav {
     display: none;
   }
+  .header-nav {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 15;
+    gap: 4px;
+    padding: 6px 10px calc(6px + env(safe-area-inset-bottom, 0px));
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    box-shadow: 0 -4px 16px rgba(32, 28, 43, 0.06);
+  }
   .nav-pill {
-    padding: 8px 12px;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2px;
+    padding: 6px 4px;
+    border-radius: var(--radius-sm);
+    font-size: 0.72rem;
+  }
+  .nav-pill-icon {
+    display: flex;
+  }
+  .nav-pill.is-active {
+    background: var(--surface-alt);
+    color: var(--ink);
+  }
+  .update-banner {
+    bottom: calc(var(--tabbar-h) + env(safe-area-inset-bottom, 0px) + 12px);
   }
   .unit-item {
     display: grid;
@@ -2010,8 +2188,13 @@ a.timeline-row:hover {
   .unit-nav-link.is-next {
     grid-column: 1;
   }
+  /* 手機上考試標題列只留狀態(已作答/答案卡/倒數),標題文字沒地方放。 */
   .mockexam-run-header h2 {
-    font-size: 0.95rem;
+    display: none;
+  }
+  .mockexam-run-status {
+    width: 100%;
+    justify-content: space-between;
   }
   .container, .container-narrow {
     padding: 20px;

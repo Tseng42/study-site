@@ -2,7 +2,7 @@ import { getAllSubjects } from './subjects-registry.js';
 import { getSubjectProgress, getQuizResults, isUnitCompleted } from './storage.js';
 import { getReviewableWrongQuestions } from './wrong-utils.js';
 import { el, progressBar, subjectIcon, icon, blobDecoration } from './render.js';
-import { initHeader, renderUserMenu } from './layout.js';
+import { initHeader, renderUserMenu, renderExamDraftNotice } from './layout.js';
 import { getDaysRemaining, getStudyPhase, suggestFocusSubjects } from './study-plan.js';
 import { ensureSignedIn } from './auth.js';
 import { initCloudSync } from './cloud-sync.js';
@@ -15,6 +15,10 @@ renderUserMenu(user);
 const subjects = getAllSubjects();
 
 renderDashHeader();
+// 有作答到一半的模擬考,放在最上面提醒,不然離開頁面後很容易忘記還有一份在計時。
+const draftHost = el('div');
+document.getElementById('study-plan-card').before(draftHost);
+renderExamDraftNotice(draftHost);
 renderStudyPlanCard();
 renderSubjectCards();
 
