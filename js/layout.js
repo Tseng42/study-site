@@ -35,24 +35,66 @@ function watchForUpdate(registration) {
   });
 }
 
-function showUpdateBanner() {
-  if (document.getElementById('update-banner')) return;
-  const btn = el('button', { type: 'button', class: 'update-banner-btn' }, '重新整理');
-  btn.addEventListener('click', () => location.reload());
-  const banner = el('div', { id: 'update-banner', class: 'update-banner' }, [
-    el('span', { class: 'update-banner-text' }, '有新版本可以使用'),
+// 畫面底部的小提示條(有新版本、雲端資料晚到、錯題本復原等共用):一段文字加一個按鈕。
+// 回傳提示條本身,呼叫端可以自己決定要不要自動消失。
+export function showBanner({ id, text, buttonLabel, onClick }) {
+  document.getElementById(id)?.remove();
+  const btn = el('button', { type: 'button', class: 'update-banner-btn' }, buttonLabel);
+  btn.addEventListener('click', onClick);
+  const banner = el('div', { id, class: 'update-banner', role: 'status' }, [
+    el('span', { class: 'update-banner-text' }, text),
     btn,
   ]);
   document.body.append(banner);
+  return banner;
 }
+
+function showUpdateBanner() {
+  if (document.getElementById('update-banner')) return;
+  showBanner({ id: 'update-banner', text: '有新版本可以使用', buttonLabel: '重新整理', onClick: () => location.reload() });
+}
+
+// 換裝置或久沒開時,雲端資料如果超過 3 秒才回來(見 cloud-sync.js),頁面早就用舊的
+// 本機資料畫好了;資料真的有變動時提示一聲,讓使用者自己決定要不要重新整理。
+window.addEventListener('studysite:cloud-updated', () => {
+  if (document.getElementById('update-banner')) return;
+  showBanner({ id: 'sync-banner', text: '已同步雲端上較新的資料', buttonLabel: '重新整理', onClick: () => location.reload() });
+});
 
 export function initHeader() {
   const mark = document.getElementById('brand-mark');
   if (mark) mark.append(icon('book', { size: 18 }));
+  trackHeaderHeight();
+  markCurrentNav();
+  showLoadingPlaceholder();
+}
+
+// 手機版導覽列比桌機版矮,而且模擬考的計時列、測驗的進度列都要 sticky 貼在導覽列
+// 正下方,所以把導覽列實際高度量出來寫進 --header-h,不用在 CSS 裡猜。
+function trackHeaderHeight() {
+  const header = document.querySelector('.site-header');
+  if (!header) return;
+  const apply = () => document.documentElement.style.setProperty('--header-h', `${Math.round(header.getBoundingClientRect().height)}px`);
+  apply();
+  if ('ResizeObserver' in window) new ResizeObserver(apply).observe(header);
+  else window.addEventListener('resize', apply);
+}
+
+function markCurrentNav() {
+  document.querySelector('.nav-pill.is-active')?.setAttribute('aria-current', 'page');
+}
+
+// 每一頁都要先等登入狀態、雲端資料才畫得出內容(慢網路可能等好幾秒),這段時間
+// main 是空的,看起來像壞掉。先放一行載入中,renderUserMenu() 在資料準備好之後拿掉。
+function showLoadingPlaceholder() {
+  const main = document.querySelector('main');
+  if (!main || document.getElementById('page-loading')) return;
+  main.prepend(el('p', { id: 'page-loading', class: 'page-loading', role: 'status' }, '載入中…'));
 }
 
 // 點頭像彈出的小選單:個人資料/成就徽章/登出都收在裡面,不再各自散在 header 上。
 export function renderUserMenu(user) {
+  document.getElementById('page-loading')?.remove();
   const container = document.getElementById('user-menu');
   if (!container || !user) return;
 

@@ -38,7 +38,7 @@ import { scienceRealExams } from '../data/science-real-exams.js';
 import { getSubject } from './subjects-registry.js';
 import { addQuizResult, addMockExamResult, updateMockExamResult } from './storage.js';
 import { describeBandLevel } from '../data/mock-exam-config.js';
-import { shuffle, prepareQuestions, shuffleQuestionOptions, renderAnswerField, gradeAnswer, typeLabel } from './quiz-utils.js';
+import { shuffle, prepareQuestions, shuffleQuestionOptions, renderAnswerField, gradeAnswer, typeLabel, isAnswered } from './quiz-utils.js';
 import { el, icon, renderPassage } from './render.js';
 import { initHeader, renderUserMenu } from './layout.js';
 import { ensureSignedIn } from './auth.js';
@@ -331,7 +331,11 @@ function renderPicker() {
   container.append(
     el('a', { href: 'mockexam.html', class: 'back-link' }, [icon('chevronLeft', { size: 14 }), '回模擬考首頁']),
     el('h1', { class: 'profile-title' }, `${config.subjectLabel}歷屆試題模擬考`),
-    el('p', { class: 'mockexam-intro' }, config.intro)
+    el('p', { class: 'mockexam-intro' },
+      `111~115 學年度學測${config.subjectLabel}真題,限時 ${MINUTES} 分鐘,時間到會自動送出。單一年份模式重現整份考卷(有非選擇題的科目,交卷後自行對照官方答案),混合年份模式跨年抽選擇題。`
+    ),
+    // 版權依據、資料來源、略過題目的說明很長,收進「完整說明」,不擋在開始按鈕前面。
+    el('details', { class: 'intro-details' }, [el('summary', {}, '完整說明與資料來源'), el('p', {}, config.intro)])
   );
 
   const mixGrid = el('div', { class: 'mockexam-grid' });
@@ -344,7 +348,7 @@ function renderPicker() {
     el('h2', { class: 'real-exam-subheading' }, '單一年份模式'),
     el('p', { class: 'mockexam-intro' }, '固定考同一學年度所有可收錄的題目,但每次選項順序都會重新洗牌。')
   );
-  const yearGrid = el('div', { class: 'mockexam-grid' });
+  const yearGrid = el('div', { class: 'mockexam-grid mockexam-grid-compact' });
   for (const yearSet of config.data) {
     const count = yearSet.questions.length;
     yearGrid.append(
@@ -371,14 +375,32 @@ function startExam(questions, examLabel) {
 
 function runExam(questions, examLabel) {
   container.innerHTML = '';
+  // 換成新畫面之後要回到最上面:考卷很長、按「開始作答/送出」的時候頁面已經捲到很下面,
+  // 不捲回去的話,會停在考卷/成績單的中段(成績跟第一題都看不到)。
+  window.scrollTo(0, 0);
 
   const timerEl = el('div', { class: 'mockexam-timer' });
+  const answeredEl = el('span', { class: 'mockexam-answered' });
   const header = el('div', { class: 'mockexam-run-header' }, [
     el('h2', {}, `${config.subjectLabel}歷屆試題模擬考 · ${examLabel}`),
-    timerEl,
+    el('div', { class: 'mockexam-run-status' }, [answeredEl, timerEl]),
   ]);
 
   const answers = new Array(questions.length).fill(null);
+  // 純寫答的非選擇題不強迫作答,不列入「已作答 x/N」的分母。
+  const countable = questions.map((q, i) => i).filter((i) => questions[i].type !== 'written');
+  const updateAnswered = () => {
+    const done = countable.filter((i) => isAnswered(questions[i], answers[i])).length;
+    answeredEl.textContent = `已作答 ${done}/${countable.length}`;
+  };
+  updateAnswered();
+
+  // 計時中不小心關掉分頁、按到導覽列連結或上一頁,整場作答會直接消失,先問一聲。
+  const warnBeforeLeaving = (e) => {
+    e.preventDefault();
+    e.returnValue = '';
+  };
+  window.addEventListener('beforeunload', warnBeforeLeaving);
   const form = el('div', { class: 'quiz-form' });
   const shownPassages = new Set();
 
@@ -400,6 +422,7 @@ function runExam(questions, examLabel) {
 
     const field = renderAnswerField(q, index, (value) => {
       answers[index] = value;
+      updateAnswered();
     });
     form.append(
       el('div', { class: 'quiz-question' }, [
@@ -435,9 +458,13 @@ function runExam(questions, examLabel) {
 
   function finish(timeUp) {
     if (!timeUp) {
-      const hasUnanswered = questions.some((q, index) => isUnanswered(q, answers[index]));
-      if (hasUnanswered && !confirm('還有題目尚未作答,確定要送出嗎?')) return;
+      const missing = questions.map((q, i) => (isAnswered(q, answers[i]) ? -1 : i + 1)).filter((n) => n !== -1);
+      if (missing.length) {
+        const shown = missing.slice(0, 10).join('、');
+        if (!confirm(`還有 ${missing.length} 題尚未作答(第 ${shown}${missing.length > 10 ? ' 題…' : ' 題'}),確定要送出嗎?`)) return;
+      }
     }
+    window.removeEventListener('beforeunload', warnBeforeLeaving);
     clearInterval(intervalId);
     submitBtn.disabled = true;
 
@@ -535,18 +562,6 @@ function runExam(questions, examLabel) {
   }
 }
 
-// 各題型「還沒作答完」的判斷。選填多格要每一格都有填;hybrid 的勾選部分要有選
-// (簡答本來就是選填,不列入);純寫答的非選擇題不強制作答。
-function isUnanswered(q, answer) {
-  if (q.type === 'written') return false;
-  if (answer == null) return true;
-  if (q.type === 'numeric-multi') return answer.some((v) => !String(v ?? '').trim());
-  if (q.type === 'numeric') return !String(answer).trim();
-  if (q.type === 'hybrid') return answer.choice == null;
-  if (q.type === 'multi') return answer.size === 0;
-  return false;
-}
-
 function correctAnswerOf(q) {
   if (q.type === 'multi') return q.answers;
   if (q.type === 'numeric') return q.answerText;
@@ -556,6 +571,9 @@ function correctAnswerOf(q) {
 
 function renderResult(results, writtenResults, summary) {
   container.innerHTML = '';
+  // 換成新畫面之後要回到最上面:考卷很長、按「開始作答/送出」的時候頁面已經捲到很下面,
+  // 不捲回去的話,會停在考卷/成績單的中段(成績跟第一題都看不到)。
+  window.scrollTo(0, 0);
 
   const wrongs = results.filter((r) => !r.isCorrect);
   const hasWritten = writtenResults.length > 0;

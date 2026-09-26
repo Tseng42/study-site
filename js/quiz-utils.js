@@ -254,6 +254,19 @@ export function markAnswerFeedback(field, q, userAnswer) {
   });
 }
 
+// 這題「作答完成了沒」,給送出前的未作答提醒、作答進度計數用:單選要有選、多選至少勾
+// 一個、選填每一格都不能空、hybrid 的勾選部分要有選。純寫答的非選擇題本來就是選填的,
+// 一律算完成(不強迫作答)。
+export function isAnswered(q, answer) {
+  if (q.type === 'written') return true;
+  if (answer == null) return false;
+  if (q.type === 'numeric-multi') return answer.every((v) => String(v ?? '').trim() !== '');
+  if (q.type === 'numeric') return String(answer).trim() !== '';
+  if (q.type === 'hybrid') return answer.choice != null;
+  if (q.type === 'multi') return answer.size > 0;
+  return true;
+}
+
 export function typeLabel(type) {
   if (type === 'multi') return '多選';
   if (type === 'numeric' || type === 'numeric-multi') return '選填';

@@ -1,5 +1,6 @@
 import { getAllSubjects, getSubject, getUnit, getQuestion } from './subjects-registry.js';
-import { getSubjectProgress, getQuizResults, getWrongQuestions, getExamDate, setExamDate, getMockExamHistory } from './storage.js';
+import { getSubjectProgress, getQuizResults, getExamDate, setExamDate, getMockExamHistory } from './storage.js';
+import { getReviewableWrongQuestions } from './wrong-utils.js';
 import { resolveExamDate, getDaysRemaining } from './study-plan.js';
 import { getAchievementState, getHighestTier, TIER_LABEL } from './achievements.js';
 import { el, icon } from './render.js';
@@ -252,7 +253,8 @@ function renderAccuracyChart() {
 
 function renderReviewList() {
   const container = document.getElementById('review-list');
-  const wrongs = getWrongQuestions().slice(0, 5);
+  const allWrongs = getReviewableWrongQuestions().sort((a, b) => new Date(b.lastAttemptAt) - new Date(a.lastAttemptAt));
+  const wrongs = allWrongs.slice(0, 5);
 
   if (!wrongs.length) {
     container.append(el('div', { class: 'timeline-row-empty' }, '目前沒有待複習的錯題,繼續保持!'));
@@ -263,7 +265,6 @@ function renderReviewList() {
     const subject = getSubject(w.subjectId);
     const unit = getUnit(w.subjectId, w.unitId);
     const question = getQuestion(w.subjectId, w.unitId, w.questionId);
-    if (!question) continue;
 
     const row = el('a', {
       class: 'timeline-row',
@@ -278,6 +279,9 @@ function renderReviewList() {
       icon('chevronRight', { size: 16 })
     );
     container.append(row);
+  }
+  if (allWrongs.length > wrongs.length) {
+    container.append(el('a', { href: 'wrongbook.html', class: 'timeline-row-empty timeline-row-more' }, `查看全部 ${allWrongs.length} 題待複習 →`));
   }
 }
 

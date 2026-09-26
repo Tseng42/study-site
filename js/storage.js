@@ -93,6 +93,19 @@ export function addQuizResult(record) {
   writeJSON('quizResults', all);
 }
 
+// 練習模式邊答邊存:同一次測驗共用一個 id,每答完一題就用最新的作答內容覆蓋同 id 的
+// 那一筆(沒有就新增)。中途離開頁面,已經答過的題目(尤其是答錯要進錯題本的)不會
+// 跟著消失。錯題本「已熟練」重置的判斷只看這次新增的作答,免得每次覆蓋都重複處理。
+export function upsertQuizResult(record) {
+  const all = readJSON('quizResults', []);
+  const index = all.findIndex((r) => r.id === record.id);
+  const knownIds = new Set(index === -1 ? [] : all[index].answers.map((a) => a.questionId));
+  reopenMasteredIfWrong({ ...record, answers: record.answers.filter((a) => !knownIds.has(a.questionId)) });
+  if (index === -1) all.push(record);
+  else all[index] = record;
+  writeJSON('quizResults', all);
+}
+
 // ---- 錯題本 ----
 // wrongBookState: { [questionId]: { mastered: boolean, everMastered?: boolean } }
 // 錯題本內容不另外重複儲存題目,而是即時從 quizResults 彙整「每題最近一次作答結果」，
@@ -237,6 +250,24 @@ function mergeProgress(preferred = {}, other = {}) {
   return merged;
 }
 
+// 只看「內容」的比對用字串(不含 updatedAt),用來判斷兩份快照的資料是否相同。
+function contentKey(s) {
+  return JSON.stringify([
+    s.progress || {},
+    s.quizResults || [],
+    s.wrongBookState || {},
+    s.mockExamHistory || [],
+    s.examDate || null,
+    [...(s.seenAchievements || [])].sort(),
+  ]);
+}
+
+// 目前本機資料的內容指紋,cloud-sync.js 用來偵測「雲端資料晚一步併進來、畫面上
+// 顯示的還是舊的」這種情況。
+export function getContentFingerprint() {
+  return contentKey(getSnapshot());
+}
+
 // 把雲端快照併進本機(取代原本「誰的 updatedAt 新就整份蓋掉另一份」的做法 ——
 // 那樣兩邊各自有不同紀錄時,輸的那邊整份消失,例如新裝置在跟雲端比對完成前就先
 // 作答,或兩台裝置都離線用過)。updatedAt 較新的那份在有衝突時優先;回傳 true 代表
@@ -257,16 +288,7 @@ export function mergeSnapshot(remote) {
     seenAchievements: [...new Set([...(local.seenAchievements || []), ...(remote.seenAchievements || [])])],
   };
 
-  const comparable = (s) =>
-    JSON.stringify([
-      s.progress || {},
-      s.quizResults || [],
-      s.wrongBookState || {},
-      s.mockExamHistory || [],
-      s.examDate || null,
-      [...(s.seenAchievements || [])].sort(),
-    ]);
-  const hasNewForRemote = comparable(merged) !== comparable(remote);
+  const hasNewForRemote = contentKey(merged) !== contentKey(remote);
   // 合併後有雲端沒有的內容時,updatedAt 要更新成現在,其他裝置才會發現雲端有新資料。
   merged.updatedAt = hasNewForRemote
     ? new Date().toISOString()

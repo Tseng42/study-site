@@ -51,10 +51,14 @@ function render() {
       item.append(
         el('span', { class: `circular-check${done ? ' is-checked' : ''}` }, icon('check', { size: 12 })),
         el('span', { class: 'unit-title' }, unit.title),
-        ...(unit.tag || unit.semester ? [el('span', { class: 'unit-semester-badge' }, unit.tag || unit.semester)] : []),
-        hasContent
-          ? el('span', { class: 'unit-quiz-count' }, unit.quiz?.length ? `${unit.quiz.length} 題測驗` : '')
-          : el('span', { class: 'unit-badge-stub' }, '製作中')
+        // 徽章跟題數包成一組:桌面版排在標題右邊,手機版整組掉到標題下面一行,
+        // 不然標題會被擠成兩三行、在括號中間斷開。
+        el('span', { class: 'unit-meta' }, [
+          unit.tag || unit.semester ? el('span', { class: 'unit-semester-badge' }, unit.tag || unit.semester) : null,
+          hasContent
+            ? el('span', { class: 'unit-quiz-count' }, unit.quiz?.length ? `${unit.quiz.length} 題測驗` : '')
+            : el('span', { class: 'unit-badge-stub' }, '製作中'),
+        ])
       );
       group.append(item);
     }

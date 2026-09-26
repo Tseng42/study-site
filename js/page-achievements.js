@@ -4,7 +4,7 @@
 // 點進來看過完整徽章牆,才算「看過」。
 import { getAchievementState, getNewlyUnlockedIds, CATEGORIES } from './achievements.js';
 import { markAchievementsSeen } from './storage.js';
-import { el, icon } from './render.js';
+import { el, icon, progressBar } from './render.js';
 import { initHeader, renderUserMenu } from './layout.js';
 import { ensureSignedIn } from './auth.js';
 import { initCloudSync } from './cloud-sync.js';
@@ -27,12 +27,23 @@ function renderAchievements() {
   const summaryEl = document.getElementById('achievements-summary');
   if (summaryEl) summaryEl.textContent = `${earnedCount}/${achievements.length} 已解鎖`;
 
+  // 10 個分類、87 張卡片排成一長條,先放一列可以直接跳到各分類的捷徑。
+  const jumpRow = el('nav', { class: 'filter-chips filter-chips-scroll', 'aria-label': '成就分類' });
+  container.before(jumpRow);
+
   for (const cat of CATEGORIES) {
     const items = achievements.filter((a) => a.category === cat.id);
     if (!items.length) continue;
     const catEarned = items.filter((a) => a.earned).length;
 
-    const section = el('div', { class: 'achievement-category' });
+    jumpRow.append(
+      el('a', { class: 'filter-chip', href: `#ach-${cat.id}` }, [
+        cat.label,
+        el('span', { class: 'filter-chip-count' }, `${catEarned}/${items.length}`),
+      ])
+    );
+
+    const section = el('div', { class: 'achievement-category', id: `ach-${cat.id}` });
     section.append(
       el('div', { class: 'achievement-category-header' }, [
         el('span', { class: 'achievement-category-icon' }, icon(cat.icon, { size: 16 })),
@@ -55,6 +66,8 @@ function renderAchievements() {
           el('div', { class: 'achievement-title' }, isMystery ? '？？？' : a.title),
           el('div', { class: 'achievement-desc' }, isMystery ? '隱藏成就,達成後才會揭曉條件' : a.desc),
           isMystery ? null : el('div', { class: 'achievement-progress' }, a.progress),
+          // 還沒解鎖、又算得出比例的成就多一條進度條,一眼看得出離目標還有多遠。
+          !isMystery && !a.earned && a.ratio != null ? progressBar(Math.round(a.ratio * 100), { tone: 'var(--tier-color, var(--ink))' }) : null,
         ])
       );
       if (isNew) card.append(el('span', { class: 'achievement-new-badge' }, 'NEW'));

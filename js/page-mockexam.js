@@ -1,6 +1,6 @@
 import { getAllSubjects, getSubject } from './subjects-registry.js';
 import { addQuizResult, addMockExamResult, getMockExamHistory } from './storage.js';
-import { prepareQuestions, renderAnswerField, gradeAnswer, markAnswerFeedback, typeLabel } from './quiz-utils.js';
+import { prepareQuestions, renderAnswerField, gradeAnswer, markAnswerFeedback, typeLabel, isAnswered } from './quiz-utils.js';
 
 // 依 typeBreakdown 分別從各題型抽題,維持「單選→多選→選填」的分節順序,
 // 跟真實考卷的結構一致。每題都標上 sectionLabel,給 runExam 畫分節標題用。
@@ -79,6 +79,7 @@ function renderPicker() {
   container.innerHTML = '';
   container.append(
     el('h1', { class: 'profile-title' }, '模擬考'),
+    el('h2', { class: 'real-exam-subheading' }, '題庫模擬考'),
     el('p', { class: 'mockexam-intro' },
       '各科單獨計時作答,題目從該科所有單元的題庫中隨機抽取,每次組合都不一樣。題數、限時、單選/多選(社會、自然還會依歷史/地理/公民、物理/化學/生物/地科均分)都對齊真實學測選擇題部分的配置;需要人工評閱的寫作、非選擇題無法在這裡模擬,詳見各科說明。'
     )
@@ -123,6 +124,8 @@ function renderPicker() {
   const realExamGrid = el('div', { class: 'mockexam-grid' });
   for (const { subjectId, param, title } of REAL_EXAM_SUBJECTS) {
     const realSubject = getSubject(subjectId);
+    const realAttempts = getMockExamHistory(`${subjectId}-real`);
+    const lastRealAttempt = realAttempts.slice().sort((a, b) => new Date(b.takenAt) - new Date(a.takenAt))[0];
     const realExamCard = el('div', { class: 'mockexam-card' });
     realExamCard.style.setProperty('--card-color', realSubject?.color || '#201c2b');
     realExamCard.append(
@@ -130,15 +133,21 @@ function renderPicker() {
         el('div', { class: 'subject-card-icon' }, icon('scroll', { size: 22 })),
         el('div', {}, [
           el('h2', {}, title),
-          el('p', { class: 'mockexam-card-meta' }, '111~115 學年度真實學測考題,逐字轉錄'),
+          el('p', { class: 'mockexam-card-meta' }, '111~115 學年度學測真題'),
         ]),
       ]),
-      el('p', { class: 'mockexam-card-last mockexam-card-last-empty' }, '單一年份或跨年混合抽題,每次都不一樣'),
+      lastRealAttempt
+        ? el('p', { class: 'mockexam-card-last' }, `上次:${lastRealAttempt.examLabel || ''} ${lastRealAttempt.writtenPending ? '· 非選未對答案' : `· 估計 ${lastRealAttempt.estimatedBand} 級分`} · ${formatRelativeDate(lastRealAttempt.takenAt)}`)
+        : el('p', { class: 'mockexam-card-last mockexam-card-last-empty' }, '單一年份或跨年混合抽題'),
       el('a', { class: 'btn-pill btn-pill-dark', href: `real-exam.html?subject=${param}` }, '前往歷屆試題模擬考')
     );
     realExamGrid.append(realExamCard);
   }
-  container.append(el('h2', { class: 'real-exam-subheading' }, '真題模擬考'), realExamGrid);
+  container.append(
+    el('h2', { class: 'real-exam-subheading' }, '真題模擬考'),
+    el('p', { class: 'mockexam-intro' }, '收錄大考中心公布的學測歷屆試題,可以整份年度重考,也可以跨年混合抽題。'),
+    realExamGrid
+  );
 }
 
 function renderStartScreen(subjectId) {
@@ -199,14 +208,30 @@ function renderStartScreen(subjectId) {
 
 function runExam(subject, config, questions) {
   container.innerHTML = '';
+  // 換成新畫面之後要回到最上面:考卷很長、按「開始作答/送出」的時候頁面已經捲到很下面,
+  // 不捲回去的話,會停在考卷/成績單的中段(成績跟第一題都看不到)。
+  window.scrollTo(0, 0);
 
   const timerEl = el('div', { class: 'mockexam-timer' });
+  const answeredEl = el('span', { class: 'mockexam-answered' });
   const header = el('div', { class: 'mockexam-run-header' }, [
     el('h2', {}, `${config.label} 模擬考`),
-    timerEl,
+    el('div', { class: 'mockexam-run-status' }, [answeredEl, timerEl]),
   ]);
 
   const answers = new Array(questions.length).fill(null);
+  const updateAnswered = () => {
+    const done = questions.filter((q, i) => isAnswered(q, answers[i])).length;
+    answeredEl.textContent = `已作答 ${done}/${questions.length}`;
+  };
+  updateAnswered();
+
+  // 計時中不小心關掉分頁、按到導覽列連結或上一頁,整場作答會直接消失,先問一聲。
+  const warnBeforeLeaving = (e) => {
+    e.preventDefault();
+    e.returnValue = '';
+  };
+  window.addEventListener('beforeunload', warnBeforeLeaving);
   const fields = [];
   const form = el('div', { class: 'quiz-form' });
   const shownPassages = new Set();
@@ -225,6 +250,7 @@ function runExam(subject, config, questions) {
 
     const field = renderAnswerField(q, index, (value) => {
       answers[index] = value;
+      updateAnswered();
     });
     fields.push(field);
     form.append(
@@ -260,8 +286,13 @@ function runExam(subject, config, questions) {
 
   function finish(timeUp) {
     if (!timeUp) {
-      if (answers.includes(null) && !confirm('還有題目尚未作答,確定要送出嗎?')) return;
+      const missing = questions.map((q, i) => (isAnswered(q, answers[i]) ? -1 : i + 1)).filter((n) => n !== -1);
+      if (missing.length) {
+        const shown = missing.slice(0, 10).join('、');
+        if (!confirm(`還有 ${missing.length} 題尚未作答(第 ${shown}${missing.length > 10 ? ' 題…' : ' 題'}),確定要送出嗎?`)) return;
+      }
     }
+    window.removeEventListener('beforeunload', warnBeforeLeaving);
     clearInterval(intervalId);
     submitBtn.disabled = true;
 
@@ -318,6 +349,9 @@ function runExam(subject, config, questions) {
 
 function renderResult(subject, config, results, summary) {
   container.innerHTML = '';
+  // 換成新畫面之後要回到最上面:考卷很長、按「開始作答/送出」的時候頁面已經捲到很下面,
+  // 不捲回去的話,會停在考卷/成績單的中段(成績跟第一題都看不到)。
+  window.scrollTo(0, 0);
 
   const wrongs = results.filter((r) => !r.isCorrect);
   const years = fiveStandardsReference[subject.id] || {};

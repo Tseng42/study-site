@@ -1,5 +1,6 @@
 import { getAllSubjects } from './subjects-registry.js';
-import { getSubjectProgress } from './storage.js';
+import { getSubjectProgress, getQuizResults, isUnitCompleted } from './storage.js';
+import { getReviewableWrongQuestions } from './wrong-utils.js';
 import { el, progressBar, subjectIcon, icon, blobDecoration } from './render.js';
 import { initHeader, renderUserMenu } from './layout.js';
 import { getDaysRemaining, getStudyPhase, suggestFocusSubjects } from './study-plan.js';
@@ -17,6 +18,29 @@ renderDashHeader();
 renderStudyPlanCard();
 renderSubjectCards();
 
+// 首頁最上面的主要按鈕:直接接著上次讀到的地方。沒有作答紀錄(新使用者)就從建議多花
+// 時間的那一科第一個還沒完成的單元開始。單元都完成了就回傳 null,不顯示這個按鈕。
+function findResumeTarget() {
+  const hasContent = (u) => !!(u.note?.sections?.length || u.quiz?.length);
+  const nextUnfinished = (subject, fromIndex = 0) =>
+    subject.units.slice(fromIndex).find((u) => hasContent(u) && !isUnitCompleted(subject.id, u.id));
+
+  const recent = getQuizResults().slice().sort((a, b) => new Date(b.takenAt) - new Date(a.takenAt));
+  for (const r of recent) {
+    const subject = subjects.find((s) => s.id === r.subjectId);
+    const index = subject ? subject.units.findIndex((u) => u.id === r.unitId) : -1;
+    if (index === -1) continue; // 歷屆試題之類沒有單元頁的紀錄
+    // 上次的單元還沒標完成就接著讀它,標完了就往後找下一個沒完成的,後面都完成了就回頭找第一個。
+    const unit = nextUnfinished(subject, index) || nextUnfinished(subject);
+    if (unit) return { subject, unit, resumed: unit.id === r.unitId };
+  }
+  for (const { subject } of suggestFocusSubjects(subjects, subjects.length)) {
+    const unit = nextUnfinished(subject);
+    if (unit) return { subject, unit, resumed: false };
+  }
+  return null;
+}
+
 function renderDashHeader() {
   const container = document.getElementById('dash-header');
   const today = new Date();
@@ -25,12 +49,31 @@ function renderDashHeader() {
   const blob = blobDecoration('#f2a93b');
   blob.classList.add('dash-blob');
 
+  const wrongCount = getReviewableWrongQuestions().length;
+  const resume = findResumeTarget();
+  const actions = el('div', { class: 'dash-actions' });
+  if (resume) {
+    actions.append(
+      el('a', { href: `unit.html?subject=${resume.subject.id}&unit=${resume.unit.id}`, class: 'btn-pill btn-pill-dark dash-cta' }, [
+        el('span', { class: 'dash-cta-label' }, `${resume.resumed ? '繼續' : '下一個'}:${resume.subject.name} ${resume.unit.title}`),
+        icon('chevronRight', { size: 16 }),
+      ])
+    );
+  }
+  // 有待複習的錯題才強調錯題本;還沒有錯題的新使用者,主要按鈕應該是開始讀,不是去看一個空清單。
+  actions.append(
+    el('a', { href: 'wrongbook.html', class: `btn-pill ${resume ? 'btn-pill-outline' : 'btn-pill-dark'}` }, [
+      icon('flag', { size: 16 }),
+      wrongCount ? `錯題本(${wrongCount})` : '錯題本',
+    ])
+  );
+
   container.append(
     el('div', {}, [
       el('h1', {}, '嗨,開始今天的複習吧'),
       el('p', { class: 'dash-subtitle' }, `${today.getFullYear()}/${today.getMonth() + 1}/${today.getDate()}(${weekday})`),
     ]),
-    el('a', { href: 'wrongbook.html', class: 'btn-pill btn-pill-dark' }, [icon('flag', { size: 16 }), '前往錯題本']),
+    actions,
     blob
   );
 }

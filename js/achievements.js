@@ -68,6 +68,7 @@ function counter({ id, title, tier, category, icon, desc, stat, target, unit, se
     ...(secret ? { secret: true } : {}),
     check: (s) => s[stat] >= target,
     progressText: (s) => `${Math.min(s[stat], target)}/${target} ${unit}`,
+    progressRatio: (s) => Math.min(1, s[stat] / target),
   };
 }
 
@@ -99,6 +100,8 @@ function accuracyAchievement({ id, title, tier, minAnswered, percent }) {
       s.totalAnswered < minAnswered
         ? `已作答 ${s.totalAnswered}/${minAnswered} 題(先累積題數)`
         : `目前正確率 ${s.accuracy}%(目標 ${percent}%)`,
+    // 題數跟正確率兩個條件都要達標,進度條取比較落後的那一個。
+    progressRatio: (s) => Math.min(1, s.totalAnswered / minAnswered, s.accuracy / percent),
   };
 }
 
@@ -109,7 +112,7 @@ const CORE_ACHIEVEMENTS = [
   counter({ id: 'units-60', title: '單元收藏家 II', tier: 'silver', category: 'units', icon: 'layers', desc: '完成 60 個單元', stat: 'completedUnits', target: 60, unit: '單元' }),
   counter({ id: 'units-100', title: '單元收藏家 III', tier: 'gold', category: 'units', icon: 'layers', desc: '完成 100 個單元', stat: 'completedUnits', target: 100, unit: '單元' }),
   counter({ id: 'units-150', title: '單元收藏家 IV', tier: 'gold', category: 'units', icon: 'layers', desc: '完成 150 個單元', stat: 'completedUnits', target: 150, unit: '單元' }),
-  { id: 'units-all', title: '單元制霸', tier: 'diamond', category: 'units', icon: 'crown', desc: '完成全部單元', check: (s) => s.totalUnits > 0 && s.completedUnits >= s.totalUnits, progressText: (s) => `${s.completedUnits}/${s.totalUnits} 單元` },
+  { id: 'units-all', title: '單元制霸', tier: 'diamond', category: 'units', icon: 'crown', desc: '完成全部單元', check: (s) => s.totalUnits > 0 && s.completedUnits >= s.totalUnits, progressText: (s) => `${s.completedUnits}/${s.totalUnits} 單元`, progressRatio: (s) => (s.totalUnits ? Math.min(1, s.completedUnits / s.totalUnits) : 0) },
 
   // ---- 作答題數 ----
   counter({ id: 'answered-100', title: '初試啼聲', tier: 'bronze', category: 'volume', icon: 'pen', desc: '累積作答 100 題', stat: 'totalAnswered', target: 100, unit: '題' }),
@@ -147,15 +150,15 @@ const CORE_ACHIEVEMENTS = [
   counter({ id: 'mastered-400', title: '錯題本傳奇', tier: 'diamond', category: 'wrongbook', icon: 'flag', desc: '在錯題本標記 400 題已熟練', stat: 'masteredCount', target: 400, unit: '題' }),
 
   // ---- 均衡發展(五個科目「最低的那科」進度要達標)----
-  { id: 'balanced-25', title: '五科起跑', tier: 'bronze', category: 'balance', icon: 'scale', desc: '五個科目進度都超過 25%', check: (s) => s.minSubjectPercent >= 25, progressText: (s) => `目前最低的科目 ${s.minSubjectPercent}%` },
-  { id: 'balanced-40', title: '五科並進', tier: 'silver', category: 'balance', icon: 'scale', desc: '五個科目進度都超過 40%', check: (s) => s.minSubjectPercent >= 40, progressText: (s) => `目前最低的科目 ${s.minSubjectPercent}%` },
-  { id: 'balanced-60', title: '五科均衡發展', tier: 'gold', category: 'balance', icon: 'scale', desc: '五個科目進度都超過 60%', check: (s) => s.minSubjectPercent >= 60, progressText: (s) => `目前最低的科目 ${s.minSubjectPercent}%` },
+  { id: 'balanced-25', title: '五科起跑', tier: 'bronze', category: 'balance', icon: 'scale', desc: '五個科目進度都超過 25%', check: (s) => s.minSubjectPercent >= 25, progressText: (s) => `目前最低的科目 ${s.minSubjectPercent}%`, progressRatio: (s) => Math.min(1, s.minSubjectPercent / 25) },
+  { id: 'balanced-40', title: '五科並進', tier: 'silver', category: 'balance', icon: 'scale', desc: '五個科目進度都超過 40%', check: (s) => s.minSubjectPercent >= 40, progressText: (s) => `目前最低的科目 ${s.minSubjectPercent}%`, progressRatio: (s) => Math.min(1, s.minSubjectPercent / 40) },
+  { id: 'balanced-60', title: '五科均衡發展', tier: 'gold', category: 'balance', icon: 'scale', desc: '五個科目進度都超過 60%', check: (s) => s.minSubjectPercent >= 60, progressText: (s) => `目前最低的科目 ${s.minSubjectPercent}%`, progressRatio: (s) => Math.min(1, s.minSubjectPercent / 60) },
 
   // ---- 模擬考(一般模擬考,不含歷屆試題)----
   counter({ id: 'mock-count-5', title: '模考新手', tier: 'bronze', category: 'mock', icon: 'medal', desc: '累積完成 5 次模擬考', stat: 'mockCount', target: 5, unit: '次' }),
   counter({ id: 'mock-count-15', title: '模考老手', tier: 'silver', category: 'mock', icon: 'medal', desc: '累積完成 15 次模擬考', stat: 'mockCount', target: 15, unit: '次' }),
   counter({ id: 'mock-count-30', title: '模考達人', tier: 'gold', category: 'mock', icon: 'medal', desc: '累積完成 30 次模擬考', stat: 'mockCount', target: 30, unit: '次' }),
-  { id: 'mock-all-subjects', title: '模考初體驗', tier: 'silver', category: 'mock', icon: 'medal', desc: '五科模擬考都至少完成一次', check: (s) => s.mockSubjectsCovered >= 5, progressText: (s) => `${s.mockSubjectsCovered}/5 科` },
+  { id: 'mock-all-subjects', title: '模考初體驗', tier: 'silver', category: 'mock', icon: 'medal', desc: '五科模擬考都至少完成一次', check: (s) => s.mockSubjectsCovered >= 5, progressText: (s) => `${s.mockSubjectsCovered}/5 科`, progressRatio: (s) => Math.min(1, s.mockSubjectsCovered / 5) },
   flag({ id: 'mock-front', title: '考場常勝軍', tier: 'gold', category: 'mock', icon: 'trophy', desc: '任一科模擬考估計級分達到近年前標以上', stat: 'mockAnyAtFront', todo: '還沒有科目達到前標' }),
   flag({ id: 'mock-top', title: '頂標挑戰者', tier: 'diamond', category: 'mock', icon: 'trophy', desc: '任一科模擬考估計級分達到近年頂標以上', stat: 'mockAnyAtTop', todo: '還沒有科目達到頂標' }),
   counter({ id: 'mock-mean-5', title: '五科達標', tier: 'diamond', category: 'mock', icon: 'shield', desc: '五個科目的模擬考都至少有一次估計級分達到近年均標以上', stat: 'mockSubjectsAtMean', target: 5, unit: '科' }),
@@ -164,7 +167,7 @@ const CORE_ACHIEVEMENTS = [
   { id: 'realexam-first', title: '踏入考場', tier: 'bronze', category: 'realexam', icon: 'scroll', desc: '完成任一科歷屆試題模擬考(單一年份或混合年份皆可)', check: (s) => s.realExamCount > 0, progressText: (s) => (s.realExamCount > 0 ? '已完成' : '還沒挑戰過歷屆試題') },
   counter({ id: 'realexam-count-5', title: '歷屆常客', tier: 'silver', category: 'realexam', icon: 'scroll', desc: '累積完成 5 次歷屆試題模擬考', stat: 'realExamCount', target: 5, unit: '次' }),
   counter({ id: 'realexam-count-20', title: '歷屆老手', tier: 'gold', category: 'realexam', icon: 'scroll', desc: '累積完成 20 次歷屆試題模擬考', stat: 'realExamCount', target: 20, unit: '次' }),
-  { id: 'realexam-all-subjects', title: '五科制霸', tier: 'silver', category: 'realexam', icon: 'crown', desc: '五個科目的歷屆試題模擬考都至少完成一次', check: (s) => s.realExamSubjectsCovered >= 5, progressText: (s) => `${s.realExamSubjectsCovered}/5 科` },
+  { id: 'realexam-all-subjects', title: '五科制霸', tier: 'silver', category: 'realexam', icon: 'crown', desc: '五個科目的歷屆試題模擬考都至少完成一次', check: (s) => s.realExamSubjectsCovered >= 5, progressText: (s) => `${s.realExamSubjectsCovered}/5 科`, progressRatio: (s) => Math.min(1, s.realExamSubjectsCovered / 5) },
   flag({ id: 'realexam-front', title: '歷屆常勝軍', tier: 'gold', category: 'realexam', icon: 'trophy', desc: '任一科歷屆試題模擬考,估計級分達到近年前標以上', stat: 'realExamAnyAtFront', todo: '還沒有科目達到前標' }),
   flag({ id: 'realexam-top', title: '歷屆頂標', tier: 'diamond', category: 'realexam', icon: 'trophy', desc: '任一科歷屆試題模擬考,估計級分達到近年頂標以上', stat: 'realExamAnyAtTop', todo: '還沒有科目達到頂標' }),
   counter({ id: 'realexam-mean-5', title: '歷屆五科達標', tier: 'diamond', category: 'realexam', icon: 'shield', desc: '五個科目的歷屆試題模擬考都至少有一次估計級分達到近年均標以上', stat: 'realExamSubjectsAtMean', target: 5, unit: '科' }),
@@ -186,7 +189,7 @@ const CORE_ACHIEVEMENTS = [
   flag({ id: 'secret-mock-perfect', title: '模考滿分', tier: 'diamond', category: 'secret', icon: 'trophy', secret: true, desc: '一般模擬考(至少 20 題)拿到 100% 正確率', stat: 'mockPerfect', todo: '還沒有紀錄' }),
   { id: 'secret-wrongbook-zero', title: '錯題本淨空', tier: 'silver', category: 'secret', icon: 'flag', secret: true, desc: '錯題本目前完全沒有待複習的錯題(至少要標記過一題已熟練)', check: (s) => s.wrongCount === 0 && s.masteredCount > 0, progressText: (s) => (s.wrongCount === 0 && s.masteredCount > 0 ? '已達成' : `目前還有 ${s.wrongCount} 題待複習`) },
   { id: 'secret-comeback', title: '東山再起', tier: 'gold', category: 'secret', icon: 'flag', secret: true, desc: '錯題本清到 0 題,而且累積標記過 30 題以上已熟練', check: (s) => s.wrongCount === 0 && s.masteredCount >= 30, progressText: (s) => (s.wrongCount === 0 && s.masteredCount >= 30 ? '已達成' : `已熟練 ${s.masteredCount} 題,待複習 ${s.wrongCount} 題`) },
-  { id: 'secret-balanced-90', title: '全能選手', tier: 'gold', category: 'secret', icon: 'scale', secret: true, desc: '五個科目的完成度都超過 90%', check: (s) => s.minSubjectPercent >= 90, progressText: (s) => `目前最低的科目 ${s.minSubjectPercent}%` },
+  { id: 'secret-balanced-90', title: '全能選手', tier: 'gold', category: 'secret', icon: 'scale', secret: true, desc: '五個科目的完成度都超過 90%', check: (s) => s.minSubjectPercent >= 90, progressText: (s) => `目前最低的科目 ${s.minSubjectPercent}%`, progressRatio: (s) => Math.min(1, s.minSubjectPercent / 90) },
   flag({ id: 'secret-near-perfect', title: '一題不差傳說', tier: 'diamond', category: 'secret', icon: 'trophy', secret: true, desc: '歷屆試題模擬考單一年份模式,選擇題自動判分正確率達 95% 以上', stat: 'realExamAnyNearPerfectSingleYear', todo: '還沒有單一年份達到 95%' }),
 ];
 
@@ -398,10 +401,16 @@ export function computeStats() {
   };
 }
 
-// 每個成就加上 earned(布林)、progress(給還沒解鎖的成就看目前進度到哪)。
+// 每個成就加上 earned(布林)、progress(給還沒解鎖的成就看目前進度到哪的文字)、
+// ratio(0~1 的進度比例,給進度條用;算不出比例的成就是 null)。
 export function getAchievementState() {
   const stats = computeStats();
-  return ACHIEVEMENTS.map((a) => ({ ...a, earned: a.check(stats), progress: a.progressText(stats) }));
+  return ACHIEVEMENTS.map((a) => ({
+    ...a,
+    earned: a.check(stats),
+    progress: a.progressText(stats),
+    ratio: a.progressRatio ? a.progressRatio(stats) : null,
+  }));
 }
 
 // 目前已解鎖成就裡最高的 tier,沒有解鎖任何成就就回傳 null。

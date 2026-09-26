@@ -30,6 +30,9 @@
   --font-numeric: 'M PLUS Rounded 1c', 'Noto Sans TC', -apple-system, "Segoe UI", "Microsoft JhengHei", sans-serif;
 
   --max-width: 1180px;
+  /* 頂部導覽列的實際高度,由 layout.js 的 initHeader() 量測後覆寫(手機版導覽列比較矮),
+     供其他 sticky 元素(模擬考計時列、測驗進度列)決定要貼在導覽列下方多遠。 */
+  --header-h: 72px;
 }
 
 * {
@@ -383,6 +386,22 @@ h1, h2, h3, h4 {
   margin: 0;
   font-weight: 500;
 }
+.dash-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  min-width: 0;
+  max-width: 100%;
+}
+.dash-cta {
+  max-width: 100%;
+  min-width: 0;
+}
+.dash-cta-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 .dash-blob {
   position: absolute;
   top: -40px;
@@ -475,11 +494,18 @@ h1, h2, h3, h4 {
 }
 
 /* ---- Subject cards ---- */
+/* 五科剛好五張卡片:寬螢幕一排五張、中等寬度 3+2、手機 2 欄且落單的最後一張撐滿一列,
+   不會出現「4 張一排、第 5 張孤零零掉到下一行」。 */
 .subject-card-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 16px;
   margin-bottom: 36px;
+}
+@media (max-width: 1000px) {
+  .subject-card-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 }
 .subject-card {
   display: flex;
@@ -544,6 +570,7 @@ h1, h2, h3, h4 {
   display: flex;
   flex-direction: column;
   gap: 14px;
+  min-width: 0;
 }
 .dash-col h2, .app-rail h2 {
   font-size: 1.1rem;
@@ -592,6 +619,17 @@ a.timeline-row:hover {
   font-size: 0.78rem;
   color: var(--ink-muted);
   margin-top: 2px;
+}
+.timeline-row-more {
+  display: block;
+  font-weight: 700;
+  color: var(--ink);
+}
+.timeline-row-more:hover {
+  background: var(--surface-alt);
+}
+.profile-title + .real-exam-subheading {
+  margin-top: 0;
 }
 .timeline-row-empty {
   color: var(--ink-muted);
@@ -644,6 +682,7 @@ a.timeline-row:hover {
   display: flex;
   align-items: center;
   gap: 14px;
+  margin-bottom: 20px;
   background: linear-gradient(135deg, var(--math), var(--english));
   color: #fff;
   border-radius: var(--radius-lg);
@@ -817,8 +856,27 @@ a.timeline-row:hover {
 .achievement-card.tier-silver { --tier-color: #a7adb6; --tier-color-light: #dde1e6; --tier-color-dark: #767c86; }
 .achievement-card.tier-gold { --tier-color: #e0a716; --tier-color-light: #f7d668; --tier-color-dark: #a2790a; }
 .achievement-card.tier-diamond { --tier-color: #45b8c9; --tier-color-light: #9fe9f2; --tier-color-dark: #1f7c8a; }
+.achievement-card .achievement-body {
+  flex: 1;
+  min-width: 0;
+}
+/* 還沒解鎖的卡片只淡化徽章圖示,標題/說明/進度維持原本的對比,不能整張半透明
+   (進度文字正是這種卡片最有用的資訊,整張變淡會讓它幾乎看不清)。 */
 .achievement-card.is-locked {
-  opacity: 0.55;
+  background: var(--surface-alt);
+}
+.achievement-card.is-locked .achievement-icon {
+  opacity: 0.5;
+}
+.achievement-card.is-locked .achievement-title {
+  color: var(--ink-muted);
+}
+.achievement-card.is-locked .achievement-progress {
+  color: var(--ink-muted);
+}
+.achievement-card .progress-bar {
+  height: 6px;
+  margin: 8px 0 0;
 }
 .achievement-card.is-secret-locked {
   opacity: 0.7;
@@ -1096,6 +1154,10 @@ a.timeline-row:hover {
   transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
   flex-shrink: 0;
 }
+.sr-only-checkbox:focus-visible + .circular-check {
+  outline: 2.5px solid var(--ink);
+  outline-offset: 2px;
+}
 .circular-check.is-checked {
   background: var(--success);
   border-color: var(--success);
@@ -1262,6 +1324,7 @@ a.timeline-row:hover {
   opacity: 0.6;
 }
 .quiz-option-row {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -1270,11 +1333,32 @@ a.timeline-row:hover {
   border: 1.5px solid var(--border);
   transition: border-color 0.15s ease, background 0.15s ease;
 }
-.quiz-option-row input[type="radio"] {
+.quiz-option-row input[type="radio"],
+.quiz-option-row input[type="checkbox"] {
   accent-color: var(--ink);
   width: 18px;
   height: 18px;
   flex-shrink: 0;
+  margin: 0;
+}
+/* label 撐滿整列,再用 ::after 蓋住整個選項框:點選項框裡任何地方(不只是文字
+   或那顆小圓點)都能選取,手機上比較好按。 */
+.quiz-option-row label {
+  flex: 1;
+  cursor: pointer;
+}
+.quiz-option-row label::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+}
+/* :where() 讓這條的優先權歸零,答完後的 .is-correct / .is-wrong 才蓋得過去。 */
+.quiz-option-row:has(:where(input:checked)) {
+  border-color: var(--ink);
+  background: var(--surface-alt);
+}
+.quiz-option-row:has(:where(input:disabled)) label {
+  cursor: default;
 }
 .quiz-option-row.is-correct {
   border-color: var(--success);
@@ -1428,18 +1512,37 @@ a.timeline-row:hover {
 /* ---- Mock exam: running ---- */
 .mockexam-run-header {
   position: sticky;
-  top: 64px;
+  top: var(--header-h);
   z-index: 5;
   background: var(--bg);
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 12px;
   padding: 10px 0;
   margin-bottom: 8px;
 }
 .mockexam-run-header h2 {
   margin: 0;
   font-size: 1.1rem;
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.mockexam-run-status {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+.mockexam-answered {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--ink-muted);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
 }
 .mockexam-timer {
   font-family: var(--font-numeric);
@@ -1609,12 +1712,229 @@ a.timeline-row:hover {
   min-height: 80px;
 }
 
+/* ---- 頁面載入中提示(layout.js 的 initHeader 放進去、renderUserMenu 拿掉) ---- */
+.page-loading {
+  padding: 48px 0;
+  text-align: center;
+  color: var(--ink-muted);
+  font-weight: 600;
+}
+
+/* ---- 單元列表:學期/類型徽章 + 題數 ---- */
+.unit-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+/* ---- 篩選 chip(錯題本科目篩選、成就分類捷徑) ---- */
+.filter-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+.filter-chips-scroll {
+  scrollbar-width: none;
+}
+.filter-chips-scroll::-webkit-scrollbar {
+  display: none;
+}
+.filter-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+  padding: 7px 14px;
+  border-radius: var(--radius-full);
+  border: 1.5px solid var(--border);
+  background: var(--surface);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.filter-chip:hover {
+  border-color: var(--ink);
+}
+.filter-chip.is-active {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: #fff;
+}
+.filter-chip-count {
+  font-size: 0.75rem;
+  font-weight: 600;
+  opacity: 0.7;
+  font-variant-numeric: tabular-nums;
+}
+.achievement-category {
+  scroll-margin-top: calc(var(--header-h) + 12px);
+}
+
+/* ---- 單元測驗:進度列、未作答提示、完成後的行動列 ---- */
+.quiz-status-bar {
+  position: sticky;
+  top: var(--header-h);
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--bg);
+  padding: 10px 0;
+  margin-bottom: 8px;
+}
+.quiz-status-text {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--ink-muted);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+.quiz-status-bar .progress-bar {
+  flex: 1;
+  margin: 0;
+}
+.quiz-question,
+.quiz-result-bar {
+  scroll-margin-top: calc(var(--header-h) + 64px);
+}
+#unit-quiz {
+  scroll-margin-top: calc(var(--header-h) + 12px);
+}
+.quiz-question.is-unanswered {
+  box-shadow: 0 0 0 2px var(--danger), var(--shadow-sm);
+}
+.quiz-warning {
+  color: var(--danger);
+  font-weight: 700;
+  margin: 0 0 12px;
+}
+.quiz-finish-card {
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  box-shadow: var(--shadow-sm);
+  margin: 4px 0 16px;
+}
+.quiz-finish-card .quiz-score {
+  margin-bottom: 4px;
+}
+.quiz-finish-note {
+  margin: 0;
+  color: var(--ink-muted);
+  font-size: 0.9rem;
+}
+.quiz-finish-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+/* ---- 單元頁:直接跳到測驗、上一單元/下一單元 ---- */
+.jump-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin: 2px 0 6px;
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+.jump-link:hover {
+  border-color: var(--ink);
+}
+.unit-nav {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 36px;
+}
+.unit-nav-link {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 14px 16px;
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+  border-left: 4px solid var(--row-color, var(--ink));
+  min-width: 0;
+}
+.unit-nav-link:hover {
+  box-shadow: var(--shadow-md);
+}
+.unit-nav-link.is-next {
+  grid-column: 2;
+  text-align: right;
+  border-left: none;
+  border-right: 4px solid var(--row-color, var(--ink));
+}
+.unit-nav-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--ink-muted);
+}
+.unit-nav-title {
+  font-weight: 700;
+  font-size: 0.92rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ---- 錯題本:篩選/載入更多 ---- */
+.wrongbook-more {
+  display: flex;
+  justify-content: center;
+  margin: 8px 0 24px;
+}
+.wrongbook-empty {
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  padding: 28px 24px;
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+}
+.wrongbook-empty p {
+  margin: 0 0 14px;
+  color: var(--ink-muted);
+  font-weight: 600;
+}
+
+/* ---- 歷屆試題頁:精簡說明 + 展開完整說明 ---- */
+.intro-details {
+  margin: 0 0 20px;
+  color: var(--ink-muted);
+  font-size: 0.9rem;
+  line-height: 1.8;
+}
+.intro-details summary {
+  cursor: pointer;
+  font-weight: 700;
+  color: var(--ink);
+  margin-top: 6px;
+}
+.intro-details p {
+  margin: 8px 0 0;
+}
+
 @media (max-width: 860px) {
+  /* minmax(0, 1fr) 而不是 1fr:1fr 的下限是內容的最小寬度,「近期需複習」那種
+     white-space: nowrap 的長題目會把整欄撐寬,手機版整個頁面就會橫向捲動。 */
   .dash-columns {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
   .chart-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
   .stat-tile-grid {
     grid-template-columns: repeat(3, 1fr);
@@ -1623,7 +1943,75 @@ a.timeline-row:hover {
 
 @media (max-width: 640px) {
   .site-header {
-    padding: 14px 18px;
+    padding: 12px 16px;
+    flex-wrap: nowrap;
+    gap: 10px;
+  }
+  /* 手機版把品牌文字收起來只留圖示,導覽列就能排成單行(原本兩行、超過 110px 高
+     而且是 sticky,佔掉將近七分之一的螢幕高度)。 */
+  .brand-name {
+    display: none;
+  }
+  .nav-pill {
+    padding: 8px 12px;
+  }
+  .unit-item {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    column-gap: 12px;
+    row-gap: 6px;
+    align-items: start;
+  }
+  .unit-item .circular-check {
+    margin-top: 2px;
+  }
+  .unit-title {
+    grid-column: 2;
+  }
+  .unit-meta {
+    grid-column: 2;
+    justify-self: start;
+  }
+  /* 歷屆試題的年份卡片在手機上兩張一排,不然五張全寬卡片要捲很久。 */
+  .mockexam-grid-compact {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+  .mockexam-grid-compact .mockexam-card {
+    padding: 16px;
+    gap: 8px;
+  }
+  .mockexam-grid-compact .mockexam-card h2 {
+    font-size: 1rem;
+  }
+  .mockexam-grid-compact .mockexam-card .btn-pill {
+    padding: 10px 12px;
+    font-size: 0.9rem;
+  }
+  .mockexam-grid-compact .mockexam-card:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+  /* 手機上分類捷徑排成一行、左右滑動,不然十個 chip 會佔掉四五行。 */
+  .filter-chips-scroll {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    margin-right: -20px;
+    padding-right: 20px;
+  }
+  .quiz-finish-actions {
+    flex-direction: column;
+  }
+  .quiz-finish-actions .btn-pill {
+    width: 100%;
+  }
+  .unit-nav {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .unit-nav-link.is-next {
+    grid-column: 1;
+  }
+  .mockexam-run-header h2 {
+    font-size: 0.95rem;
   }
   .container, .container-narrow {
     padding: 20px;
@@ -1636,6 +2024,9 @@ a.timeline-row:hover {
     grid-template-columns: 1fr 1fr;
   }
   .subject-card-grid {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .subject-card:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
   }
 }

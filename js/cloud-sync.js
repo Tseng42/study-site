@@ -9,7 +9,7 @@ import {
   getDoc,
   setDoc,
 } from 'https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js';
-import { getSnapshot, mergeSnapshot, getLocalUpdatedAt, onChange, setActiveUser } from './storage.js';
+import { getSnapshot, mergeSnapshot, getLocalUpdatedAt, getContentFingerprint, onChange, setActiveUser } from './storage.js';
 
 let currentUid = null;
 let pushTimer = null;
@@ -29,6 +29,9 @@ export async function initCloudSync(uid) {
   // 幾乎是空的」本機快照整份蓋掉雲端既有紀錄,造成資料遺失。
   // 合併(而不是誰新就整份採用誰)也涵蓋了「pull 還在等的時候使用者已經在這台
   // 裝置上作答」的情況:那筆新紀錄跟雲端既有紀錄會一起保留。
+  // 頁面已經放行(等滿 3 秒、或 pull 先完成)之後才算「晚到」;晚到的雲端資料如果
+  // 真的改到本機內容,畫面上顯示的還是舊資料,要通知 layout.js 提示使用者重新整理。
+  let pageReleased = false;
   const pull = getDoc(doc(db, 'users', uid))
     .then((snap) => {
       const localUpdatedAt = getLocalUpdatedAt();
@@ -39,7 +42,11 @@ export async function initCloudSync(uid) {
       }
       const remote = snap.data();
       if (remote.updatedAt && remote.updatedAt === localUpdatedAt) return;
+      const before = getContentFingerprint();
       if (mergeSnapshot(remote)) pendingPush = true;
+      if (pageReleased && getContentFingerprint() !== before) {
+        window.dispatchEvent(new CustomEvent('studysite:cloud-updated'));
+      }
     })
     .catch(() => {
       // 讀不到雲端(離線、規則還沒設好等)就先用本機資料,不擋畫面。
@@ -53,6 +60,7 @@ export async function initCloudSync(uid) {
     });
 
   await Promise.race([pull, new Promise((resolve) => setTimeout(resolve, 3000))]);
+  pageReleased = true;
 
   if (!listenersRegistered) {
     listenersRegistered = true;
