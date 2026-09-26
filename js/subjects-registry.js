@@ -19,6 +19,7 @@ import { englishLessons4 } from '../data/english-lessons-4.js';
 import { englishLessons5 } from '../data/english-lessons-5.js';
 import { englishLessons6 } from '../data/english-lessons-6.js';
 import { sciencePhysicsChapters } from '../data/science-chapters-physics.js';
+import { scienceChemistryChapters } from '../data/science-chapters-chemistry.js';
 import { mathRealExams } from '../data/math-real-exams.js';
 import { socialRealExams } from '../data/social-real-exams.js';
 import { chineseRealExams } from '../data/chinese-real-exams.js';
@@ -88,7 +89,7 @@ function mergeChapterUnits(baseUnits, chapterUnits) {
 }
 
 const socialWithChapters = { ...social, units: mergeChapterUnits(social.units, []) };
-const scienceWithChapters = { ...science, units: mergeChapterUnits(science.units, [...sciencePhysicsChapters]) };
+const scienceWithChapters = { ...science, units: mergeChapterUnits(science.units, [...sciencePhysicsChapters, ...scienceChemistryChapters]) };
 
 const dataBySubject = { chinese: chineseWithLessons, english: englishWithLessons, math, science: scienceWithChapters, social: socialWithChapters };
 
