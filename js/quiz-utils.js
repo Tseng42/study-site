@@ -4,7 +4,9 @@
 // 題目資料格式(type 省略時視為 'single',跟舊資料相容):
 //   單選 type:'single'        { options:[...4], answer: index }
 //   多選 type:'multi'         { options:[...n], answers: [index, ...] }
-//   選填 type:'numeric'       { answerText: '3' }  // 純數字/簡短文字,去除空白後完全比對
+//   選填 type:'numeric'       { answerText: '3' }  // 數字/簡短文字,去除空白後完全比對;
+//                              // 若雙方都能解析成數值(含分數 a/b),改用數值相等比對
+//                              // (例如答案是 1/2,使用者填 0.5 或 2/4 都算對)
 //   選填(多格) type:'numeric-multi' { blanks: [{ label:'a', answerText:'2' }, ...] }
 //              // 一題有好幾個獨立空格(如歷屆試題選填題的 a、b 兩個未知數),須全部答對才給分
 //   非選擇題 type:'written'   { explanation: '官方滿分參考答案與評分原則' }
@@ -24,6 +26,39 @@ export function shuffle(array) {
     [copy[i], copy[j]] = [copy[j], copy[i]];
   }
   return copy;
+}
+
+// 把「選填」的作答字串解析成精確分數 { num, den },看不懂(非數字/非分數)就回傳 null。
+// 用分數(整數對)而不是 parseFloat,是為了避免 1/3 這類除不盡的分數在轉成浮點數時
+// 失去精確度,導致該相等的值被誤判成不相等。
+function parseNumericValue(s) {
+  const str = String(s ?? '').trim().replace(/\s+/g, '');
+  const fracMatch = str.match(/^(-?\d+)\/(\d+)$/);
+  if (fracMatch) {
+    const den = Number(fracMatch[2]);
+    if (den === 0) return null;
+    return { num: Number(fracMatch[1]), den };
+  }
+  const decMatch = str.match(/^(-?)(\d+)(?:\.(\d+))?$/);
+  if (decMatch) {
+    const [, sign, intPart, decPart = ''] = decMatch;
+    const den = 10 ** decPart.length;
+    const num = Number(intPart + decPart) * (sign === '-' ? -1 : 1);
+    return { num, den };
+  }
+  return null;
+}
+
+// 選填題判斷使用者的作答是否跟標準答案相符:先比對去空白後的字串,再比對數值是否
+// 相等(分數/小數互換也算對,例如答案是 1/2,填 0.5 或 2/4 都算對)。
+function numericAnswerMatches(userAnswer, answerText) {
+  const normalize = (s) => String(s ?? '').trim().replace(/\s+/g, '');
+  if (userAnswer == null) return false;
+  if (normalize(userAnswer) === normalize(answerText)) return true;
+  const a = parseNumericValue(userAnswer);
+  const b = parseNumericValue(answerText);
+  if (!a || !b) return false;
+  return a.num * b.den === b.num * a.den;
 }
 
 // 洗掉一題的選項順序(單選/多選才有選項),並同步校正正確答案的 index。
@@ -66,15 +101,13 @@ export function gradeAnswer(q, userAnswer) {
     return { creditFraction: fraction, isCorrect: fraction === 1 };
   }
   if (q.type === 'numeric') {
-    const normalize = (s) => String(s ?? '').trim().replace(/\s+/g, '');
-    const isCorrect = userAnswer != null && normalize(userAnswer) === normalize(q.answerText);
+    const isCorrect = numericAnswerMatches(userAnswer, q.answerText);
     return { creditFraction: isCorrect ? 1 : 0, isCorrect };
   }
   if (q.type === 'numeric-multi') {
     // 官方選填題規則:一題有好幾個空格,須全部答對才給分,答錯不倒扣(沒有部分分數)。
-    const normalize = (s) => String(s ?? '').trim().replace(/\s+/g, '');
     const answers = userAnswer || [];
-    const isCorrect = q.blanks.every((blank, i) => normalize(answers[i]) === normalize(blank.answerText));
+    const isCorrect = q.blanks.every((blank, i) => numericAnswerMatches(answers[i], blank.answerText));
     return { creditFraction: isCorrect ? 1 : 0, isCorrect };
   }
   if (q.type === 'hybrid') {
