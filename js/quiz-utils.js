@@ -28,11 +28,18 @@ export function shuffle(array) {
   return copy;
 }
 
+// 全形數字/斜線/負號/小數點(U+FF01~U+FF5E)轉成對應的半形字元,避免手機中文輸入法
+// 切到全形時打出「/」「－」「1」這種看起來一樣、但跟題庫資料(都是半形)比不起來的字元。
+function toHalfwidth(str) {
+  return str.replace(/[！-～]/g, (ch) => String.fromCharCode(ch.charCodeAt(0) - 0xfee0));
+}
+
 // 把「選填」的作答字串解析成精確分數 { num, den },看不懂(非數字/非分數)就回傳 null。
 // 用分數(整數對)而不是 parseFloat,是為了避免 1/3 這類除不盡的分數在轉成浮點數時
 // 失去精確度,導致該相等的值被誤判成不相等。
 function parseNumericValue(s) {
-  const str = String(s ?? '').trim().replace(/\s+/g, '');
+  let str = String(s ?? '').trim().replace(/\s+/g, '');
+  str = toHalfwidth(str).replace(/,/g, ''); // 全形轉半形,並去掉千分位逗號(如 10,000)
   const fracMatch = str.match(/^(-?\d+)\/(\d+)$/);
   if (fracMatch) {
     const den = Number(fracMatch[2]);
