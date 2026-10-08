@@ -50,7 +50,7 @@ export const englishLessons1 = [
         p.single('en-l1-1-q9', "Why did Mia wake up early?", ['She had to catch a bus.', 'She was too nervous to sleep.', 'She wanted to meet Lily.', 'Her mother woke her up.'], 1, '第二句提到 She woke up early because she was too nervous to sleep.'),
         p.single('en-l1-1-q10', "What can be inferred about Lily?", ['She was also once a new student at the school.', 'She had never eaten a sandwich.', 'She disliked Mia.', 'She was a teacher.'], 0, 'Lily 說 I felt the same way when I first arrived here,可推知她也曾是新來的人。'),
         p.single('en-l1-1-q11', "The word \"unfamiliar\" in the passage is closest in meaning to ______.", ['strange', 'boring', 'noisy', 'dangerous'], 0, 'unfamiliar 是「陌生的」,與 strange(陌生、不熟悉的)最接近。'),
-        multi('en-l1-1-q12', "Which of the following sentences are grammatically correct? (多選)", ['She has visited Japan three times.', 'I have seen him yesterday.', 'They moved here in 2019.', 'He has been to Paris last year.', 'We have known each other for ten years.'], [0, 2, 4], 'yesterday、in 2019、last year 是明確的過去時間,不可搭配現在完成式,「I have seen him yesterday.」、「He has been to Paris last year.」錯誤。'),
+        multi('en-l1-1-q12', "Which of the following sentences are grammatically correct? (Choose all that apply.)", ['She has visited Japan three times.', 'I have seen him yesterday.', 'They moved here in 2019.', 'He has been to Paris last year.', 'We have known each other for ten years.'], [0, 2, 4], 'yesterday、in 2019、last year 是明確的過去時間,不可搭配現在完成式,「I have seen him yesterday.」、「He has been to Paris last year.」錯誤。'),
       ],
     });
   })(),
@@ -98,7 +98,7 @@ export const englishLessons1 = [
         p.single('en-l1-2-q9', "According to Ms. Chen, why are club activities valuable?", ['They help students earn higher grades.', 'They help students develop teamwork and time-management skills.', 'They keep students away from homework.', 'They are required by the government.'], 1, '文中說這些活動 help students develop teamwork and time-management skills。'),
         p.single('en-l1-2-q10', "When do students usually eat lunch at Sunrise High?", ['Before the flag-raising ceremony', 'After four morning classes', 'After club activities', 'At 7:50 a.m.'], 1, '第二句提到 After four morning classes, students eat lunch in the cafeteria。'),
         p.single('en-l1-2-q11', "The word \"cooperate\" in the passage is closest in meaning to ______.", ['work together', 'compete', 'disagree', 'escape'], 0, 'cooperate 是「合作」,即 work together。'),
-        multi('en-l1-2-q12', "Which of the following sentences are correct? (多選)", ['She always is late.', 'He never eats breakfast.', 'They often go swimming.', 'I sometimes am tired.', 'We are usually busy on Mondays.'], [1, 2, 4], '頻率副詞放在 be 動詞後、一般動詞前:She is always late. / I am sometimes tired.,「She always is late.」、「I sometimes am tired.」錯誤。'),
+        multi('en-l1-2-q12', "Which of the following sentences are correct? (Choose all that apply.)", ['She always is late.', 'He never eats breakfast.', 'They often go swimming.', 'I sometimes am tired.', 'We are usually busy on Mondays.'], [1, 2, 4], '頻率副詞放在 be 動詞後、一般動詞前:She is always late. / I am sometimes tired.,「She always is late.」、「I sometimes am tired.」錯誤。'),
       ],
     });
   })(),
@@ -145,7 +145,7 @@ export const englishLessons1 = [
         p.single('en-l1-3-q9', "Why did Jack stop talking to Ben?", ['Ben broke a promise to help him.', 'Ben won the contest.', 'Ben moved to another school.', 'Ben borrowed his money.'], 0, '文中說 Ben 答應幫忙卻忘記並去看球賽,Jack 因此感到受傷。'),
         p.single('en-l1-3-q10', "What can we learn from the story?", ['Friends should never make mistakes.', 'Real friends are willing to apologize and forgive.', 'Basketball is more important than friendship.', 'Speech contests are not important.'], 1, '最後一句指出真正的友誼是願意說對不起並原諒對方。'),
         p.single('en-l1-3-q11', "In the passage, \"letting you down\" is closest in meaning to ______.", ['disappointing you', 'helping you', 'following you', 'inviting you'], 0, 'let sb down 是「使某人失望」,即 disappoint。'),
-        multi('en-l1-3-q12', "Which of the following sentences are correct? (多選)", ['He apologized for being late.', 'She insisted on to go.', 'I look forward to seeing you.', 'They forgave him for lie.', 'Thank you for inviting me.'], [0, 2, 4], 'insist on 後接 V-ing;forgive sb for 後接名詞或 V-ing(for lying),故「She insisted on to go.」、「They forgave him for lie.」錯誤。'),
+        multi('en-l1-3-q12', "Which of the following sentences are correct? (Choose all that apply.)", ['He apologized for being late.', 'She insisted on to go.', 'I look forward to seeing you.', 'They forgave him for lie.', 'Thank you for inviting me.'], [0, 2, 4], 'insist on 後接 V-ing;forgive sb for 後接名詞或 V-ing(for lying),故「She insisted on to go.」、「They forgave him for lie.」錯誤。'),
       ],
     });
   })(),
@@ -193,7 +193,7 @@ export const englishLessons1 = [
         p.single('en-l1-4-q9', "What is the main idea of the passage?", ['Red is the best color in the world.', 'The same color can have different meanings in different cultures.', 'Everyone should wear white at weddings.', 'Traffic lights are always red.'], 1, '全文以紅色、白色為例,說明顏色在不同文化中有不同意義。'),
         p.single('en-l1-4-q10', "According to the passage, which statement about white is true?", ['It is always connected with happiness.', 'In East Asia it is traditionally connected with funerals, but in many Western weddings it represents purity.', 'It is used on traffic lights.', 'It is the color of Chinese New Year.'], 1, '文中提到東亞傳統上白色與葬禮有關,但西方婚禮新娘穿白色代表純潔。'),
         p.single('en-l1-4-q11', "The phrase \"associated with\" in the passage is closest in meaning to ______.", ['connected with', 'separated from', 'different from', 'blamed for'], 0, 'be associated with 是「與……有關聯」,即 connected with。'),
-        multi('en-l1-4-q12', "Which of the following sentences are correct? (多選)", ['She is as taller as her mother.', 'He runs faster than I do.', 'This is the more interesting book I have ever read.', 'Nothing is as important as health.', 'Tom is the tallest boy in our class.'], [1, 3, 4], 'as 與 as 之間用原級(as tall as),「She is as taller as her mother.」錯誤;「我讀過最……的書」要用最高級 the most interesting,「This is the more interesting book I have ever read.」錯誤。'),
+        multi('en-l1-4-q12', "Which of the following sentences are correct? (Choose all that apply.)", ['She is as taller as her mother.', 'He runs faster than I do.', 'This is the more interesting book I have ever read.', 'Nothing is as important as health.', 'Tom is the tallest boy in our class.'], [1, 3, 4], 'as 與 as 之間用原級(as tall as),「She is as taller as her mother.」錯誤;「我讀過最……的書」要用最高級 the most interesting,「This is the more interesting book I have ever read.」錯誤。'),
       ],
     });
   })(),
@@ -241,7 +241,7 @@ export const englishLessons1 = [
         p.single('en-l1-5-q9', "According to the passage, what does the brain do during sleep?", ['It stops working completely.', 'It organizes what we have learned during the day.', 'It makes us feel angry.', 'It repairs the body.'], 1, '文中說 During sleep, the brain organizes what we have learned during the day。'),
         p.single('en-l1-5-q10', "Which of the following is NOT a suggestion for sleeping better?", ['Going to bed at the same time every night', 'Avoiding caffeine in the evening', 'Keeping phones away from the bed', 'Drinking coffee before bedtime'], 3, '文中建議晚上避免咖啡因,所以睡前喝咖啡不是建議。'),
         p.single('en-l1-5-q11', "The sentence \"it is an investment in your health\" means that sleep ______.", ['brings long-term benefits to our health', 'costs a lot of money', 'is a waste of time', 'is only for adults'], 0, '把睡眠比喻成對健康的投資,表示睡眠會帶來長期的好處。'),
-        multi('en-l1-5-q12', "Which of the following sentences are correct? (多選)", ['You should to go to bed early.', 'He must be tired after such a long trip.', "She doesn't have to wear a uniform on Fridays.", 'You had better to see a doctor.', 'They might be at home now.'], [1, 2, 4], '情態助動詞後面接原形動詞,不可加 to,「You should to go to bed early.」、「You had better to see a doctor.」錯誤。'),
+        multi('en-l1-5-q12', "Which of the following sentences are correct? (Choose all that apply.)", ['You should to go to bed early.', 'He must be tired after such a long trip.', "She doesn't have to wear a uniform on Fridays.", 'You had better to see a doctor.', 'They might be at home now.'], [1, 2, 4], '情態助動詞後面接原形動詞,不可加 to,「You should to go to bed early.」、「You had better to see a doctor.」錯誤。'),
       ],
     });
   })(),
@@ -290,7 +290,7 @@ export const englishLessons1 = [
         p.single('en-l1-6-q9', "Why do some turtles eat plastic bags?", ['They are very hungry.', 'The bags look like jellyfish.', 'The bags smell good.', 'They want to clean the ocean.'], 1, '文中說 turtles eat plastic bags because they look like jellyfish。'),
         p.single('en-l1-6-q10', "What have some countries done to solve the plastic problem?", ['They have banned free plastic bags.', 'They have thrown plastic into the ocean.', 'They have stopped fishing.', 'They have built more factories.'], 0, '文中說 some countries have banned free plastic bags。'),
         p.single('en-l1-6-q11', "The phrase \"make a big difference\" in the passage means ______.", ['have a great effect', 'cause an argument', 'look very different', 'take a long time'], 0, 'make a big difference 是「產生很大的影響」。'),
-        multi('en-l1-6-q12', "Which of the following sentences are correct? (多選)", ['The cake was eaten by my brother.', 'A new bridge is building now.', 'The movie was directed by a famous director.', 'The homework has been finished.', 'The letter was arrived yesterday.'], [0, 2, 3], '「正在興建」要用 is being built,「A new bridge is building now.」錯誤;arrive 是不及物動詞,沒有被動語態,「The letter was arrived yesterday.」錯誤。'),
+        multi('en-l1-6-q12', "Which of the following sentences are correct? (Choose all that apply.)", ['The cake was eaten by my brother.', 'A new bridge is building now.', 'The movie was directed by a famous director.', 'The homework has been finished.', 'The letter was arrived yesterday.'], [0, 2, 3], '「正在興建」要用 is being built,「A new bridge is building now.」錯誤;arrive 是不及物動詞,沒有被動語態,「The letter was arrived yesterday.」錯誤。'),
       ],
     });
   })(),

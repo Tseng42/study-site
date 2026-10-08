@@ -218,3 +218,20 @@ function renderTable({ headers, rows }) {
   );
   return el('table', { class: 'note-table' }, [thead, tbody]);
 }
+
+// 英文科題幹的「翻譯」按鈕:題幹預設只顯示英文,按了才在下面多一行中文(q.questionZh)。
+// richText 是 renderRichText 畫出來的題幹;按鈕接在題幹第一行後面,中文那一行接在題幹下面。
+export function attachTranslation(richText, zhText) {
+  if (!zhText) return richText;
+  const line = el('p', { class: 'question-zh', lang: 'zh-Hant' }, zhText);
+  line.hidden = true;
+  const button = el('button', { type: 'button', class: 'translate-btn', 'aria-expanded': 'false' }, '翻譯');
+  button.addEventListener('click', () => {
+    line.hidden = !line.hidden;
+    button.setAttribute('aria-expanded', String(!line.hidden));
+    button.classList.toggle('is-on', !line.hidden);
+  });
+  (richText.querySelector('p') || richText).append(button);
+  richText.append(line);
+  return richText;
+}

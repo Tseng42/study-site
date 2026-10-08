@@ -1,7 +1,7 @@
 // 「一份測驗」的整套畫面與流程:題目、即時/送出後判分、進度列、完成卡片、邊答邊存。
 // 單元測驗(page-unit.js)跟錯題重練(page-wrongbook.js)共用,兩邊只差在題目從哪來、
 // 作答紀錄要記在哪個單元底下、做完後有哪些按鈕。
-import { el, renderPassage, renderRichText, progressBar } from './render.js';
+import { el, renderPassage, renderRichText, progressBar, attachTranslation } from './render.js';
 import { renderAnswerField, gradeAnswer, markAnswerFeedback, typeLabel, isAnswered, correctAnswerOf, serializeAnswer } from './quiz-utils.js';
 import { upsertQuizResult } from './storage.js';
 
@@ -81,10 +81,13 @@ export function runQuiz(container, { title, questions, mode, recordMode = mode, 
     fields.push(field);
 
     const qCard = el('div', { class: 'quiz-question', id: `q-${index}` }, [
-      renderRichText(`${index + 1}. ${q.question}`, {
-        className: 'quiz-question-text',
-        badge: el('span', { class: 'quiz-type-badge' }, typeLabel(q.type)),
-      }),
+      attachTranslation(
+        renderRichText(`${index + 1}. ${q.question}`, {
+          className: 'quiz-question-text',
+          badge: el('span', { class: 'quiz-type-badge' }, typeLabel(q.type)),
+        }),
+        q.questionZh
+      ),
       field.optionsWrap,
       feedback,
     ]);

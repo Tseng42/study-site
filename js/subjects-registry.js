@@ -26,6 +26,7 @@ import { mathRealExams } from '../data/math-real-exams.js';
 import { socialRealExams } from '../data/social-real-exams.js';
 import { chineseRealExams } from '../data/chinese-real-exams.js';
 import { englishPracticeSets } from '../data/english-practice-sets.js';
+import { englishStemZh } from '../data/english-zh.js';
 import { englishRealExams } from '../data/english-real-exams.js';
 import { scienceRealExams } from '../data/science-real-exams.js';
 
@@ -64,6 +65,9 @@ const chineseWithLessons = {
 // 英文專題單元的實作題組(data/english-practice-sets.js)接在各單元原有題目後面,原題目 id 不變。
 const englishTopicalUnits = english.units.map((unit) => (englishPracticeSets[unit.id] ? { ...unit, quiz: [...unit.quiz, ...englishPracticeSets[unit.id]] } : unit));
 
+// 英文題幹的中文翻譯(data/english-zh.js,依題目 id 對應)掛成 questionZh,畫面上按「翻譯」才顯示。
+const withStemZh = (unit) => ({ ...unit, quiz: unit.quiz.map((q) => (englishStemZh[q.id] ? { ...q, questionZh: englishStemZh[q.id] } : q)) });
+
 const englishWithLessons = {
   ...english,
   units: mergeTextbookUnits(englishTopicalUnits, [
@@ -73,7 +77,7 @@ const englishWithLessons = {
     ...englishLessons4,
     ...englishLessons5,
     ...englishLessons6,
-  ]),
+  ]).map(withStemZh),
 };
 
 // 社會、自然:依 108 課綱課本章節切細的「章節單元」(data/social-chapters-*.js、

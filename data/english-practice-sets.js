@@ -9,7 +9,7 @@ const FIRST_NEW_NO = 39; // 六個單元原有題目的編號都到 q38 為止
 
 const s = (q, options, exp) => ({ q, options, answer: 0, exp });
 const m = (q, options, answers, exp) => ({ q, options, answers, exp });
-const blank = (no, options, exp) => s(`空格 (${no}) 應填入下列哪一個選項?`, options, exp);
+const blank = (no, options, exp) => s(`Which option best fits blank (${no})?`, options, exp);
 
 function build(unitId, sets) {
   let no = FIRST_NEW_NO;
@@ -267,9 +267,9 @@ Rita: I have worked at a bakery every Saturday for a year. The job has taught me
 
 Leo: I tried working at a convenience store last semester, and my grades dropped. I was too exhausted to concentrate in class, and I had no time for the basketball team. I quit after three months. I do not regret the experience, because it showed me how hard it is to earn money. Still, I believe students should focus on schoolwork first; there will be plenty of time to work after graduation.`,
     items: [
-      s(`選出最適合填入下列句子、且字形正確的選項:\nWorking at the bakery has taught Rita to be on time and to spend her money more ______.`, [`carefully`, `careful`, `care`, `caring`], `空格修飾動詞 spend,需要副詞 carefully;Rita 說賺了錢之後花錢前會多想一下(think twice before spending it)。`),
+      s(`Choose the option that best completes the sentence in the correct form:\nWorking at the bakery has taught Rita to be on time and to spend her money more ______.`, [`carefully`, `careful`, `care`, `caring`], `空格修飾動詞 spend,需要副詞 carefully;Rita 說賺了錢之後花錢前會多想一下(think twice before spending it)。`),
       s(`Which word in Leo's comment means "extremely tired"?`, [`exhausted`, `plenty`, `regret`, `focus`], `Leo 說 I was too exhausted to concentrate in class,exhausted 是「精疲力盡的」。`),
-      m(`Which of the following are true for BOTH Rita and Leo? (多選)`, [`They have had the experience of working part-time.`, `They learned something about money from working.`, `Their grades dropped because of their jobs.`, `They are still working at the same place.`, `They think students should not work until after graduation.`], [0, 1], `兩人都打過工,也都從中體會到金錢得來不易(Rita 花錢前會多想,Leo 知道賺錢很辛苦)。成績退步、已經辭職、主張畢業後再工作的只有 Leo。`),
+      m(`Which of the following are true for BOTH Rita and Leo? (Choose all that apply.)`, [`They have had the experience of working part-time.`, `They learned something about money from working.`, `Their grades dropped because of their jobs.`, `They are still working at the same place.`, `They think students should not work until after graduation.`], [0, 1], `兩人都打過工,也都從中體會到金錢得來不易(Rita 花錢前會多想,Leo 知道賺錢很辛苦)。成績退步、已經辭職、主張畢業後再工作的只有 Leo。`),
       s(`Why did Leo quit his job?`, [`His grades dropped and he was too tired to concentrate in class.`, `His manager asked him to leave.`, `He found a better job at a bakery.`, `His parents did not allow him to work.`], `Leo 說成績退步、上課累到無法專心,也沒時間參加籃球隊,三個月後就辭職了。`),
     ],
   },
@@ -281,9 +281,9 @@ Emperor penguins spend the winter in Antarctica, where temperatures can fall bel
 
 Arctic foxes live in the far north. Their thick fur, which turns white in winter and brown in summer, keeps them warm and helps them hide from enemies. Even the bottoms of their feet are covered with fur. When food is plentiful, the foxes bury some of it in the frozen ground so that they will have something to eat during the long winter. On the coldest days, a fox curls up and wraps its bushy tail around its body like a blanket.`,
     items: [
-      s(`選出最適合填入下列句子、且字形正確的選項:\nEmperor penguins stay warm by standing close together, while arctic foxes are ______ from the cold by their thick fur.`, [`protected`, `protect`, `protecting`, `protection`], `are ___ by their thick fur 是被動語態,需要過去分詞 protected。`),
+      s(`Choose the option that best completes the sentence in the correct form:\nEmperor penguins stay warm by standing close together, while arctic foxes are ______ from the cold by their thick fur.`, [`protected`, `protect`, `protecting`, `protection`], `are ___ by their thick fur 是被動語態,需要過去分詞 protected。`),
       s(`Which word in the passage means "available in large amounts"?`, [`plentiful`, `remarkable`, `frozen`, `bushy`], `When food is plentiful 指食物充足的時候,plentiful 是「大量的、充足的」。`),
-      m(`Which of the following are true for BOTH emperor penguins and arctic foxes? (多選)`, [`They live in extremely cold places.`, `Their bodies or behavior help them keep warm.`, `Their color changes with the seasons.`, `They store food for the winter.`, `They gather in groups of thousands.`], [0, 1], `兩者都生活在極寒地區,也都有保暖的方法(企鵝擠在一起,狐狸有厚毛並用尾巴裹住身體)。毛色隨季節改變與儲存食物只有北極狐,成千上萬聚在一起只有皇帝企鵝。`),
+      m(`Which of the following are true for BOTH emperor penguins and arctic foxes? (Choose all that apply.)`, [`They live in extremely cold places.`, `Their bodies or behavior help them keep warm.`, `Their color changes with the seasons.`, `They store food for the winter.`, `They gather in groups of thousands.`], [0, 1], `兩者都生活在極寒地區,也都有保暖的方法(企鵝擠在一起,狐狸有厚毛並用尾巴裹住身體)。毛色隨季節改變與儲存食物只有北極狐,成千上萬聚在一起只有皇帝企鵝。`),
       s(`According to the passage, what does a male emperor penguin do during the winter?`, [`He keeps an egg on his feet and eats nothing for about two months.`, `He buries food in the frozen ground.`, `He swims north to look for warmer water.`, `He changes the color of his feathers.`], `文中說 each male balances a single egg on his feet and goes without food for about two months。`),
     ],
   },
@@ -301,9 +301,9 @@ C. Hiking Club
 We explore a different trail on the second Saturday of every month. No experience is necessary, but members must be able to walk for at least three hours. Transportation costs are shared equally.`,
     items: [
       s(`Amy is busy after school on weekdays, but she is free on weekends and loves being outdoors. Which club suits her best?`, [`Hiking Club`, `Photography Club`, `Debate Club`, `None of the three clubs`], `Hiking Club 在每個月第二個星期六活動,而且是戶外健行;另外兩個社團都在平日放學後。`),
-      m(`Which clubs clearly say that people without experience can join? (多選)`, [`Photography Club`, `Debate Club`, `Hiking Club`], [0, 2], `Photography Club 寫 Beginners are welcome,Hiking Club 寫 No experience is necessary;Debate Club 沒有這樣的說明。`),
+      m(`Which clubs clearly say that people without experience can join? (Choose all that apply.)`, [`Photography Club`, `Debate Club`, `Hiking Club`], [0, 2], `Photography Club 寫 Beginners are welcome,Hiking Club 寫 No experience is necessary;Debate Club 沒有這樣的說明。`),
       s(`Which word in the Debate Club's description means "being present at meetings or events"?`, [`attendance`, `competitions`, `confident`, `current`], `regular attendance is required 是「必須固定出席」,attendance 是「出席」。`),
-      s(`選出最適合填入下列句子、且字形正確的選項:\nAt the end of each semester, the Photography Club ______ its members' photos in the school library.`, [`exhibits`, `exhibition`, `exhibiting`, `exhibitor`], `句子缺動詞,主詞 the Photography Club 是單數,要把文中的名詞 exhibition 改成動詞 exhibits。`),
+      s(`Choose the option that best completes the sentence in the correct form:\nAt the end of each semester, the Photography Club ______ its members' photos in the school library.`, [`exhibits`, `exhibition`, `exhibiting`, `exhibitor`], `句子缺動詞,主詞 the Photography Club 是單數,要把文中的名詞 exhibition 改成動詞 exhibits。`),
     ],
   },
   {
@@ -320,10 +320,10 @@ Quinn: Not every family can afford a tablet. Unless the school provides them for
 
 Ray: Digital textbooks can be updated instantly, so we would always have the latest information. I am all for it.`,
     items: [
-      m(`Which students clearly support replacing paper textbooks with tablets? (多選)`, [`Nina`, `Owen`, `Paula`, `Quinn`, `Ray`], [0, 4], `Nina 說 Absolutely,Ray 說 I am all for it,兩人明確支持。Owen 不認同,Paula 主張兩種並用,Quinn 擔心不公平。`),
+      m(`Which students clearly support replacing paper textbooks with tablets? (Choose all that apply.)`, [`Nina`, `Owen`, `Paula`, `Quinn`, `Ray`], [0, 4], `Nina 說 Absolutely,Ray 說 I am all for it,兩人明確支持。Owen 不認同,Paula 主張兩種並用,Quinn 擔心不公平。`),
       s(`Whose opinion suggests using tablets and paper books together?`, [`Paula`, `Nina`, `Owen`, `Quinn`], `Paula 說平板適合看影片和做測驗,但手寫筆記記得比較牢,並問 Why not use both?`),
       s(`Which phrase on the forum means "completely in favor of something"?`, [`all for it`, `not convinced`, `by hand`, `for free`], `Ray 說 I am all for it,be all for something 是「完全贊成」。`),
-      s(`選出最適合填入下列句子、且字形正確的選項:\nRay likes digital textbooks because they can receive ______ instantly.`, [`updates`, `updated`, `updating`, `update`], `receive 後面需要名詞作受詞;可數名詞單數不能單獨出現,所以用複數 updates(由文中的 updated 變化而來)。`),
+      s(`Choose the option that best completes the sentence in the correct form:\nRay likes digital textbooks because they can receive ______ instantly.`, [`updates`, `updated`, `updating`, `update`], `receive 後面需要名詞作受詞;可數名詞單數不能單獨出現,所以用複數 updates(由文中的 updated 變化而來)。`),
     ],
   },
 ];

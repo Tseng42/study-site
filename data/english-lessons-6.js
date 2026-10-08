@@ -49,7 +49,7 @@ export const englishLessons6 = [
         single('en-l6-1-q9', "The government decided to ______ the use of plastic bags.", ['restrict', 'acquire', 'maintain', 'emphasize'], 0, 'restrict 是「限制」。'),
         p.single('en-l6-1-q10', "What did Nora assume about the diary at first?", ['It would be full of boring daily notes.', 'It would be very valuable.', 'It would be written in a foreign language.', 'It would be about her own life.'], 0, '文中說 she assumed it would be full of boring daily notes。'),
         p.single('en-l6-1-q11', "The word \"revealed\" in the passage is closest in meaning to ______.", ['showed', 'hid', 'lost', 'built'], 0, 'reveal 是「揭露、顯示」,與 showed 最接近。'),
-        multi('en-l6-1-q12', "Which of the following sentences use the underlined words correctly? (多選)", ['The report revealed a serious problem.', 'She predicted the door and left.', 'This course requires basic math skills.', 'He obtained a scholarship to study abroad.', 'They maintained their friendship for many years.'], [0, 2, 3, 4], 'predict 是「預測」,不能接 the door,「She predicted the door and left.」錯誤。'),
+        multi('en-l6-1-q12', "Which of the following sentences use the underlined words correctly? (Choose all that apply.)", ['The report revealed a serious problem.', 'She predicted the door and left.', 'This course requires basic math skills.', 'He obtained a scholarship to study abroad.', 'They maintained their friendship for many years.'], [0, 2, 3, 4], 'predict 是「預測」,不能接 the door,「She predicted the door and left.」錯誤。'),
       ],
     });
   })(),
@@ -100,7 +100,7 @@ export const englishLessons6 = [
         single('en-l6-2-q9', "Rainbows are a natural ______ caused by sunlight and water drops.", ['phenomenon', 'consequence', 'ambition', 'tendency'], 0, 'natural phenomenon 是「自然現象」。'),
         p.single('en-l6-2-q10', "What is obvious according to the passage?", ['Sleep affects learning.', 'Exams are easy.', 'Screens improve memory.', 'Students sleep too much.'], 0, '第一句說 It is obvious that sleep affects learning。'),
         p.single('en-l6-2-q11', "The word \"reluctant\" in the passage is closest in meaning to ______.", ['unwilling', 'eager', 'able', 'anxious'], 0, 'reluctant 是「不情願的」,與 unwilling 最接近。'),
-        multi('en-l6-2-q12', "Which of the following sentences are correct? (多選)", ['It is obvious that he is lying.', 'She was reluctant to speak in public.', 'We have sufficient food for everyone.', 'His answer was so vague that nobody understood.', 'The tendency of the exam is tomorrow.'], [0, 1, 2, 3], 'tendency 是「傾向」,不能用來表示考試日期,「The tendency of the exam is tomorrow.」錯誤。'),
+        multi('en-l6-2-q12', "Which of the following sentences are correct? (Choose all that apply.)", ['It is obvious that he is lying.', 'She was reluctant to speak in public.', 'We have sufficient food for everyone.', 'His answer was so vague that nobody understood.', 'The tendency of the exam is tomorrow.'], [0, 1, 2, 3], 'tendency 是「傾向」,不能用來表示考試日期,「The tendency of the exam is tomorrow.」錯誤。'),
       ],
     });
   })(),
@@ -153,7 +153,7 @@ export const englishLessons6 = [
         single('en-l6-3-q9', "I missed a week of class, so I must work hard to ______ my classmates.", ['catch up with', 'get rid of', 'look up to', 'run out of'], 0, 'catch up with 是「趕上」。'),
         p.single('en-l6-3-q10', "How many people visited the library on the first day?", ['Approximately 2,000', 'Exactly 20,000', 'Fewer than 200', 'About 10,000'], 0, '文中說 Approximately 2,000 people visited on the first day。'),
         p.single('en-l6-3-q11', "What did the city eventually agree to do?", ['Keep the library open until ten every night', 'Close the library', 'Build a smaller library', 'Charge for entry'], 0, '最後一句說 Eventually, the city agreed to keep the library open until ten every night。'),
-        multi('en-l6-3-q12', "Which of the following sentences are correct? (多選)", ['In spite of the rain, we had a great picnic.', 'In spite of it rained, we had a great picnic.', 'He worked hard; otherwise, he would have failed.', 'She paid attention to the teacher.', 'You should take advantage the offer.'], [0, 2, 3], 'in spite of 後面接名詞而非子句,「In spite of it rained, we had a great picnic.」錯誤;take advantage of 的 of 不能省略,「You should take advantage the offer.」錯誤。'),
+        multi('en-l6-3-q12', "Which of the following sentences are correct? (Choose all that apply.)", ['In spite of the rain, we had a great picnic.', 'In spite of it rained, we had a great picnic.', 'He worked hard; otherwise, he would have failed.', 'She paid attention to the teacher.', 'You should take advantage the offer.'], [0, 2, 3], 'in spite of 後面接名詞而非子句,「In spite of it rained, we had a great picnic.」錯誤;take advantage of 的 of 不能省略,「You should take advantage the offer.」錯誤。'),
       ],
     });
   })(),

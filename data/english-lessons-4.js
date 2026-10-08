@@ -49,7 +49,7 @@ export const englishLessons4 = [
         p.single('en-l4-1-q9', "Which of the following can AI already do, according to the passage?", ['Translate languages, diagnose diseases, and write simple news reports', 'Cook all meals', 'Replace every teacher', 'Predict the weather perfectly'], 0, '第一句提到 AI 能翻譯、診斷疾病、撰寫簡單新聞。'),
         p.single('en-l4-1-q10', "Why does the author mention the invention of cars?", ['To show that technology can also create new jobs', 'To prove that machines are dangerous', 'To explain how horses were trained', 'To describe the history of engineers'], 0, '汽車的發明使馬車夫失業,卻創造了司機、技師與工程師等新工作。'),
         p.single('en-l4-1-q11', "According to the passage, which skills will be important in the future?", ['Creativity, communication, and teamwork', 'Only computer programming', 'Memorizing facts', 'Working alone'], 0, '最後一句提到創造力、溝通與團隊合作等機器不易複製的能力。'),
-        multi('en-l4-1-q12', "Which of the following sentences are correct? (多選)", ['It is difficult for me to learn Japanese.', 'It is nice for you to say so.', 'To learn a new language takes time.', 'He was too proud to admit his mistake.', 'I decided to studying abroad.'], [0, 2, 3], '形容詞 nice 描述人的性格,應用 of you;decide 後接不定詞(decided to study),「It is nice for you to say so.」、「I decided to studying abroad.」錯誤。'),
+        multi('en-l4-1-q12', "Which of the following sentences are correct? (Choose all that apply.)", ['It is difficult for me to learn Japanese.', 'It is nice for you to say so.', 'To learn a new language takes time.', 'He was too proud to admit his mistake.', 'I decided to studying abroad.'], [0, 2, 3], '形容詞 nice 描述人的性格,應用 of you;decide 後接不定詞(decided to study),「It is nice for you to say so.」、「I decided to studying abroad.」錯誤。'),
       ],
     });
   })(),
@@ -97,7 +97,7 @@ export const englishLessons4 = [
         p.single('en-l4-2-q9', "What has led to global warming, according to the passage?", ['The burning of coal, oil, and gas that raises the amount of carbon dioxide', 'The growth of forests', 'The use of solar power', 'Stronger storms'], 0, '文中說燃燒煤、石油與天然氣使二氧化碳大量增加,導致全球暖化。'),
         p.single('en-l4-2-q10', "What threat do rising sea levels pose?", ['Some island countries may disappear.', 'Solar panels will break.', 'Storms will stop.', 'Ice will grow.'], 0, '文中說 some island countries may disappear within the next hundred years。'),
         p.single('en-l4-2-q11', "What do experts say about switching to clean energy?", ['It costs a lot at first but saves money and protects health in the long run.', 'It is always cheaper at first.', 'It has no effect on health.', 'It is impossible in Taiwan.'], 0, '文中說剛開始花費很高,但長期能省錢並保護健康。'),
-        multi('en-l4-2-q12', "Which of the following sentences are correct? (多選)", ['He was late because of the traffic.', 'He was late because of the traffic was heavy.', 'The picnic was canceled due to bad weather.', 'Thanks to your help, I passed the test.', 'She succeeded because her hard work.'], [0, 2, 3], 'because of / because 後面接的形式不同:「He was late because of the traffic was heavy.」應改為 because the traffic was heavy;「She succeeded because her hard work.」應改為 because of her hard work。'),
+        multi('en-l4-2-q12', "Which of the following sentences are correct? (Choose all that apply.)", ['He was late because of the traffic.', 'He was late because of the traffic was heavy.', 'The picnic was canceled due to bad weather.', 'Thanks to your help, I passed the test.', 'She succeeded because her hard work.'], [0, 2, 3], 'because of / because 後面接的形式不同:「He was late because of the traffic was heavy.」應改為 because the traffic was heavy;「She succeeded because her hard work.」應改為 because of her hard work。'),
       ],
     });
   })(),
@@ -146,7 +146,7 @@ export const englishLessons4 = [
         p.single('en-l4-3-q9', "What happens to about one third of the food produced in the world?", ['It is never eaten.', 'It is exported.', 'It is turned into fuel.', 'It is given to farmers.'], 0, '第一句說約三分之一的食物從未被吃掉。'),
         p.single('en-l4-3-q10', "Why is food often lost in poor countries before reaching the market?", ['Farmers lack storage.', 'Consumers buy too much.', 'Farmers grow too little.', 'Roads are too new.'], 0, '文中說 farmers lack storage。'),
         p.single('en-l4-3-q11', "Which of the following is suggested as a way to help reduce food waste?", ['Planning meals and buying \"ugly\" vegetables', 'Eating out every day', 'Throwing away old food quickly', 'Buying more than needed'], 0, '最後一句建議規劃餐點、妥善儲存,以及購買「醜」蔬菜。'),
-        multi('en-l4-3-q12', "Which of the following sentences are correct? (多選)", ['The city where I grew up has changed a lot.', 'This is the woman that I told you about.', 'My sister, that lives in Tokyo, is a nurse.', 'The book, which I borrowed from him, was very old.', 'The man to who I spoke was kind.'], [0, 1, 3], '非限定關係子句(有逗號)不能用 that,「My sister, that lives in Tokyo, is a nurse.」錯誤;介系詞後要用 whom,應為 to whom,「The man to who I spoke was kind.」錯誤。'),
+        multi('en-l4-3-q12', "Which of the following sentences are correct? (Choose all that apply.)", ['The city where I grew up has changed a lot.', 'This is the woman that I told you about.', 'My sister, that lives in Tokyo, is a nurse.', 'The book, which I borrowed from him, was very old.', 'The man to who I spoke was kind.'], [0, 1, 3], '非限定關係子句(有逗號)不能用 that,「My sister, that lives in Tokyo, is a nurse.」錯誤;介系詞後要用 whom,應為 to whom,「The man to who I spoke was kind.」錯誤。'),
       ],
     });
   })(),
@@ -194,7 +194,7 @@ export const englishLessons4 = [
         p.single('en-l4-4-q9', "How much faster do false news stories spread than true ones?", ['Twice as fast', 'Six times faster', 'Ten times faster', 'They spread at the same speed'], 1, '文中說 false news stories spread six times faster。'),
         p.single('en-l4-4-q10', "Why do experts say headlines can be a problem?", ['They are designed to attract attention rather than tell the whole truth.', 'They are always too long.', 'They are written by students.', 'They are not read by anyone.'], 0, '文中說標題常是為了吸引注意而不是傳達完整真相。'),
         p.single('en-l4-4-q11', "What do media-literate readers do if the answers are unclear?", ['They wait before sharing.', 'They share it immediately.', 'They delete their accounts.', 'They write a headline.'], 0, '文中說 If the answers are unclear, they wait before sharing。'),
-        multi('en-l4-4-q12', "Which of the following sentences are correct? (多選)", ['He said that he was tired.', 'He said me that he was tired.', 'She told us that she would come.', 'She asked if I liked coffee.', 'She asked me did I like coffee.'], [0, 2, 3], 'say 後不直接接人,「He said me that he was tired.」應為 told me;間接問句不倒裝,「She asked me did I like coffee.」錯誤。'),
+        multi('en-l4-4-q12', "Which of the following sentences are correct? (Choose all that apply.)", ['He said that he was tired.', 'He said me that he was tired.', 'She told us that she would come.', 'She asked if I liked coffee.', 'She asked me did I like coffee.'], [0, 2, 3], 'say 後不直接接人,「He said me that he was tired.」應為 told me;間接問句不倒裝,「She asked me did I like coffee.」錯誤。'),
       ],
     });
   })(),
@@ -242,7 +242,7 @@ export const englishLessons4 = [
         p.single('en-l4-5-q9', "Why was Maya hurt?", ['Her classmates laughed and said pilots are men.', 'She failed a flight test.', 'Her aunt was angry with her.', 'She lost her job.'], 0, '文中說有同學笑她,並說 Pilots are men。'),
         p.single('en-l4-5-q10', "Who encouraged Maya to follow her dream?", ['A classmate', 'Her aunt, a retired airline captain', 'Her teacher', 'Her father'], 1, '文中說 It was her aunt, a retired airline captain, who encouraged her。'),
         p.single('en-l4-5-q11', "According to the passage, about what percentage of airline pilots worldwide are women?", ['5 percent', '15 percent', '30 percent', '50 percent'], 0, '文中說 women make up only about five percent of airline pilots worldwide。'),
-        multi('en-l4-5-q12', "Which of the following sentences are correct? (多選)", ['It was in 2019 that we first met.', 'Only after the meeting did I know the truth.', 'Never I have seen such a beautiful sunset.', 'Not only was he late, but he also forgot the book.', 'Rarely he goes to the movies.'], [0, 1, 3], '否定副詞置句首要倒裝:Never have I seen...、Rarely does he go...,「Never I have seen such a beautiful sunset.」、「Rarely he goes to the movies.」錯誤。'),
+        multi('en-l4-5-q12', "Which of the following sentences are correct? (Choose all that apply.)", ['It was in 2019 that we first met.', 'Only after the meeting did I know the truth.', 'Never I have seen such a beautiful sunset.', 'Not only was he late, but he also forgot the book.', 'Rarely he goes to the movies.'], [0, 1, 3], '否定副詞置句首要倒裝:Never have I seen...、Rarely does he go...,「Never I have seen such a beautiful sunset.」、「Rarely he goes to the movies.」錯誤。'),
       ],
     });
   })(),
@@ -290,7 +290,7 @@ export const englishLessons4 = [
         p.single('en-l4-6-q9', "What did Ethan like about the city at first?", ['The convenience', 'The quiet', 'The rice fields', 'The low prices'], 0, '文中說 At first, he loved the convenience of the city。'),
         p.single('en-l4-6-q10', "Why did Ethan begin to miss the countryside?", ['A tiny apartment and a long commute left him exhausted, and he missed the quiet.', 'He lost his job.', 'His friends left Taipei.', 'The MRT stopped running.'], 0, '文中說住在小公寓、每天通勤一小時使他疲憊,他開始想念鄉下的寧靜。'),
         p.single('en-l4-6-q11', "Where does Ethan plan to work in the future?", ['In a smaller city near the mountains', 'In a village', 'In Taipei forever', 'In another country'], 0, '最後一句說他打算到山邊較小的城市工作。'),
-        multi('en-l4-6-q12', "Which of the following sentences are correct? (多選)", ['I prefer walking to driving.', 'I prefer walking than driving.', 'She would rather study than watch TV.', 'She would rather to study than watch TV.', 'The country is not as noisy as the city.'], [0, 2, 4], 'prefer A to B 不用 than;would rather 後面不加 to,「I prefer walking than driving.」、「She would rather to study than watch TV.」錯誤。'),
+        multi('en-l4-6-q12', "Which of the following sentences are correct? (Choose all that apply.)", ['I prefer walking to driving.', 'I prefer walking than driving.', 'She would rather study than watch TV.', 'She would rather to study than watch TV.', 'The country is not as noisy as the city.'], [0, 2, 4], 'prefer A to B 不用 than;would rather 後面不加 to,「I prefer walking than driving.」、「She would rather to study than watch TV.」錯誤。'),
       ],
     });
   })(),

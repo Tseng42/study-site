@@ -1353,6 +1353,30 @@ a.timeline-row:hover {
   font-family: var(--font-body);
   vertical-align: middle;
 }
+.translate-btn {
+  margin-left: 8px;
+  padding: 2px 10px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  background: transparent;
+  color: var(--ink-muted);
+  font-size: 0.72rem;
+  font-weight: 700;
+  font-family: var(--font-body);
+  vertical-align: middle;
+  cursor: pointer;
+}
+.translate-btn:hover,
+.translate-btn.is-on {
+  background: var(--surface-alt);
+  color: var(--ink);
+}
+.question-zh {
+  margin: 6px 0 0;
+  color: var(--ink-muted);
+  font-size: 0.92rem;
+  font-weight: 400;
+}
 .quiz-options {
   display: flex;
   flex-direction: column;

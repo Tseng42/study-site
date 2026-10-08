@@ -46,7 +46,7 @@ export const englishLessons2 = [
         p.single('en-l2-1-q9', "What makes bread dough rise?", ['The heat of the oven only', 'Gas produced by yeast', 'Adding more flour', 'Cooling the dough'], 1, '文中說 yeast eats sugar and produces gas,氣體形成氣泡使麵團變大。'),
         p.single('en-l2-1-q10', "What happens when the dough is put into a hot oven?", ['The bubbles disappear immediately.', 'The bubbles expand briefly, and then the heat hardens the bread and gives it color.', 'The dough turns into sugar.', 'The yeast starts to grow again.'], 1, '文中說氣泡先短暫膨脹,然後熱使麵包變硬並呈金黃色。'),
         p.single('en-l2-1-q11', "The word \"expand\" in the passage is closest in meaning to ______.", ['become bigger', 'break', 'become colder', 'disappear'], 0, 'expand 是「膨脹、擴大」,即 become bigger。'),
-        multi('en-l2-1-q12', "Which of the following sentences are correct? (多選)", ['The girl who won the prize is my cousin.', 'This is the house where I was born.', 'The pen which I lost it was expensive.', 'I know a man whose son is a famous scientist.', 'The movie that we watched last night was boring.'], [0, 1, 3, 4], '「The pen which I lost it was expensive.」句中 which 已是 lost 的受詞,不能再加 it。'),
+        multi('en-l2-1-q12', "Which of the following sentences are correct? (Choose all that apply.)", ['The girl who won the prize is my cousin.', 'This is the house where I was born.', 'The pen which I lost it was expensive.', 'I know a man whose son is a famous scientist.', 'The movie that we watched last night was boring.'], [0, 1, 3, 4], '「The pen which I lost it was expensive.」句中 which 已是 lost 的受詞,不能再加 it。'),
       ],
     });
   })(),
@@ -93,7 +93,7 @@ export const englishLessons2 = [
         p.single('en-l2-2-q9', "Why is the number 4 often avoided in East Asia?", ['It sounds like the word for death.', 'It is too small.', 'It appears on many buildings.', 'It is considered lucky in the West.'], 0, '文中說 the number 4 ... sounds like the word for "death"。'),
         p.single('en-l2-2-q10', "What do scientists say about superstitions?", ['They are always true.', 'They have no real power but can still affect how people behave.', 'They only exist in Asia.', 'They should be banned.'], 1, '文中說 such superstitions have no real power, but they can still affect how people behave。'),
         p.single('en-l2-2-q11', "The word \"skip\" in the passage is closest in meaning to ______.", ['leave out', 'jump over a rope', 'destroy', 'repair'], 0, 'skip the thirteenth floor 指「略過第十三層」,即 leave out。'),
-        multi('en-l2-2-q12', "Which of the following sentences are correct? (多選)", ['I wonder if she will attend the meeting.', 'Do you know where does he live?', 'What she wants is a quiet place.', 'It is not clear whether the story is true.', 'Tell me what is your name.'], [0, 2, 3], '間接問句要用直述語序:Do you know where he lives? / Tell me what your name is.,「Do you know where does he live?」、「Tell me what is your name.」錯誤。'),
+        multi('en-l2-2-q12', "Which of the following sentences are correct? (Choose all that apply.)", ['I wonder if she will attend the meeting.', 'Do you know where does he live?', 'What she wants is a quiet place.', 'It is not clear whether the story is true.', 'Tell me what is your name.'], [0, 2, 3], '間接問句要用直述語序:Do you know where he lives? / Tell me what your name is.,「Do you know where does he live?」、「Tell me what is your name.」錯誤。'),
       ],
     });
   })(),
@@ -140,7 +140,7 @@ export const englishLessons2 = [
         p.single('en-l2-3-q9', "When did machines make it possible to produce solid chocolate bars?", ['About 3,000 years ago', 'In the 1500s', 'In the 1800s', 'Today'], 2, '文中說 It was not until the 1800s that machines made it possible to produce solid chocolate bars。'),
         p.single('en-l2-3-q10', "Why did chocolate become popular among the rich in Europe?", ['It was cheap and easy to grow.', 'Spanish explorers added sugar to the bitter drink.', 'It was invented in Europe.', 'Doctors ordered people to eat it.'], 1, '文中說西班牙探險家把糖加進去,巧克力很快成為富人間流行的奢侈品。'),
         p.single('en-l2-3-q11', "What is the author's concern in the last sentence?", ['Chocolate is too sweet.', 'Cacao farmers are often paid very little.', 'Chocolate bars are too expensive.', 'Consumers do not like fair trade.'], 1, '最後一句指出種植可可的農夫常常收入很低,因此有消費者選擇公平貿易產品。'),
-        multi('en-l2-3-q12', "Which of the following sentences are correct? (多選)", ['I am interested in history.', 'The news was surprised.', 'He is excited about the trip.', 'The class was boring, so many students felt bored.', 'She is a very fascinated person.'], [0, 2, 3], '新聞是「令人驚訝的」,應為 surprising;她是「令人著迷的」人,應為 fascinating,「The news was surprised.」、「She is a very fascinated person.」錯誤。'),
+        multi('en-l2-3-q12', "Which of the following sentences are correct? (Choose all that apply.)", ['I am interested in history.', 'The news was surprised.', 'He is excited about the trip.', 'The class was boring, so many students felt bored.', 'She is a very fascinated person.'], [0, 2, 3], '新聞是「令人驚訝的」,應為 surprising;她是「令人著迷的」人,應為 fascinating,「The news was surprised.」、「She is a very fascinated person.」錯誤。'),
       ],
     });
   })(),
@@ -189,7 +189,7 @@ export const englishLessons2 = [
         p.single('en-l2-4-q9', "According to the passage, what is one downside of social media?", ['It is too expensive.', 'Perfect photos of others may make young people feel their own lives are boring.', 'It cannot connect friends.', 'It makes students sleep more.'], 1, '文中說 Scrolling through perfect photos of others can make young people feel that their own lives are boring。'),
         p.single('en-l2-4-q10', "What have some schools started asking students to do?", ['Bring two phones to class', 'Put their phones in a box during class', 'Use phones for homework', 'Take photos in class'], 1, '文中說 Some schools have started asking students to put their phones in a box during class。'),
         p.single('en-l2-4-q11', "The word \"distract\" in the passage is closest in meaning to ______.", ['draw attention away', 'help', 'teach', 'protect'], 0, 'distract 是「使分心」,即把注意力從功課上移開。'),
-        multi('en-l2-4-q12', "Which of the following sentences are correct? (多選)", ['I enjoy chatting with my friends online.', 'She decided going to bed early.', 'He suggested taking a break.', 'They refused to answer the phone.', 'I am used to get up early.'], [0, 2, 3], 'decide 後接不定詞(decided to go);be used to 後接 V-ing(am used to getting up),「She decided going to bed early.」、「I am used to get up early.」錯誤。'),
+        multi('en-l2-4-q12', "Which of the following sentences are correct? (Choose all that apply.)", ['I enjoy chatting with my friends online.', 'She decided going to bed early.', 'He suggested taking a break.', 'They refused to answer the phone.', 'I am used to get up early.'], [0, 2, 3], 'decide 後接不定詞(decided to go);be used to 後接 V-ing(am used to getting up),「She decided going to bed early.」、「I am used to get up early.」錯誤。'),
       ],
     });
   })(),
@@ -237,7 +237,7 @@ export const englishLessons2 = [
         p.single('en-l2-5-q9', "Why did Amy first start volunteering?", ['Her school required community service hours.', 'Her friends asked her to.', 'She wanted to earn money.', 'She wanted to meet an elderly man.'], 0, '文中說 she volunteered only because her school required community service hours。'),
         p.single('en-l2-5-q10', "What changed Amy's attitude?", ['She won a prize.', 'An elderly man thanked her with tears in his eyes.', 'Her school gave her a higher grade.', 'She became less busy.'], 1, '文中說 after she met an elderly man who thanked her with tears in his eyes,她才體會到小善行的意義。'),
         p.single('en-l2-5-q11', "The word \"precious\" in the passage is closest in meaning to ______.", ['valuable', 'expensive', 'dangerous', 'ordinary'], 0, 'precious 是「珍貴的」,與 valuable 最接近。'),
-        multi('en-l2-5-q12', "Which of the following sentences are correct? (多選)", ['He was too tired to walk any farther.', 'She is enough smart to solve the puzzle.', 'It was such a nice day that we went out.', 'The soup was so hot that I couldn\'t eat it.', 'The box is too heavy for me to carry.'], [0, 2, 3, 4], 'enough 要放在形容詞後面,應為 smart enough to solve,「She is enough smart to solve the puzzle.」錯誤。'),
+        multi('en-l2-5-q12', "Which of the following sentences are correct? (Choose all that apply.)", ['He was too tired to walk any farther.', 'She is enough smart to solve the puzzle.', 'It was such a nice day that we went out.', 'The soup was so hot that I couldn\'t eat it.', 'The box is too heavy for me to carry.'], [0, 2, 3, 4], 'enough 要放在形容詞後面,應為 smart enough to solve,「She is enough smart to solve the puzzle.」錯誤。'),
       ],
     });
   })(),
@@ -285,7 +285,7 @@ export const englishLessons2 = [
         p.single('en-l2-6-q9', "Why did the team lose the game?", ['They did not train.', 'Their opponents were taller and faster.', 'The coach was absent.', 'The game was canceled.'], 1, '文中說 Although we trained hard for months, our opponents were taller and faster。'),
         p.single('en-l2-6-q10', "What did the coach want the players to understand?", ['Winning is the only goal of sport.', 'Determination and teamwork matter even when you do not win.', 'They should never play again.', 'The referee was unfair.'], 1, '教練說 winning is not the only goal of sport,並稱讚他們展現決心與團隊合作。'),
         p.single('en-l2-6-q11', "The phrase \"being a good sport\" means ______.", ['behaving fairly and politely, whether winning or losing', 'playing every sport', 'winning every game', 'wearing a sports uniform'], 0, 'a good sport 指有運動家精神的人,不論輸贏都公平有禮。'),
-        multi('en-l2-6-q12', "Which of the following sentences are correct? (多選)", ['Although he was tired, he kept running.', 'Although he was tired, but he kept running.', 'She was ill; however, she went to work.', 'Because it was late, so we went home.', 'He did not study; therefore, he failed the test.'], [0, 2, 4], 'although 與 but、because 與 so 不能同時使用,「Although he was tired, but he kept running.」、「Because it was late, so we went home.」錯誤。'),
+        multi('en-l2-6-q12', "Which of the following sentences are correct? (Choose all that apply.)", ['Although he was tired, he kept running.', 'Although he was tired, but he kept running.', 'She was ill; however, she went to work.', 'Because it was late, so we went home.', 'He did not study; therefore, he failed the test.'], [0, 2, 4], 'although 與 but、because 與 so 不能同時使用,「Although he was tired, but he kept running.」、「Because it was late, so we went home.」錯誤。'),
       ],
     });
   })(),
