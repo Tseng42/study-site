@@ -25,6 +25,7 @@ import { scienceEarthChapters } from '../data/science-chapters-earth.js';
 import { mathRealExams } from '../data/math-real-exams.js';
 import { socialRealExams } from '../data/social-real-exams.js';
 import { chineseRealExams } from '../data/chinese-real-exams.js';
+import { englishPracticeSets } from '../data/english-practice-sets.js';
 import { englishRealExams } from '../data/english-real-exams.js';
 import { scienceRealExams } from '../data/science-real-exams.js';
 
@@ -60,9 +61,12 @@ const chineseWithLessons = {
   ]),
 };
 
+// 英文專題單元的實作題組(data/english-practice-sets.js)接在各單元原有題目後面,原題目 id 不變。
+const englishTopicalUnits = english.units.map((unit) => (englishPracticeSets[unit.id] ? { ...unit, quiz: [...unit.quiz, ...englishPracticeSets[unit.id]] } : unit));
+
 const englishWithLessons = {
   ...english,
-  units: mergeTextbookUnits(english.units, [
+  units: mergeTextbookUnits(englishTopicalUnits, [
     ...englishLessons1,
     ...englishLessons2,
     ...englishLessons3,
