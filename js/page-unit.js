@@ -4,7 +4,7 @@ import { el, renderNoteSections, icon, circularCheck } from './render.js';
 import { initHeader, renderUserMenu } from './layout.js';
 import { ensureSignedIn } from './auth.js';
 import { initCloudSync } from './cloud-sync.js';
-import { prepareQuestions } from './quiz-utils.js';
+import { prepareGroupedQuestions } from './quiz-utils.js';
 import { runQuiz } from './quiz-runner.js';
 
 initHeader();
@@ -121,7 +121,7 @@ const DEFAULT_QUIZ_QUESTIONS = 8;
 function startQuiz(mode, count = DEFAULT_QUIZ_QUESTIONS) {
   runQuiz(document.getElementById('unit-quiz'), {
     title: mode === 'practice' ? '練習模式' : '測驗模式',
-    questions: prepareQuestions(unit.quiz, count),
+    questions: prepareGroupedQuestions(unit.quiz, count),
     mode,
     locate: () => ({ subjectId, unitId }),
     restart: () => startQuiz(mode, count),

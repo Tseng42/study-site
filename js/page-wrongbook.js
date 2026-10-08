@@ -1,7 +1,7 @@
 import { markQuestionMastered } from './storage.js';
 import { getReviewableWrongQuestions } from './wrong-utils.js';
 import { getQuestion, getUnit, getSubject } from './subjects-registry.js';
-import { prepareQuestions } from './quiz-utils.js';
+import { prepareGroupedQuestions } from './quiz-utils.js';
 import { runQuiz } from './quiz-runner.js';
 import { el, icon, renderPassage, renderRichText } from './render.js';
 import { initHeader, renderUserMenu, showBanner, formatRelativeDate } from './layout.js';
@@ -133,7 +133,7 @@ function startRetest(n) {
   backBtn.addEventListener('click', leaveRetest);
   runQuiz(retestBox, {
     title: '錯題重練',
-    questions: prepareQuestions(pool, n),
+    questions: prepareGroupedQuestions(pool, n),
     mode: 'practice',
     recordMode: 'retest',
     locate: (q) => q._loc,

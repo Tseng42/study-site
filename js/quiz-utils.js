@@ -93,6 +93,26 @@ export function prepareQuestions(pool, maxCount = 8) {
     .map(shuffleQuestionOptions);
 }
 
+// 單元練習/錯題重練用:抽法跟 prepareQuestions 一樣,但抽完後把同一篇文章(passageId 相同)的
+// 題目移到一起連續出現,組內依題庫原本的順序排(克漏字的空格 1、2、3 才會照順序)。
+// 文章只在每組第一題前面顯示一次,題目散開的話得往回捲很遠才看得到文章。
+export function prepareGroupedQuestions(pool, maxCount = 8) {
+  const poolIndex = new Map(pool.map((q, i) => [q, i]));
+  const picked = shuffle(pool).slice(0, maxCount);
+  const grouped = [];
+  const placed = new Set();
+  for (const q of picked) {
+    if (placed.has(q)) continue;
+    const group = q.passageId ? picked.filter((other) => other.passageId === q.passageId) : [q];
+    group.sort((x, y) => poolIndex.get(x) - poolIndex.get(y));
+    for (const member of group) {
+      placed.add(member);
+      grouped.push(member);
+    }
+  }
+  return grouped.map(shuffleQuestionOptions);
+}
+
 // 計分:回傳 0~1 的得分比例。單選/選填只有全對(1)或全錯(0);
 // 多選採學測「選項獨立判定」規則:n 個選項各自判斷對錯,錯 k 個選項得 (n-2k)/n,最低 0 分。
 export function gradeAnswer(q, userAnswer) {
