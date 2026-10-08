@@ -93,24 +93,30 @@ export function prepareQuestions(pool, maxCount = 8) {
     .map(shuffleQuestionOptions);
 }
 
-// 單元練習/錯題重練用:抽法跟 prepareQuestions 一樣,但抽完後把同一篇文章(passageId 相同)的
-// 題目移到一起連續出現,組內依題庫原本的順序排(克漏字的空格 1、2、3 才會照順序)。
-// 文章只在每組第一題前面顯示一次,題目散開的話得往回捲很遠才看得到文章。
+// 單元練習/錯題重練用:題組(passageId 相同的題目)整篇一起出,不會只抽到其中一兩題。
+// 把題庫分成「一題獨立題」或「一整組題組」,洗牌後一份一份放進來,放到題數達到 maxCount 為止;
+// 最後一份如果是題組,整組都會放進來,所以實際題數可能比 maxCount 多幾題。
+// 組內依題庫原本的順序排(克漏字的空格 1、2、3 才會照順序),文章只在每組第一題前面顯示一次。
 export function prepareGroupedQuestions(pool, maxCount = 8) {
-  const poolIndex = new Map(pool.map((q, i) => [q, i]));
-  const picked = shuffle(pool).slice(0, maxCount);
-  const grouped = [];
-  const placed = new Set();
-  for (const q of picked) {
-    if (placed.has(q)) continue;
-    const group = q.passageId ? picked.filter((other) => other.passageId === q.passageId) : [q];
-    group.sort((x, y) => poolIndex.get(x) - poolIndex.get(y));
-    for (const member of group) {
-      placed.add(member);
-      grouped.push(member);
+  const bundles = [];
+  const byPassage = new Map();
+  for (const q of pool) {
+    if (!q.passageId) {
+      bundles.push([q]);
+    } else if (byPassage.has(q.passageId)) {
+      byPassage.get(q.passageId).push(q);
+    } else {
+      const bundle = [q];
+      byPassage.set(q.passageId, bundle);
+      bundles.push(bundle);
     }
   }
-  return grouped.map(shuffleQuestionOptions);
+  const picked = [];
+  for (const bundle of shuffle(bundles)) {
+    if (picked.length >= maxCount) break;
+    picked.push(...bundle);
+  }
+  return picked.map(shuffleQuestionOptions);
 }
 
 // 計分:回傳 0~1 的得分比例。單選/選填只有全對(1)或全錯(0);
