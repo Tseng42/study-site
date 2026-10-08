@@ -54,7 +54,7 @@ export const englishRealExams = [
           "stretched"
         ],
         "answer": 1,
-        "explanation": "(111學測英文第1題,官方答案B)"
+        "explanation": "(111學測英文第1題,官方答案B,即「delivered」)"
       },
       {
         "id": "english-real-111-q2",
@@ -69,7 +69,7 @@ export const englishRealExams = [
           "politician"
         ],
         "answer": 0,
-        "explanation": "(111學測英文第2題,官方答案A)"
+        "explanation": "(111學測英文第2題,官方答案A,即「assistant」)"
       },
       {
         "id": "english-real-111-q3",
@@ -84,7 +84,7 @@ export const englishRealExams = [
           "variety"
         ],
         "answer": 2,
-        "explanation": "(111學測英文第3題,官方答案C)"
+        "explanation": "(111學測英文第3題,官方答案C,即「puppet」)"
       },
       {
         "id": "english-real-111-q4",
@@ -99,7 +99,7 @@ export const englishRealExams = [
           "optionally"
         ],
         "answer": 0,
-        "explanation": "(111學測英文第4題,官方答案A)"
+        "explanation": "(111學測英文第4題,官方答案A,即「potentially」)"
       },
       {
         "id": "english-real-111-q5",
@@ -114,7 +114,7 @@ export const englishRealExams = [
           "Snapping"
         ],
         "answer": 0,
-        "explanation": "(111學測英文第5題,官方答案A)"
+        "explanation": "(111學測英文第5題,官方答案A,即「Tagging」)"
       },
       {
         "id": "english-real-111-q6",
@@ -129,7 +129,7 @@ export const englishRealExams = [
           "ultimate"
         ],
         "answer": 2,
-        "explanation": "(111學測英文第6題,官方答案C)"
+        "explanation": "(111學測英文第6題,官方答案C,即「agreeable」)"
       },
       {
         "id": "english-real-111-q7",
@@ -144,7 +144,7 @@ export const englishRealExams = [
           "remarkable"
         ],
         "answer": 1,
-        "explanation": "(111學測英文第7題,官方答案B)"
+        "explanation": "(111學測英文第7題,官方答案B,即「visible」)"
       },
       {
         "id": "english-real-111-q8",
@@ -159,7 +159,7 @@ export const englishRealExams = [
           "eventual"
         ],
         "answer": 3,
-        "explanation": "(111學測英文第8題,官方答案D)"
+        "explanation": "(111學測英文第8題,官方答案D,即「eventual」)"
       },
       {
         "id": "english-real-111-q9",
@@ -174,7 +174,7 @@ export const englishRealExams = [
           "quest"
         ],
         "answer": 3,
-        "explanation": "(111學測英文第9題,官方答案D)"
+        "explanation": "(111學測英文第9題,官方答案D,即「quest」)"
       },
       {
         "id": "english-real-111-q10",
@@ -189,7 +189,7 @@ export const englishRealExams = [
           "transfers"
         ],
         "answer": 1,
-        "explanation": "(111學測英文第10題,官方答案B)"
+        "explanation": "(111學測英文第10題,官方答案B,即「blushes」)"
       },
       {
         "id": "english-real-111-q11",
@@ -207,7 +207,7 @@ export const englishRealExams = [
           "manipulated"
         ],
         "answer": 0,
-        "explanation": "(111學測英文第11題,官方答案A)"
+        "explanation": "(111學測英文第11題,官方答案A,即「initiated」)"
       },
       {
         "id": "english-real-111-q12",
@@ -225,7 +225,7 @@ export const englishRealExams = [
           "have been springing"
         ],
         "answer": 3,
-        "explanation": "(111學測英文第12題,官方答案D)"
+        "explanation": "(111學測英文第12題,官方答案D,即「have been springing」)"
       },
       {
         "id": "english-real-111-q13",
@@ -243,7 +243,7 @@ export const englishRealExams = [
           "matter"
         ],
         "answer": 2,
-        "explanation": "(111學測英文第13題,官方答案C)"
+        "explanation": "(111學測英文第13題,官方答案C,即「end」)"
       },
       {
         "id": "english-real-111-q14",
@@ -261,7 +261,7 @@ export const englishRealExams = [
           "announcements"
         ],
         "answer": 1,
-        "explanation": "(111學測英文第14題,官方答案B)"
+        "explanation": "(111學測英文第14題,官方答案B,即「releases」)"
       },
       {
         "id": "english-real-111-q15",
@@ -279,7 +279,7 @@ export const englishRealExams = [
           "keep the printed word alive"
         ],
         "answer": 3,
-        "explanation": "(111學測英文第15題,官方答案D)"
+        "explanation": "(111學測英文第15題,官方答案D,即「keep the printed word alive」)"
       },
       {
         "id": "english-real-111-q16",
@@ -297,7 +297,7 @@ export const englishRealExams = [
           "other than"
         ],
         "answer": 3,
-        "explanation": "(111學測英文第16題,官方答案D)"
+        "explanation": "(111學測英文第16題,官方答案D,即「other than」)"
       },
       {
         "id": "english-real-111-q17",
@@ -315,7 +315,7 @@ export const englishRealExams = [
           "must have been"
         ],
         "answer": 0,
-        "explanation": "(111學測英文第17題,官方答案A)"
+        "explanation": "(111學測英文第17題,官方答案A,即「used to be」)"
       },
       {
         "id": "english-real-111-q18",
@@ -333,7 +333,7 @@ export const englishRealExams = [
           "intensified"
         ],
         "answer": 3,
-        "explanation": "(111學測英文第18題,官方答案D)"
+        "explanation": "(111學測英文第18題,官方答案D,即「intensified」)"
       },
       {
         "id": "english-real-111-q19",
@@ -351,7 +351,7 @@ export const englishRealExams = [
           "endure shock"
         ],
         "answer": 2,
-        "explanation": "(111學測英文第19題,官方答案C)"
+        "explanation": "(111學測英文第19題,官方答案C,即「spell disaster」)"
       },
       {
         "id": "english-real-111-q20",
@@ -369,7 +369,7 @@ export const englishRealExams = [
           "obtain"
         ],
         "answer": 0,
-        "explanation": "(111學測英文第20題,官方答案A)"
+        "explanation": "(111學測英文第20題,官方答案A,即「tolerate」)"
       },
       {
         "id": "english-real-111-q21",
@@ -393,7 +393,7 @@ export const englishRealExams = [
           "career"
         ],
         "answer": 2,
-        "explanation": "(111學測英文第21題,官方答案C)"
+        "explanation": "(111學測英文第21題,官方答案C,即「risky」)"
       },
       {
         "id": "english-real-111-q22",
@@ -417,7 +417,7 @@ export const englishRealExams = [
           "career"
         ],
         "answer": 8,
-        "explanation": "(111學測英文第22題,官方答案I)"
+        "explanation": "(111學測英文第22題,官方答案I,即「necessity」)"
       },
       {
         "id": "english-real-111-q23",
@@ -441,7 +441,7 @@ export const englishRealExams = [
           "career"
         ],
         "answer": 5,
-        "explanation": "(111學測英文第23題,官方答案F)"
+        "explanation": "(111學測英文第23題,官方答案F,即「professional」)"
       },
       {
         "id": "english-real-111-q24",
@@ -465,7 +465,7 @@ export const englishRealExams = [
           "career"
         ],
         "answer": 7,
-        "explanation": "(111學測英文第24題,官方答案H)"
+        "explanation": "(111學測英文第24題,官方答案H,即「tried out」)"
       },
       {
         "id": "english-real-111-q25",
@@ -489,7 +489,7 @@ export const englishRealExams = [
           "career"
         ],
         "answer": 3,
-        "explanation": "(111學測英文第25題,官方答案D)"
+        "explanation": "(111學測英文第25題,官方答案D,即「cost」)"
       },
       {
         "id": "english-real-111-q26",
@@ -513,7 +513,7 @@ export const englishRealExams = [
           "career"
         ],
         "answer": 6,
-        "explanation": "(111學測英文第26題,官方答案G)"
+        "explanation": "(111學測英文第26題,官方答案G,即「called for」)"
       },
       {
         "id": "english-real-111-q27",
@@ -537,7 +537,7 @@ export const englishRealExams = [
           "career"
         ],
         "answer": 9,
-        "explanation": "(111學測英文第27題,官方答案J)"
+        "explanation": "(111學測英文第27題,官方答案J,即「career」)"
       },
       {
         "id": "english-real-111-q28",
@@ -561,7 +561,7 @@ export const englishRealExams = [
           "career"
         ],
         "answer": 4,
-        "explanation": "(111學測英文第28題,官方答案E)"
+        "explanation": "(111學測英文第28題,官方答案E,即「witnessed」)"
       },
       {
         "id": "english-real-111-q29",
@@ -585,7 +585,7 @@ export const englishRealExams = [
           "career"
         ],
         "answer": 0,
-        "explanation": "(111學測英文第29題,官方答案A)"
+        "explanation": "(111學測英文第29題,官方答案A,即「possible」)"
       },
       {
         "id": "english-real-111-q30",
@@ -609,7 +609,7 @@ export const englishRealExams = [
           "career"
         ],
         "answer": 1,
-        "explanation": "(111學測英文第30題,官方答案B)"
+        "explanation": "(111學測英文第30題,官方答案B,即「sensation」)"
       },
       {
         "id": "english-real-111-q31",
@@ -627,7 +627,7 @@ export const englishRealExams = [
           "Originating from the Chinese Ghost Festival, this annual event has evolved into a time of family reunion."
         ],
         "answer": 3,
-        "explanation": "(111學測英文第31題,官方答案D)"
+        "explanation": "(111學測英文第31題,官方答案D,即「Originating from the Chinese Ghost Festival, this annual event has evolved into a time of family reunion.」)"
       },
       {
         "id": "english-real-111-q32",
@@ -645,7 +645,7 @@ export const englishRealExams = [
           "Originating from the Chinese Ghost Festival, this annual event has evolved into a time of family reunion."
         ],
         "answer": 0,
-        "explanation": "(111學測英文第32題,官方答案A)"
+        "explanation": "(111學測英文第32題,官方答案A,即「Some people also visit the cemetery to clean up the family graves and pray for their ancestors.」)"
       },
       {
         "id": "english-real-111-q33",
@@ -663,7 +663,7 @@ export const englishRealExams = [
           "Originating from the Chinese Ghost Festival, this annual event has evolved into a time of family reunion."
         ],
         "answer": 2,
-        "explanation": "(111學測英文第33題,官方答案C)"
+        "explanation": "(111學測英文第33題,官方答案C,即「Obon concludes with another bonfire, okuribi, lighting up the sky to see the ancestors’ spirits off.」)"
       },
       {
         "id": "english-real-111-q34",
@@ -681,7 +681,7 @@ export const englishRealExams = [
           "Originating from the Chinese Ghost Festival, this annual event has evolved into a time of family reunion."
         ],
         "answer": 1,
-        "explanation": "(111學測英文第34題,官方答案B)"
+        "explanation": "(111學測英文第34題,官方答案B,即「Such festive activities are usually held in parks, temples, and other public places around Japan.」)"
       },
       {
         "id": "english-real-111-q35",
@@ -717,7 +717,7 @@ export const englishRealExams = [
           "A Maasai woman is usually good at beadwork and farming."
         ],
         "answer": 0,
-        "explanation": "(111學測英文第36題,官方答案A)"
+        "explanation": "(111學測英文第36題,官方答案A,即「They have been urged by governments to leave behind their traditions.」)"
       },
       {
         "id": "english-real-111-q37",
@@ -735,7 +735,7 @@ export const englishRealExams = [
           "The color of the shúkà represented one's importance in the tribe."
         ],
         "answer": 2,
-        "explanation": "(111學測英文第37題,官方答案C)"
+        "explanation": "(111學測英文第37題,官方答案C,即「Colorful glass jewelry became popular after the 19th century.」)"
       },
       {
         "id": "english-real-111-q38",
@@ -753,7 +753,7 @@ export const englishRealExams = [
           "To show the similarities between the behavior of a Maasai warrior and that of a male deer."
         ],
         "answer": 2,
-        "explanation": "(111學測英文第38題,官方答案C)"
+        "explanation": "(111學測英文第38題,官方答案C,即「To emphasize that weapons are an inseparable part of a Maasai warrior's outfit.」)"
       },
       {
         "id": "english-real-111-q39",
@@ -771,7 +771,7 @@ export const englishRealExams = [
           "Their limitations."
         ],
         "answer": 3,
-        "explanation": "(111學測英文第39題,官方答案D)"
+        "explanation": "(111學測英文第39題,官方答案D,即「Their limitations.」)"
       },
       {
         "id": "english-real-111-q40",
@@ -789,7 +789,7 @@ export const englishRealExams = [
           "d→c→b→a"
         ],
         "answer": 0,
-        "explanation": "(111學測英文第40題,官方答案A)"
+        "explanation": "(111學測英文第40題,官方答案A,即「d→c→a→b」)"
       },
       {
         "id": "english-real-111-q41",
@@ -807,7 +807,7 @@ export const englishRealExams = [
           "Different colors are used in different industries to signal the roles of people on site."
         ],
         "answer": 1,
-        "explanation": "(111學測英文第41題,官方答案B)"
+        "explanation": "(111學測英文第41題,官方答案B,即「The inspiration came from the inventor's wartime experience.」)"
       },
       {
         "id": "english-real-111-q42",
@@ -825,7 +825,7 @@ export const englishRealExams = [
           "a, d, e, f"
         ],
         "answer": 1,
-        "explanation": "(111學測英文第42題,官方答案B)"
+        "explanation": "(111學測英文第42題,官方答案B,即「a, c, d, f」)"
       },
       {
         "id": "english-real-111-q43",
@@ -843,7 +843,7 @@ export const englishRealExams = [
           "What they may offer in medical advancements."
         ],
         "answer": 3,
-        "explanation": "(111學測英文第43題,官方答案D)"
+        "explanation": "(111學測英文第43題,官方答案D,即「What they may offer in medical advancements.」)"
       },
       {
         "id": "english-real-111-q44",
@@ -861,7 +861,7 @@ export const englishRealExams = [
           "GABA contains chemical elements that trigger the growth of neurons."
         ],
         "answer": 2,
-        "explanation": "(111學測英文第44題,官方答案C)"
+        "explanation": "(111學測英文第44題,官方答案C,即「Lowering GABA levels in the brain can stimulate retina regrowth.」)"
       },
       {
         "id": "english-real-111-q45",
@@ -879,7 +879,7 @@ export const englishRealExams = [
           "Restored."
         ],
         "answer": 0,
-        "explanation": "(111學測英文第45題,官方答案A)"
+        "explanation": "(111學測英文第45題,官方答案A,即「Reproduced.」)"
       },
       {
         "id": "english-real-111-q46",
@@ -897,7 +897,7 @@ export const englishRealExams = [
           "Understanding regeneration in zebrafish may allow humans to regrow their organs."
         ],
         "answer": 3,
-        "explanation": "(111學測英文第46題,官方答案D)"
+        "explanation": "(111學測英文第46題,官方答案D,即「Understanding regeneration in zebrafish may allow humans to regrow their organs.」)"
       },
       {
         "id": "english-real-111-q47",
@@ -932,7 +932,7 @@ export const englishRealExams = [
         "passageId": "english-real-111-mixed",
         "passageTitle": "混合題 第47至49題",
         "passage": "To support refugees and people facing crises around the world, the International Olympic Committee created the Refugee Olympic Team. Refugee athletes have been invited to compete in the Olympic Games since 2016. Here are two refugee athletes and their stories.\n[圖片示意:原題右上角附 REFUGEE OLYMPIC TEAM 標誌(黑色粗體字 REFUGEE OLYMPIC TEAM,下方為奧運五環)]\n【試題本左欄】\nYusra Mardini is a swimmer who grew up in the war-torn country of Syria. Due to the unstable political situation there, Yusra sometimes had to train in pools under roofs that had been blown open by bombings.\nIn 2015 when she was just a 17-year-old, her house was destroyed in the civil war, so she decided to flee her home country. She managed to reach Turkey through Lebanon. From Turkey, she boarded a small boat that held 20 people and set sail into the deep waters of the Aegean Sea. But 30 minutes later, the engine stopped and the boat began to sink. Yusra dove into the cold water, and—with the help of her sister and two men—swam and pushed the boat for over three hours to reach the Greek island of Lesbos. They saved everyone aboard.\nYusra eventually settled in Germany and has since worked to inspire others to pursue their dreams. Her incredible story and superior swimming skills won her the opportunity to participate in the Olympic Games. She was a member of the Refugee Olympic Team for both the 2016 Rio Games and 2021 Tokyo Games.\n【試題本右欄】\nPopole Misenga was born in the Democratic Republic of the Congo. When he was nine, the country's civil war claimed the life of his mother and left him homeless. Escaping from the war zone, he wandered alone for a week in a rainforest before being rescued and taken to a center for displaced children in the capital, Kinshasa.\nThere, Popole discovered judo, from which he gained strength in body and mind. “Judo helped me by giving me serenity, discipline, commitment—everything,” he said. He trained hard and became a professional judoka. However, each time he lost a competition, his coaches would lock him in a cage for days, feeding him only coffee and bread. Finally, when he was cruelly abused for not winning medals at the 2013 World Championships in Brazil, he decided to seek protection.\nPopole was granted asylum in 2014 by Brazilian government and later continued judo training at a youth facility. He made his Olympic debut at Rio 2016. He also represented the Refugee Olympic Team in 2021 Tokyo Games.",
-        "question": "請從下列(A)到(F)中,選出對Yusra Mardini和Popole Misenga都正確的選項。(多選題,4分)",
+        "question": "請從下列(A)到(F)中,選出對Yusra Mardini和Popole Misenga都正確的選項。(多選題,4分)\n(非官方註記:本站選項不標 A、B、C 代號,且順序每次隨機排列,請直接勾選符合的選項。)",
         "options": [
           "Being an Olympic medalist.",
           "Growing up in an orphanage.",
@@ -945,7 +945,7 @@ export const englishRealExams = [
           2,
           3
         ],
-        "explanation": "(111學測英文第49題,官方答案CD)"
+        "explanation": "(111學測英文第49題,官方答案CD,即「Joining the Olympic Games more than once.」、「Leaving his/her hometown because of war.」)"
       },
       {
         "id": "english-real-111-q50",
@@ -1009,7 +1009,7 @@ export const englishRealExams = [
           "mighty"
         ],
         "answer": 0,
-        "explanation": "(112學測英文第1題,官方答案A)"
+        "explanation": "(112學測英文第1題,官方答案A,即「sticky」)"
       },
       {
         "id": "english-real-112-q2",
@@ -1024,7 +1024,7 @@ export const englishRealExams = [
           "snap"
         ],
         "answer": 2,
-        "explanation": "(112學測英文第2題,官方答案C)"
+        "explanation": "(112學測英文第2題,官方答案C,即「pose」)"
       },
       {
         "id": "english-real-112-q3",
@@ -1039,7 +1039,7 @@ export const englishRealExams = [
           "instructors"
         ],
         "answer": 2,
-        "explanation": "(112學測英文第3題,官方答案C)"
+        "explanation": "(112學測英文第3題,官方答案C,即「ancestors」)"
       },
       {
         "id": "english-real-112-q4",
@@ -1054,7 +1054,7 @@ export const englishRealExams = [
           "queer"
         ],
         "answer": 1,
-        "explanation": "(112學測英文第4題,官方答案B)"
+        "explanation": "(112學測英文第4題,官方答案B,即「bare」)"
       },
       {
         "id": "english-real-112-q5",
@@ -1069,7 +1069,7 @@ export const englishRealExams = [
           "sincerity"
         ],
         "answer": 3,
-        "explanation": "(112學測英文第5題,官方答案D)"
+        "explanation": "(112學測英文第5題,官方答案D,即「sincerity」)"
       },
       {
         "id": "english-real-112-q6",
@@ -1084,7 +1084,7 @@ export const englishRealExams = [
           "recall"
         ],
         "answer": 3,
-        "explanation": "(112學測英文第6題,官方答案D)"
+        "explanation": "(112學測英文第6題,官方答案D,即「recall」)"
       },
       {
         "id": "english-real-112-q7",
@@ -1099,7 +1099,7 @@ export const englishRealExams = [
           "convert"
         ],
         "answer": 1,
-        "explanation": "(112學測英文第7題,官方答案B)"
+        "explanation": "(112學測英文第7題,官方答案B,即「counter」)"
       },
       {
         "id": "english-real-112-q8",
@@ -1114,7 +1114,7 @@ export const englishRealExams = [
           "ventured"
         ],
         "answer": 0,
-        "explanation": "(112學測英文第8題,官方答案A)"
+        "explanation": "(112學測英文第8題,官方答案A,即「crippled」)"
       },
       {
         "id": "english-real-112-q9",
@@ -1129,7 +1129,7 @@ export const englishRealExams = [
           "injected"
         ],
         "answer": 0,
-        "explanation": "(112學測英文第9題,官方答案A)"
+        "explanation": "(112學測英文第9題,官方答案A,即「choked」)"
       },
       {
         "id": "english-real-112-q10",
@@ -1144,7 +1144,7 @@ export const englishRealExams = [
           "supposedly"
         ],
         "answer": 3,
-        "explanation": "(112學測英文第10題,官方答案D)"
+        "explanation": "(112學測英文第10題,官方答案D,即「supposedly」)"
       },
       {
         "id": "english-real-112-q11",
@@ -1162,7 +1162,7 @@ export const englishRealExams = [
           "and pretty much"
         ],
         "answer": 2,
-        "explanation": "(112學測英文第11題,官方答案C)"
+        "explanation": "(112學測英文第11題,官方答案C,即「but not quite」)"
       },
       {
         "id": "english-real-112-q12",
@@ -1180,7 +1180,7 @@ export const englishRealExams = [
           "multiple"
         ],
         "answer": 3,
-        "explanation": "(112學測英文第12題,官方答案D)"
+        "explanation": "(112學測英文第12題,官方答案D,即「multiple」)"
       },
       {
         "id": "english-real-112-q13",
@@ -1198,7 +1198,7 @@ export const englishRealExams = [
           "make up for"
         ],
         "answer": 1,
-        "explanation": "(112學測英文第13題,官方答案B)"
+        "explanation": "(112學測英文第13題,官方答案B,即「compete for」)"
       },
       {
         "id": "english-real-112-q14",
@@ -1216,7 +1216,7 @@ export const englishRealExams = [
           "reflection on"
         ],
         "answer": 1,
-        "explanation": "(112學測英文第14題,官方答案B)"
+        "explanation": "(112學測英文第14題,官方答案B,即「exposure to」)"
       },
       {
         "id": "english-real-112-q15",
@@ -1234,7 +1234,7 @@ export const englishRealExams = [
           "Concerning"
         ],
         "answer": 2,
-        "explanation": "(112學測英文第15題,官方答案C)"
+        "explanation": "(112學測英文第15題,官方答案C,即「Despite」)"
       },
       {
         "id": "english-real-112-q16",
@@ -1252,7 +1252,7 @@ export const englishRealExams = [
           "straight on"
         ],
         "answer": 1,
-        "explanation": "(112學測英文第16題,官方答案B)"
+        "explanation": "(112學測英文第16題,官方答案B,即「free of」)"
       },
       {
         "id": "english-real-112-q17",
@@ -1270,7 +1270,7 @@ export const englishRealExams = [
           "external"
         ],
         "answer": 0,
-        "explanation": "(112學測英文第17題,官方答案A)"
+        "explanation": "(112學測英文第17題,官方答案A,即「physical」)"
       },
       {
         "id": "english-real-112-q18",
@@ -1288,7 +1288,7 @@ export const englishRealExams = [
           "being redistributed"
         ],
         "answer": 0,
-        "explanation": "(112學測英文第18題,官方答案A)"
+        "explanation": "(112學測英文第18題,官方答案A,即「redistribute」)"
       },
       {
         "id": "english-real-112-q19",
@@ -1306,7 +1306,7 @@ export const englishRealExams = [
           "aggressive"
         ],
         "answer": 2,
-        "explanation": "(112學測英文第19題,官方答案C)"
+        "explanation": "(112學測英文第19題,官方答案C,即「severe」)"
       },
       {
         "id": "english-real-112-q20",
@@ -1324,7 +1324,7 @@ export const englishRealExams = [
           "accompanied by"
         ],
         "answer": 3,
-        "explanation": "(112學測英文第20題,官方答案D)"
+        "explanation": "(112學測英文第20題,官方答案D,即「accompanied by」)"
       },
       {
         "id": "english-real-112-q21",
@@ -1348,7 +1348,7 @@ export const englishRealExams = [
           "reach for"
         ],
         "answer": 9,
-        "explanation": "(112學測英文第21題,官方答案J)"
+        "explanation": "(112學測英文第21題,官方答案J,即「reach for」)"
       },
       {
         "id": "english-real-112-q22",
@@ -1372,7 +1372,7 @@ export const englishRealExams = [
           "reach for"
         ],
         "answer": 1,
-        "explanation": "(112學測英文第22題,官方答案B)"
+        "explanation": "(112學測英文第22題,官方答案B,即「active」)"
       },
       {
         "id": "english-real-112-q23",
@@ -1396,7 +1396,7 @@ export const englishRealExams = [
           "reach for"
         ],
         "answer": 6,
-        "explanation": "(112學測英文第23題,官方答案G)"
+        "explanation": "(112學測英文第23題,官方答案G,即「even」)"
       },
       {
         "id": "english-real-112-q24",
@@ -1420,7 +1420,7 @@ export const englishRealExams = [
           "reach for"
         ],
         "answer": 5,
-        "explanation": "(112學測英文第24題,官方答案F)"
+        "explanation": "(112學測英文第24題,官方答案F,即「effective」)"
       },
       {
         "id": "english-real-112-q25",
@@ -1444,7 +1444,7 @@ export const englishRealExams = [
           "reach for"
         ],
         "answer": 0,
-        "explanation": "(112學測英文第25題,官方答案A)"
+        "explanation": "(112學測英文第25題,官方答案A,即「absorption」)"
       },
       {
         "id": "english-real-112-q26",
@@ -1468,7 +1468,7 @@ export const englishRealExams = [
           "reach for"
         ],
         "answer": 7,
-        "explanation": "(112學測英文第26題,官方答案H)"
+        "explanation": "(112學測英文第26題,官方答案H,即「status」)"
       },
       {
         "id": "english-real-112-q27",
@@ -1492,7 +1492,7 @@ export const englishRealExams = [
           "reach for"
         ],
         "answer": 4,
-        "explanation": "(112學測英文第27題,官方答案E)"
+        "explanation": "(112學測英文第27題,官方答案E,即「option」)"
       },
       {
         "id": "english-real-112-q28",
@@ -1516,7 +1516,7 @@ export const englishRealExams = [
           "reach for"
         ],
         "answer": 2,
-        "explanation": "(112學測英文第28題,官方答案C)"
+        "explanation": "(112學測英文第28題,官方答案C,即「alert」)"
       },
       {
         "id": "english-real-112-q29",
@@ -1540,7 +1540,7 @@ export const englishRealExams = [
           "reach for"
         ],
         "answer": 8,
-        "explanation": "(112學測英文第29題,官方答案I)"
+        "explanation": "(112學測英文第29題,官方答案I,即「pass through」)"
       },
       {
         "id": "english-real-112-q30",
@@ -1564,7 +1564,7 @@ export const englishRealExams = [
           "reach for"
         ],
         "answer": 3,
-        "explanation": "(112學測英文第30題,官方答案D)"
+        "explanation": "(112學測英文第30題,官方答案D,即「combat」)"
       },
       {
         "id": "english-real-112-q31",
@@ -1582,7 +1582,7 @@ export const englishRealExams = [
           "Some studies even show that people may all be synesthetic to some degree."
         ],
         "answer": 2,
-        "explanation": "(112學測英文第31題,官方答案C)"
+        "explanation": "(112學測英文第31題,官方答案C,即「People with synesthesia used to be accused of making their experiences up.」)"
       },
       {
         "id": "english-real-112-q32",
@@ -1600,7 +1600,7 @@ export const englishRealExams = [
           "Some studies even show that people may all be synesthetic to some degree."
         ],
         "answer": 0,
-        "explanation": "(112學測英文第32題,官方答案A)"
+        "explanation": "(112學測英文第32題,官方答案A,即「This consistency serves as a proof that synesthesia is real.」)"
       },
       {
         "id": "english-real-112-q33",
@@ -1618,7 +1618,7 @@ export const englishRealExams = [
           "Some studies even show that people may all be synesthetic to some degree."
         ],
         "answer": 1,
-        "explanation": "(112學測英文第33題,官方答案B)"
+        "explanation": "(112學測英文第33題,官方答案B,即「Meanwhile, environmental influences seem to shape a person’s synesthesia.」)"
       },
       {
         "id": "english-real-112-q34",
@@ -1636,7 +1636,7 @@ export const englishRealExams = [
           "Some studies even show that people may all be synesthetic to some degree."
         ],
         "answer": 3,
-        "explanation": "(112學測英文第34題,官方答案D)"
+        "explanation": "(112學測英文第34題,官方答案D,即「Some studies even show that people may all be synesthetic to some degree.」)"
       },
       {
         "id": "english-real-112-q35",
@@ -1654,7 +1654,7 @@ export const englishRealExams = [
           "What was the favorite toy of ancient Egyptian kids?"
         ],
         "answer": 0,
-        "explanation": "(112學測英文第35題,官方答案A)"
+        "explanation": "(112學測英文第35題,官方答案A,即「How was the word “hula-hooping” derived?」)"
       },
       {
         "id": "english-real-112-q36",
@@ -1672,7 +1672,7 @@ export const englishRealExams = [
           "Hawaiian dancers used it to represent the circle of life."
         ],
         "answer": 2,
-        "explanation": "(112學測英文第36題,官方答案C)"
+        "explanation": "(112學測英文第36題,官方答案C,即「Ancient Greeks used it as a tool for workout.」)"
       },
       {
         "id": "english-real-112-q37",
@@ -1690,7 +1690,7 @@ export const englishRealExams = [
           "Kicking."
         ],
         "answer": 3,
-        "explanation": "(112學測英文第37題,官方答案D)"
+        "explanation": "(112學測英文第37題,官方答案D,即「Kicking.」)"
       },
       {
         "id": "english-real-112-q38",
@@ -1708,7 +1708,7 @@ export const englishRealExams = [
           "grapevine, plastic, metal, animal skin"
         ],
         "answer": 1,
-        "explanation": "(112學測英文第38題,官方答案B)"
+        "explanation": "(112學測英文第38題,官方答案B,即「reed, grapevine, plastic, metal」)"
       },
       {
         "id": "english-real-112-q39",
@@ -1726,7 +1726,7 @@ export const englishRealExams = [
           "To mark boundaries of tea gardens."
         ],
         "answer": 0,
-        "explanation": "(112學測英文第39題,官方答案A)"
+        "explanation": "(112學測英文第39題,官方答案A,即「To protect tea trees.」)"
       },
       {
         "id": "english-real-112-q40",
@@ -1744,7 +1744,7 @@ export const englishRealExams = [
           "They have difficulties moving around the uneven fields."
         ],
         "answer": 3,
-        "explanation": "(112學測英文第40題,官方答案D)"
+        "explanation": "(112學測英文第40題,官方答案D,即「They have difficulties moving around the uneven fields.」)"
       },
       {
         "id": "english-real-112-q41",
@@ -1762,7 +1762,7 @@ export const englishRealExams = [
           "Pregnant elephants avoid delivering babies in the tea gardens for fear of being disturbed."
         ],
         "answer": 2,
-        "explanation": "(112學測英文第41題,官方答案C)"
+        "explanation": "(112學測英文第41題,官方答案C,即「Elephants are unwilling to leave their injured members behind in the tea gardens.」)"
       },
       {
         "id": "english-real-112-q42",
@@ -1780,7 +1780,7 @@ export const englishRealExams = [
           "To create a win-win situation for elephants and tea farms."
         ],
         "answer": 3,
-        "explanation": "(112學測英文第42題,官方答案D)"
+        "explanation": "(112學測英文第42題,官方答案D,即「To create a win-win situation for elephants and tea farms.」)"
       },
       {
         "id": "english-real-112-q43",
@@ -1798,7 +1798,7 @@ export const englishRealExams = [
           "Traders from Persia settled down permanently around 1000 AD."
         ],
         "answer": 2,
-        "explanation": "(112學測英文第43題,官方答案C)"
+        "explanation": "(112學測英文第43題,官方答案C,即「Asian merchants arrived centuries before the African settlers.」)"
       },
       {
         "id": "english-real-112-q44",
@@ -1834,7 +1834,7 @@ export const englishRealExams = [
           "Vasco da Gama was Zanzibar’s first foreign ruler during the Age of Exploration."
         ],
         "answer": 1,
-        "explanation": "(112學測英文第45題,官方答案B)"
+        "explanation": "(112學測英文第45題,官方答案B,即「Cloves, vanilla, and cinnamon are common spices in Zanzibar.」)"
       },
       {
         "id": "english-real-112-q46",
@@ -1852,7 +1852,7 @@ export const englishRealExams = [
           "archipelago, settlements, paths, islands"
         ],
         "answer": 2,
-        "explanation": "(112學測英文第46題,官方答案C)"
+        "explanation": "(112學測英文第46題,官方答案C,即「archipelago, islands, jewels, destination」)"
       },
       {
         "id": "english-real-112-q47",
@@ -1887,7 +1887,7 @@ export const englishRealExams = [
         "passageId": "english-real-112-mixed",
         "passageTitle": "混合題 第47至50題",
         "passage": "Even if you’re not a vegetarian, there’s a good chance you’ve heard of plant-based meat. These meat substitutes are often advertised as beneficial for the environment. But do the customers really like them? Read the following chatroom discussions about GreenBurger, a product using alternative-meat patties.\n(A) Olivia\nThat’s a firm NO! I tried one when I was a prep cook for Next Level Burgers…tasted awful, just like mashed peas gone to rot.\n(B) Smith\nI haven’t tried them. I just don’t see the point. They are heavily processed with more calories and sodium than meat and are more expensive too! Unless you are a strict vegetarian and eschew meat for ethical reasons, meat is surely a better deal.\n(C) Mika\nNot really. It tastes too much like actual meat. If I wanted to eat a dead cow, I would go for real burgers. Being vegan means I try to stick to plant food. But this is just not something that will ever interest me.\n(D) Thomas\nGreenBurger just tastes “beany” to me, so I think that whatever form it comes in, it works better in recipes that would usually contain beans, such as in a rice bowl (as ground meat substitute). That being said, I’m definitely a carnivore and prefer meat, but I don’t see anything wrong with choosing one of the fakey-fakey meaty things once in a while—just for a change.\n(E) Rico\nI finally tried one last week. It didn’t taste that bad, but I was surprised to find it had 40 more calories than the meat version! Isn’t it supposed to be a healthy choice?\n(F) Linda\nI liked it fine. I did NOT like the price, though. Hopefully that will come down. I’m trying to eat less beef.\n(G) Ablo\nYes! My whole family does. We’ve been mostly vegan 90% of the time for the last 6 years and we cannot thank GreenBurger enough! Especially when a burger craving hits…a GreenBurger does the trick. I’ve tried all kinds of vegan “burgers,” and GreenBurgers are closer to what I’m looking for. In fact, I can have them every day—vegan or not!\n(H) Alexander\nWell, they taste good if you add plenty of spices and sauces. Good for you? No, not at all. They’re highly processed and contain no vegetables. They also contain a very large amount of processed coconut oil, which is even worse than lard. It’s a killer for sure if eaten regularly. So why risk your life?",
-        "question": "From (A) to (H) in the above chatroom discussions, which ones show that GreenBurger can be a choice for the chatroom participants themselves only under certain circumstances?(多選題,4分;選項依序對應留言者 (A) 至 (H))",
+        "question": "From (A) to (H) in the above chatroom discussions, which ones show that GreenBurger can be a choice for the chatroom participants themselves only under certain circumstances?(多選題,4分;選項為留言者 (A) 至 (H) 的姓名)\n(非官方註記:本站選項不標 A、B、C 代號,且順序每次隨機排列,請直接勾選符合的選項。)",
         "options": [
           "Olivia",
           "Smith",
@@ -1981,7 +1981,7 @@ export const englishRealExams = [
           "slippery"
         ],
         "answer": 1,
-        "explanation": "(113學測英文第1題,官方答案B)"
+        "explanation": "(113學測英文第1題,官方答案B,即「slender」)"
       },
       {
         "id": "english-real-113-q2",
@@ -1996,7 +1996,7 @@ export const englishRealExams = [
           "floating"
         ],
         "answer": 0,
-        "explanation": "(113學測英文第2題,官方答案A)"
+        "explanation": "(113學測英文第2題,官方答案A,即「emerging」)"
       },
       {
         "id": "english-real-113-q3",
@@ -2011,7 +2011,7 @@ export const englishRealExams = [
           "docked"
         ],
         "answer": 1,
-        "explanation": "(113學測英文第3題,官方答案B)"
+        "explanation": "(113學測英文第3題,官方答案B,即「due」)"
       },
       {
         "id": "english-real-113-q4",
@@ -2026,7 +2026,7 @@ export const englishRealExams = [
           "atmosphere"
         ],
         "answer": 1,
-        "explanation": "(113學測英文第4題,官方答案B)"
+        "explanation": "(113學測英文第4題,官方答案B,即「humidity」)"
       },
       {
         "id": "english-real-113-q5",
@@ -2041,7 +2041,7 @@ export const englishRealExams = [
           "stand"
         ],
         "answer": 3,
-        "explanation": "(113學測英文第5題,官方答案D)"
+        "explanation": "(113學測英文第5題,官方答案D,即「stand」)"
       },
       {
         "id": "english-real-113-q6",
@@ -2056,7 +2056,7 @@ export const englishRealExams = [
           "distinctive"
         ],
         "answer": 2,
-        "explanation": "(113學測英文第6題,官方答案C)"
+        "explanation": "(113學測英文第6題,官方答案C,即「compulsory」)"
       },
       {
         "id": "english-real-113-q7",
@@ -2071,7 +2071,7 @@ export const englishRealExams = [
           "credit"
         ],
         "answer": 3,
-        "explanation": "(113學測英文第7題,官方答案D)"
+        "explanation": "(113學測英文第7題,官方答案D,即「credit」)"
       },
       {
         "id": "english-real-113-q8",
@@ -2086,7 +2086,7 @@ export const englishRealExams = [
           "confirms"
         ],
         "answer": 2,
-        "explanation": "(113學測英文第8題,官方答案C)"
+        "explanation": "(113學測英文第8題,官方答案C,即「promises」)"
       },
       {
         "id": "english-real-113-q9",
@@ -2101,7 +2101,7 @@ export const englishRealExams = [
           "observation"
         ],
         "answer": 0,
-        "explanation": "(113學測英文第9題,官方答案A)"
+        "explanation": "(113學測英文第9題,官方答案A,即「appeal」)"
       },
       {
         "id": "english-real-113-q10",
@@ -2116,7 +2116,7 @@ export const englishRealExams = [
           "consequently"
         ],
         "answer": 1,
-        "explanation": "(113學測英文第10題,官方答案B)"
+        "explanation": "(113學測英文第10題,官方答案B,即「randomly」)"
       },
       {
         "id": "english-real-113-q11",
@@ -2134,7 +2134,7 @@ export const englishRealExams = [
           "engage in"
         ],
         "answer": 1,
-        "explanation": "(113學測英文第11題,官方答案B)"
+        "explanation": "(113學測英文第11題,官方答案B,即「pose as」)"
       },
       {
         "id": "english-real-113-q12",
@@ -2152,7 +2152,7 @@ export const englishRealExams = [
           "to which"
         ],
         "answer": 3,
-        "explanation": "(113學測英文第12題,官方答案D)"
+        "explanation": "(113學測英文第12題,官方答案D,即「to which」)"
       },
       {
         "id": "english-real-113-q13",
@@ -2170,7 +2170,7 @@ export const englishRealExams = [
           "personal bias"
         ],
         "answer": 3,
-        "explanation": "(113學測英文第13題,官方答案D)"
+        "explanation": "(113學測英文第13題,官方答案D,即「personal bias」)"
       },
       {
         "id": "english-real-113-q14",
@@ -2188,7 +2188,7 @@ export const englishRealExams = [
           "anonymous"
         ],
         "answer": 0,
-        "explanation": "(113學測英文第14題,官方答案A)"
+        "explanation": "(113學測英文第14題,官方答案A,即「difficult」)"
       },
       {
         "id": "english-real-113-q15",
@@ -2206,7 +2206,7 @@ export const englishRealExams = [
           "management"
         ],
         "answer": 2,
-        "explanation": "(113學測英文第15題,官方答案C)"
+        "explanation": "(113學測英文第15題,官方答案C,即「improvement」)"
       },
       {
         "id": "english-real-113-q16",
@@ -2224,7 +2224,7 @@ export const englishRealExams = [
           "were mostly using"
         ],
         "answer": 1,
-        "explanation": "(113學測英文第16題,官方答案B)"
+        "explanation": "(113學測英文第16題,官方答案B,即「could have used」)"
       },
       {
         "id": "english-real-113-q17",
@@ -2242,7 +2242,7 @@ export const englishRealExams = [
           "Exhausted by"
         ],
         "answer": 2,
-        "explanation": "(113學測英文第17題,官方答案C)"
+        "explanation": "(113學測英文第17題,官方答案C,即「Equipped with」)"
       },
       {
         "id": "english-real-113-q18",
@@ -2260,7 +2260,7 @@ export const englishRealExams = [
           "public eyesores"
         ],
         "answer": 0,
-        "explanation": "(113學測英文第18題,官方答案A)"
+        "explanation": "(113學測英文第18題,官方答案A,即「familiar presences」)"
       },
       {
         "id": "english-real-113-q19",
@@ -2278,7 +2278,7 @@ export const englishRealExams = [
           "declined"
         ],
         "answer": 3,
-        "explanation": "(113學測英文第19題,官方答案D)"
+        "explanation": "(113學測英文第19題,官方答案D,即「declined」)"
       },
       {
         "id": "english-real-113-q20",
@@ -2296,7 +2296,7 @@ export const englishRealExams = [
           "regret"
         ],
         "answer": 2,
-        "explanation": "(113學測英文第20題,官方答案C)"
+        "explanation": "(113學測英文第20題,官方答案C,即「match」)"
       },
       {
         "id": "english-real-113-q21",
@@ -2320,7 +2320,7 @@ export const englishRealExams = [
           "brought forth"
         ],
         "answer": 4,
-        "explanation": "(113學測英文第21題,官方答案E)"
+        "explanation": "(113學測英文第21題,官方答案E,即「departed」)"
       },
       {
         "id": "english-real-113-q22",
@@ -2344,7 +2344,7 @@ export const englishRealExams = [
           "brought forth"
         ],
         "answer": 8,
-        "explanation": "(113學測英文第22題,官方答案I)"
+        "explanation": "(113學測英文第22題,官方答案I,即「fateful」)"
       },
       {
         "id": "english-real-113-q23",
@@ -2368,7 +2368,7 @@ export const englishRealExams = [
           "brought forth"
         ],
         "answer": 9,
-        "explanation": "(113學測英文第23題,官方答案J)"
+        "explanation": "(113學測英文第23題,官方答案J,即「brought forth」)"
       },
       {
         "id": "english-real-113-q24",
@@ -2392,7 +2392,7 @@ export const englishRealExams = [
           "brought forth"
         ],
         "answer": 2,
-        "explanation": "(113學測英文第24題,官方答案C)"
+        "explanation": "(113學測英文第24題,官方答案C,即「sorrow」)"
       },
       {
         "id": "english-real-113-q25",
@@ -2416,7 +2416,7 @@ export const englishRealExams = [
           "brought forth"
         ],
         "answer": 6,
-        "explanation": "(113學測英文第25題,官方答案G)"
+        "explanation": "(113學測英文第25題,官方答案G,即「housed」)"
       },
       {
         "id": "english-real-113-q26",
@@ -2440,7 +2440,7 @@ export const englishRealExams = [
           "brought forth"
         ],
         "answer": 0,
-        "explanation": "(113學測英文第26題,官方答案A)"
+        "explanation": "(113學測英文第26題,官方答案A,即「passed on」)"
       },
       {
         "id": "english-real-113-q27",
@@ -2464,7 +2464,7 @@ export const englishRealExams = [
           "brought forth"
         ],
         "answer": 7,
-        "explanation": "(113學測英文第27題,官方答案H)"
+        "explanation": "(113學測英文第27題,官方答案H,即「manageable」)"
       },
       {
         "id": "english-real-113-q28",
@@ -2488,7 +2488,7 @@ export const englishRealExams = [
           "brought forth"
         ],
         "answer": 1,
-        "explanation": "(113學測英文第28題,官方答案B)"
+        "explanation": "(113學測英文第28題,官方答案B,即「bridge」)"
       },
       {
         "id": "english-real-113-q29",
@@ -2512,7 +2512,7 @@ export const englishRealExams = [
           "brought forth"
         ],
         "answer": 5,
-        "explanation": "(113學測英文第29題,官方答案F)"
+        "explanation": "(113學測英文第29題,官方答案F,即「mechanism」)"
       },
       {
         "id": "english-real-113-q30",
@@ -2536,7 +2536,7 @@ export const englishRealExams = [
           "brought forth"
         ],
         "answer": 3,
-        "explanation": "(113學測英文第30題,官方答案D)"
+        "explanation": "(113學測英文第30題,官方答案D,即「hope」)"
       },
       {
         "id": "english-real-113-q31",
@@ -2554,7 +2554,7 @@ export const englishRealExams = [
           "This seems to run counter to the common practice."
         ],
         "answer": 3,
-        "explanation": "(113學測英文第31題,官方答案D)"
+        "explanation": "(113學測英文第31題,官方答案D,即「This seems to run counter to the common practice.」)"
       },
       {
         "id": "english-real-113-q32",
@@ -2572,7 +2572,7 @@ export const englishRealExams = [
           "This seems to run counter to the common practice."
         ],
         "answer": 2,
-        "explanation": "(113學測英文第32題,官方答案C)"
+        "explanation": "(113學測英文第32題,官方答案C,即「Many suggest that most patients can continue with the sport they love.」)"
       },
       {
         "id": "english-real-113-q33",
@@ -2590,7 +2590,7 @@ export const englishRealExams = [
           "This seems to run counter to the common practice."
         ],
         "answer": 0,
-        "explanation": "(113學測英文第33題,官方答案A)"
+        "explanation": "(113學測英文第33題,官方答案A,即「For example, an injured runner might end up cycling and swimming instead of running.」)"
       },
       {
         "id": "english-real-113-q34",
@@ -2608,7 +2608,7 @@ export const englishRealExams = [
           "This seems to run counter to the common practice."
         ],
         "answer": 1,
-        "explanation": "(113學測英文第34題,官方答案B)"
+        "explanation": "(113學測英文第34題,官方答案B,即「Over time, researchers have come to realize the importance of exercising when injured.」)"
       },
       {
         "id": "english-real-113-q35",
@@ -2644,7 +2644,7 @@ export const englishRealExams = [
           "A sudden inspiration."
         ],
         "answer": 3,
-        "explanation": "(113學測英文第36題,官方答案D)"
+        "explanation": "(113學測英文第36題,官方答案D,即「A sudden inspiration.」)"
       },
       {
         "id": "english-real-113-q37",
@@ -2662,7 +2662,7 @@ export const englishRealExams = [
           "The design was intended to look as shiny and smooth as velvet."
         ],
         "answer": 1,
-        "explanation": "(113學測英文第37題,官方答案B)"
+        "explanation": "(113學測英文第37題,官方答案B,即「Cotton was not durable enough to be used as its materials.」)"
       },
       {
         "id": "english-real-113-q38",
@@ -2680,7 +2680,7 @@ export const englishRealExams = [
           "Sports and recreation."
         ],
         "answer": 0,
-        "explanation": "(113學測英文第38題,官方答案A)"
+        "explanation": "(113學測英文第38題,官方答案A,即「Civil engineering.」)"
       },
       {
         "id": "english-real-113-q39",
@@ -2698,7 +2698,7 @@ export const englishRealExams = [
           "Why Moran started painting Yellowstone."
         ],
         "answer": 3,
-        "explanation": "(113學測英文第39題,官方答案D)"
+        "explanation": "(113學測英文第39題,官方答案D,即「Why Moran started painting Yellowstone.」)"
       },
       {
         "id": "english-real-113-q40",
@@ -2716,7 +2716,7 @@ export const englishRealExams = [
           "The laborers mostly wore dark and dirty uniforms."
         ],
         "answer": 0,
-        "explanation": "(113學測英文第40題,官方答案A)"
+        "explanation": "(113學測英文第40題,官方答案A,即「The place was severely polluted.」)"
       },
       {
         "id": "english-real-113-q41",
@@ -2734,7 +2734,7 @@ export const englishRealExams = [
           "It was the only national park established because of Moran’s works."
         ],
         "answer": 1,
-        "explanation": "(113學測英文第41題,官方答案B)"
+        "explanation": "(113學測英文第41題,官方答案B,即「Americans knew little about its beauty before the 1870s.」)"
       },
       {
         "id": "english-real-113-q42",
@@ -2752,7 +2752,7 @@ export const englishRealExams = [
           "Watercolor was the most popular form of landscape painting in the 19th century."
         ],
         "answer": 2,
-        "explanation": "(113學測英文第42題,官方答案C)"
+        "explanation": "(113學測英文第42題,官方答案C,即「Color photos were not common when Moran started painting Yellowstone.」)"
       },
       {
         "id": "english-real-113-q43",
@@ -2770,7 +2770,7 @@ export const englishRealExams = [
           "To make the most of marine resources."
         ],
         "answer": 3,
-        "explanation": "(113學測英文第43題,官方答案D)"
+        "explanation": "(113學測英文第43題,官方答案D,即「To make the most of marine resources.」)"
       },
       {
         "id": "english-real-113-q44",
@@ -2788,7 +2788,7 @@ export const englishRealExams = [
           "A new approach to protect the environment."
         ],
         "answer": 1,
-        "explanation": "(113學測英文第44題,官方答案B)"
+        "explanation": "(113學測英文第44題,官方答案B,即「Oddsson’s skin transplant.」)"
       },
       {
         "id": "english-real-113-q45",
@@ -2806,7 +2806,7 @@ export const englishRealExams = [
           "100% Fish is a big international enterprise marketing seafood products."
         ],
         "answer": 2,
-        "explanation": "(113學測英文第45題,官方答案C)"
+        "explanation": "(113學測英文第45題,官方答案C,即「Cross-field collaboration has proved to be very fruitful for 100% Fish.」)"
       },
       {
         "id": "english-real-113-q46",
@@ -2824,7 +2824,7 @@ export const englishRealExams = [
           "Paragraph 4."
         ],
         "answer": 2,
-        "explanation": "(113學測英文第46題,官方答案C)"
+        "explanation": "(113學測英文第46題,官方答案C,即「Paragraph 3.」)"
       },
       {
         "id": "english-real-113-q47",
@@ -2859,7 +2859,7 @@ export const englishRealExams = [
         "passageId": "english-real-113-mixed",
         "passageTitle": "混合題 第47至50題",
         "passage": "Many animals are known to live and move in groups to secure food and avoid predators. Over the years, people have been curious about the way they deal with disturbances arising from the environment, and the operations underlying their responses as a group. Studies on jackdaws and turtle ants may provide some insights into the issue.\n[圖片示意(非官方文字):原題下方為左右兩欄,各附一張黑白照片——左欄為兩隻棲息在樹幹上的寒鴉(jackdaw),右欄為數隻龜蟻(turtle ants);圖片僅為配圖,不影響作答]\n[左欄]\nJackdaws are birds in the crow family often found in the English countryside. They are highly social birds and often travel in large flocks. Normally, the birds enjoy a smooth flight together as a group when “commuting” between two locations, such as from their nesting site to their feeding ground. However, if a predator (such as a fox) is present, the pattern of their flight will change immediately. Instead of paying attention to all the other members and following the group pattern, they now focus only on the birds within a fixed distance from them, based on information coming from other members. By doing so, the flock members are able to keep a safe distance between themselves, and thus avoid crashing into each other while they flee from the predator.\n[右欄]\nTurtle ants often live in the cavities of dead branches in American forests. They have evolved search strategies to link their food source to their nests. They travel entirely along tree branches and vines, laying down trails of pheromone (a chemical substance) behind them so that other ants can follow. The trails connect the ants’ colonies and sources of food, forming a sort of communication network. However, since these trails can easily be broken by wind or rain, the ants have to find new paths to get around the broken points and reestablish the network. Often they have to work together to explore alternative routes many times before they finally settle on the most efficient one. By working collectively, the ants are able to improve the efficiency of their network and adapt to their ever-changing environment.",
-        "question": "From (A) to (F) below, choose the ONES that are true for both jackdaws and turtle ants.(多選題,4分)",
+        "question": "From (A) to (F) below, choose the ONES that are true for both jackdaws and turtle ants.(多選題,4分)\n(非官方註記:本站選項不標 A、B、C 代號,且順序每次隨機排列,請直接勾選符合的選項。)",
         "options": [
           "They have special strategies to locate food sources.",
           "They have complex interactions led by a leader.",
@@ -2872,7 +2872,7 @@ export const englishRealExams = [
           2,
           5
         ],
-        "explanation": "(113學測英文第49題,官方答案CF)"
+        "explanation": "(113學測英文第49題,官方答案CF,即「They share information with their group members.」、「They show behavior governed by a unique system of communication.」)"
       },
       {
         "id": "english-real-113-q50",
@@ -2955,7 +2955,7 @@ export const englishRealExams = [
           "marker"
         ],
         "answer": 2,
-        "explanation": "(114學測英文第1題,官方答案C)"
+        "explanation": "(114學測英文第1題,官方答案C,即「container」)"
       },
       {
         "id": "english-real-114-q2",
@@ -2970,7 +2970,7 @@ export const englishRealExams = [
           "trend"
         ],
         "answer": 0,
-        "explanation": "(114學測英文第2題,官方答案A)"
+        "explanation": "(114學測英文第2題,官方答案A,即「produce」)"
       },
       {
         "id": "english-real-114-q3",
@@ -2985,7 +2985,7 @@ export const englishRealExams = [
           "glaring"
         ],
         "answer": 0,
-        "explanation": "(114學測英文第3題,官方答案A)"
+        "explanation": "(114學測英文第3題,官方答案A,即「blurring」)"
       },
       {
         "id": "english-real-114-q4",
@@ -3000,7 +3000,7 @@ export const englishRealExams = [
           "stubborn"
         ],
         "answer": 2,
-        "explanation": "(114學測英文第4題,官方答案C)"
+        "explanation": "(114學測英文第4題,官方答案C,即「offensive」)"
       },
       {
         "id": "english-real-114-q5",
@@ -3015,7 +3015,7 @@ export const englishRealExams = [
           "plot"
         ],
         "answer": 2,
-        "explanation": "(114學測英文第5題,官方答案C)"
+        "explanation": "(114學測英文第5題,官方答案C,即「draft」)"
       },
       {
         "id": "english-real-114-q6",
@@ -3030,7 +3030,7 @@ export const englishRealExams = [
           "vacant"
         ],
         "answer": 3,
-        "explanation": "(114學測英文第6題,官方答案D)"
+        "explanation": "(114學測英文第6題,官方答案D,即「vacant」)"
       },
       {
         "id": "english-real-114-q7",
@@ -3045,7 +3045,7 @@ export const englishRealExams = [
           "enormous"
         ],
         "answer": 3,
-        "explanation": "(114學測英文第7題,官方答案D)"
+        "explanation": "(114學測英文第7題,官方答案D,即「enormous」)"
       },
       {
         "id": "english-real-114-q8",
@@ -3060,7 +3060,7 @@ export const englishRealExams = [
           "reinforced"
         ],
         "answer": 0,
-        "explanation": "(114學測英文第8題,官方答案A)"
+        "explanation": "(114學測英文第8題,官方答案A,即「halted」)"
       },
       {
         "id": "english-real-114-q9",
@@ -3075,7 +3075,7 @@ export const englishRealExams = [
           "credited"
         ],
         "answer": 1,
-        "explanation": "(114學測英文第9題,官方答案B)"
+        "explanation": "(114學測英文第9題,官方答案B,即「graced」)"
       },
       {
         "id": "english-real-114-q10",
@@ -3090,7 +3090,7 @@ export const englishRealExams = [
           "relevantly"
         ],
         "answer": 0,
-        "explanation": "(114學測英文第10題,官方答案A)"
+        "explanation": "(114學測英文第10題,官方答案A,即「verbally」)"
       },
       {
         "id": "english-real-114-q11",
@@ -3108,7 +3108,7 @@ export const englishRealExams = [
           "would have spread"
         ],
         "answer": 1,
-        "explanation": "(114學測英文第11題,官方答案B)"
+        "explanation": "(114學測英文第11題,官方答案B,即「would spread」)"
       },
       {
         "id": "english-real-114-q12",
@@ -3126,7 +3126,7 @@ export const englishRealExams = [
           "fulfilled"
         ],
         "answer": 1,
-        "explanation": "(114學測英文第12題,官方答案B)"
+        "explanation": "(114學測英文第12題,官方答案B,即「disrupted」)"
       },
       {
         "id": "english-real-114-q13",
@@ -3144,7 +3144,7 @@ export const englishRealExams = [
           "preserve"
         ],
         "answer": 0,
-        "explanation": "(114學測英文第13題,官方答案A)"
+        "explanation": "(114學測英文第13題,官方答案A,即「circulate」)"
       },
       {
         "id": "english-real-114-q14",
@@ -3162,7 +3162,7 @@ export const englishRealExams = [
           "looked out for"
         ],
         "answer": 2,
-        "explanation": "(114學測英文第14題,官方答案C)"
+        "explanation": "(114學測英文第14題,官方答案C,即「gave rise to」)"
       },
       {
         "id": "english-real-114-q15",
@@ -3180,7 +3180,7 @@ export const englishRealExams = [
           "thus"
         ],
         "answer": 3,
-        "explanation": "(114學測英文第15題,官方答案D)"
+        "explanation": "(114學測英文第15題,官方答案D,即「thus」)"
       },
       {
         "id": "english-real-114-q16",
@@ -3198,7 +3198,7 @@ export const englishRealExams = [
           "strike"
         ],
         "answer": 3,
-        "explanation": "(114學測英文第16題,官方答案D)"
+        "explanation": "(114學測英文第16題,官方答案D,即「strike」)"
       },
       {
         "id": "english-real-114-q17",
@@ -3216,7 +3216,7 @@ export const englishRealExams = [
           "are rarely cued"
         ],
         "answer": 2,
-        "explanation": "(114學測英文第17題,官方答案C)"
+        "explanation": "(114學測英文第17題,官方答案C,即「do not match」)"
       },
       {
         "id": "english-real-114-q18",
@@ -3234,7 +3234,7 @@ export const englishRealExams = [
           "haven’t"
         ],
         "answer": 2,
-        "explanation": "(114學測英文第18題,官方答案C)"
+        "explanation": "(114學測英文第18題,官方答案C,即「don’t」)"
       },
       {
         "id": "english-real-114-q19",
@@ -3252,7 +3252,7 @@ export const englishRealExams = [
           "significant advantages"
         ],
         "answer": 1,
-        "explanation": "(114學測英文第19題,官方答案B)"
+        "explanation": "(114學測英文第19題,官方答案B,即「preventive measures」)"
       },
       {
         "id": "english-real-114-q20",
@@ -3270,7 +3270,7 @@ export const englishRealExams = [
           "after all"
         ],
         "answer": 0,
-        "explanation": "(114學測英文第20題,官方答案A)"
+        "explanation": "(114學測英文第20題,官方答案A,即「as well」)"
       },
       {
         "id": "english-real-114-q21",
@@ -3294,7 +3294,7 @@ export const englishRealExams = [
           "silent"
         ],
         "answer": 8,
-        "explanation": "(114學測英文第21題,官方答案I)"
+        "explanation": "(114學測英文第21題,官方答案I,即「noted」)"
       },
       {
         "id": "english-real-114-q22",
@@ -3318,7 +3318,7 @@ export const englishRealExams = [
           "silent"
         ],
         "answer": 0,
-        "explanation": "(114學測英文第22題,官方答案A)"
+        "explanation": "(114學測英文第22題,官方答案A,即「reference」)"
       },
       {
         "id": "english-real-114-q23",
@@ -3342,7 +3342,7 @@ export const englishRealExams = [
           "silent"
         ],
         "answer": 1,
-        "explanation": "(114學測英文第23題,官方答案B)"
+        "explanation": "(114學測英文第23題,官方答案B,即「bearing」)"
       },
       {
         "id": "english-real-114-q24",
@@ -3366,7 +3366,7 @@ export const englishRealExams = [
           "silent"
         ],
         "answer": 5,
-        "explanation": "(114學測英文第24題,官方答案F)"
+        "explanation": "(114學測英文第24題,官方答案F,即「survived」)"
       },
       {
         "id": "english-real-114-q25",
@@ -3390,7 +3390,7 @@ export const englishRealExams = [
           "silent"
         ],
         "answer": 3,
-        "explanation": "(114學測英文第25題,官方答案D)"
+        "explanation": "(114學測英文第25題,官方答案D,即「retained」)"
       },
       {
         "id": "english-real-114-q26",
@@ -3414,7 +3414,7 @@ export const englishRealExams = [
           "silent"
         ],
         "answer": 2,
-        "explanation": "(114學測英文第26題,官方答案C)"
+        "explanation": "(114學測英文第26題,官方答案C,即「familiar」)"
       },
       {
         "id": "english-real-114-q27",
@@ -3438,7 +3438,7 @@ export const englishRealExams = [
           "silent"
         ],
         "answer": 4,
-        "explanation": "(114學測英文第27題,官方答案E)"
+        "explanation": "(114學測英文第27題,官方答案E,即「faithful」)"
       },
       {
         "id": "english-real-114-q28",
@@ -3462,7 +3462,7 @@ export const englishRealExams = [
           "silent"
         ],
         "answer": 6,
-        "explanation": "(114學測英文第28題,官方答案G)"
+        "explanation": "(114學測英文第28題,官方答案G,即「celebration」)"
       },
       {
         "id": "english-real-114-q29",
@@ -3486,7 +3486,7 @@ export const englishRealExams = [
           "silent"
         ],
         "answer": 9,
-        "explanation": "(114學測英文第29題,官方答案J)"
+        "explanation": "(114學測英文第29題,官方答案J,即「silent」)"
       },
       {
         "id": "english-real-114-q30",
@@ -3510,7 +3510,7 @@ export const englishRealExams = [
           "silent"
         ],
         "answer": 7,
-        "explanation": "(114學測英文第30題,官方答案H)"
+        "explanation": "(114學測英文第30題,官方答案H,即「restoration」)"
       },
       {
         "id": "english-real-114-q31",
@@ -3528,7 +3528,7 @@ export const englishRealExams = [
           "Today, they provide low-budget, overnight lodging in commerce centers in large cities worldwide."
         ],
         "answer": 3,
-        "explanation": "(114學測英文第31題,官方答案D)"
+        "explanation": "(114學測英文第31題,官方答案D,即「Today, they provide low-budget, overnight lodging in commerce centers in large cities worldwide.」)"
       },
       {
         "id": "english-real-114-q32",
@@ -3546,7 +3546,7 @@ export const englishRealExams = [
           "Today, they provide low-budget, overnight lodging in commerce centers in large cities worldwide."
         ],
         "answer": 2,
-        "explanation": "(114學測英文第32題,官方答案C)"
+        "explanation": "(114學測英文第32題,官方答案C,即「The chambers are stacked side-by-side, two units high, with the upper rooms reached by a ladder.」)"
       },
       {
         "id": "english-real-114-q33",
@@ -3564,7 +3564,7 @@ export const englishRealExams = [
           "Today, they provide low-budget, overnight lodging in commerce centers in large cities worldwide."
         ],
         "answer": 0,
-        "explanation": "(114學測英文第33題,官方答案A)"
+        "explanation": "(114學測英文第33題,官方答案A,即「In response to rising demands, these hotels are embracing a wave of innovation.」)"
       },
       {
         "id": "english-real-114-q34",
@@ -3582,7 +3582,7 @@ export const englishRealExams = [
           "Today, they provide low-budget, overnight lodging in commerce centers in large cities worldwide."
         ],
         "answer": 1,
-        "explanation": "(114學測英文第34題,官方答案B)"
+        "explanation": "(114學測英文第34題,官方答案B,即「The room’s thin plastic walls easily transmit the sound of snoring made by neighboring guests.」)"
       },
       {
         "id": "english-real-114-q35",
@@ -3600,7 +3600,7 @@ export const englishRealExams = [
           "The development of modern transportation."
         ],
         "answer": 0,
-        "explanation": "(114學測英文第35題,官方答案A)"
+        "explanation": "(114學測英文第35題,官方答案A,即「The evolution of traffic control systems.」)"
       },
       {
         "id": "english-real-114-q36",
@@ -3636,7 +3636,7 @@ export const englishRealExams = [
           "Future vehicles may not need traffic lights to cross an intersection."
         ],
         "answer": 3,
-        "explanation": "(114學測英文第37題,官方答案D)"
+        "explanation": "(114學測英文第37題,官方答案D,即「Future vehicles may not need traffic lights to cross an intersection.」)"
       },
       {
         "id": "english-real-114-q38",
@@ -3654,7 +3654,7 @@ export const englishRealExams = [
           "Paragraph 4."
         ],
         "answer": 2,
-        "explanation": "(114學測英文第38題,官方答案C)"
+        "explanation": "(114學測英文第38題,官方答案C,即「Paragraph 3.」)"
       },
       {
         "id": "english-real-114-q39",
@@ -3672,7 +3672,7 @@ export const englishRealExams = [
           "Communication."
         ],
         "answer": 0,
-        "explanation": "(114學測英文第39題,官方答案A)"
+        "explanation": "(114學測英文第39題,官方答案A,即「Psychology.」)"
       },
       {
         "id": "english-real-114-q40",
@@ -3690,7 +3690,7 @@ export const englishRealExams = [
           "Obtaining information from personal experience."
         ],
         "answer": 1,
-        "explanation": "(114學測英文第40題,官方答案B)"
+        "explanation": "(114學測英文第40題,官方答案B,即「Gaining knowledge through observation.」)"
       },
       {
         "id": "english-real-114-q41",
@@ -3708,7 +3708,7 @@ export const englishRealExams = [
           "Watching horror movies may have a long-term effect on personality."
         ],
         "answer": 3,
-        "explanation": "(114學測英文第41題,官方答案D)"
+        "explanation": "(114學測英文第41題,官方答案D,即「Watching horror movies may have a long-term effect on personality.」)"
       },
       {
         "id": "english-real-114-q42",
@@ -3726,7 +3726,7 @@ export const englishRealExams = [
           "By providing steps for settling a disagreement."
         ],
         "answer": 1,
-        "explanation": "(114學測英文第42題,官方答案B)"
+        "explanation": "(114學測英文第42題,官方答案B,即「By showing opposing views of an issue.」)"
       },
       {
         "id": "english-real-114-q43",
@@ -3744,7 +3744,7 @@ export const englishRealExams = [
           "To link Russians’ vodka consumption to their adoption of Christianity."
         ],
         "answer": 2,
-        "explanation": "(114學測英文第43題,官方答案C)"
+        "explanation": "(114學測英文第43題,官方答案C,即「To argue against the assumption that Russians are born drinkers.」)"
       },
       {
         "id": "english-real-114-q44",
@@ -3762,7 +3762,7 @@ export const englishRealExams = [
           "Russian people were encouraged to make their own vodka in the 19th century."
         ],
         "answer": 0,
-        "explanation": "(114學測英文第44題,官方答案A)"
+        "explanation": "(114學測英文第44題,官方答案A,即「Vodka production in Russia started in the 15th century.」)"
       },
       {
         "id": "english-real-114-q45",
@@ -3780,7 +3780,7 @@ export const englishRealExams = [
           "The state monopoly."
         ],
         "answer": 3,
-        "explanation": "(114學測英文第45題,官方答案D)"
+        "explanation": "(114學測英文第45題,官方答案D,即「The state monopoly.」)"
       },
       {
         "id": "english-real-114-q46",
@@ -3798,7 +3798,7 @@ export const englishRealExams = [
           "By making a future prediction."
         ],
         "answer": 0,
-        "explanation": "(114學測英文第46題,官方答案A)"
+        "explanation": "(114學測英文第46題,官方答案A,即「By providing further facts.」)"
       },
       {
         "id": "english-real-114-q47",
@@ -3833,7 +3833,7 @@ export const englishRealExams = [
         "passageId": "english-real-114-mixed",
         "passageTitle": "混合題 第47至50題",
         "passage": "A zoo is a place where animals in captivity are put on display for humans to see. While early zoos put emphasis on displaying as many unusual creatures as possible, most modern zoos now focus on conservation and education. Still, many animal rights activists believe the cost of confining animals outweighs the benefits. What are your opinions? Feel free to share your ideas on this forum.\nA. Amy\nPersonally I’m against zoos, though I do understand some of the arguments why they should exist. I don’t agree with caging animals for our entertainment.\nB. Ben\nWhat gives humans the right to capture, confine, or breed other species? Even if an animal is endangered, does that justify restricting its freedom?\nC. Cathy\nZoos are a tradition, and a visit to a zoo is a wholesome family activity. Wildlife encounters are unforgettable experiences for children and adults alike.\nD. Daniel\nTo me, a zoo can be a good place for endangered species which have difficulty finding suitable mates in the wild.\nE. Eddie\nMy childhood memory of a polar bear pacing back and forth in a very small space in a zoo keeps haunting me. Is it a good idea to keep animals in sites not suited to them?\nF. Frank\nWell, if zoos are an inevitability, zoo keepers must provide the best possible conditions for the animals that live in captivity—to say the least!\nG. George\nZoos have an educational aspect to it. It’s easier to learn about an animal by seeing them in person.\nH. Henry\nMost animals in zoos are not endangered, nor are they being prepared for release into natural habitats. In fact, it is nearly impossible to release captive-bred animals.\nI. Irene\nFostering empathy…By seeing an animal up close, the public could be encouraged to be more sensitive and compassionate to a species that is facing extinction in the wild.\nJ. Jack\nIn making a case for or against zoos, both sides argue that they’re saving animals. Whether or not zoos benefit the animal community, they certainly do make money. Like it or not, zoos will continue to exist as long as there is a demand for them.",
-        "question": "From (A) to (J) in the above forum discussion, which ONES show a positive attitude toward zoos?(多選題,4分)\n(非官方註記:選項 A 至 J 即上方討論串中 A. 至 J. 十位發言者的發言,此處以發言者姓名代表)",
+        "question": "From (A) to (J) in the above forum discussion, which ONES show a positive attitude toward zoos?(多選題,4分)\n(非官方註記:選項 A 至 J 即上方討論串中 A. 至 J. 十位發言者的發言,此處以發言者姓名代表)\n(非官方註記:本站選項不標 A、B、C 代號,且順序每次隨機排列,請直接勾選符合的選項。)",
         "options": [
           "Amy",
           "Ben",
@@ -3852,7 +3852,7 @@ export const englishRealExams = [
           6,
           8
         ],
-        "explanation": "(114學測英文第49題,官方答案CDGI)"
+        "explanation": "(114學測英文第49題,官方答案CDGI,即「Cathy」、「Daniel」、「George」、「Irene」)"
       },
       {
         "id": "english-real-114-q50",
@@ -3939,7 +3939,7 @@ export const englishRealExams = [
           "routine"
         ],
         "answer": 1,
-        "explanation": "(115學測英文第1題,官方答案B)"
+        "explanation": "(115學測英文第1題,官方答案B,即「tight」)"
       },
       {
         "id": "english-real-115-q2",
@@ -3954,7 +3954,7 @@ export const englishRealExams = [
           "elementary"
         ],
         "answer": 2,
-        "explanation": "(115學測英文第2題,官方答案C)"
+        "explanation": "(115學測英文第2題,官方答案C,即「amateur」)"
       },
       {
         "id": "english-real-115-q3",
@@ -3969,7 +3969,7 @@ export const englishRealExams = [
           "inspiration"
         ],
         "answer": 1,
-        "explanation": "(115學測英文第3題,官方答案B)"
+        "explanation": "(115學測英文第3題,官方答案B,即「vacancy」)"
       },
       {
         "id": "english-real-115-q4",
@@ -3984,7 +3984,7 @@ export const englishRealExams = [
           "fundamentally"
         ],
         "answer": 0,
-        "explanation": "(115學測英文第4題,官方答案A)"
+        "explanation": "(115學測英文第4題,官方答案A,即「initially」)"
       },
       {
         "id": "english-real-115-q5",
@@ -3999,7 +3999,7 @@ export const englishRealExams = [
           "consumption"
         ],
         "answer": 3,
-        "explanation": "(115學測英文第5題,官方答案D)"
+        "explanation": "(115學測英文第5題,官方答案D,即「consumption」)"
       },
       {
         "id": "english-real-115-q6",
@@ -4014,7 +4014,7 @@ export const englishRealExams = [
           "escapes"
         ],
         "answer": 0,
-        "explanation": "(115學測英文第6題,官方答案A)"
+        "explanation": "(115學測英文第6題,官方答案A,即「dreads」)"
       },
       {
         "id": "english-real-115-q7",
@@ -4029,7 +4029,7 @@ export const englishRealExams = [
           "emphasis"
         ],
         "answer": 2,
-        "explanation": "(115學測英文第7題,官方答案C)"
+        "explanation": "(115學測英文第7題,官方答案C,即「passion」)"
       },
       {
         "id": "english-real-115-q8",
@@ -4044,7 +4044,7 @@ export const englishRealExams = [
           "condemned"
         ],
         "answer": 1,
-        "explanation": "(115學測英文第8題,官方答案B)"
+        "explanation": "(115學測英文第8題,官方答案B,即「assaulted」)"
       },
       {
         "id": "english-real-115-q9",
@@ -4059,7 +4059,7 @@ export const englishRealExams = [
           "struggle"
         ],
         "answer": 2,
-        "explanation": "(115學測英文第9題,官方答案C)"
+        "explanation": "(115學測英文第9題,官方答案C,即「elbow」)"
       },
       {
         "id": "english-real-115-q10",
@@ -4074,7 +4074,7 @@ export const englishRealExams = [
           "grave"
         ],
         "answer": 3,
-        "explanation": "(115學測英文第10題,官方答案D)"
+        "explanation": "(115學測英文第10題,官方答案D,即「grave」)"
       },
       {
         "id": "english-real-115-q11",
@@ -4092,7 +4092,7 @@ export const englishRealExams = [
           "all in all"
         ],
         "answer": 1,
-        "explanation": "(115學測英文第11題,官方答案B)"
+        "explanation": "(115學測英文第11題,官方答案B,即「it turns out」)"
       },
       {
         "id": "english-real-115-q12",
@@ -4110,7 +4110,7 @@ export const englishRealExams = [
           "manipulate"
         ],
         "answer": 2,
-        "explanation": "(115學測英文第12題,官方答案C)"
+        "explanation": "(115學測英文第12題,官方答案C,即「communicate」)"
       },
       {
         "id": "english-real-115-q13",
@@ -4128,7 +4128,7 @@ export const englishRealExams = [
           "clues"
         ],
         "answer": 3,
-        "explanation": "(115學測英文第13題,官方答案D)"
+        "explanation": "(115學測英文第13題,官方答案D,即「clues」)"
       },
       {
         "id": "english-real-115-q14",
@@ -4146,7 +4146,7 @@ export const englishRealExams = [
           "less likely"
         ],
         "answer": 3,
-        "explanation": "(115學測英文第14題,官方答案D)"
+        "explanation": "(115學測英文第14題,官方答案D,即「less likely」)"
       },
       {
         "id": "english-real-115-q15",
@@ -4164,7 +4164,7 @@ export const englishRealExams = [
           "tolerant with"
         ],
         "answer": 0,
-        "explanation": "(115學測英文第15題,官方答案A)"
+        "explanation": "(115學測英文第15題,官方答案A,即「responsive to」)"
       },
       {
         "id": "english-real-115-q16",
@@ -4182,7 +4182,7 @@ export const englishRealExams = [
           "reinforce"
         ],
         "answer": 0,
-        "explanation": "(115學測英文第16題,官方答案A)"
+        "explanation": "(115學測英文第16題,官方答案A,即「accommodate」)"
       },
       {
         "id": "english-real-115-q17",
@@ -4200,7 +4200,7 @@ export const englishRealExams = [
           "had almost developed"
         ],
         "answer": 1,
-        "explanation": "(115學測英文第17題,官方答案B)"
+        "explanation": "(115學測英文第17題,官方答案B,即「had yet to develop」)"
       },
       {
         "id": "english-real-115-q18",
@@ -4218,7 +4218,7 @@ export const englishRealExams = [
           "meant to be"
         ],
         "answer": 3,
-        "explanation": "(115學測英文第18題,官方答案D)"
+        "explanation": "(115學測英文第18題,官方答案D,即「meant to be」)"
       },
       {
         "id": "english-real-115-q19",
@@ -4236,7 +4236,7 @@ export const englishRealExams = [
           "in that"
         ],
         "answer": 1,
-        "explanation": "(115學測英文第19題,官方答案B)"
+        "explanation": "(115學測英文第19題,官方答案B,即「as such」)"
       },
       {
         "id": "english-real-115-q20",
@@ -4254,7 +4254,7 @@ export const englishRealExams = [
           "an amazing local cuisine"
         ],
         "answer": 2,
-        "explanation": "(115學測英文第20題,官方答案C)"
+        "explanation": "(115學測英文第20題,官方答案C,即「a joyful social activity」)"
       },
       {
         "id": "english-real-115-q21",
@@ -4278,7 +4278,7 @@ export const englishRealExams = [
           "point to"
         ],
         "answer": 4,
-        "explanation": "(115學測英文第21題,官方答案E)"
+        "explanation": "(115學測英文第21題,官方答案E,即「unproductive」)"
       },
       {
         "id": "english-real-115-q22",
@@ -4302,7 +4302,7 @@ export const englishRealExams = [
           "point to"
         ],
         "answer": 6,
-        "explanation": "(115學測英文第22題,官方答案G)"
+        "explanation": "(115學測英文第22題,官方答案G,即「function」)"
       },
       {
         "id": "english-real-115-q23",
@@ -4326,7 +4326,7 @@ export const englishRealExams = [
           "point to"
         ],
         "answer": 5,
-        "explanation": "(115學測英文第23題,官方答案F)"
+        "explanation": "(115學測英文第23題,官方答案F,即「risk」)"
       },
       {
         "id": "english-real-115-q24",
@@ -4350,7 +4350,7 @@ export const englishRealExams = [
           "point to"
         ],
         "answer": 3,
-        "explanation": "(115學測英文第24題,官方答案D)"
+        "explanation": "(115學測英文第24題,官方答案D,即「delay」)"
       },
       {
         "id": "english-real-115-q25",
@@ -4374,7 +4374,7 @@ export const englishRealExams = [
           "point to"
         ],
         "answer": 0,
-        "explanation": "(115學測英文第25題,官方答案A)"
+        "explanation": "(115學測英文第25題,官方答案A,即「retain」)"
       },
       {
         "id": "english-real-115-q26",
@@ -4398,7 +4398,7 @@ export const englishRealExams = [
           "point to"
         ],
         "answer": 9,
-        "explanation": "(115學測英文第26題,官方答案J)"
+        "explanation": "(115學測英文第26題,官方答案J,即「point to」)"
       },
       {
         "id": "english-real-115-q27",
@@ -4422,7 +4422,7 @@ export const englishRealExams = [
           "point to"
         ],
         "answer": 1,
-        "explanation": "(115學測英文第27題,官方答案B)"
+        "explanation": "(115學測英文第27題,官方答案B,即「depend on」)"
       },
       {
         "id": "english-real-115-q28",
@@ -4446,7 +4446,7 @@ export const englishRealExams = [
           "point to"
         ],
         "answer": 8,
-        "explanation": "(115學測英文第28題,官方答案I)"
+        "explanation": "(115學測英文第28題,官方答案I,即「dramatic」)"
       },
       {
         "id": "english-real-115-q29",
@@ -4470,7 +4470,7 @@ export const englishRealExams = [
           "point to"
         ],
         "answer": 7,
-        "explanation": "(115學測英文第29題,官方答案H)"
+        "explanation": "(115學測英文第29題,官方答案H,即「minimal」)"
       },
       {
         "id": "english-real-115-q30",
@@ -4494,7 +4494,7 @@ export const englishRealExams = [
           "point to"
         ],
         "answer": 2,
-        "explanation": "(115學測英文第30題,官方答案C)"
+        "explanation": "(115學測英文第30題,官方答案C,即「atmosphere」)"
       },
       {
         "id": "english-real-115-q31",
@@ -4513,7 +4513,7 @@ export const englishRealExams = [
           "In fact, there is a well-known Russian proverb that goes, “Smiling with no reason is a sign of stupidity.”"
         ],
         "answer": 2,
-        "explanation": "(115學測英文第31題,官方答案C)"
+        "explanation": "(115學測英文第31題,官方答案C,即「For most of recorded human history, the open smile has been deeply unfashionable.」)"
       },
       {
         "id": "english-real-115-q32",
@@ -4532,7 +4532,7 @@ export const englishRealExams = [
           "In fact, there is a well-known Russian proverb that goes, “Smiling with no reason is a sign of stupidity.”"
         ],
         "answer": 4,
-        "explanation": "(115學測英文第32題,官方答案E)"
+        "explanation": "(115學測英文第32題,官方答案E,即「In fact, there is a well-known Russian proverb that goes, “Smiling with no reason is a sign of stupidity.”」)"
       },
       {
         "id": "english-real-115-q33",
@@ -4551,7 +4551,7 @@ export const englishRealExams = [
           "In fact, there is a well-known Russian proverb that goes, “Smiling with no reason is a sign of stupidity.”"
         ],
         "answer": 0,
-        "explanation": "(115學測英文第33題,官方答案A)"
+        "explanation": "(115學測英文第33題,官方答案A,即「Another crucial factor is a society’s immigration diversity.」)"
       },
       {
         "id": "english-real-115-q34",
@@ -4570,7 +4570,7 @@ export const englishRealExams = [
           "In fact, there is a well-known Russian proverb that goes, “Smiling with no reason is a sign of stupidity.”"
         ],
         "answer": 1,
-        "explanation": "(115學測英文第34題,官方答案B)"
+        "explanation": "(115學測英文第34題,官方答案B,即「Various factors have thus contributed to the phenomenon of smiling.」)"
       },
       {
         "id": "english-real-115-q35",
@@ -4588,7 +4588,7 @@ export const englishRealExams = [
           "The amazing discovery of a sunken ship."
         ],
         "answer": 2,
-        "explanation": "(115學測英文第35題,官方答案C)"
+        "explanation": "(115學測英文第35題,官方答案C,即「A challenging voyage to Antarctica.」)"
       },
       {
         "id": "english-real-115-q36",
@@ -4606,7 +4606,7 @@ export const englishRealExams = [
           "Added fuel to the fire."
         ],
         "answer": 3,
-        "explanation": "(115學測英文第36題,官方答案D)"
+        "explanation": "(115學測英文第36題,官方答案D,即「Added fuel to the fire.」)"
       },
       {
         "id": "english-real-115-q37",
@@ -4624,7 +4624,7 @@ export const englishRealExams = [
           "He sent five crew members on a lifeboat to get help from a whaling station."
         ],
         "answer": 0,
-        "explanation": "(115學測英文第37題,官方答案A)"
+        "explanation": "(115學測英文第37題,官方答案A,即「His journey lasted more than two years.」)"
       },
       {
         "id": "english-real-115-q38",
@@ -4660,7 +4660,7 @@ export const englishRealExams = [
           "Why is the spiral staircase popular in modern times?"
         ],
         "answer": 3,
-        "explanation": "(115學測英文第39題,官方答案D)"
+        "explanation": "(115學測英文第39題,官方答案D,即「Why is the spiral staircase popular in modern times?」)"
       },
       {
         "id": "english-real-115-q40",
@@ -4678,7 +4678,7 @@ export const englishRealExams = [
           "Defenders."
         ],
         "answer": 0,
-        "explanation": "(115學測英文第40題,官方答案A)"
+        "explanation": "(115學測英文第40題,官方答案A,即「Stairs.」)"
       },
       {
         "id": "english-real-115-q41",
@@ -4696,7 +4696,7 @@ export const englishRealExams = [
           "marble → wood → stone → concrete"
         ],
         "answer": 0,
-        "explanation": "(115學測英文第41題,官方答案A)"
+        "explanation": "(115學測英文第41題,官方答案A,即「stone → iron → steel → glass」)"
       },
       {
         "id": "english-real-115-q42",
@@ -4714,7 +4714,7 @@ export const englishRealExams = [
           "The staircase was dark enough for defenders to hide from attackers."
         ],
         "answer": 1,
-        "explanation": "(115學測英文第42題,官方答案B)"
+        "explanation": "(115學測英文第42題,官方答案B,即「The clockwise design favored right-handed castle defenders.」)"
       },
       {
         "id": "english-real-115-q43",
@@ -4732,7 +4732,7 @@ export const englishRealExams = [
           "Why maps were important during the age of exploration."
         ],
         "answer": 2,
-        "explanation": "(115學測英文第43題,官方答案C)"
+        "explanation": "(115學測英文第43題,官方答案C,即「How map orientation evolved over time.」)"
       },
       {
         "id": "english-real-115-q44",
@@ -4750,7 +4750,7 @@ export const englishRealExams = [
           "East-orientation of maps."
         ],
         "answer": 3,
-        "explanation": "(115學測英文第44題,官方答案D)"
+        "explanation": "(115學測英文第44題,官方答案D,即「East-orientation of maps.」)"
       },
       {
         "id": "english-real-115-q45",
@@ -4768,7 +4768,7 @@ export const englishRealExams = [
           "An advanced system."
         ],
         "answer": 0,
-        "explanation": "(115學測英文第45題,官方答案A)"
+        "explanation": "(115學測英文第45題,官方答案A,即「A temporary state.」)"
       },
       {
         "id": "english-real-115-q46",
@@ -4786,7 +4786,7 @@ export const englishRealExams = [
           "Old Islamic maps put south at the top for religious purposes."
         ],
         "answer": 3,
-        "explanation": "(115學測英文第46題,官方答案D)"
+        "explanation": "(115學測英文第46題,官方答案D,即「Old Islamic maps put south at the top for religious purposes.」)"
       },
       {
         "id": "english-real-115-q47",
@@ -4821,7 +4821,7 @@ export const englishRealExams = [
         "passageId": "english-real-115-mixed",
         "passageTitle": "混合題 第47至50題",
         "passage": "Located along the sparkling coastline of the Pacific Ocean, Wonder Village is a famous indigenous district in eastern Taiwan. The historic village exhibits the traditional way of life of the tribe there. However, it does not live in the past. As numerous new restaurants and shops have sprung up in recent years, it has become not only a cultural center but also a unique commercial zone. The following six shops are examples of some of the specialty stores there.\n[圖片示意(非官方文字):原題附一張插畫式村落地圖,以道路與小樹分隔,標示六間商店的名稱與位置——左側為 The Pinery,上方由左至右依序為 Oh Eco、Beyond World、After Work,中下方為 Aroma Paradise 與 Something Different。地圖僅標示店名與相對位置,作答所需資訊皆在下列六段店家介紹文字中。]\nA. Oh Eco\nGreatly concerned about the presence of fake “green” products on the market, Alice Bao decided to open this shop. She sells environmentally friendly items such as reusable bottles, bamboo toothbrushes, and soy candles. “Here everyone looks out for each other and the neighborhood,” she says. “There’s a sense of community in the area.”\nB. After Work\nNeighborhood beer lovers rejoiced when After Work moved in last summer. “We knew we were coming into a really cool neighborhood,” says co-owner Joey Ma. Aside from handcrafted beer, the menu boasts hand-made gourmet pizzas such as the Yummy Duck n’ Cheese, loaded with roast duck and, yes, creamy delicious cheese. A truly unique blend!\nC. Aroma Paradise\nThe fragrances at this scent shop are largely customized to meet the individual shopper’s taste. Owner Joseph Tang says he knew the idea would work well in this unique district: “Each store is one of a kind in Wonder Village,” he states. “Aroma Paradise wants to create a paradise for those who are looking for fragrance made for their special preferences.”\nD. Something Different\nLooking for something unique? Yes, at this tiny antique store you can always find, as promised, something different. Open since 1996, the store features traditional-style home accessories, ranging from cabinets and chairs to picture frames and decorative mirrors.\nE. Beyond World\nOwner Foting Mayaw opened this boutique in what he calls “the most fascinating area in Taiwan.” The shop focuses on selling various “good goods” that showcase the skill and spirit of neighborhood artisans. From fashion items to rice snacks, it carries products only from local makers and small businesses owned by indigenous people.\nF. The Pinery\nThis restaurant got its name from the pineapple farms that once populated the area. Indeed, the fruit appears in some innovative menu items (e.g., pineapple jam on the burger). “Wonder Village is much more than just a tourist destination,” says owner Carol Hon. “It is a place where the old meets the new: diverse, unique, and always full of surprises.”",
-        "question": "While visiting Wonder Village, the Chen family decide to buy the following items as souvenirs:\n(1) a 19th century oil lamp\n(2) recycled plastic sunglasses\n(3) an aboriginal wooden beads necklace\nWhich stores should they go to for these items?\n請選出商店名稱前的英文大寫字母(如 A、B、C 等),並劃記在「答題卷」作答區內。(多選題,4分)\n(非官方註記:選項 A 至 F 即上方文章中 A. 至 F. 六間商店,此處以商店名稱代表)",
+        "question": "While visiting Wonder Village, the Chen family decide to buy the following items as souvenirs:\n(1) a 19th century oil lamp\n(2) recycled plastic sunglasses\n(3) an aboriginal wooden beads necklace\nWhich stores should they go to for these items?\n請選出商店名稱前的英文大寫字母(如 A、B、C 等),並劃記在「答題卷」作答區內。(多選題,4分)\n(非官方註記:選項 A 至 F 即上方文章中 A. 至 F. 六間商店,此處以商店名稱代表)\n(非官方註記:本站選項不標 A、B、C 代號,且順序每次隨機排列,請直接勾選符合的選項。)",
         "options": [
           "Oh Eco",
           "After Work",
@@ -4835,7 +4835,7 @@ export const englishRealExams = [
           3,
           4
         ],
-        "explanation": "(115學測英文第49題,官方答案ADE)"
+        "explanation": "(115學測英文第49題,官方答案ADE,即「Oh Eco」、「Something Different」、「Beyond World」)"
       },
       {
         "id": "english-real-115-q50",

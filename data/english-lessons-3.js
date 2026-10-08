@@ -47,7 +47,7 @@ export const englishLessons3 = [
         p.single('en-l3-1-q9', "What problem did Kevin have when he arrived in Lisbon?", ['His passport was stolen.', 'His luggage had not arrived.', 'His hotel was closed.', 'He missed his flight.'], 1, '文中說 he discovered that his luggage had not arrived。'),
         p.single('en-l3-1-q10', "What was Kevin doing when the staff member spoke to him?", ['Sleeping in his hotel', 'Standing at the counter and feeling worried', 'Buying a souvenir', 'Eating egg tarts'], 1, '文中說 He was standing at the counter, worried, when a kind staff member told him...'),
         p.single('en-l3-1-q11', "What did the trip teach Kevin?", ['To carry less luggage', 'To stay calm when plans change', 'To avoid traveling alone', 'To buy more souvenirs'], 1, '最後一句說 the trip taught him to stay calm when plans change。'),
-        multi('en-l3-1-q12', "Which of the following sentences are correct? (多選)", ['He was reading when I called him.', 'When I got home, my mom cooked dinner already.', 'She had finished her homework before her friends came.', 'While she was cooking, the smoke alarm went off.', 'I have lost my key yesterday.'], [0, 2, 3], '媽媽在我到家之前已煮好,應用 had already cooked,B 錯誤;yesterday 不可搭配現在完成式,E 錯誤。'),
+        multi('en-l3-1-q12', "Which of the following sentences are correct? (多選)", ['He was reading when I called him.', 'When I got home, my mom cooked dinner already.', 'She had finished her homework before her friends came.', 'While she was cooking, the smoke alarm went off.', 'I have lost my key yesterday.'], [0, 2, 3], '媽媽在我到家之前已煮好,應用 had already cooked,「When I got home, my mom cooked dinner already.」錯誤;yesterday 不可搭配現在完成式,「I have lost my key yesterday.」錯誤。'),
       ],
     });
   })(),
@@ -95,7 +95,7 @@ export const englishLessons3 = [
         p.single('en-l3-2-q9', "What do slow, gentle melodies help people do?", ['Relax', 'Exercise', 'Study math', 'Sing loudly'], 0, '文中說 slow, gentle melodies help people relax。'),
         p.single('en-l3-2-q10', "According to some scientists, why can a familiar song make us cry or smile?", ['Because music is processed in the part of the brain that stores emotions', 'Because songs are always sad', 'Because the lyrics are easy', 'Because we sing too loudly'], 0, '文中說音樂與情緒在大腦同一區域被處理,所以熟悉的歌曲會讓人哭或笑。'),
         p.single('en-l3-2-q11', "What is the main idea of the passage?", ['Music has strong effects on our emotions, thoughts, and memories.', 'Athletes should not listen to music.', 'Loud music is harmful.', 'Only students need music.'], 0, '全文說明音樂影響情緒、思考、行為與記憶。'),
-        multi('en-l3-2-q12', "Which of the following sentences are correct? (多選)", ['Both Tom and Mary are musicians.', 'Neither the teacher nor the students was late.', 'Either my parents or my sister is coming.', 'She not only sings but also dances.', 'Not only he but also I are ready.'], [0, 2, 3], 'B 句動詞與較近的 the students 一致,應為 were;E 句動詞與 I 一致,應為 am,B、E 錯誤。'),
+        multi('en-l3-2-q12', "Which of the following sentences are correct? (多選)", ['Both Tom and Mary are musicians.', 'Neither the teacher nor the students was late.', 'Either my parents or my sister is coming.', 'She not only sings but also dances.', 'Not only he but also I are ready.'], [0, 2, 3], '「Neither the teacher nor the students was late.」動詞要與較近的 the students 一致,應為 were;「Not only he but also I are ready.」動詞要與 I 一致,應為 am。'),
       ],
     });
   })(),
@@ -144,7 +144,7 @@ export const englishLessons3 = [
         p.single('en-l3-3-q9', "Why do some teenagers follow every trend?", ['They want to fit in with their friends.', 'They cannot afford new clothes.', 'They dislike uniforms.', 'They work in fashion shops.'], 0, '文中說 they wish they could fit in with their friends。'),
         p.single('en-l3-3-q10', "What do critics say about school uniforms?", ['They limit students\' freedom of expression.', 'They are too expensive.', 'They increase competition.', 'They are old-fashioned.'], 0, '文中說 Critics argue that uniforms limit students\' freedom of expression。'),
         p.single('en-l3-3-q11', "According to fashion experts, the best style is ______.", ['the one that makes you feel confident', 'the one that is most expensive', 'the one that follows trends', 'the one your friends choose'], 0, '最後一句說最好的風格是讓你覺得有自信的那一種。'),
-        multi('en-l3-3-q12', "Which of the following sentences are correct? (多選)", ['I wish I could speak French.', 'I wish I can fly.', 'She wishes she had studied harder.', 'He acts as if he were the boss.', 'If only I will win the prize.'], [0, 2, 3], 'wish 後面不用現在式 can,應為 could,B 錯誤;If only 之後不用 will,E 錯誤。'),
+        multi('en-l3-3-q12', "Which of the following sentences are correct? (多選)", ['I wish I could speak French.', 'I wish I can fly.', 'She wishes she had studied harder.', 'He acts as if he were the boss.', 'If only I will win the prize.'], [0, 2, 3], 'wish 後面不用現在式 can,應為 could,「I wish I can fly.」錯誤;If only 之後不用 will,「If only I will win the prize.」錯誤。'),
       ],
     });
   })(),
@@ -193,7 +193,7 @@ export const englishLessons3 = [
         p.single('en-l3-4-q9', "How did Ava reach her goal of buying the camera?", ['She won a lottery.', 'She made a budget, saved half of her allowance, and sold old books.', 'Her parents bought it.', 'She borrowed money from friends.'], 1, '文中說她編了預算、每月存一半零用錢,並賣舊書。'),
         p.single('en-l3-4-q10', "What does Ava mean by \"I would still be dreaming\"?", ['She would still not have the camera.', 'She would sleep more.', 'She would be rich.', 'She would have no dreams.'], 0, '如果沒有每個月存錢,她現在仍只是在夢想而沒有相機。'),
         p.single('en-l3-4-q11', "What do money experts say?", ['Small habits matter, and spending should be planned.', 'Nobody should buy cameras.', 'Only rich people can save.', 'Bubble tea is always harmful.'], 0, '文中說 small habits matter,並提醒不規劃花費錢就會不見。'),
-        multi('en-l3-4-q12', "Which of the following sentences are correct? (多選)", ['Unless it rains, we will go camping.', "Unless it doesn't rain, we will go camping.", 'Take an umbrella in case it rains.', 'If I were rich, I would travel around the world.', 'If I would have time, I would help you.'], [0, 2, 3], 'unless 已含否定意思,不再加 not,B 錯誤;if 子句中不用 would,E 錯誤。'),
+        multi('en-l3-4-q12', "Which of the following sentences are correct? (多選)", ['Unless it rains, we will go camping.', "Unless it doesn't rain, we will go camping.", 'Take an umbrella in case it rains.', 'If I were rich, I would travel around the world.', 'If I would have time, I would help you.'], [0, 2, 3], 'unless 已含否定意思,不再加 not,「Unless it doesn\'t rain, we will go camping.」錯誤;if 子句中不用 would,「If I would have time, I would help you.」錯誤。'),
       ],
     });
   })(),
@@ -241,7 +241,7 @@ export const englishLessons3 = [
         p.single('en-l3-5-q9', "Why is the Formosan black bear considered endangered?", ['Too many tourists feed it.', 'Forests have been cleared, so it has lost much of its habitat.', 'It cannot find water.', 'It is too small.'], 1, '文中說森林被開墾成農地與道路,黑熊失去許多棲地。'),
         p.single('en-l3-5-q10', "What has been done to protect the bears?", ['National parks were set up and hunters were asked to stop laying traps.', 'All the bears were moved abroad.', 'Farms were built near forests.', 'Schools were closed.'], 0, '文中說政府設立國家公園,並要求獵人停止設陷阱。'),
         p.single('en-l3-5-q11', "What does the last sentence mean?", ['Protecting one animal also helps protect the whole ecosystem.', 'Only bears need protection.', 'Forests are not important.', 'Zoos are better than nature.'], 0, '保護一種動物就等於保護整個生態系。'),
-        multi('en-l3-5-q12', "Which of the following sentences are correct? (多選)", ['I heard someone call my name.', 'I saw him to cross the street.', 'The boss let the workers go home early.', 'She had her hair to cut.', 'I felt the ground shake.'], [0, 2, 4], '感官動詞 see 後接原形或 V-ing,不接 to V,B 錯誤;have 後受詞為被動關係要用 p.p.,應為 had her hair cut,D 錯誤。'),
+        multi('en-l3-5-q12', "Which of the following sentences are correct? (多選)", ['I heard someone call my name.', 'I saw him to cross the street.', 'The boss let the workers go home early.', 'She had her hair to cut.', 'I felt the ground shake.'], [0, 2, 4], '感官動詞 see 後接原形或 V-ing,不接 to V,「I saw him to cross the street.」錯誤;have 後受詞為被動關係要用 p.p.,應為 had her hair cut,「She had her hair to cut.」錯誤。'),
       ],
     });
   })(),
@@ -290,7 +290,7 @@ export const englishLessons3 = [
         p.single('en-l3-6-q9', "How long will the journey to Mars take?", ['About seven days', 'About seven months', 'About seven years', 'About thirty years'], 1, '文中說 The journey will take about seven months。'),
         p.single('en-l3-6-q10', "Which is a challenge on Mars mentioned in the passage?", ['The temperature can be extremely cold and there is no breathable air.', 'It has too much water.', 'It is too crowded.', 'It has no gravity.'], 0, '文中說溫度可降到零下六十度,而且沒有可呼吸的空氣。'),
         p.single('en-l3-6-q11', "What do critics argue?", ['The money might be better spent on solving problems on Earth.', 'Mars is too close.', 'Astronauts are not brave.', 'Spacecraft are too small.'], 0, '批評者質疑這些錢是否更適合用在解決地球上的問題。'),
-        multi('en-l3-6-q12', "Which of the following sentences are correct? (多選)", ['The train leaves at 8 a.m. tomorrow.', 'By midnight, I will have gone to bed.', 'Tomorrow I will be meeting my teacher at noon.', 'If it will rain tomorrow, we will stay home.', 'When I will arrive, I will call you.'], [0, 1, 2], '時間與條件副詞子句要用現在式代替未來式,D、E 錯誤。'),
+        multi('en-l3-6-q12', "Which of the following sentences are correct? (多選)", ['The train leaves at 8 a.m. tomorrow.', 'By midnight, I will have gone to bed.', 'Tomorrow I will be meeting my teacher at noon.', 'If it will rain tomorrow, we will stay home.', 'When I will arrive, I will call you.'], [0, 1, 2], '時間與條件副詞子句要用現在式代替未來式,「If it will rain tomorrow, we will stay home.」、「When I will arrive, I will call you.」錯誤。'),
       ],
     });
   })(),
