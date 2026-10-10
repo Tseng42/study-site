@@ -667,7 +667,6 @@ export const englishStemZh = {
   'en-u13-q6': '"I know that she is honest." 句中的 "that she is honest" 扮演什麼角色?',
   'en-u13-q7': '"The fact is that he lied to us." 句中的 "that he lied to us" 扮演什麼角色?',
   'en-u13-q11': '"It is true that she won the competition." 句中的 "It" 扮演什麼角色?',
-  'en-u13-q12': '我不知道她是否會參加派對。',
   'en-u13-q14': '"I\'m not sure whether to go or stay." 句中 "whether to go or stay" 屬於什麼結構?',
   'en-u13-q15': '下列哪個句子正確使用了 whether 引導的名詞子句作介系詞受詞?',
   'en-u13-q16': '"whether...or not" 這個結構通常用來表示什麼語意?',

@@ -2670,13 +2670,6 @@ export default {
           explanation: '"It" 是虛主詞,代替後面真正的邏輯主詞 that 子句。',
         },
         {
-          id: 'en-u13-q12',
-          question: "I don't know ___ she will attend the party.",
-          options: ['whether', 'that', 'which', 'what'],
-          answer: 0,
-          explanation: '表示「是否」應使用 whether 引導名詞子句。',
-        },
-        {
           id: 'en-u13-q14',
           question: 'In "I\'m not sure whether to go or stay," what structure is "whether to go or stay"?',
           options: ['whether + infinitive', 'whether + gerund', 'a direct question', 'It has nothing to do with infinitives.'],
