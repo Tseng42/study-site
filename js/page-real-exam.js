@@ -39,7 +39,7 @@ import { getSubject } from './subjects-registry.js';
 import { addQuizResult, addMockExamResult, updateMockExamResult, getExamDraft } from './storage.js';
 import { createExamSession } from './exam-ui.js';
 import { describeBandLevel } from '../data/mock-exam-config.js';
-import { shuffle, prepareQuestions, shuffleQuestionOptions, renderAnswerField, gradeAnswer, typeLabel, isAnswered, correctAnswerOf } from './quiz-utils.js';
+import { shuffle, prepareQuestions, shuffleQuestionOptions, renderAnswerField, gradeAnswer, typeLabel, isAnswered, correctAnswerOf, renderAnswerReview } from './quiz-utils.js';
 import { el, icon, renderPassage, renderRichText } from './render.js';
 import { initHeader, renderUserMenu, renderExamDraftNotice } from './layout.js';
 import { ensureSignedIn } from './auth.js';
@@ -583,7 +583,7 @@ function renderResult(results, writtenResults, summary) {
     card.append(el('p', { class: 'wrong-meta' }, `${typeLabel(w.type)} · ${w.sourceYear} 學年度第 ${w.origNo} 題`));
     if (w.passageId) card.append(renderPassage(w));
     card.append(renderRichText(w.question, { className: 'wrong-question' }));
-    card.append(renderCorrectAnswerBlock(w));
+    card.append(renderAnswerReview(w, w.userAnswer));
 
     if (w.explanation) card.append(el('p', { class: 'feedback-explanation' }, w.explanation));
     container.append(card);
@@ -648,28 +648,6 @@ function renderResult(results, writtenResults, summary) {
 
 // 依題型畫出「正確答案」區塊:單選/多選/hybrid(勾選部分)標示選項對錯,
 // 選填(單一格/多格)直接列出答案。
-function renderCorrectAnswerBlock(w) {
-  if (w.type === 'numeric') {
-    return el('p', { class: 'feedback-correct' }, `正確答案:${w.answerText}`);
-  }
-  if (w.type === 'numeric-multi') {
-    const text = w.blanks.map((b) => `${b.label}=${b.answerText}`).join('、');
-    return el('p', { class: 'feedback-correct' }, `正確答案:${text}`);
-  }
-  const correctSet = w.type === 'multi' ? new Set(w.answers) : new Set([w.answer]);
-  const selectedSet =
-    w.type === 'multi' ? new Set(w.userAnswer || []) : new Set(w.userAnswer != null ? [w.userAnswer] : []);
-  const optionsWrap = el('div', { class: 'quiz-options' });
-  w.options.forEach((opt, i) => {
-    const row = el('div', { class: 'quiz-option-row static' });
-    if (correctSet.has(i)) row.classList.add('is-correct');
-    else if (selectedSet.has(i)) row.classList.add('is-wrong');
-    row.append(el('span', {}, opt));
-    optionsWrap.append(row);
-  });
-  return optionsWrap;
-}
-
 // 非選擇題沒辦法自動判分:顯示題目跟官方滿分參考答案,讓使用者自己對照後回報
 // 「答對了/沒答對」。onReport(isCorrect, reportRow) 由呼叫端(renderResult)決定
 // 回報後要做什麼 —— 寫進 quizResults、更新這題底下的文字、檢查是否所有非選擇題

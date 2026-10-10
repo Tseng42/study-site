@@ -44,10 +44,6 @@ onAuthStateChanged(auth, (user) => {
   }
 });
 
-export function getCurrentUser() {
-  return auth.currentUser;
-}
-
 export function signOutUser() {
   return signOut(auth);
 }

@@ -153,6 +153,25 @@ export function gradeAnswer(q, userAnswer) {
   return { creditFraction: isCorrect ? 1 : 0, isCorrect };
 }
 
+// 作答後的「對答案」區塊(錯題本、模擬考與歷屆試題的成績頁共用):選擇題把選項全部列出來,
+// 正解標成 is-correct、使用者選錯的標成 is-wrong;選填題直接寫出正確答案。
+// 不傳 userAnswer(錯題本)就只標正解。
+export function renderAnswerReview(q, userAnswer) {
+  if (q.type === 'numeric') return el('p', { class: 'feedback-correct' }, `正確答案:${q.answerText}`);
+  if (q.type === 'numeric-multi') {
+    return el('p', { class: 'feedback-correct' }, `正確答案:${q.blanks.map((b) => `${b.label}=${b.answerText}`).join('、')}`);
+  }
+  const correct = new Set(q.type === 'multi' ? q.answers : [q.answer]);
+  const selected = new Set(q.type === 'multi' ? userAnswer || [] : userAnswer != null ? [userAnswer] : []);
+  return el(
+    'div',
+    { class: 'quiz-options' },
+    q.options.map((opt, i) =>
+      el('div', { class: `quiz-option-row static${correct.has(i) ? ' is-correct' : selected.has(i) ? ' is-wrong' : ''}` }, el('span', {}, opt))
+    )
+  );
+}
+
 // 產生一題的作答欄位(radio/checkbox/文字輸入,依 type 而定)。
 // onChange(value) 會在使用者改變作答時呼叫(用來即時記錄目前輸入的值);
 // value 的形狀依題型而定(單選: index number;多選: Set<number>;選填: string)。

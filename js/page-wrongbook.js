@@ -1,7 +1,7 @@
 import { markQuestionMastered } from './storage.js';
 import { getReviewableWrongQuestions } from './wrong-utils.js';
 import { getQuestion, getUnit, getSubject } from './subjects-registry.js';
-import { prepareGroupedQuestions } from './quiz-utils.js';
+import { prepareGroupedQuestions, renderAnswerReview } from './quiz-utils.js';
 import { runQuiz } from './quiz-runner.js';
 import { el, icon, renderPassage, renderRichText, attachTranslation } from './render.js';
 import { initHeader, renderUserMenu, showBanner, formatRelativeDate } from './layout.js';
@@ -187,23 +187,10 @@ function buildCard(w) {
     card.append(el('p', { class: 'wrong-question' }, `【簡答部分】${question.writtenPrompt}`));
   }
 
-  if (question.type === 'numeric') {
-    card.append(el('p', { class: 'feedback-correct' }, `正確答案:${question.answerText}`));
-  } else if (question.type === 'numeric-multi') {
-    const text = question.blanks.map((b) => `${b.label}=${b.answerText}`).join('、');
-    card.append(el('p', { class: 'feedback-correct' }, `正確答案:${text}`));
-  } else if (question.type === 'written') {
+  if (question.type === 'written') {
     card.append(el('p', { class: 'feedback-correct' }, '非選擇題(自行對答案),詳見下方官方參考答案'));
   } else {
-    const correctSet = question.type === 'multi' ? new Set(question.answers) : new Set([question.answer]);
-    const optionsWrap = el('div', { class: 'quiz-options' });
-    question.options.forEach((opt, i) => {
-      const row = el('div', { class: 'quiz-option-row static' });
-      if (correctSet.has(i)) row.classList.add('is-correct');
-      row.append(el('span', {}, opt));
-      optionsWrap.append(row);
-    });
-    card.append(optionsWrap);
+    card.append(renderAnswerReview(question));
   }
 
   if (question.explanation) {

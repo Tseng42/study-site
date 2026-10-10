@@ -1,7 +1,7 @@
 import { getAllSubjects, getSubject } from './subjects-registry.js';
 import { addQuizResult, addMockExamResult, getMockExamHistory, getExamDraft } from './storage.js';
 import { createExamSession } from './exam-ui.js';
-import { prepareQuestions, renderAnswerField, gradeAnswer, markAnswerFeedback, typeLabel, isAnswered, serializeAnswer, correctAnswerOf } from './quiz-utils.js';
+import { prepareQuestions, renderAnswerField, gradeAnswer, renderAnswerReview, typeLabel, isAnswered, serializeAnswer, correctAnswerOf } from './quiz-utils.js';
 
 // 依 typeBreakdown 分別從各題型抽題,維持「單選→多選→選填」的分節順序,
 // 跟真實考卷的結構一致。每題都標上 sectionLabel,給 runExam 畫分節標題用。
@@ -385,25 +385,8 @@ function renderResult(subject, config, results, summary) {
     if (w.passageId) card.append(renderPassage(w));
     card.append(renderRichText(w.question, { className: 'wrong-question' }));
 
-    if (w.type === 'numeric') {
-      card.append(
-        el('p', { class: 'feedback-wrong' }, `你的答案:${w.userAnswer || '(未作答)'}`),
-        el('p', { class: 'feedback-correct' }, `正確答案:${w.answerText}`)
-      );
-    } else {
-      const correctSet = w.type === 'multi' ? new Set(w.answers) : new Set([w.answer]);
-      const selectedSet =
-        w.type === 'multi' ? new Set(w.userAnswer || []) : new Set(w.userAnswer != null ? [w.userAnswer] : []);
-      const optionsWrap = el('div', { class: 'quiz-options' });
-      w.options.forEach((opt, i) => {
-        const row = el('div', { class: 'quiz-option-row static' });
-        if (correctSet.has(i)) row.classList.add('is-correct');
-        else if (selectedSet.has(i)) row.classList.add('is-wrong');
-        row.append(el('span', {}, opt));
-        optionsWrap.append(row);
-      });
-      card.append(optionsWrap);
-    }
+    if (w.type === 'numeric') card.append(el('p', { class: 'feedback-wrong' }, `你的答案:${w.userAnswer || '(未作答)'}`));
+    card.append(renderAnswerReview(w, w.userAnswer));
 
     if (w.explanation) card.append(el('p', { class: 'feedback-explanation' }, w.explanation));
     container.append(card);

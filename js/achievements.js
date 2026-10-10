@@ -19,12 +19,12 @@
 // 答對 1 題就是 100%。成就 id 內含門檻數字(如 units-30),之後再調門檻請換新 id,
 // 才不會讓已經「看過」舊成就的人在重新達成時沒有解鎖提示。
 import { getAllSubjects } from './subjects-registry.js';
+import { getReviewableWrongQuestions } from './wrong-utils.js';
 import {
   getSubjectProgress,
   getQuizResults,
   getMockExamHistory,
   getMasteredCount,
-  getWrongQuestions,
   getSeenAchievements,
 } from './storage.js';
 import { subjectsMeta } from '../data/subjects-meta.js';
@@ -374,7 +374,7 @@ export function computeStats() {
     studyDays: dayStats.size,
     longestRun: longestRun(dayIndexes),
     masteredCount: getMasteredCount(),
-    wrongCount: getWrongQuestions().length,
+    wrongCount: getReviewableWrongQuestions().length,
     minSubjectPercent: subjectPercents.length ? Math.min(...subjectPercents) : 0,
     mockCount: ordinaryMock.length,
     mockSubjectsCovered: new Set(ordinaryMock.map((m) => m.subjectId)).size,
