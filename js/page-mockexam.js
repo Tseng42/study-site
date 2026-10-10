@@ -1,7 +1,7 @@
 import { getAllSubjects, getSubject } from './subjects-registry.js';
 import { addQuizResult, addMockExamResult, getMockExamHistory, getExamDraft } from './storage.js';
 import { createExamSession } from './exam-ui.js';
-import { prepareQuestions, renderAnswerField, gradeAnswer, renderAnswerReview, typeLabel, isAnswered, serializeAnswer, correctAnswerOf } from './quiz-utils.js';
+import { prepareGroupedQuestions, renderAnswerField, gradeAnswer, renderAnswerReview, typeLabel, isAnswered, serializeAnswer, correctAnswerOf } from './quiz-utils.js';
 
 // 依 typeBreakdown 分別從各題型抽題,維持「單選→多選→選填」的分節順序,
 // 跟真實考卷的結構一致。每題都標上 sectionLabel,給 runExam 畫分節標題用。
@@ -17,7 +17,7 @@ function drawByType(pool, typeBreakdown, sectionLabel) {
     const count = typeBreakdown[type];
     if (count) {
       picked.push(
-        ...prepareQuestions(byType[type], count).map((q) => ({
+        ...prepareGroupedQuestions(byType[type], count, { exact: true }).map((q) => ({
           ...q,
           sectionLabel: sectionLabel ?? typeLabel(q.type),
         }))
@@ -42,7 +42,7 @@ function drawExamQuestions(pool, config) {
     return picked;
   }
   if (config.typeBreakdown) return drawByType(pool, config.typeBreakdown);
-  return prepareQuestions(pool, config.questionCount).map((q) => ({ ...q, sectionLabel: typeLabel(q.type) }));
+  return prepareGroupedQuestions(pool, config.questionCount, { exact: true }).map((q) => ({ ...q, sectionLabel: typeLabel(q.type) }));
 }
 import { mockExamConfig, fiveStandardsReference, describeBandLevel } from '../data/mock-exam-config.js';
 import { el, icon, subjectIcon, renderPassage, renderRichText } from './render.js';
@@ -236,8 +236,7 @@ function runExam(subject, config, questions, resume = null) {
   const answers = session.answers;
 
   const form = el('div', { class: 'quiz-form' });
-  const shownPassages = new Set();
-
+  let lastPassageId = null;
   let lastSection = null;
   questions.forEach((q, index) => {
     if (q.sectionLabel !== lastSection) {
@@ -245,12 +244,14 @@ function runExam(subject, config, questions, resume = null) {
       form.append(el('h3', { class: 'mockexam-section-heading' }, heading));
       lastSection = q.sectionLabel;
     }
+    // 題組整組連在一起出,文章放在每一段連續題目的最前面。同一篇文章的多選題會排在後面的
+    // 多選段,所以那裡要再顯示一次文章,不能整份考卷只顯示一次。
     let passageEl = null;
-    if (q.passageId && !shownPassages.has(q.passageId)) {
-      shownPassages.add(q.passageId);
+    if (q.passageId && q.passageId !== lastPassageId) {
       passageEl = renderPassage(q);
       form.append(passageEl);
     }
+    lastPassageId = q.passageId || null;
 
     const field = renderAnswerField(q, index, (value) => session.onAnswer(index, value), undefined, false, session.initialAnswer(index));
     const card = el('div', { class: 'quiz-question' }, [

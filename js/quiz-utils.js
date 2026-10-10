@@ -93,11 +93,13 @@ export function prepareQuestions(pool, maxCount = 8) {
     .map(shuffleQuestionOptions);
 }
 
-// 單元練習/錯題重練用:題組(passageId 相同的題目)整篇一起出,不會只抽到其中一兩題。
-// 把題庫分成「一題獨立題」或「一整組題組」,洗牌後一份一份放進來,放到題數達到 maxCount 為止;
-// 最後一份如果是題組,整組都會放進來,所以實際題數可能比 maxCount 多幾題。
-// 組內依題庫原本的順序排(克漏字的空格 1、2、3 才會照順序),文章只在每組第一題前面顯示一次。
-export function prepareGroupedQuestions(pool, maxCount = 8) {
+// 題組(passageId 相同的題目)整篇一起出,不會只抽到其中一兩題。
+// 把題庫分成「一題獨立題」或「一整組題組」,洗牌後一份一份放進來;組內依題庫原本的順序排
+// (克漏字的空格 1、2、3 才會照順序),文章只在每組第一題前面顯示一次。
+// - 單元練習/錯題重練:放到題數達到 maxCount 為止,最後一份如果是題組會整組放進來,
+//   所以實際題數可能比 maxCount 多幾題。
+// - exact: true(模擬考):總題數要剛好等於 maxCount,放不下的題組就跳過,換下一份。
+export function prepareGroupedQuestions(pool, maxCount = 8, { exact = false } = {}) {
   const bundles = [];
   const byPassage = new Map();
   for (const q of pool) {
@@ -114,6 +116,7 @@ export function prepareGroupedQuestions(pool, maxCount = 8) {
   const picked = [];
   for (const bundle of shuffle(bundles)) {
     if (picked.length >= maxCount) break;
+    if (exact && picked.length + bundle.length > maxCount) continue;
     picked.push(...bundle);
   }
   return picked.map(shuffleQuestionOptions);
