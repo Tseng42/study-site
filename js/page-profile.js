@@ -169,7 +169,7 @@ function renderExamDateSettings() {
 
 // 成就徽章牆本體已經獨立成 achievements.html(見 js/page-achievements.js),這裡
 // 只顯示一小列摘要(已解鎖幾個、目前最高 tier)+ 連結過去,不在個人資料頁一次
-// 攤開全部 87 個卡片。「已看過/NEW 標籤」的判斷也一起搬過去了,只有使用者真的
+// 攤開全部卡片。「已看過/NEW 標籤」的判斷也一起搬過去了,只有使用者真的
 // 點進完整徽章牆才算「看過」。
 function renderAchievements() {
   const container = document.getElementById('achievements-summary-card');

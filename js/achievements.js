@@ -14,9 +14,9 @@
 // markAchievementsSeen —— 這筆資料跟著帳號一起同步(換裝置登入才不會把所有已解鎖
 // 成就當成新解鎖再慶祝一次)。
 //
-// 門檻原則(2026-09 調高):一次性就能拿到的「入門成就」只留一個(跨出第一步、
-// 踏入考場),其餘都要累積相當的作答量;正確率類成就一定要搭配最低作答題數,不然
-// 答對 1 題就是 100%。成就 id 內含門檻數字(如 units-30),之後再調門檻請換新 id,
+// 門檻原則:正確率類成就一定要搭配最低作答題數,不然答對 1 題就是 100%。2026-09
+// 曾把入門成就砍到只剩兩個,2026-10 使用者決定補回一批前期小成就(作答 30 題、
+// 連續 3 天等)跟各科的中間階梯,讓剛開始用的前幾週也有東西可以拿。成就 id 內含門檻數字(如 units-30),之後再調門檻請換新 id,
 // 才不會讓已經「看過」舊成就的人在重新達成時沒有解鎖提示。
 import { getAllSubjects } from './subjects-registry.js';
 import { getReviewableWrongQuestions } from './wrong-utils.js';
@@ -39,7 +39,8 @@ export const CATEGORIES = [
   { id: 'accuracy', label: '正確率', icon: 'target' },
   { id: 'habit', label: '讀書習慣', icon: 'clock' },
   { id: 'wrongbook', label: '錯題本', icon: 'flag' },
-  { id: 'subject', label: '各科精熟', icon: 'compass' },
+  { id: 'practice', label: '練習方式', icon: 'spark' },
+  ...subjectsMeta.map((meta) => ({ id: `subj-${meta.id}`, label: meta.name, icon: meta.icon })),
   { id: 'balance', label: '均衡發展', icon: 'globe' },
   { id: 'mock', label: '模擬考', icon: 'trendUp' },
   { id: 'realexam', label: '歷屆試題挑戰', icon: 'scroll' },
@@ -114,7 +115,10 @@ const CORE_ACHIEVEMENTS = [
   counter({ id: 'units-150', title: '單元收藏家 IV', tier: 'gold', category: 'units', icon: 'layers', desc: '完成 150 個單元', stat: 'completedUnits', target: 150, unit: '單元' }),
   { id: 'units-all', title: '單元制霸', tier: 'diamond', category: 'units', icon: 'crown', desc: '完成全部單元', check: (s) => s.totalUnits > 0 && s.completedUnits >= s.totalUnits, progressText: (s) => `${s.completedUnits}/${s.totalUnits} 單元`, progressRatio: (s) => (s.totalUnits ? Math.min(1, s.completedUnits / s.totalUnits) : 0) },
 
+  flag({ id: 'first-perfect-5', title: '首次全對', tier: 'bronze', category: 'units', icon: 'star', desc: '單次測驗作答至少 5 題,而且全部答對', stat: 'anyPerfectFive', todo: '還沒有全對的測驗' }),
+
   // ---- 作答題數 ----
+  counter({ id: 'answered-30', title: '暖身開始', tier: 'bronze', category: 'volume', icon: 'pen', desc: '累積作答 30 題', stat: 'totalAnswered', target: 30, unit: '題' }),
   counter({ id: 'answered-100', title: '初試啼聲', tier: 'bronze', category: 'volume', icon: 'pen', desc: '累積作答 100 題', stat: 'totalAnswered', target: 100, unit: '題' }),
   counter({ id: 'answered-500', title: '熱身完畢', tier: 'bronze', category: 'volume', icon: 'pen', desc: '累積作答 500 題', stat: 'totalAnswered', target: 500, unit: '題' }),
   counter({ id: 'answered-1000', title: '千題起步', tier: 'silver', category: 'volume', icon: 'pen', desc: '累積作答 1,000 題', stat: 'totalAnswered', target: 1000, unit: '題' }),
@@ -129,6 +133,7 @@ const CORE_ACHIEVEMENTS = [
   accuracyAchievement({ id: 'accuracy-95', title: '滿分獵人', tier: 'diamond', minAnswered: 1500, percent: 95 }),
 
   // ---- 讀書習慣:累積天數(不用連續)----
+  counter({ id: 'days-7', title: '第一週', tier: 'bronze', category: 'habit', icon: 'calendar', desc: '累積 7 天有作答紀錄', stat: 'studyDays', target: 7, unit: '天' }),
   counter({ id: 'days-21', title: '三週不間斷', tier: 'bronze', category: 'habit', icon: 'calendar', desc: '累積 21 天有作答紀錄', stat: 'studyDays', target: 21, unit: '天' }),
   counter({ id: 'days-60', title: '雙月常客', tier: 'silver', category: 'habit', icon: 'calendar', desc: '累積 60 天有作答紀錄', stat: 'studyDays', target: 60, unit: '天' }),
   counter({ id: 'days-120', title: '四個月修行者', tier: 'gold', category: 'habit', icon: 'calendar', desc: '累積 120 天有作答紀錄', stat: 'studyDays', target: 120, unit: '天' }),
@@ -136,6 +141,7 @@ const CORE_ACHIEVEMENTS = [
   counter({ id: 'days-300', title: '三百日修行者', tier: 'gold', category: 'habit', icon: 'calendar', desc: '累積 300 天有作答紀錄', stat: 'studyDays', target: 300, unit: '天' }),
   counter({ id: 'streak-365', title: '全年無休', tier: 'diamond', category: 'habit', icon: 'calendar', desc: '累積 365 天有作答紀錄', stat: 'studyDays', target: 365, unit: '天' }),
   // ---- 讀書習慣:連續天數(中間斷一天就重新計算)----
+  counter({ id: 'run-3', title: '三日連勝', tier: 'bronze', category: 'habit', icon: 'flame', desc: '連續 3 天每天都有作答紀錄', stat: 'longestRun', target: 3, unit: '天' }),
   counter({ id: 'run-7', title: '七日連勝', tier: 'bronze', category: 'habit', icon: 'flame', desc: '連續 7 天每天都有作答紀錄', stat: 'longestRun', target: 7, unit: '天' }),
   counter({ id: 'run-14', title: '雙週連勝', tier: 'silver', category: 'habit', icon: 'flame', desc: '連續 14 天每天都有作答紀錄', stat: 'longestRun', target: 14, unit: '天' }),
   counter({ id: 'run-30', title: '月度連勝', tier: 'gold', category: 'habit', icon: 'flame', desc: '連續 30 天每天都有作答紀錄', stat: 'longestRun', target: 30, unit: '天' }),
@@ -143,11 +149,19 @@ const CORE_ACHIEVEMENTS = [
   counter({ id: 'run-100', title: '百日連勝', tier: 'diamond', category: 'habit', icon: 'flame', desc: '連續 100 天每天都有作答紀錄', stat: 'longestRun', target: 100, unit: '天' }),
 
   // ---- 錯題本 ----
+  counter({ id: 'mastered-1', title: '第一次訂正', tier: 'bronze', category: 'wrongbook', icon: 'flag', desc: '在錯題本標記第 1 題已熟練', stat: 'masteredCount', target: 1, unit: '題' }),
   counter({ id: 'mastered-10', title: '知錯能改', tier: 'bronze', category: 'wrongbook', icon: 'flag', desc: '在錯題本標記 10 題已熟練', stat: 'masteredCount', target: 10, unit: '題' }),
   counter({ id: 'mastered-40', title: '錯題清道夫', tier: 'silver', category: 'wrongbook', icon: 'flag', desc: '在錯題本標記 40 題已熟練', stat: 'masteredCount', target: 40, unit: '題' }),
   counter({ id: 'mastered-100', title: '錯題本剋星', tier: 'gold', category: 'wrongbook', icon: 'flag', desc: '在錯題本標記 100 題已熟練', stat: 'masteredCount', target: 100, unit: '題' }),
   counter({ id: 'mastered-200', title: '錯題終結者', tier: 'gold', category: 'wrongbook', icon: 'flag', desc: '在錯題本標記 200 題已熟練', stat: 'masteredCount', target: 200, unit: '題' }),
   counter({ id: 'mastered-400', title: '錯題本傳奇', tier: 'diamond', category: 'wrongbook', icon: 'flag', desc: '在錯題本標記 400 題已熟練', stat: 'masteredCount', target: 400, unit: '題' }),
+
+  // ---- 練習方式(怎麼練,而不是練多少)----
+  flag({ id: 'passage-perfect', title: '整篇拿下', tier: 'silver', category: 'practice', icon: 'scroll', desc: '同一篇文章的題組(至少 3 題)在一次測驗裡全部答對', stat: 'passagePerfect', todo: '還沒有整篇全對的題組' }),
+  flag({ id: 'retest-improve-20', title: '捲土重來', tier: 'silver', category: 'practice', icon: 'trendUp', desc: '同一個單元再測一次,正確率比上一次高 20 個百分點以上(兩次都至少 5 題)', stat: 'retestImproved', todo: '還沒有紀錄' }),
+  flag({ id: 'retest-perfect', title: '雪恥成功', tier: 'gold', category: 'practice', icon: 'star', desc: '同一個單元先前沒有全對,之後再測一次(至少 5 題)全部答對', stat: 'retestPerfect', todo: '還沒有紀錄' }),
+  flag({ id: 'week-all-subjects', title: '一週五科', tier: 'silver', category: 'practice', icon: 'globe', desc: '連續 7 天之內,五個科目都有作答紀錄', stat: 'weekAllSubjects', todo: '還沒有一週內五科都碰過' }),
+  flag({ id: 'practice-and-mock-day', title: '練考合一', tier: 'bronze', category: 'practice', icon: 'bolt', desc: '同一天有單元練習,也完成一次模擬考或歷屆試題', stat: 'practiceAndMockDay', todo: '還沒有紀錄' }),
 
   // ---- 均衡發展(五個科目「最低的那科」進度要達標)----
   { id: 'balanced-25', title: '五科起跑', tier: 'bronze', category: 'balance', icon: 'scale', desc: '五個科目進度都超過 25%', check: (s) => s.minSubjectPercent >= 25, progressText: (s) => `目前最低的科目 ${s.minSubjectPercent}%`, progressRatio: (s) => Math.min(1, s.minSubjectPercent / 25) },
@@ -155,6 +169,7 @@ const CORE_ACHIEVEMENTS = [
   { id: 'balanced-60', title: '五科均衡發展', tier: 'gold', category: 'balance', icon: 'scale', desc: '五個科目進度都超過 60%', check: (s) => s.minSubjectPercent >= 60, progressText: (s) => `目前最低的科目 ${s.minSubjectPercent}%`, progressRatio: (s) => Math.min(1, s.minSubjectPercent / 60) },
 
   // ---- 模擬考(一般模擬考,不含歷屆試題)----
+  counter({ id: 'mock-count-1', title: '模考初登場', tier: 'bronze', category: 'mock', icon: 'medal', desc: '完成第 1 次模擬考', stat: 'mockCount', target: 1, unit: '次' }),
   counter({ id: 'mock-count-5', title: '模考新手', tier: 'bronze', category: 'mock', icon: 'medal', desc: '累積完成 5 次模擬考', stat: 'mockCount', target: 5, unit: '次' }),
   counter({ id: 'mock-count-15', title: '模考老手', tier: 'silver', category: 'mock', icon: 'medal', desc: '累積完成 15 次模擬考', stat: 'mockCount', target: 15, unit: '次' }),
   counter({ id: 'mock-count-30', title: '模考達人', tier: 'gold', category: 'mock', icon: 'medal', desc: '累積完成 30 次模擬考', stat: 'mockCount', target: 30, unit: '次' }),
@@ -193,16 +208,68 @@ const CORE_ACHIEVEMENTS = [
   flag({ id: 'secret-near-perfect', title: '一題不差傳說', tier: 'diamond', category: 'secret', icon: 'trophy', secret: true, desc: '歷屆試題模擬考單一年份模式,選擇題自動判分正確率達 95% 以上', stat: 'realExamAnyNearPerfectSingleYear', todo: '還沒有單一年份達到 95%' }),
 ];
 
-// 各科精熟度成就:每科各自一組,依 subjectsMeta 產生,不手動一筆一筆寫,
-// 新增科目時這裡會自動跟著多一組。
-const SUBJECT_ACHIEVEMENTS = subjectsMeta.flatMap(({ id, name }) => {
+// 各科成就:每科各自一區(category 是 subj-{科目 id}),依 subjectsMeta 產生,不手動
+// 一筆一筆寫,新增科目時這裡會自動跟著多一組。一區裡依序是:完成度階梯、科目內
+// 各領域(冊別/分科)、作答題數階梯、正確率、模擬考與歷屆試題的均標/前標/頂標。
+// 領域成就的 id 用領域在該科裡的順序(area-{科目}-{第幾個}),單元分類重新編排時要留意。
+const BAND_LEVELS = [
+  { level: 'mean', label: '均標' },
+  { level: 'front', label: '前標' },
+  { level: 'top', label: '頂標' },
+];
+
+const SUBJECT_ACHIEVEMENTS = getAllSubjects().flatMap(({ id, name, units }) => {
+  const category = `subj-${id}`;
   const find = (s) => s.subjects.find((x) => x.id === id);
+  const areaNames = [...new Set(units.map((u) => u.category))];
+
+  const progressStep = (percent, title, tier) => ({
+    id: `subj-progress-${id}-${percent}`,
+    title: `${name}${title}`,
+    tier,
+    category,
+    icon: 'layers',
+    desc: `${name}單元完成度達 ${percent}%`,
+    check: (s) => (find(s)?.percent || 0) >= percent,
+    progressText: (s) => {
+      const subj = find(s);
+      return subj ? `${subj.completed}/${subj.total} 單元(${subj.percent}%)` : '0 單元';
+    },
+    progressRatio: (s) => Math.min(1, (find(s)?.percent || 0) / percent),
+  });
+
+  const volumeStep = (target, title, tier, stepId = `subj-volume-${id}-${target}`) => ({
+    id: stepId,
+    title: `${name}${title}`,
+    tier,
+    category,
+    icon: 'pen',
+    desc: `${name}累積作答 ${target.toLocaleString('en-US')} 題`,
+    check: (s) => (find(s)?.answered || 0) >= target,
+    progressText: (s) => `${Math.min(find(s)?.answered || 0, target)}/${target} 題`,
+    progressRatio: (s) => Math.min(1, (find(s)?.answered || 0) / target),
+  });
+
+  const bandStep = (kind, kindLabel, { level, label }, tier) => ({
+    id: `subj-${kind}-${id}-${level}`,
+    title: `${name}${kindLabel}${label}`,
+    tier,
+    category,
+    icon: kind === 'mock' ? 'medal' : 'scroll',
+    desc: `${name}${kind === 'mock' ? '模擬考' : '歷屆試題模擬考'}估計級分達到近年${label}以上`,
+    check: (s) => !!find(s)?.[`${kind}Band`]?.[level],
+    progressText: (s) => (find(s)?.[`${kind}Band`]?.[level] ? '已達成' : `還沒達到${label}`),
+  });
+
   return [
+    progressStep(25, '起步', 'bronze'),
+    progressStep(50, '過半', 'silver'),
+    progressStep(75, '衝刺', 'gold'),
     {
       id: `subj-complete-${id}`,
       title: `${name}制霸`,
       tier: 'gold',
-      category: 'subject',
+      category,
       icon: 'crown',
       desc: `完成${name}全部單元`,
       check: (s) => {
@@ -214,21 +281,38 @@ const SUBJECT_ACHIEVEMENTS = subjectsMeta.flatMap(({ id, name }) => {
         return subj ? `${subj.completed}/${subj.total} 單元` : '0 單元';
       },
     },
-    {
-      id: `subj-volume-${id}`,
-      title: `${name}題海`,
-      tier: 'bronze',
-      category: 'subject',
-      icon: 'pen',
-      desc: `${name}累積作答 300 題`,
-      check: (s) => (find(s)?.answered || 0) >= 300,
-      progressText: (s) => `${Math.min(find(s)?.answered || 0, 300)}/300 題`,
-    },
+    ...areaNames.map((area, index) => {
+      const findArea = (s) => find(s)?.areas.find((a) => a.name === area);
+      return {
+        id: `area-${id}-${index + 1}`,
+        title: `${name}・${area}`,
+        tier: 'silver',
+        category,
+        icon: 'check',
+        desc: `完成${name}「${area}」的全部單元`,
+        check: (s) => {
+          const a = findArea(s);
+          return !!a && a.total > 0 && a.completed >= a.total;
+        },
+        progressText: (s) => {
+          const a = findArea(s);
+          return a ? `${a.completed}/${a.total} 單元` : '0 單元';
+        },
+        progressRatio: (s) => {
+          const a = findArea(s);
+          return a && a.total ? Math.min(1, a.completed / a.total) : 0;
+        },
+      };
+    }),
+    volumeStep(100, '暖身', 'bronze'),
+    volumeStep(300, '題海', 'bronze', `subj-volume-${id}`),
+    volumeStep(600, '苦練', 'silver'),
+    volumeStep(1000, '千題', 'gold'),
     {
       id: `subj-accuracy-${id}`,
       title: `${name}神射手`,
       tier: 'silver',
-      category: 'subject',
+      category,
       icon: 'target',
       desc: `${name}測驗正確率達 85%(至少作答 100 題)`,
       check: (s) => {
@@ -245,7 +329,7 @@ const SUBJECT_ACHIEVEMENTS = subjectsMeta.flatMap(({ id, name }) => {
       id: `subj-master-${id}`,
       title: `${name}達人`,
       tier: 'gold',
-      category: 'subject',
+      category,
       icon: 'gem',
       desc: `${name}測驗正確率達 90%(至少作答 300 題)`,
       check: (s) => {
@@ -258,6 +342,8 @@ const SUBJECT_ACHIEVEMENTS = subjectsMeta.flatMap(({ id, name }) => {
         return `已作答 ${subj.answered}/300 題,正確率 ${subj.accuracy}%`;
       },
     },
+    ...BAND_LEVELS.map((band, i) => bandStep('mock', '模考', band, ['bronze', 'silver', 'gold'][i])),
+    ...BAND_LEVELS.map((band, i) => bandStep('real', '歷屆', band, ['silver', 'gold', 'diamond'][i])),
   ];
 });
 
@@ -281,6 +367,25 @@ function longestRun(dayIndexes) {
   return best;
 }
 
+// 題目 id → 所屬文章 id、文章 id → 該篇題數,給「整篇題組全對」用。題庫不會變,算一次就好。
+let passageIndexCache = null;
+function passageIndex() {
+  if (passageIndexCache) return passageIndexCache;
+  const byQuestion = new Map();
+  const size = new Map();
+  for (const subject of getAllSubjects()) {
+    for (const unit of subject.units) {
+      for (const q of unit.quiz || []) {
+        if (!q.passageId) continue;
+        byQuestion.set(q.id, q.passageId);
+        size.set(q.passageId, (size.get(q.passageId) || 0) + 1);
+      }
+    }
+  }
+  passageIndexCache = { byQuestion, size };
+  return passageIndexCache;
+}
+
 export function computeStats() {
   const allResults = getQuizResults();
   const resultsBySubject = new Map();
@@ -291,6 +396,10 @@ export function computeStats() {
 
   const subjectDetails = getAllSubjects().map((s) => {
     const progress = getSubjectProgress(s.id, s.units);
+    const areas = [...new Set(s.units.map((u) => u.category))].map((name) => {
+      const { completed, total } = getSubjectProgress(s.id, s.units.filter((u) => u.category === name));
+      return { name, completed, total };
+    });
     let answered = 0;
     let correct = 0;
     for (const r of resultsBySubject.get(s.id) || []) {
@@ -303,6 +412,7 @@ export function computeStats() {
       percent: progress.percent,
       completed: progress.completed,
       total: progress.total,
+      areas,
       answered,
       accuracy: answered ? Math.round((correct / answered) * 100) : 0,
     };
@@ -319,6 +429,11 @@ export function computeStats() {
   let earlyBird = false;
   let maxPerfectQuiz = 0;
   const perfectSubjectSet = new Set();
+  let anyPerfectFive = false;
+  let passagePerfect = false;
+  const practiceDays = new Set();
+  const unitAttempts = new Map();
+  const passages = passageIndex();
   for (const r of allResults) {
     totalAnswered += r.answers.length;
     totalCorrect += r.answers.filter((a) => a.isCorrect).length;
@@ -331,7 +446,30 @@ export function computeStats() {
     const day = dayStats.get(dayIndex);
     day.count += r.answers.length;
     day.subjects.add(r.subjectId);
-    if (r.answers.length >= 10 && r.answers.every((a) => a.isCorrect)) {
+    const allCorrect = r.answers.every((a) => a.isCorrect);
+    if (r.answers.length >= 5 && allCorrect) anyPerfectFive = true;
+    // 單元練習/測驗(不含模擬考拆出來的紀錄跟錯題重練)才算「同一個單元再測一次」。
+    if (r.mode === 'practice' || r.mode === 'exam') {
+      practiceDays.add(dayIndex);
+      if (r.answers.length >= 5) {
+        const key = `${r.subjectId}/${r.unitId}`;
+        if (!unitAttempts.has(key)) unitAttempts.set(key, []);
+        unitAttempts.get(key).push({ time: takenAt.getTime(), allCorrect, percent: (r.answers.filter((a) => a.isCorrect).length / r.answers.length) * 100 });
+      }
+    }
+    if (!passagePerfect) {
+      const hits = new Map();
+      for (const a of r.answers) {
+        const pid = passages.byQuestion.get(a.questionId);
+        if (!pid) continue;
+        if (!hits.has(pid)) hits.set(pid, { count: 0, wrong: false });
+        const hit = hits.get(pid);
+        hit.count += 1;
+        if (!a.isCorrect) hit.wrong = true;
+      }
+      passagePerfect = [...hits].some(([pid, hit]) => !hit.wrong && passages.size.get(pid) >= 3 && hit.count >= passages.size.get(pid));
+    }
+    if (r.answers.length >= 10 && allCorrect) {
       maxPerfectQuiz = Math.max(maxPerfectQuiz, r.answers.length);
       perfectSubjectSet.add(r.subjectId);
     }
@@ -343,6 +481,22 @@ export function computeStats() {
   const maxDaySubjects = dayList.reduce((max, d) => Math.max(max, d.subjects.size), 0);
   const longestHeavyRun = longestRun(dayIndexes.filter((d) => dayStats.get(d).count >= 100));
   // 週六(getUTCDay()===6)的隔天週日也有作答,算同一個週末。
+  let retestImproved = false;
+  let retestPerfect = false;
+  for (const attempts of unitAttempts.values()) {
+    attempts.sort((a, b) => a.time - b.time);
+    let missedBefore = false;
+    attempts.forEach((attempt, i) => {
+      if (i > 0 && attempt.percent - attempts[i - 1].percent >= 20) retestImproved = true;
+      if (missedBefore && attempt.allCorrect) retestPerfect = true;
+      if (!attempt.allCorrect) missedBefore = true;
+    });
+  }
+  const weekAllSubjects = dayIndexes.some((start) => {
+    const seen = new Set();
+    for (let d = start; d < start + 7; d++) for (const id of dayStats.get(d)?.subjects || []) seen.add(bareSubjectId(id));
+    return subjectDetails.length > 0 && subjectDetails.every((s) => seen.has(s.id));
+  });
   const weekendWarrior = dayIndexes.some((d) => new Date(d * 86400000).getUTCDay() === 6 && dayStats.has(d + 1));
 
   // 歷屆試題模擬考的紀錄 subjectId 是虛擬的「{科目}-real」,跟一般模擬考分開判斷。
@@ -355,6 +509,16 @@ export function computeStats() {
   const anyAt = (list, level) => finalOnly(list).some((m) => bandAtOrAbove(bareSubjectId(m.subjectId), m.estimatedBand, level));
   const subjectsAtMean = (list) =>
     new Set(finalOnly(list).filter((m) => bandAtOrAbove(bareSubjectId(m.subjectId), m.estimatedBand, 'mean')).map((m) => bareSubjectId(m.subjectId))).size;
+
+  const bandFlags = (list, subjectId) => {
+    const own = list.filter((m) => bareSubjectId(m.subjectId) === subjectId);
+    return { mean: anyAt(own, 'mean'), front: anyAt(own, 'front'), top: anyAt(own, 'top') };
+  };
+  for (const s of subjectDetails) {
+    s.mockBand = bandFlags(ordinaryMock, s.id);
+    s.realBand = bandFlags(realExamHistory, s.id);
+  }
+  const practiceAndMockDay = mockHistory.some((m) => practiceDays.has(dayIndexOf(new Date(m.takenAt))));
 
   const yearsBySubject = new Map();
   for (const m of realExamHistory) {
@@ -398,6 +562,12 @@ export function computeStats() {
     longestHeavyRun,
     maxPerfectQuiz,
     perfectSubjects: perfectSubjectSet.size,
+    anyPerfectFive,
+    passagePerfect,
+    retestImproved,
+    retestPerfect,
+    weekAllSubjects,
+    practiceAndMockDay,
   };
 }
 

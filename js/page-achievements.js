@@ -27,7 +27,7 @@ function renderAchievements() {
   const summaryEl = document.getElementById('achievements-summary');
   if (summaryEl) summaryEl.textContent = `${earnedCount}/${achievements.length} 已解鎖`;
 
-  // 10 個分類、87 張卡片排成一長條,先放一列可以直接跳到各分類的捷徑。
+  // 十幾個分類、近兩百張卡片排成一長條,先放一列可以直接跳到各分類的捷徑。
   const jumpRow = el('nav', { class: 'filter-chips filter-chips-scroll', 'aria-label': '成就分類' });
   container.before(jumpRow);
 
