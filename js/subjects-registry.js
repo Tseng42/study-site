@@ -13,6 +13,7 @@ import { chineseLessons4 } from '../data/chinese-lessons-4.js';
 import { chineseLessons5 } from '../data/chinese-lessons-5.js';
 import { chineseLessons6 } from '../data/chinese-lessons-6.js';
 import { chineseLessonsLongteng } from '../data/chinese-lessons-lt.js';
+import { chineseLessonsLongtengModern } from '../data/chinese-lessons-lt-modern.js';
 import { englishLessons1 } from '../data/english-lessons-1.js';
 import { englishLessons2 } from '../data/english-lessons-2.js';
 import { englishLessons3 } from '../data/english-lessons-3.js';
@@ -105,6 +106,7 @@ const chineseWithLessons = {
     ...chineseLessons5,
     ...chineseLessons6,
     ...chineseLessonsLongteng,
+    ...chineseLessonsLongtengModern,
   ]),
 };
 
