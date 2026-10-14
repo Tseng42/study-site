@@ -12,6 +12,7 @@ import { chineseLessons3 } from '../data/chinese-lessons-3.js';
 import { chineseLessons4 } from '../data/chinese-lessons-4.js';
 import { chineseLessons5 } from '../data/chinese-lessons-5.js';
 import { chineseLessons6 } from '../data/chinese-lessons-6.js';
+import { chineseLessonsLongteng } from '../data/chinese-lessons-lt.js';
 import { englishLessons1 } from '../data/english-lessons-1.js';
 import { englishLessons2 } from '../data/english-lessons-2.js';
 import { englishLessons3 } from '../data/english-lessons-3.js';
@@ -67,7 +68,7 @@ const CHINESE_LAYOUT = [
   },
   {
     category: '龍騰 第三冊',
-    ids: ['ch-lt-15', 'ch-lt-16', 'ch-lt-17', 'ch-lt-18', 'ch-l3-1', 'ch-l1-4', 'ch-lt-19', 'ch-lt-20', 'ch-lt-21', 'ch-l2-2', 'ch-l3-2'],
+    ids: ['ch-lt-16', 'ch-lt-17', 'ch-l3-1', 'ch-lt-19', 'ch-lt-18', 'ch-l1-4', 'ch-lt-20', 'ch-lt-15', 'ch-lt-21', 'ch-l2-2', 'ch-l3-2'],
   },
   {
     category: '龍騰 第四冊',
@@ -103,6 +104,7 @@ const chineseWithLessons = {
     ...chineseLessons4,
     ...chineseLessons5,
     ...chineseLessons6,
+    ...chineseLessonsLongteng,
   ]),
 };
 
