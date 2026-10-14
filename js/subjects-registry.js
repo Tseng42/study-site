@@ -50,20 +50,34 @@ function mergeTextbookUnits(topicalUnits, lessonUnits) {
     .map(({ unit }) => unit);
 }
 
-// 國文不分冊,改按內容分類(2026-10):各家書商把同一篇課文放在不同冊,站上自己排的
-// 冊次跟哪一家都對不上,使用者反映「範圍不對」。資料檔裡各單元的 category 還留著舊的
-// 冊次字樣,實際顯示的分類與順序以這張表為準;沒列在表裡的單元會排到最後的「其他」。
-// 單元 id 都沒變,舊的作答紀錄與完成標記仍然有效。
+// 國文照龍騰版五冊編排(2026-10-14,使用者的弟弟用龍騰版課本)。依據是龍騰官方的國文
+// 課程地圖(ltedu.com.tw 的 curriculum-map/ghs/chinese/map.pdf)列出的五冊選文;第一冊與
+// 第二冊前五課的順序有書商目錄可對,其餘各冊冊內順序是推測。ch-lt-* 是補上的龍騰課文
+// (data/chinese-lessons-lt.js),還沒寫好的 id 會自動略過。不在龍騰課本裡的課文放在
+// 「其他常見選文」。資料檔裡各單元的 category 是舊資料,實際顯示以這張表為準;沒列在
+// 表裡的單元會排到最後的「其他」。單元 id 都沒變,舊的作答紀錄與完成標記仍然有效。
 const CHINESE_LAYOUT = [
   {
-    category: '課綱推薦古文 15 篇',
-    ids: ['ch-l2-2', 'ch-l2-3', 'ch-l3-3', 'ch-l4-1', 'ch-l3-2', 'ch-l1-1', 'ch-l1-2', 'ch-l4-2', 'ch-l3-1', 'ch-l1-3', 'ch-l2-1', 'ch-l1-4', 'ch-l5-1', 'ch-l5-2', 'ch-l5-3'],
+    category: '龍騰 第一冊',
+    ids: ['ch-l1-1', 'ch-l1-5', 'ch-lt-1', 'ch-lt-2', 'ch-l1-2', 'ch-lt-3', 'ch-l4-6', 'ch-l1-6', 'ch-lt-4', 'ch-l2-1', 'ch-lt-5', 'ch-l2-4'],
   },
   {
-    category: '其他古典選文',
-    ids: ['ch-l2-4', 'ch-l3-4', 'ch-l4-3', 'ch-l5-4', 'ch-l5-6', 'ch-l3-5', 'ch-l5-5', 'ch-l4-4', 'ch-l4-5', 'ch-l4-6'],
+    category: '龍騰 第二冊',
+    ids: ['ch-lt-6', 'ch-lt-7', 'ch-l1-3', 'ch-lt-8', 'ch-lt-9', 'ch-lt-10', 'ch-lt-11', 'ch-lt-12', 'ch-l3-6', 'ch-lt-13', 'ch-l5-3', 'ch-lt-14', 'ch-l3-4'],
   },
-  { category: '現代文學', ids: ['ch-l1-5', 'ch-l1-6', 'ch-l3-6'] },
+  {
+    category: '龍騰 第三冊',
+    ids: ['ch-lt-15', 'ch-lt-16', 'ch-lt-17', 'ch-lt-18', 'ch-l3-1', 'ch-l1-4', 'ch-lt-19', 'ch-lt-20', 'ch-lt-21', 'ch-l2-2', 'ch-l3-2'],
+  },
+  {
+    category: '龍騰 第四冊',
+    ids: ['ch-l4-2', 'ch-lt-22', 'ch-l5-2', 'ch-lt-23', 'ch-lt-24', 'ch-lt-25', 'ch-lt-26', 'ch-lt-27', 'ch-lt-28', 'ch-l2-3', 'ch-l3-3', 'ch-l4-3'],
+  },
+  {
+    category: '龍騰 第五冊',
+    ids: ['ch-l4-1', 'ch-lt-29', 'ch-lt-30', 'ch-lt-31', 'ch-l5-1', 'ch-lt-32', 'ch-lt-33', 'ch-lt-34', 'ch-lt-35', 'ch-lt-36'],
+  },
+  { category: '其他常見選文(不在龍騰課本)', ids: ['ch-l5-4', 'ch-l5-5', 'ch-l5-6', 'ch-l3-5', 'ch-l4-4', 'ch-l4-5'] },
   { category: '專題', ids: Array.from({ length: 20 }, (_, i) => `ch-u${i + 1}`) },
   { category: '總複習', ids: ['ch-l6-1', 'ch-l6-2', 'ch-u21', 'ch-u22', 'ch-u23', 'ch-u24'] },
 ];
