@@ -8,7 +8,7 @@ const CATEGORY = '第五冊(高三上)';
 export const chineseLessons5 = [
   lesson({
     id: 'ch-l5-1',
-    title: '第1課 勸和論(鄭用錫)',
+    title: '勸和論(鄭用錫)',
     category: CATEGORY,
     sections: [
       bullets('作者與背景', [
@@ -55,7 +55,7 @@ export const chineseLessons5 = [
 
   lesson({
     id: 'ch-l5-2',
-    title: '第2課 鹿港乘桴記(洪繻)',
+    title: '鹿港乘桴記(洪繻)',
     category: CATEGORY,
     sections: [
       bullets('作者與背景', [
@@ -101,7 +101,7 @@ export const chineseLessons5 = [
 
   lesson({
     id: 'ch-l5-3',
-    title: '第3課 畫菊自序(張李德和)',
+    title: '畫菊自序(張李德和)',
     category: CATEGORY,
     sections: [
       bullets('作者與背景', [
@@ -142,7 +142,7 @@ export const chineseLessons5 = [
 
   lesson({
     id: 'ch-l5-4',
-    title: '第4課 勸學(荀子)',
+    title: '勸學(荀子)',
     category: CATEGORY,
     sections: [
       bullets('作者與作品', [
@@ -189,7 +189,7 @@ export const chineseLessons5 = [
 
   lesson({
     id: 'ch-l5-5',
-    title: '第5課 岳陽樓記(范仲淹)',
+    title: '岳陽樓記(范仲淹)',
     category: CATEGORY,
     sections: [
       bullets('作者與背景', [
@@ -237,7 +237,7 @@ export const chineseLessons5 = [
 
   lesson({
     id: 'ch-l5-6',
-    title: '第6課 世說新語選讀(劉義慶)',
+    title: '世說新語選讀(劉義慶)',
     category: CATEGORY,
     sections: [
       bullets('作者與作品', [

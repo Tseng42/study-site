@@ -30,9 +30,9 @@ import { englishStemZh } from '../data/english-zh.js';
 import { englishRealExams } from '../data/english-real-exams.js';
 import { scienceRealExams } from '../data/science-real-exams.js';
 
-// 國文、英文依課本「冊次」編排:每一冊先列課文單元(chinese-lessons-*.js、
-// english-lessons-*.js,一課一個單元),再列該冊的專題單元(chinese.js、english.js
-// 原本按技巧分類的單元,id 與題目維持不變,舊的作答紀錄與完成標記仍然有效)。
+// 英文依課本「冊次」編排:每一冊先列課文單元(english-lessons-*.js,一課一個單元),
+// 再列該冊的專題單元(english.js 原本按技巧分類的單元,id 與題目維持不變,舊的作答
+// 紀錄與完成標記仍然有效)。國文原本也這樣排,2026-10 改成按內容分類,見 CHINESE_LAYOUT。
 const VOLUME_ORDER = [
   '第一冊(高一上)',
   '第二冊(高一下)',
@@ -50,9 +50,39 @@ function mergeTextbookUnits(topicalUnits, lessonUnits) {
     .map(({ unit }) => unit);
 }
 
+// 國文不分冊,改按內容分類(2026-10):各家書商把同一篇課文放在不同冊,站上自己排的
+// 冊次跟哪一家都對不上,使用者反映「範圍不對」。資料檔裡各單元的 category 還留著舊的
+// 冊次字樣,實際顯示的分類與順序以這張表為準;沒列在表裡的單元會排到最後的「其他」。
+// 單元 id 都沒變,舊的作答紀錄與完成標記仍然有效。
+const CHINESE_LAYOUT = [
+  {
+    category: '課綱推薦古文 15 篇',
+    ids: ['ch-l2-2', 'ch-l2-3', 'ch-l3-3', 'ch-l4-1', 'ch-l3-2', 'ch-l1-1', 'ch-l1-2', 'ch-l4-2', 'ch-l3-1', 'ch-l1-3', 'ch-l2-1', 'ch-l1-4', 'ch-l5-1', 'ch-l5-2', 'ch-l5-3'],
+  },
+  {
+    category: '其他古典選文',
+    ids: ['ch-l2-4', 'ch-l3-4', 'ch-l4-3', 'ch-l5-4', 'ch-l5-6', 'ch-l3-5', 'ch-l5-5', 'ch-l4-4', 'ch-l4-5', 'ch-l4-6'],
+  },
+  { category: '現代文學', ids: ['ch-l1-5', 'ch-l1-6', 'ch-l3-6'] },
+  { category: '專題', ids: Array.from({ length: 20 }, (_, i) => `ch-u${i + 1}`) },
+  { category: '總複習', ids: ['ch-l6-1', 'ch-l6-2', 'ch-u21', 'ch-u22', 'ch-u23', 'ch-u24'] },
+];
+
+function layoutChineseUnits(topicalUnits, lessonUnits) {
+  const byId = new Map([...lessonUnits, ...topicalUnits.map((u) => ({ ...u, tag: '專題' }))].map((u) => [u.id, u]));
+  const placed = CHINESE_LAYOUT.flatMap(({ category, ids }) =>
+    ids.filter((id) => byId.has(id)).map((id) => {
+      const unit = { ...byId.get(id), category };
+      byId.delete(id);
+      return unit;
+    })
+  );
+  return [...placed, ...[...byId.values()].map((u) => ({ ...u, category: '其他' }))];
+}
+
 const chineseWithLessons = {
   ...chinese,
-  units: mergeTextbookUnits(chinese.units, [
+  units: layoutChineseUnits(chinese.units, [
     ...chineseLessons1,
     ...chineseLessons2,
     ...chineseLessons3,

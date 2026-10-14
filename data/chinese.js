@@ -1,6 +1,6 @@
-// 國文科「專題」單元資料(原本依技巧分類、放在高一上~高三下六個學期,category 欄位為冊次)。
-// 課文單元(一課一個單元)在 chinese-lessons-*.js,由 js/subjects-registry.js 合併:每一冊
-// 先列課文再列專題。這裡的單元 id 與題目 id 維持不變,舊的作答紀錄與完成標記仍然有效。
+// 國文科「專題」單元資料(依技巧分類)。category 欄位還留著舊的冊次字樣,實際顯示的分類
+// 與順序由 js/subjects-registry.js 的 CHINESE_LAYOUT 決定(2026-10 起國文不分冊)。
+// 課文單元(一課一個單元)在 chinese-lessons-*.js。這裡的單元 id 與題目 id 維持不變,舊的作答紀錄與完成標記仍然有效。
 // 每個單元: { id, title, category, note: { sections: [...] } | null, quiz: [...] }
 // note 為 null 或 quiz 為空陣列代表「內容製作中」,頁面會自動顯示對應提示與「製作中」標記。
 // 筆記內容為統整多家出版社講義常見重點後,以原創文字重寫的條列筆記,

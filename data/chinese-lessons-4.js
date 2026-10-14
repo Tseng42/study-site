@@ -6,7 +6,7 @@ const CATEGORY = '第四冊(高二下)';
 export const chineseLessons4 = [
   lesson({
     id: 'ch-l4-1',
-    title: '第1課 鴻門宴(司馬遷)',
+    title: '鴻門宴(司馬遷)',
     category: CATEGORY,
     sections: [
       bullets('作者與出處', [
@@ -54,7 +54,7 @@ export const chineseLessons4 = [
 
   lesson({
     id: 'ch-l4-2',
-    title: '第2課 虯髯客傳(杜光庭)',
+    title: '虯髯客傳(杜光庭)',
     category: CATEGORY,
     sections: [
       bullets('作者與體裁', [
@@ -96,7 +96,7 @@ export const chineseLessons4 = [
 
   lesson({
     id: 'ch-l4-3',
-    title: '第3課 老莊選讀',
+    title: '老莊選讀',
     category: CATEGORY,
     sections: [
       bullets('老子與莊子', [
@@ -138,7 +138,7 @@ export const chineseLessons4 = [
 
   lesson({
     id: 'ch-l4-4',
-    title: '第4課 宋詞選讀(蘇軾、李清照、辛棄疾)',
+    title: '宋詞選讀(蘇軾、李清照、辛棄疾)',
     category: CATEGORY,
     sections: [
       bullets('詞的基本常識', [
@@ -175,7 +175,7 @@ export const chineseLessons4 = [
 
   lesson({
     id: 'ch-l4-5',
-    title: '第5課 元曲選讀(馬致遠、張養浩)',
+    title: '元曲選讀(馬致遠、張養浩)',
     category: CATEGORY,
     sections: [
       bullets('元曲概說', [
@@ -215,7 +215,7 @@ export const chineseLessons4 = [
 
   lesson({
     id: 'ch-l4-6',
-    title: '第6課 范進中舉(吳敬梓)',
+    title: '范進中舉(吳敬梓)',
     category: CATEGORY,
     sections: [
       bullets('作者與作品', [

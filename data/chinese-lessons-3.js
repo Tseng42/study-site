@@ -6,7 +6,7 @@ const CATEGORY = '第三冊(高二上)';
 export const chineseLessons3 = [
   lesson({
     id: 'ch-l3-1',
-    title: '第1課 赤壁賦(蘇軾)',
+    title: '赤壁賦(蘇軾)',
     category: CATEGORY,
     sections: [
       bullets('作者與背景', [
@@ -54,7 +54,7 @@ export const chineseLessons3 = [
 
   lesson({
     id: 'ch-l3-2',
-    title: '第2課 出師表(諸葛亮)',
+    title: '出師表(諸葛亮)',
     category: CATEGORY,
     sections: [
       bullets('作者與背景', [
@@ -103,7 +103,7 @@ export const chineseLessons3 = [
 
   lesson({
     id: 'ch-l3-3',
-    title: '第3課 諫逐客書(李斯)',
+    title: '諫逐客書(李斯)',
     category: CATEGORY,
     sections: [
       bullets('作者與背景', [
@@ -146,7 +146,7 @@ export const chineseLessons3 = [
 
   lesson({
     id: 'ch-l3-4',
-    title: '第4課 孟子選讀',
+    title: '孟子選讀',
     category: CATEGORY,
     sections: [
       bullets('《孟子》概說', [
@@ -187,7 +187,7 @@ export const chineseLessons3 = [
 
   lesson({
     id: 'ch-l3-5',
-    title: '第5課 唐詩選讀(杜甫、王維、李白)',
+    title: '唐詩選讀(杜甫、王維、李白)',
     category: CATEGORY,
     sections: [
       bullets('三位詩人', [
@@ -231,7 +231,7 @@ export const chineseLessons3 = [
 
   lesson({
     id: 'ch-l3-6',
-    title: '第6課 一桿「稱」仔(賴和)',
+    title: '一桿「稱」仔(賴和)',
     category: CATEGORY,
     sections: [
       bullets('作者與作品', [
