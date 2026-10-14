@@ -1,6 +1,6 @@
-// 數學科單元資料,依高一上~高三總複習分組(category 欄位),依 108課綱官方學期
-// 順序與多家出版社課本目錄交叉查證後排列(非任一單一出版社的照抄目錄)。
-// note 為 null 或 quiz 為空陣列代表「內容製作中」。
+// 數學科單元資料,依 108 課綱的年級分組(category 欄位):高一(10 年級必修)、高二上/下(11 年級數 A,
+// 依課綱數 A 上下冊)、總複習。2026-10 刪掉學測不考的高三數甲內容(圓錐曲線標準式、複數極式與
+// 棣美弗定理)。note 為 null 或 quiz 為空陣列代表「內容製作中」。
 //
 // 筆記內容為統整多家出版社講義常見重點後,以原創文字重寫的條列筆記,不逐字照抄任何單一出版社的講義文字。
 export default {
@@ -9,7 +9,7 @@ export default {
   {
     "id": "math-u3",
     "title": "數與式的運算",
-    "category": "高一上",
+    "category": "高一",
     "note": {
       "sections": [
         {
@@ -541,7 +541,7 @@ export default {
   {
     "id": "math-u4",
     "title": "多項式函數",
-    "category": "高一上",
+    "category": "高一",
     "note": {
       "sections": [
         {
@@ -999,7 +999,7 @@ export default {
   {
     "id": "math-u1",
     "title": "二次函數與圖形",
-    "category": "高一上",
+    "category": "高一",
     "note": {
       "sections": [
         {
@@ -1575,9 +1575,2667 @@ export default {
     ]
   },
   {
+    "id": "math-u2",
+    "title": "數列與級數",
+    "category": "高一",
+    "note": {
+      "sections": [
+        {
+          "heading": "重點整理",
+          "content": [
+            "等差數列:aₙ = a₁ + (n-1)d,前 n 項和 Sₙ = n(a₁+aₙ)/2。",
+            "等比數列:aₙ = a₁ × r^(n-1),前 n 項和 Sₙ = a₁(1-rⁿ)/(1-r), r≠1。",
+            "無窮等比級數收斂條件:|r| < 1,和為 a₁/(1-r)。"
+          ]
+        }
+      ]
+    },
+    "quiz": [
+      {
+        "id": "math-u2-q1",
+        "question": "等差數列首項 a₁=3,公差 d=4,則第 10 項為多少?",
+        "options": [
+          "39",
+          "43",
+          "35",
+          "40"
+        ],
+        "answer": 0,
+        "explanation": "aₙ = a₁ + (n-1)d = 3 + 9×4 = 3 + 36 = 39。"
+      },
+      {
+        "id": "math-u2-q2",
+        "question": "等比數列首項 a₁=2,公比 r=3,則第 4 項為多少?",
+        "options": [
+          "54",
+          "24",
+          "18",
+          "162"
+        ],
+        "answer": 0,
+        "explanation": "aₙ = a₁ × r^(n-1) = 2 × 3³ = 2 × 27 = 54。"
+      },
+      {
+        "id": "math-u2-q3",
+        "question": "無窮等比級數收斂的條件為?",
+        "options": [
+          "|r| > 1",
+          "|r| < 1",
+          "r = 1",
+          "r = 0"
+        ],
+        "answer": 1,
+        "explanation": "無窮等比級數收斂(有和)的條件是公比絕對值 |r| < 1。"
+      },
+      {
+        "id": "math-u2-q4",
+        "type": "numeric",
+        "question": "等比數列首項 a₁=3,公比 r=2,則第 5 項為多少?",
+        "answerText": "48",
+        "explanation": "aₙ = a₁×r^(n-1) = 3×2⁴ = 3×16 = 48。"
+      },
+      {
+        "id": "math-u2-q5",
+        "type": "multi",
+        "question": "關於等差數列,下列敘述哪些正確?(多選)",
+        "options": [
+          "前 n 項和公式為 Sₙ = n(a₁+aₙ)/2",
+          "公差可以為負數",
+          "相鄰兩項的差都等於公差",
+          "一定是遞增數列",
+          "任一項都等於前一項乘以公比"
+        ],
+        "answers": [
+          0,
+          1,
+          2
+        ],
+        "explanation": "公差為負時數列遞減,故不一定遞增;「乘以公比」是等比數列的性質,不是等差數列。"
+      },
+      {
+        "id": "math-u2-q6",
+        "type": "numeric",
+        "question": "等差數列 a₁=5, d=3,求 a₁₀。",
+        "answerText": "32",
+        "explanation": "a₁₀ = 5 + 9×3 = 32。"
+      },
+      {
+        "id": "math-u2-q7",
+        "type": "numeric",
+        "question": "等差數列 a₁=-2, d=4,求 a₈。",
+        "answerText": "26",
+        "explanation": "a₈ = -2 + 7×4 = 26。"
+      },
+      {
+        "id": "math-u2-q8",
+        "type": "numeric",
+        "question": "等差數列 a₁=10, d=-3,求 a₆。",
+        "answerText": "-5",
+        "explanation": "a₆ = 10 + 5×(-3) = -5。"
+      },
+      {
+        "id": "math-u2-q9",
+        "type": "numeric",
+        "question": "等差數列 a₁=1, d=5,求 a₁₅。",
+        "answerText": "71",
+        "explanation": "a₁₅ = 1 + 14×5 = 71。"
+      },
+      {
+        "id": "math-u2-q10",
+        "type": "numeric",
+        "question": "等差數列 a₁=7, d=-2,求 a₁₂。",
+        "answerText": "-15",
+        "explanation": "a₁₂ = 7 + 11×(-2) = -15。"
+      },
+      {
+        "id": "math-u2-q11",
+        "type": "numeric",
+        "question": "等差數列 a₁=0, d=6,求 a₂₀。",
+        "answerText": "114",
+        "explanation": "a₂₀ = 0 + 19×6 = 114。"
+      },
+      {
+        "id": "math-u2-q12",
+        "type": "numeric",
+        "question": "等差數列 a₁=100, d=-8,求 a₁₁。",
+        "answerText": "20",
+        "explanation": "a₁₁ = 100 + 10×(-8) = 20。"
+      },
+      {
+        "id": "math-u2-q13",
+        "type": "numeric",
+        "question": "等差數列 a₁=-5, d=7,求 a₉。",
+        "answerText": "51",
+        "explanation": "a₉ = -5 + 8×7 = 51。"
+      },
+      {
+        "id": "math-u2-q14",
+        "type": "numeric",
+        "question": "等差數列 a₁=2, d=4,求前 10 項和 S₁₀。",
+        "answerText": "200",
+        "explanation": "a₁₀=2+9×4=38,S₁₀=10×(2+38)/2=200。"
+      },
+      {
+        "id": "math-u2-q15",
+        "type": "numeric",
+        "question": "求 1+2+3+...+20 的總和。",
+        "answerText": "210",
+        "explanation": "此為等差數列 a₁=1,d=1,n=20,S₂₀=20×(1+20)/2=210。"
+      },
+      {
+        "id": "math-u2-q16",
+        "type": "numeric",
+        "question": "等差數列 a₁=5, d=3,求前 8 項和 S₈。",
+        "answerText": "124",
+        "explanation": "a₈=5+7×3=26,S₈=8×(5+26)/2=124。"
+      },
+      {
+        "id": "math-u2-q17",
+        "type": "numeric",
+        "question": "等差數列 a₁=-3, d=2,求前 12 項和 S₁₂。",
+        "answerText": "96",
+        "explanation": "a₁₂=-3+11×2=19,S₁₂=12×(-3+19)/2=96。"
+      },
+      {
+        "id": "math-u2-q18",
+        "type": "numeric",
+        "question": "等差數列 a₁=10, d=-2,求前 6 項和 S₆。",
+        "answerText": "30",
+        "explanation": "a₆=10+5×(-2)=0,S₆=6×(10+0)/2=30。"
+      },
+      {
+        "id": "math-u2-q19",
+        "type": "numeric",
+        "question": "等差數列 a₁=3, d=5,求前 7 項和 S₇。",
+        "answerText": "126",
+        "explanation": "a₇=3+6×5=33,S₇=7×(3+33)/2=126。"
+      },
+      {
+        "id": "math-u2-q20",
+        "type": "numeric",
+        "question": "等比數列 a₁=2, r=3,求 a₄。",
+        "answerText": "54",
+        "explanation": "a₄=2×3³=2×27=54。"
+      },
+      {
+        "id": "math-u2-q21",
+        "type": "numeric",
+        "question": "等比數列 a₁=5, r=2,求 a₅。",
+        "answerText": "80",
+        "explanation": "a₅=5×2⁴=5×16=80。"
+      },
+      {
+        "id": "math-u2-q22",
+        "type": "numeric",
+        "question": "等比數列 a₁=1, r=-2,求 a₆。",
+        "answerText": "-32",
+        "explanation": "a₆=1×(-2)⁵=-32。"
+      },
+      {
+        "id": "math-u2-q23",
+        "type": "numeric",
+        "question": "等比數列 a₁=100, r=0.5,求 a₄。",
+        "answerText": "12.5",
+        "explanation": "a₄=100×0.5³=100×0.125=12.5。"
+      },
+      {
+        "id": "math-u2-q24",
+        "type": "numeric",
+        "question": "等比數列 a₁=3, r=2,求 a₆。",
+        "answerText": "96",
+        "explanation": "a₆=3×2⁵=3×32=96。"
+      },
+      {
+        "id": "math-u2-q25",
+        "type": "numeric",
+        "question": "等比數列 a₁=-4, r=3,求 a₃。",
+        "answerText": "-36",
+        "explanation": "a₃=-4×3²=-4×9=-36。"
+      },
+      {
+        "id": "math-u2-q26",
+        "type": "numeric",
+        "question": "等比數列 a₁=1, r=10,求 a₄。",
+        "answerText": "1000",
+        "explanation": "a₄=1×10³=1000。"
+      },
+      {
+        "id": "math-u2-q27",
+        "type": "numeric",
+        "question": "等比數列 a₁=64, r=0.5,求 a₅。",
+        "answerText": "4",
+        "explanation": "a₅=64×0.5⁴=64/16=4。"
+      },
+      {
+        "id": "math-u2-q28",
+        "type": "numeric",
+        "question": "等比數列 a₁=1, r=2,求前 5 項和 S₅。",
+        "answerText": "31",
+        "explanation": "S₅=1×(1-2⁵)/(1-2)=(1-32)/(-1)=31。"
+      },
+      {
+        "id": "math-u2-q29",
+        "type": "numeric",
+        "question": "等比數列 a₁=3, r=2,求前 4 項和 S₄。",
+        "answerText": "45",
+        "explanation": "S₄=3×(1-2⁴)/(1-2)=3×(-15)/(-1)=45。"
+      },
+      {
+        "id": "math-u2-q30",
+        "type": "numeric",
+        "question": "等比數列 a₁=2, r=3,求前 3 項和 S₃。",
+        "answerText": "26",
+        "explanation": "S₃=2×(1-3³)/(1-3)=2×(1-27)/(-2)=2×(-26)/(-2)=26。"
+      },
+      {
+        "id": "math-u2-q31",
+        "type": "numeric",
+        "question": "等比數列 a₁=1, r=-1,求前 5 項和 S₅。",
+        "answerText": "1",
+        "explanation": "前5項為 1,-1,1,-1,1,總和為 1。"
+      },
+      {
+        "id": "math-u2-q32",
+        "type": "numeric",
+        "question": "無窮等比級數 a₁=1, r=1/2,求其和。",
+        "answerText": "2",
+        "explanation": "S=a₁/(1-r)=1/(1-0.5)=2。"
+      },
+      {
+        "id": "math-u2-q33",
+        "type": "numeric",
+        "question": "無窮等比級數 a₁=2, r=1/2,求其和。",
+        "answerText": "4",
+        "explanation": "S=a₁/(1-r)=2/(1-0.5)=4。"
+      },
+      {
+        "id": "math-u2-q34",
+        "type": "numeric",
+        "question": "無窮等比級數 a₁=3, r=2/3,求其和。",
+        "answerText": "9",
+        "explanation": "S=a₁/(1-r)=3/(1/3)=9。"
+      },
+      {
+        "id": "math-u2-q35",
+        "type": "numeric",
+        "question": "無窮等比級數 a₁=5, r=4/5,求其和。",
+        "answerText": "25",
+        "explanation": "S=a₁/(1-r)=5/(1/5)=25。"
+      },
+      {
+        "id": "math-u2-q36",
+        "question": "等差數列 a₃=7, a₇=19,求公差 d?",
+        "options": [
+          "2",
+          "3",
+          "4",
+          "5"
+        ],
+        "answer": 1,
+        "explanation": "d=(a₇-a₃)/(7-3)=(19-7)/4=3。"
+      },
+      {
+        "id": "math-u2-q37",
+        "question": "等差數列 a₂=10, a₅=22,求公差 d?",
+        "options": [
+          "3",
+          "4",
+          "5",
+          "6"
+        ],
+        "answer": 1,
+        "explanation": "d=(a₅-a₂)/(5-2)=(22-10)/3=4。"
+      },
+      {
+        "id": "math-u2-q38",
+        "question": "等比數列 a₂=6, a₄=54,求公比 r(r>0)?",
+        "options": [
+          "2",
+          "3",
+          "4",
+          "9"
+        ],
+        "answer": 1,
+        "explanation": "r²=a₄/a₂=54/6=9,r>0 故 r=3。"
+      },
+      {
+        "id": "math-u2-q39",
+        "question": "等比數列 a₁=2, a₃=18,求公比 r(r>0)?",
+        "options": [
+          "2",
+          "3",
+          "6",
+          "9"
+        ],
+        "answer": 1,
+        "explanation": "r²=a₃/a₁=18/2=9,r>0 故 r=3。"
+      },
+      {
+        "id": "math-u2-q40",
+        "question": "等差數列 a₄=15, a₈=31,求首項 a₁?",
+        "options": [
+          "3",
+          "4",
+          "7",
+          "11"
+        ],
+        "answer": 0,
+        "explanation": "d=(31-15)/(8-4)=4,a₁=a₄-3d=15-12=3。"
+      },
+      {
+        "id": "math-u2-q41",
+        "type": "numeric",
+        "question": "5 與 13 的等差中項為多少?",
+        "answerText": "9",
+        "explanation": "等差中項 = (5+13)/2 = 9。"
+      },
+      {
+        "id": "math-u2-q42",
+        "type": "numeric",
+        "question": "4 與 36 的等比中項為多少?(取正值)",
+        "answerText": "12",
+        "explanation": "等比中項 = √(4×36) = √144 = 12。"
+      },
+      {
+        "id": "math-u2-q43",
+        "type": "numeric",
+        "question": "2 與 18 的等比中項為多少?(取正值)",
+        "answerText": "6",
+        "explanation": "等比中項 = √(2×18) = √36 = 6。"
+      },
+      {
+        "id": "math-u2-q44",
+        "type": "numeric",
+        "question": "小明第一個月存 500 元,之後每月比前一月多存 100 元,第 6 個月存多少元?",
+        "answerText": "1000",
+        "explanation": "等差數列 a₁=500,d=100,a₆=500+5×100=1000。"
+      },
+      {
+        "id": "math-u2-q45",
+        "type": "numeric",
+        "question": "小明第一個月存 500 元,之後每月比前一月多存 100 元,前 6 個月總共存了多少元?",
+        "answerText": "4500",
+        "explanation": "第 6 個月存 500+5×100=1000 元,S₆=6×(500+1000)/2=4500。"
+      },
+      {
+        "id": "math-u2-q46",
+        "type": "numeric",
+        "question": "某帳戶本金 10000 元,每年固定增加 500 元,第 5 年底餘額為多少元?",
+        "answerText": "12500",
+        "explanation": "第 n 年底餘額 = 10000+500n,第 5 年底 = 10000+500×5=12500。"
+      },
+      {
+        "id": "math-u2-q47",
+        "question": "一種細菌數量每小時增為原來的 2 倍,初始有 100 隻,經過 4 小時後有幾隻?",
+        "options": [
+          "800",
+          "1600",
+          "3200",
+          "400"
+        ],
+        "answer": 1,
+        "explanation": "等比數列 a₁=100,r=2,4 小時後為 a₅=100×2⁴=1600(經過4小時是第5個時刻的量)。"
+      },
+      {
+        "id": "math-u2-q48",
+        "type": "multi",
+        "question": "關於等比數列,下列敘述哪些正確?(多選)",
+        "options": [
+          "公比不能為 0",
+          "首項一定要是正數",
+          "r=1 時為常數數列",
+          "無窮等比級數收斂需 |r|<1",
+          "r 可以為負數"
+        ],
+        "answers": [
+          0,
+          2,
+          3,
+          4
+        ],
+        "explanation": "首項可以是負數(如 -3, -6, -12...仍是公比為2的等比數列),此項敘述錯誤。"
+      },
+      {
+        "id": "math-u2-q49",
+        "type": "multi",
+        "question": "關於數列求和,下列敘述哪些正確?(多選)",
+        "options": [
+          "等差數列前 n 項和公式為 Sₙ=n(a₁+aₙ)/2",
+          "等比數列前 n 項和公式在 r=1 時不能用 Sₙ=a₁(1-rⁿ)/(1-r)",
+          "無窮等比級數只有 |r|<1 才有和",
+          "等差數列的 Sₙ 一定是 n 的一次函數",
+          "公差為 0 的等差數列,Sₙ=n×a₁"
+        ],
+        "answers": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "explanation": "等差數列的 Sₙ 通常是 n 的二次函數(除非 d=0 才是一次函數),「一定是一次函數」此項敘述錯誤。"
+      },
+      {
+        "id": "math-u2-q50",
+        "type": "multi",
+        "question": "關於數列的遞增遞減,下列敘述哪些正確?(多選)",
+        "options": [
+          "等差數列 d>0 時遞增",
+          "等差數列 d<0 時遞減",
+          "等比數列 r>1 且 a₁>0 時遞增",
+          "等比數列 0<r<1 且 a₁>0 時遞減",
+          "所有數列都是遞增或遞減"
+        ],
+        "answers": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "explanation": "常數數列(d=0)或交錯數列(如公比為負的等比數列)都不是單純遞增或遞減,「所有數列」此項敘述錯誤。"
+      }
+    ]
+  },
+  {
+    "id": "math-u13",
+    "title": "數據分析與統計",
+    "category": "高一",
+    "note": {
+      "sections": [
+        {
+          "heading": "重點整理",
+          "content": [
+            "集中趨勢量數:平均數(所有值總和除以個數)、中位數(排序後最中間的值)、眾數(出現次數最多的值)。",
+            "離散趨勢量數:全距(最大值-最小值)、變異數、標準差,衡量資料的分散程度。",
+            "標準差公式:s = √(Σ(xᵢ-x̄)²/n),標準差越大代表資料越分散。",
+            "離群值(outlier)會顯著影響平均數,但對中位數影響較小。"
+          ]
+        },
+        {
+          "heading": "補充概念",
+          "content": [
+            "盒鬚圖(box plot)用四分位數呈現資料分布,可快速判斷資料是否有離群值。",
+            "常態分布資料中,約 68% 資料落在平均數正負一個標準差範圍內。"
+          ]
+        }
+      ]
+    },
+    "quiz": [
+      {
+        "id": "math-u13-q1",
+        "question": "一組資料中出現次數最多的值稱為?",
+        "options": [
+          "平均數",
+          "中位數",
+          "眾數",
+          "全距"
+        ],
+        "answer": 2,
+        "explanation": "眾數是一組資料中出現次數最多的值。"
+      },
+      {
+        "id": "math-u13-q2",
+        "question": "下列何者最容易受離群值影響而失真?",
+        "options": [
+          "中位數",
+          "眾數",
+          "平均數",
+          "全距"
+        ],
+        "answer": 2,
+        "explanation": "平均數會受極端離群值拉動而明顯偏移,中位數與眾數則相對穩定。"
+      },
+      {
+        "id": "math-u13-q3",
+        "question": "標準差的主要作用是?",
+        "options": [
+          "代表資料的集中趨勢",
+          "衡量資料的分散程度",
+          "一定等於平均數",
+          "只能用於常態分布"
+        ],
+        "answer": 1,
+        "explanation": "標準差用來衡量資料相對於平均數的分散程度,數值越大代表資料越分散。"
+      },
+      {
+        "id": "math-u13-q4",
+        "type": "numeric",
+        "question": "一組資料 2, 4, 6, 8, 10 的平均數為多少?",
+        "answerText": "6",
+        "explanation": "平均數 = (2+4+6+8+10)/5 = 30/5 = 6。"
+      },
+      {
+        "id": "math-u13-q5",
+        "type": "multi",
+        "question": "關於統計量數,下列敘述哪些正確?(多選)",
+        "options": [
+          "平均數容易受離群值影響",
+          "中位數是資料排序後最中間的值",
+          "標準差可以是負數",
+          "眾數是出現次數最多的值",
+          "全距等於最大值減最小值"
+        ],
+        "answers": [
+          0,
+          1,
+          3,
+          4
+        ],
+        "explanation": "標準差是由平方後開根號得到,數學上不可能是負數,此項敘述錯誤。"
+      },
+      {
+        "id": "math-u13-q6",
+        "type": "numeric",
+        "question": "資料 1,2,3,4,5,6 的平均數為多少?",
+        "answerText": "3.5",
+        "explanation": "平均數=(1+2+3+4+5+6)/6=21/6=3.5。"
+      },
+      {
+        "id": "math-u13-q7",
+        "type": "numeric",
+        "question": "資料 10,20,30 的平均數為多少?",
+        "answerText": "20",
+        "explanation": "平均數=(10+20+30)/3=60/3=20。"
+      },
+      {
+        "id": "math-u13-q8",
+        "type": "numeric",
+        "question": "資料 5,5,5,5 的平均數為多少?",
+        "answerText": "5",
+        "explanation": "所有值都相同,平均數就是該值 5。"
+      },
+      {
+        "id": "math-u13-q9",
+        "type": "numeric",
+        "question": "資料 3,7,8,10,12 的平均數為多少?",
+        "answerText": "8",
+        "explanation": "平均數=(3+7+8+10+12)/5=40/5=8。"
+      },
+      {
+        "id": "math-u13-q10",
+        "type": "numeric",
+        "question": "資料 -2,0,2,4 的平均數為多少?",
+        "answerText": "1",
+        "explanation": "平均數=(-2+0+2+4)/4=4/4=1。"
+      },
+      {
+        "id": "math-u13-q11",
+        "type": "numeric",
+        "question": "資料 3,1,4,1,5 的中位數為多少?",
+        "answerText": "3",
+        "explanation": "排序後為 1,1,3,4,5,中間值為 3。"
+      },
+      {
+        "id": "math-u13-q12",
+        "type": "numeric",
+        "question": "資料 2,8,4,6 的中位數為多少?",
+        "answerText": "5",
+        "explanation": "排序後為 2,4,6,8,中間兩數 4 與 6 的平均為 5。"
+      },
+      {
+        "id": "math-u13-q13",
+        "type": "numeric",
+        "question": "資料 10,20,30,40,50 的中位數為多少?",
+        "answerText": "30",
+        "explanation": "排序後中間值為 30。"
+      },
+      {
+        "id": "math-u13-q14",
+        "type": "numeric",
+        "question": "資料 7,2,9,4 的中位數為多少?",
+        "answerText": "5.5",
+        "explanation": "排序後為 2,4,7,9,中間兩數 4 與 7 的平均為 5.5。"
+      },
+      {
+        "id": "math-u13-q15",
+        "type": "numeric",
+        "question": "資料 1,1,1,1,1 的中位數為多少?",
+        "answerText": "1",
+        "explanation": "所有值都相同,中位數就是該值 1。"
+      },
+      {
+        "id": "math-u13-q16",
+        "type": "numeric",
+        "question": "資料 2,3,3,4,5 的眾數為多少?",
+        "answerText": "3",
+        "explanation": "3 出現 2 次,次數最多,眾數為 3。"
+      },
+      {
+        "id": "math-u13-q17",
+        "type": "numeric",
+        "question": "資料 1,1,2,2,2,3 的眾數為多少?",
+        "answerText": "2",
+        "explanation": "2 出現 3 次,次數最多,眾數為 2。"
+      },
+      {
+        "id": "math-u13-q18",
+        "question": "資料 1,2,3,4 的眾數為?",
+        "options": [
+          "沒有明顯眾數(每個值出現次數相同)",
+          "1",
+          "4",
+          "無法計算"
+        ],
+        "answer": 0,
+        "explanation": "每個值都只出現一次,沒有出現次數特別多的值,故沒有明顯眾數。"
+      },
+      {
+        "id": "math-u13-q19",
+        "type": "numeric",
+        "question": "資料 5,5,7,7,7,9 的眾數為多少?",
+        "answerText": "7",
+        "explanation": "7 出現 3 次,次數最多,眾數為 7。"
+      },
+      {
+        "id": "math-u13-q20",
+        "type": "numeric",
+        "question": "資料 3,8,15,2,20 的全距為多少?",
+        "answerText": "18",
+        "explanation": "全距=最大值-最小值=20-2=18。"
+      },
+      {
+        "id": "math-u13-q21",
+        "type": "numeric",
+        "question": "資料 10,10,10,10 的全距為多少?",
+        "answerText": "0",
+        "explanation": "所有值都相同,最大值減最小值為 0。"
+      },
+      {
+        "id": "math-u13-q22",
+        "type": "numeric",
+        "question": "資料 -5,3,8,-2 的全距為多少?",
+        "answerText": "13",
+        "explanation": "全距=8-(-5)=13。"
+      },
+      {
+        "id": "math-u13-q23",
+        "type": "numeric",
+        "question": "資料 100,50,75,90 的全距為多少?",
+        "answerText": "50",
+        "explanation": "全距=100-50=50。"
+      },
+      {
+        "id": "math-u13-q24",
+        "type": "numeric",
+        "question": "資料 2,2,6,6 的變異數(母體,除以 n)為多少?",
+        "answerText": "4",
+        "explanation": "平均數=4,離差平方和=(-2)²+(-2)²+2²+2²=16,變異數=16/4=4。"
+      },
+      {
+        "id": "math-u13-q25",
+        "type": "numeric",
+        "question": "資料 2,2,6,6 的標準差(母體)為多少?",
+        "answerText": "2",
+        "explanation": "標準差為變異數開根號,√4=2。"
+      },
+      {
+        "id": "math-u13-q26",
+        "type": "numeric",
+        "question": "資料 1,1,1,5 的變異數(母體)為多少?",
+        "answerText": "3",
+        "explanation": "平均數=2,離差平方和=(-1)²×3+3²=1+1+1+9=12,變異數=12/4=3。"
+      },
+      {
+        "id": "math-u13-q27",
+        "type": "numeric",
+        "question": "資料 0,0,4,4 的變異數(母體)為多少?",
+        "answerText": "4",
+        "explanation": "平均數=2,離差平方和=(-2)²+(-2)²+2²+2²=16,變異數=16/4=4。"
+      },
+      {
+        "id": "math-u13-q28",
+        "type": "numeric",
+        "question": "資料 0,0,4,4 的標準差(母體)為多少?",
+        "answerText": "2",
+        "explanation": "標準差為變異數開根號,√4=2。"
+      },
+      {
+        "id": "math-u13-q29",
+        "type": "numeric",
+        "question": "期中考 80 分(權重 40%)與期末考 90 分(權重 60%),求加權平均。",
+        "answerText": "86",
+        "explanation": "加權平均=80×0.4+90×0.6=32+54=86。"
+      },
+      {
+        "id": "math-u13-q30",
+        "type": "numeric",
+        "question": "期中考 70 分(權重 30%)與期末考 90 分(權重 70%),求加權平均。",
+        "answerText": "84",
+        "explanation": "加權平均=70×0.3+90×0.7=21+63=84。"
+      },
+      {
+        "id": "math-u13-q31",
+        "type": "numeric",
+        "question": "平時成績 60 分(權重 20%)、期中 80 分(權重 40%)、期末 90 分(權重 40%),求加權平均。",
+        "answerText": "80",
+        "explanation": "加權平均=60×0.2+80×0.4+90×0.4=12+32+36=80。"
+      },
+      {
+        "id": "math-u13-q32",
+        "type": "multi",
+        "question": "關於集中趨勢量數,下列敘述哪些正確?(多選)",
+        "options": [
+          "平均數會受所有資料值影響",
+          "中位數不受離群值影響(較穩健)",
+          "眾數可能不只一個",
+          "平均數一定是資料中的某個值",
+          "資料筆數為偶數時,中位數取中間兩數的平均"
+        ],
+        "answers": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "explanation": "平均數經常不是原始資料中的任何一個值(例如資料 1,2 的平均數 1.5),「一定是資料中的某個值」此項敘述錯誤。"
+      },
+      {
+        "id": "math-u13-q33",
+        "type": "multi",
+        "question": "關於離散趨勢量數,下列敘述哪些正確?(多選)",
+        "options": [
+          "全距=最大值減最小值",
+          "標準差恆為非負值",
+          "變異數是標準差的平方",
+          "標準差的單位與原始資料相同",
+          "全距能完整反映資料的分散情形"
+        ],
+        "answers": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "explanation": "全距只考慮最大值與最小值,無法反映中間資料的分布情形,「能完整反映分散情形」此項敘述錯誤。"
+      },
+      {
+        "id": "math-u13-q34",
+        "type": "numeric",
+        "question": "5 位同學的考試分數為 70,75,80,85,90,求平均分數。",
+        "answerText": "80",
+        "explanation": "平均數=(70+75+80+85+90)/5=400/5=80。"
+      },
+      {
+        "id": "math-u13-q35",
+        "type": "numeric",
+        "question": "承上題(70,75,80,85,90),求中位數。",
+        "answerText": "80",
+        "explanation": "資料已排序,中間值為 80。"
+      },
+      {
+        "id": "math-u13-q36",
+        "type": "numeric",
+        "question": "承上題(70,75,80,85,90),求全距。",
+        "answerText": "20",
+        "explanation": "全距=90-70=20。"
+      },
+      {
+        "id": "math-u13-q37",
+        "type": "numeric",
+        "question": "一組資料的平均數為 50,標準差為 5,某考生分數為 60,求其分數距平均數幾個標準差。",
+        "answerText": "2",
+        "explanation": "(60-50)/5=2 個標準差。"
+      },
+      {
+        "id": "math-u13-q38",
+        "type": "numeric",
+        "question": "某班級 10 人期中考平均 70 分,求全班總分。",
+        "answerText": "700",
+        "explanation": "總分=平均數×人數=70×10=700。"
+      }
+    ]
+  },
+  {
+    "id": "math-u7",
+    "title": "排列組合基礎",
+    "category": "高一",
+    "note": {
+      "sections": [
+        {
+          "heading": "重點整理",
+          "content": [
+            "排列(Permutation):由 n 個相異物取 r 個「有順序」排列,公式 P(n,r) = n!/(n-r)!。",
+            "組合(Combination):由 n 個相異物取 r 個「不考慮順序」,公式 C(n,r) = n!/(r!(n-r)!)。",
+            "分辨排列與組合的關鍵在於「順序是否重要」:排隊拍照要用排列,選代表隊不分職位用組合。"
+          ],
+          "table": {
+            "headers": [
+              "原理",
+              "說明"
+            ],
+            "rows": [
+              [
+                "加法原理",
+                "兩件事「不能同時發生」,方法數相加"
+              ],
+              [
+                "乘法原理",
+                "兩件事「依序都要發生」,方法數相乘"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "延伸概念",
+          "content": [
+            "重複排列:n 個位置每個位置有 k 種選擇且可重複,方法數為 kⁿ。",
+            "環狀排列:n 個相異物排成一圈,因旋轉視為相同,方法數為 (n-1)!。"
+          ]
+        }
+      ]
+    },
+    "quiz": [
+      {
+        "id": "math-u7-q1",
+        "question": "從 5 個人中選 3 個人排成一列,共有幾種排法?",
+        "options": [
+          "P(5,3)=60",
+          "C(5,3)=10",
+          "5³=125",
+          "5!=120"
+        ],
+        "answer": 0,
+        "explanation": "排隊有順序之分,應使用排列公式 P(5,3)=5×4×3=60。"
+      },
+      {
+        "id": "math-u7-q2",
+        "question": "從 5 個人中選 3 個人組成一個委員會(不分職位),共有幾種選法?",
+        "options": [
+          "60",
+          "10",
+          "15",
+          "125"
+        ],
+        "answer": 1,
+        "explanation": "不分職位不考慮順序,應使用組合公式 C(5,3)=10。"
+      },
+      {
+        "id": "math-u7-q3",
+        "question": "判斷排列與組合的關鍵在於?",
+        "options": [
+          "物品數量的多寡",
+          "順序是否重要",
+          "是否有重複的物品",
+          "位置是否相鄰"
+        ],
+        "answer": 1,
+        "explanation": "排列考慮順序,組合不考慮順序,這是兩者最核心的差異。"
+      },
+      {
+        "id": "math-u7-q4",
+        "type": "numeric",
+        "question": "從 4 個人中選 2 個人排成一列(有順序),共有幾種排法?",
+        "answerText": "12",
+        "explanation": "P(4,2) = 4×3 = 12。"
+      },
+      {
+        "id": "math-u7-q5",
+        "type": "multi",
+        "question": "關於排列組合,下列敘述哪些正確?(多選)",
+        "options": [
+          "C(n,r)=C(n,n-r)",
+          "P(n,r)=n!/(n-r)!",
+          "排列考慮順序,組合不考慮順序",
+          "C(n,r) 一定大於 P(n,r)",
+          "n 個相異物排成一圈的環狀排列數為 (n-1)!"
+        ],
+        "answers": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "explanation": "C(n,r)=P(n,r)/r!,當 r≥2 時 r!≥2,所以 C(n,r) 通常小於或等於 P(n,r),不會「一定大於」。"
+      },
+      {
+        "id": "math-u7-q6",
+        "type": "numeric",
+        "question": "求 P(5,2) 的值。",
+        "answerText": "20",
+        "explanation": "P(5,2)=5×4=20。"
+      },
+      {
+        "id": "math-u7-q7",
+        "type": "numeric",
+        "question": "求 P(6,3) 的值。",
+        "answerText": "120",
+        "explanation": "P(6,3)=6×5×4=120。"
+      },
+      {
+        "id": "math-u7-q8",
+        "type": "numeric",
+        "question": "求 P(4,4) 的值。",
+        "answerText": "24",
+        "explanation": "P(4,4)=4!=24。"
+      },
+      {
+        "id": "math-u7-q9",
+        "type": "numeric",
+        "question": "求 P(7,1) 的值。",
+        "answerText": "7",
+        "explanation": "P(7,1)=7。"
+      },
+      {
+        "id": "math-u7-q10",
+        "type": "numeric",
+        "question": "求 P(5,5) 的值。",
+        "answerText": "120",
+        "explanation": "P(5,5)=5!=120。"
+      },
+      {
+        "id": "math-u7-q11",
+        "type": "numeric",
+        "question": "求 P(8,2) 的值。",
+        "answerText": "56",
+        "explanation": "P(8,2)=8×7=56。"
+      },
+      {
+        "id": "math-u7-q12",
+        "type": "numeric",
+        "question": "求 P(6,2) 的值。",
+        "answerText": "30",
+        "explanation": "P(6,2)=6×5=30。"
+      },
+      {
+        "id": "math-u7-q13",
+        "type": "numeric",
+        "question": "求 P(10,1) 的值。",
+        "answerText": "10",
+        "explanation": "P(10,1)=10。"
+      },
+      {
+        "id": "math-u7-q14",
+        "type": "numeric",
+        "question": "求 C(5,2) 的值。",
+        "answerText": "10",
+        "explanation": "C(5,2)=5!/(2!×3!)=10。"
+      },
+      {
+        "id": "math-u7-q15",
+        "type": "numeric",
+        "question": "求 C(6,3) 的值。",
+        "answerText": "20",
+        "explanation": "C(6,3)=6!/(3!×3!)=20。"
+      },
+      {
+        "id": "math-u7-q16",
+        "type": "numeric",
+        "question": "求 C(4,2) 的值。",
+        "answerText": "6",
+        "explanation": "C(4,2)=4!/(2!×2!)=6。"
+      },
+      {
+        "id": "math-u7-q17",
+        "type": "numeric",
+        "question": "求 C(7,2) 的值。",
+        "answerText": "21",
+        "explanation": "C(7,2)=7!/(2!×5!)=21。"
+      },
+      {
+        "id": "math-u7-q18",
+        "type": "numeric",
+        "question": "求 C(5,0) 的值。",
+        "answerText": "1",
+        "explanation": "從 5 個裡選 0 個只有一種選法(什麼都不選),C(5,0)=1。"
+      },
+      {
+        "id": "math-u7-q19",
+        "type": "numeric",
+        "question": "求 C(5,5) 的值。",
+        "answerText": "1",
+        "explanation": "從 5 個裡選全部 5 個只有一種選法,C(5,5)=1。"
+      },
+      {
+        "id": "math-u7-q20",
+        "type": "numeric",
+        "question": "求 C(8,2) 的值。",
+        "answerText": "28",
+        "explanation": "C(8,2)=8!/(2!×6!)=28。"
+      },
+      {
+        "id": "math-u7-q21",
+        "type": "numeric",
+        "question": "求 C(6,4) 的值。",
+        "answerText": "15",
+        "explanation": "C(6,4)=C(6,2)=6!/(2!×4!)=15。"
+      },
+      {
+        "id": "math-u7-q22",
+        "type": "numeric",
+        "question": "4 個人圍成一圈,環狀排列共有幾種排法?",
+        "answerText": "6",
+        "explanation": "環狀排列數為 (n-1)!=(4-1)!=3!=6。"
+      },
+      {
+        "id": "math-u7-q23",
+        "type": "numeric",
+        "question": "5 個人圍成一圈,環狀排列共有幾種排法?",
+        "answerText": "24",
+        "explanation": "環狀排列數為 (5-1)!=4!=24。"
+      },
+      {
+        "id": "math-u7-q24",
+        "type": "numeric",
+        "question": "6 個人圍成一圈,環狀排列共有幾種排法?",
+        "answerText": "120",
+        "explanation": "環狀排列數為 (6-1)!=5!=120。"
+      },
+      {
+        "id": "math-u7-q25",
+        "type": "numeric",
+        "question": "3 個位置,每個位置各有 2 種選擇(可重複),共有幾種排列方式?",
+        "answerText": "8",
+        "explanation": "重複排列數為 2³=8。"
+      },
+      {
+        "id": "math-u7-q26",
+        "type": "numeric",
+        "question": "4 個位置,每個位置各有 3 種選擇(可重複),共有幾種排列方式?",
+        "answerText": "81",
+        "explanation": "重複排列數為 3⁴=81。"
+      },
+      {
+        "id": "math-u7-q27",
+        "type": "numeric",
+        "question": "用 0-9 共 10 個數字組成 3 位數密碼(數字可重複),共有幾種可能?",
+        "answerText": "1000",
+        "explanation": "重複排列數為 10³=1000。"
+      },
+      {
+        "id": "math-u7-q28",
+        "type": "numeric",
+        "question": "4 個不同的獎品分給 4 個不同的人,每人一個,共有幾種分法?",
+        "answerText": "24",
+        "explanation": "這是 4 個相異物的排列,4!=24。"
+      },
+      {
+        "id": "math-u7-q29",
+        "type": "numeric",
+        "question": "從 10 人中選 3 人組成委員會(不分職位),共有幾種選法?",
+        "answerText": "120",
+        "explanation": "C(10,3)=10!/(3!×7!)=120。"
+      },
+      {
+        "id": "math-u7-q30",
+        "type": "numeric",
+        "question": "從 10 人中選出正副會長各一人(職位不同),共有幾種選法?",
+        "answerText": "90",
+        "explanation": "P(10,2)=10×9=90。"
+      },
+      {
+        "id": "math-u7-q31",
+        "type": "numeric",
+        "question": "7 個人排成一列,其中甲、乙兩人一定要相鄰,共有幾種排法?",
+        "answerText": "1440",
+        "explanation": "將甲乙視為一個單位,與其餘 5 人共 6 個單位排列有 6!=720 種,甲乙內部順序有 2 種,共 720×2=1440。"
+      },
+      {
+        "id": "math-u7-q32",
+        "type": "numeric",
+        "question": "從 5 件上衣、3 件褲子中各選一件搭配,共有幾種搭配方式?",
+        "answerText": "15",
+        "explanation": "依乘法原理,5×3=15。"
+      },
+      {
+        "id": "math-u7-q33",
+        "type": "numeric",
+        "question": "袋中有 3 個紅球、5 個藍球,從中任選一個球(顏色不重複計算),共有幾種選法?",
+        "answerText": "8",
+        "explanation": "依加法原理,3+5=8。"
+      },
+      {
+        "id": "math-u7-q34",
+        "type": "numeric",
+        "question": "從台北到高雄可搭火車(3 個班次可選)或客運(2 個班次可選),共有幾種搭乘方式?",
+        "answerText": "5",
+        "explanation": "依加法原理(搭火車「或」客運,擇一),3+2=5。"
+      },
+      {
+        "id": "math-u7-q35",
+        "type": "numeric",
+        "question": "一件商品有 4 種顏色、3 種尺寸可選,共有幾種顏色與尺寸的組合?",
+        "answerText": "12",
+        "explanation": "依乘法原理,4×3=12。"
+      },
+      {
+        "id": "math-u7-q36",
+        "type": "multi",
+        "question": "關於排列組合的計數原理,下列敘述哪些正確?(多選)",
+        "options": [
+          "加法原理適用於「或」的情況",
+          "乘法原理適用於「且」的情況(依序都要發生)",
+          "P(n,r)=n!/(n-r)!",
+          "C(n,r)=n!/(r!(n-r)!)",
+          "C(n,r) 一定大於 P(n,r)"
+        ],
+        "answers": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "explanation": "C(n,r) 通常小於或等於 P(n,r)(因為 C(n,r)=P(n,r)/r!),不是「一定大於」,此項敘述錯誤。"
+      },
+      {
+        "id": "math-u7-q37",
+        "type": "multi",
+        "question": "關於環狀排列與重複排列,下列敘述哪些正確?(多選)",
+        "options": [
+          "n 個相異物環狀排列數為 (n-1)!",
+          "k 個位置各有 n 種選擇(可重複)方法數為 nᵏ",
+          "環狀排列因旋轉視為相同而少除一個 n",
+          "重複排列與一般排列公式完全相同",
+          "密碼鎖問題通常屬於重複排列"
+        ],
+        "answers": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "explanation": "重複排列公式為 nᵏ,與一般排列公式 n!/(n-r)! 不同(一般排列不能重複選同一物),此項敘述錯誤。"
+      },
+      {
+        "id": "math-u7-q38",
+        "type": "numeric",
+        "question": "求 5! 的值。",
+        "answerText": "120",
+        "explanation": "5!=5×4×3×2×1=120。"
+      },
+      {
+        "id": "math-u7-q39",
+        "type": "numeric",
+        "question": "求 C(5,2)+C(5,3) 的值。",
+        "answerText": "20",
+        "explanation": "C(5,2)=10, C(5,3)=10(因 C(5,3)=C(5,2)),總和為 20。"
+      },
+      {
+        "id": "math-u7-q40",
+        "type": "numeric",
+        "question": "求 0! 的值。",
+        "answerText": "1",
+        "explanation": "依定義,0!=1。"
+      },
+      {
+        "id": "math-u7-q41",
+        "question": "若 C(n,2)=10,求 n 的值。",
+        "options": [
+          "5",
+          "4",
+          "10",
+          "20"
+        ],
+        "answer": 0,
+        "explanation": "C(n,2)=n(n-1)/2=10,n(n-1)=20,解得 n=5。"
+      }
+    ]
+  },
+  {
+    "id": "math-u8",
+    "title": "機率入門",
+    "category": "高一",
+    "note": {
+      "sections": [
+        {
+          "heading": "重點整理",
+          "content": [
+            "機率定義:P(A) = 事件A發生的方法數 / 樣本空間總方法數,0 ≤ P(A) ≤ 1。",
+            "互斥事件:A、B不能同時發生,P(A∪B) = P(A) + P(B)。",
+            "獨立事件:A、B發生與否互不影響,P(A∩B) = P(A) × P(B)。",
+            "餘事件:P(A的餘事件) = 1 - P(A),常用於「至少」類型的題目。"
+          ],
+          "table": {
+            "headers": [
+              "情境",
+              "公式"
+            ],
+            "rows": [
+              [
+                "一般加法公式",
+                "P(A∪B) = P(A) + P(B) - P(A∩B)"
+              ],
+              [
+                "條件機率",
+                "P(A|B) = P(A∩B) / P(B)"
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    "quiz": [
+      {
+        "id": "math-u8-q1",
+        "question": "擲一顆公正骰子,出現偶數點的機率為?",
+        "options": [
+          "1/6",
+          "1/3",
+          "1/2",
+          "2/3"
+        ],
+        "answer": 2,
+        "explanation": "偶數點有 2, 4, 6 共 3 種,樣本空間共 6 種,機率為 3/6 = 1/2。"
+      },
+      {
+        "id": "math-u8-q2",
+        "question": "已知 P(A)=0.3, P(B)=0.4,A、B互斥,則 P(A∪B) = ?",
+        "options": [
+          "0.12",
+          "0.7",
+          "0.1",
+          "1.2"
+        ],
+        "answer": 1,
+        "explanation": "互斥事件 P(A∪B) = P(A) + P(B) = 0.3 + 0.4 = 0.7。"
+      },
+      {
+        "id": "math-u8-q3",
+        "question": "「投擲兩枚硬幣,至少一枚正面」的機率,較快的計算方式是?",
+        "options": [
+          "直接列出所有情況相加",
+          "用 1 減去「兩枚都反面」的機率",
+          "用乘法定理直接相乘",
+          "無法計算"
+        ],
+        "answer": 1,
+        "explanation": "「至少一枚正面」的餘事件是「兩枚都反面」,用 1 減去餘事件機率較快速。"
+      },
+      {
+        "id": "math-u8-q4",
+        "type": "numeric",
+        "question": "投擲兩枚公正硬幣,兩枚都出現正面的機率為多少?(請寫成最簡分數,例如 1/4)",
+        "answerText": "1/4",
+        "explanation": "兩枚都正面只有 1 種情況,樣本空間共 4 種(正正、正反、反正、反反),機率為 1/4。"
+      },
+      {
+        "id": "math-u8-q5",
+        "type": "multi",
+        "question": "關於機率,下列敘述哪些正確?(多選)",
+        "options": [
+          "機率值介於 0 到 1 之間",
+          "互斥事件的機率可以相加",
+          "獨立事件的交集機率等於各自機率相乘",
+          "所有列出的事件機率總和一定等於 1",
+          "餘事件的機率等於 1 減去該事件機率"
+        ],
+        "answers": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "explanation": "只有「彼此互斥且涵蓋整個樣本空間」的一組事件機率總和才會是 1,不是任意列出的事件都符合,此項錯誤。"
+      },
+      {
+        "id": "math-u8-q6",
+        "type": "numeric",
+        "question": "擲一顆公正骰子,出現 3 點的機率為多少?(請寫成最簡分數,例如 1/6)",
+        "answerText": "1/6",
+        "explanation": "樣本空間共 6 種,出現 3 點只有 1 種,機率為 1/6。"
+      },
+      {
+        "id": "math-u8-q7",
+        "type": "numeric",
+        "question": "擲一顆公正骰子,出現偶數點的機率為多少?(請寫成最簡分數)",
+        "answerText": "1/2",
+        "explanation": "偶數點有 2、4、6 共 3 種,機率為 3/6=1/2。"
+      },
+      {
+        "id": "math-u8-q8",
+        "type": "numeric",
+        "question": "從 52 張撲克牌中抽一張,抽到紅心的機率為多少?(請寫成最簡分數)",
+        "answerText": "1/4",
+        "explanation": "紅心共 13 張,機率為 13/52=1/4。"
+      },
+      {
+        "id": "math-u8-q9",
+        "type": "numeric",
+        "question": "袋中有 4 顆紅球、3 顆藍球,任取一球是紅球的機率為多少?(請寫成最簡分數)",
+        "answerText": "4/7",
+        "explanation": "總共 7 顆球,紅球 4 顆,機率為 4/7。"
+      },
+      {
+        "id": "math-u8-q10",
+        "type": "numeric",
+        "question": "擲兩枚公正硬幣,兩枚都出現正面的機率為多少?(請寫成最簡分數)",
+        "answerText": "1/4",
+        "explanation": "樣本空間共 4 種,兩枚都正面只有 1 種,機率為 1/4。"
+      },
+      {
+        "id": "math-u8-q11",
+        "type": "numeric",
+        "question": "從 1 到 10 中任選一數,選到質數(2,3,5,7)的機率為多少?(請寫成最簡分數)",
+        "answerText": "2/5",
+        "explanation": "1-10 中的質數有 2,3,5,7 共 4 個,機率為 4/10=2/5。"
+      },
+      {
+        "id": "math-u8-q12",
+        "type": "numeric",
+        "question": "擲一顆公正骰子,出現點數大於 4 的機率為多少?(請寫成最簡分數)",
+        "answerText": "1/3",
+        "explanation": "大於 4 的點數有 5、6 共 2 種,機率為 2/6=1/3。"
+      },
+      {
+        "id": "math-u8-q13",
+        "type": "numeric",
+        "question": "從一副 52 張撲克牌抽一張,抽到 A 的機率為多少?(請寫成最簡分數)",
+        "answerText": "1/13",
+        "explanation": "每種花色各有 1 張 A,共 4 張,機率為 4/52=1/13。"
+      },
+      {
+        "id": "math-u8-q14",
+        "type": "numeric",
+        "question": "P(A)=0.3, P(B)=0.5,A、B 互斥,求 P(A∪B)。",
+        "answerText": "0.8",
+        "explanation": "互斥事件 P(A∪B)=P(A)+P(B)=0.3+0.5=0.8。"
+      },
+      {
+        "id": "math-u8-q15",
+        "type": "numeric",
+        "question": "P(A)=0.2, P(B)=0.4,A、B 互斥,求 P(A∪B)。",
+        "answerText": "0.6",
+        "explanation": "P(A∪B)=0.2+0.4=0.6。"
+      },
+      {
+        "id": "math-u8-q16",
+        "type": "numeric",
+        "question": "擲一顆骰子,求出現 1 點或 6 點的機率。(請寫成最簡分數)",
+        "answerText": "1/3",
+        "explanation": "兩事件互斥,P=1/6+1/6=2/6=1/3。"
+      },
+      {
+        "id": "math-u8-q17",
+        "type": "numeric",
+        "question": "從一副撲克牌抽一張,求抽到紅心或黑桃的機率。(請寫成最簡分數)",
+        "answerText": "1/2",
+        "explanation": "兩花色互斥,P=13/52+13/52=26/52=1/2。"
+      },
+      {
+        "id": "math-u8-q18",
+        "type": "numeric",
+        "question": "P(A)=0.5, P(B)=0.4,A、B 獨立,求 P(A∩B)。",
+        "answerText": "0.2",
+        "explanation": "獨立事件 P(A∩B)=P(A)×P(B)=0.5×0.4=0.2。"
+      },
+      {
+        "id": "math-u8-q19",
+        "type": "numeric",
+        "question": "擲兩顆公正骰子,兩顆都出現 6 點的機率為多少?(請寫成最簡分數)",
+        "answerText": "1/36",
+        "explanation": "兩事件獨立,P=1/6×1/6=1/36。"
+      },
+      {
+        "id": "math-u8-q20",
+        "type": "numeric",
+        "question": "P(A)=0.6, P(B)=0.5,A、B 獨立,求 P(A∩B)。",
+        "answerText": "0.3",
+        "explanation": "P(A∩B)=0.6×0.5=0.3。"
+      },
+      {
+        "id": "math-u8-q21",
+        "type": "numeric",
+        "question": "投擲一枚公正硬幣 3 次,都出現正面的機率為多少?(請寫成最簡分數)",
+        "answerText": "1/8",
+        "explanation": "三次獨立,P=1/2×1/2×1/2=1/8。"
+      },
+      {
+        "id": "math-u8-q22",
+        "type": "numeric",
+        "question": "P(A)=0.3,求 A 的餘事件機率。",
+        "answerText": "0.7",
+        "explanation": "餘事件機率=1-P(A)=1-0.3=0.7。"
+      },
+      {
+        "id": "math-u8-q23",
+        "type": "numeric",
+        "question": "擲一顆骰子,求「不出現 6 點」的機率。(請寫成最簡分數)",
+        "answerText": "5/6",
+        "explanation": "「不出現6點」是「出現6點」的餘事件,P=1-1/6=5/6。"
+      },
+      {
+        "id": "math-u8-q24",
+        "type": "numeric",
+        "question": "投擲兩枚公正硬幣,求「至少一枚正面」的機率。(請寫成最簡分數)",
+        "answerText": "3/4",
+        "explanation": "「至少一枚正面」的餘事件是「兩枚都反面」(機率1/4),故 P=1-1/4=3/4。"
+      },
+      {
+        "id": "math-u8-q25",
+        "type": "numeric",
+        "question": "P(A)=0.65,求 A 的餘事件機率。",
+        "answerText": "0.35",
+        "explanation": "餘事件機率=1-0.65=0.35。"
+      },
+      {
+        "id": "math-u8-q26",
+        "type": "numeric",
+        "question": "P(A∩B)=0.2, P(B)=0.5,求 P(A|B)。",
+        "answerText": "0.4",
+        "explanation": "P(A|B)=P(A∩B)/P(B)=0.2/0.5=0.4。"
+      },
+      {
+        "id": "math-u8-q27",
+        "type": "numeric",
+        "question": "P(A∩B)=0.1, P(B)=0.4,求 P(A|B)。",
+        "answerText": "0.25",
+        "explanation": "P(A|B)=0.1/0.4=0.25。"
+      },
+      {
+        "id": "math-u8-q28",
+        "type": "numeric",
+        "question": "P(A∩B)=0.3, P(A)=0.6,求 P(B|A)。",
+        "answerText": "0.5",
+        "explanation": "P(B|A)=P(A∩B)/P(A)=0.3/0.6=0.5。"
+      },
+      {
+        "id": "math-u8-q29",
+        "type": "numeric",
+        "question": "P(A∩B)=0.12, P(B)=0.3,求 P(A|B)。",
+        "answerText": "0.4",
+        "explanation": "P(A|B)=0.12/0.3=0.4。"
+      },
+      {
+        "id": "math-u8-q30",
+        "type": "numeric",
+        "question": "P(A)=0.5, P(B)=0.4, P(A∩B)=0.2,求 P(A∪B)。",
+        "answerText": "0.7",
+        "explanation": "一般加法公式 P(A∪B)=P(A)+P(B)-P(A∩B)=0.5+0.4-0.2=0.7。"
+      },
+      {
+        "id": "math-u8-q31",
+        "type": "numeric",
+        "question": "P(A)=0.6, P(B)=0.3, P(A∩B)=0.1,求 P(A∪B)。",
+        "answerText": "0.8",
+        "explanation": "P(A∪B)=0.6+0.3-0.1=0.8。"
+      },
+      {
+        "id": "math-u8-q32",
+        "type": "numeric",
+        "question": "P(A)=0.7, P(B)=0.5, P(A∩B)=0.3,求 P(A∪B)。",
+        "answerText": "0.9",
+        "explanation": "P(A∪B)=0.7+0.5-0.3=0.9。"
+      },
+      {
+        "id": "math-u8-q33",
+        "type": "numeric",
+        "question": "P(A)=0.4, P(B)=0.6, P(A∩B)=0.2,求 P(A∪B)。",
+        "answerText": "0.8",
+        "explanation": "P(A∪B)=0.4+0.6-0.2=0.8。"
+      },
+      {
+        "id": "math-u8-q34",
+        "type": "multi",
+        "question": "關於機率基本性質,下列敘述哪些正確?(多選)",
+        "options": [
+          "0≤P(A)≤1 恆成立",
+          "P(樣本空間)=1",
+          "P(空集合)=0",
+          "互斥事件一定是獨立事件",
+          "P(A)+P(A 的餘事件)=1"
+        ],
+        "answers": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "explanation": "互斥事件與獨立事件是不同概念,互斥事件通常不是獨立事件(除非其中一事件機率為0),此項敘述錯誤。"
+      },
+      {
+        "id": "math-u8-q35",
+        "type": "multi",
+        "question": "關於條件機率,下列敘述哪些正確?(多選)",
+        "options": [
+          "P(A|B)=P(A∩B)/P(B)(P(B)>0)",
+          "若 A、B 獨立,則 P(A|B)=P(A)",
+          "P(A|B) 一定等於 P(B|A)",
+          "條件機率的值介於 0 到 1 之間",
+          "P(A|B)×P(B)=P(A∩B)"
+        ],
+        "answers": [
+          0,
+          1,
+          3,
+          4
+        ],
+        "explanation": "P(A|B) 不一定等於 P(B|A),除非 P(A)=P(B),此項敘述錯誤。"
+      },
+      {
+        "id": "math-u8-q36",
+        "type": "numeric",
+        "question": "一個班級 30 人,18 人喜歡數學,12 人喜歡英文,6 人兩者都喜歡,求喜歡數學或英文的人數。",
+        "answerText": "24",
+        "explanation": "依一般加法原理,18+12-6=24人。"
+      },
+      {
+        "id": "math-u8-q37",
+        "question": "一個班級 30 人,18 人喜歡數學,12 人喜歡英文,6 人兩者都喜歡。從班上任選一人,此人喜歡數學或英文的機率為何?",
+        "options": [
+          "0.8",
+          "0.6",
+          "0.4",
+          "1.0"
+        ],
+        "answer": 0,
+        "explanation": "喜歡數學或英文的有 18+12-6=24 人,24人/30人=0.8。"
+      },
+      {
+        "id": "math-u8-q38",
+        "type": "numeric",
+        "question": "從 1 到 20 中,3 的倍數共有幾個?",
+        "answerText": "6",
+        "explanation": "3,6,9,12,15,18 共 6 個。"
+      },
+      {
+        "id": "math-u8-q39",
+        "type": "numeric",
+        "question": "從 1 到 20 中任選一數,選到 3 的倍數的機率為多少?",
+        "answerText": "0.3",
+        "explanation": "1 到 20 中 3 的倍數有 3、6、9、12、15、18 共 6 個,6/20=0.3。"
+      },
+      {
+        "id": "math-u8-q40",
+        "type": "numeric",
+        "question": "擲兩顆骰子,點數和為 7 的組合共有幾種?(例如 1+6 算一種)",
+        "answerText": "6",
+        "explanation": "(1,6),(2,5),(3,4),(4,3),(5,2),(6,1) 共 6 種組合。"
+      }
+    ]
+  },
+  {
+    "id": "math-u11",
+    "title": "直線與圓",
+    "category": "高一",
+    "note": {
+      "sections": [
+        {
+          "heading": "重點整理",
+          "content": [
+            "直線方程式:斜截式 y=mx+b;點斜式 y-y₁=m(x-x₁);一般式 ax+by+c=0。",
+            "兩直線關係:斜率相等則平行(m₁=m₂);斜率相乘為 -1 則垂直(m₁×m₂=-1)。",
+            "點到直線距離公式:d = |ax₀+by₀+c| / √(a²+b²)。",
+            "圓方程式:標準式 (x-h)²+(y-k)²=r²,圓心 (h,k),半徑 r。"
+          ]
+        }
+      ]
+    },
+    "quiz": [
+      {
+        "id": "math-u11-q1",
+        "question": "直線 y=2x+3 與直線 y=2x-5 的關係為?",
+        "options": [
+          "垂直",
+          "平行",
+          "重合",
+          "相交於一點"
+        ],
+        "answer": 1,
+        "explanation": "兩直線斜率相同(皆為2)、截距不同,故兩直線平行且不重合。"
+      },
+      {
+        "id": "math-u11-q2",
+        "question": "圓方程式 (x-2)²+(y+1)²=9 的圓心與半徑為?",
+        "options": [
+          "圓心(2,-1),半徑3",
+          "圓心(-2,1),半徑9",
+          "圓心(2,1),半徑3",
+          "圓心(-2,-1),半徑9"
+        ],
+        "answer": 0,
+        "explanation": "標準式 (x-h)²+(y-k)²=r² 的圓心為 (h,k)=(2,-1),半徑 r=√9=3。"
+      },
+      {
+        "id": "math-u11-q3",
+        "question": "若兩直線斜率乘積為 -1,兩直線關係為?",
+        "options": [
+          "平行",
+          "垂直",
+          "重合",
+          "不相交也不垂直"
+        ],
+        "answer": 1,
+        "explanation": "兩直線斜率乘積為 -1(m₁×m₂=-1)是兩直線垂直的充要條件。"
+      },
+      {
+        "id": "math-u11-q4",
+        "type": "numeric",
+        "question": "圓 (x-2)²+(y-3)²=25 的半徑為多少?",
+        "answerText": "5",
+        "explanation": "標準式 (x-h)²+(y-k)²=r² 中 r²=25,故半徑 r=5。"
+      },
+      {
+        "id": "math-u11-q5",
+        "type": "multi",
+        "question": "關於直線與圓,下列敘述哪些正確?(多選)",
+        "options": [
+          "兩直線斜率相等則平行",
+          "兩直線斜率乘積為 -1 則垂直",
+          "圓心到直線距離大於半徑時,直線與圓不相交",
+          "圓心到直線距離小於半徑時,直線與圓相切",
+          "圓的標準式為 (x-h)²+(y-k)²=r²"
+        ],
+        "answers": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "explanation": "圓心到直線距離「等於」半徑才是相切,「小於」半徑是直線與圓相交於兩點,此項敘述錯誤。"
+      },
+      {
+        "id": "math-u11-q6",
+        "type": "numeric",
+        "question": "過 (1,2) 和 (3,8) 的直線斜率為多少?",
+        "answerText": "3",
+        "explanation": "斜率=(8-2)/(3-1)=6/2=3。"
+      },
+      {
+        "id": "math-u11-q7",
+        "type": "numeric",
+        "question": "過 (0,0) 和 (4,4) 的直線斜率為多少?",
+        "answerText": "1",
+        "explanation": "斜率=(4-0)/(4-0)=1。"
+      },
+      {
+        "id": "math-u11-q8",
+        "type": "numeric",
+        "question": "過 (-1,3) 和 (2,-3) 的直線斜率為多少?",
+        "answerText": "-2",
+        "explanation": "斜率=(-3-3)/(2-(-1))=-6/3=-2。"
+      },
+      {
+        "id": "math-u11-q9",
+        "type": "numeric",
+        "question": "過 (0,5) 和 (5,0) 的直線斜率為多少?",
+        "answerText": "-1",
+        "explanation": "斜率=(0-5)/(5-0)=-1。"
+      },
+      {
+        "id": "math-u11-q10",
+        "type": "numeric",
+        "question": "過 (1,1) 和 (4,10) 的直線斜率為多少?",
+        "answerText": "3",
+        "explanation": "斜率=(10-1)/(4-1)=9/3=3。"
+      },
+      {
+        "id": "math-u11-q11",
+        "question": "過 (2,3)、斜率為 4 的直線方程式(化為斜截式)為?",
+        "options": [
+          "y=4x-5",
+          "y=4x+5",
+          "y=4x-8",
+          "y=4x+3"
+        ],
+        "answer": 0,
+        "explanation": "點斜式 y-3=4(x-2),展開得 y=4x-8+3=4x-5。"
+      },
+      {
+        "id": "math-u11-q12",
+        "question": "過 (0,3)、斜率為 -2 的直線方程式為?",
+        "options": [
+          "y=-2x+3",
+          "y=-2x-3",
+          "y=2x+3",
+          "y=-2x"
+        ],
+        "answer": 0,
+        "explanation": "y 截距為 3,斜率為 -2,故 y=-2x+3。"
+      },
+      {
+        "id": "math-u11-q13",
+        "question": "過 (1,2)、(3,6) 兩點的直線方程式為?",
+        "options": [
+          "y=2x",
+          "y=2x+2",
+          "y=2x-2",
+          "y=x+1"
+        ],
+        "answer": 0,
+        "explanation": "斜率=(6-2)/(3-1)=2,代入點斜式 y-2=2(x-1),化簡得 y=2x。"
+      },
+      {
+        "id": "math-u11-q14",
+        "type": "numeric",
+        "question": "直線 y=3x+1 與直線 y=kx-2 平行,求 k 的值。",
+        "answerText": "3",
+        "explanation": "兩直線平行時斜率相等,故 k=3。"
+      },
+      {
+        "id": "math-u11-q15",
+        "type": "numeric",
+        "question": "直線 y=2x+5 與直線 y=kx+1 垂直,求 k 的值。(請寫成最簡分數,例如 -1/2)",
+        "answerText": "-1/2",
+        "explanation": "兩直線垂直時斜率乘積為 -1:2×k=-1,k=-1/2。"
+      },
+      {
+        "id": "math-u11-q16",
+        "question": "直線 y=5x-3 與直線 y=5x+7 的關係為?",
+        "options": [
+          "平行",
+          "垂直",
+          "重合",
+          "相交但不垂直"
+        ],
+        "answer": 0,
+        "explanation": "兩直線斜率相同(皆為5)但截距不同,故平行不重合。"
+      },
+      {
+        "id": "math-u11-q17",
+        "question": "直線 y=2x+1 與直線 y=-0.5x+3 的關係為?",
+        "options": [
+          "垂直",
+          "平行",
+          "重合",
+          "無法判斷"
+        ],
+        "answer": 0,
+        "explanation": "斜率乘積 2×(-0.5)=-1,兩直線垂直。"
+      },
+      {
+        "id": "math-u11-q18",
+        "type": "numeric",
+        "question": "直線 3x+4y=12 的斜率為多少?(請寫成最簡分數,例如 -3/4)",
+        "answerText": "-3/4",
+        "explanation": "化為斜截式 y=-3/4x+3,斜率為 -3/4。"
+      },
+      {
+        "id": "math-u11-q19",
+        "type": "numeric",
+        "question": "直線 2x-y=5 的斜率為多少?",
+        "answerText": "2",
+        "explanation": "化為斜截式 y=2x-5,斜率為 2。"
+      },
+      {
+        "id": "math-u11-q20",
+        "type": "numeric",
+        "question": "點 (0,0) 到直線 3x+4y-10=0 的距離為多少?",
+        "answerText": "2",
+        "explanation": "d=|3×0+4×0-10|/√(3²+4²)=10/5=2。"
+      },
+      {
+        "id": "math-u11-q21",
+        "type": "numeric",
+        "question": "點 (1,1) 到直線 3x+4y-10=0 的距離為多少?",
+        "answerText": "0.6",
+        "explanation": "d=|3×1+4×1-10|/5=|-3|/5=0.6。"
+      },
+      {
+        "id": "math-u11-q22",
+        "type": "numeric",
+        "question": "點 (3,4) 到直線 4x-3y=0 的距離為多少?",
+        "answerText": "0",
+        "explanation": "d=|4×3-3×4|/√(4²+3²)=|12-12|/5=0,代表此點在直線上。"
+      },
+      {
+        "id": "math-u11-q23",
+        "type": "numeric",
+        "question": "點 (0,0) 到直線 6x+8y-20=0 的距離為多少?",
+        "answerText": "2",
+        "explanation": "d=|0+0-20|/√(6²+8²)=20/10=2。"
+      },
+      {
+        "id": "math-u11-q24",
+        "type": "numeric",
+        "question": "點 (5,0) 到直線 3x+4y-15=0 的距離為多少?",
+        "answerText": "0",
+        "explanation": "d=|3×5+4×0-15|/5=|0|/5=0,代表此點在直線上。"
+      },
+      {
+        "id": "math-u11-q25",
+        "question": "圓 (x-3)²+(y-2)²=16 的圓心座標為?",
+        "options": [
+          "(3,2)",
+          "(-3,-2)",
+          "(3,-2)",
+          "(-3,2)"
+        ],
+        "answer": 0,
+        "explanation": "標準式 (x-h)²+(y-k)²=r² 的圓心為 (h,k),此處為 (3,2)。"
+      },
+      {
+        "id": "math-u11-q26",
+        "type": "numeric",
+        "question": "圓 (x-3)²+(y-2)²=16 的半徑為多少?",
+        "answerText": "4",
+        "explanation": "r²=16,故 r=4。"
+      },
+      {
+        "id": "math-u11-q27",
+        "type": "numeric",
+        "question": "圓 x²+y²=49 的半徑為多少?",
+        "answerText": "7",
+        "explanation": "r²=49,故 r=7。"
+      },
+      {
+        "id": "math-u11-q28",
+        "type": "numeric",
+        "question": "圓 (x+1)²+(y-5)²=36 的半徑為多少?",
+        "answerText": "6",
+        "explanation": "r²=36,故 r=6。"
+      },
+      {
+        "id": "math-u11-q29",
+        "question": "圓心 (2,-3)、半徑 5 的圓方程式為?",
+        "options": [
+          "(x-2)²+(y+3)²=25",
+          "(x+2)²+(y-3)²=25",
+          "(x-2)²+(y+3)²=5",
+          "(x-2)²+(y-3)²=25"
+        ],
+        "answer": 0,
+        "explanation": "圓心 (2,-3) 代入標準式 (x-h)²+(y-k)²=r²,得 (x-2)²+(y+3)²=25。"
+      },
+      {
+        "id": "math-u11-q30",
+        "type": "numeric",
+        "question": "圓 x²+y²-6x-8y=0 配方後,求圓心的 x 座標。",
+        "answerText": "3",
+        "explanation": "配方:(x-3)²-9+(y-4)²-16=0,即 (x-3)²+(y-4)²=25,圓心為 (3,4)。"
+      },
+      {
+        "id": "math-u11-q31",
+        "question": "圓心到直線距離為 3,圓半徑為 5,直線與圓的關係為?",
+        "options": [
+          "相交(兩點)",
+          "相切",
+          "不相交",
+          "無法判斷"
+        ],
+        "answer": 0,
+        "explanation": "距離(3)小於半徑(5),直線與圓相交於兩點。"
+      },
+      {
+        "id": "math-u11-q32",
+        "question": "圓心到直線距離為 5,圓半徑為 5,直線與圓的關係為?",
+        "options": [
+          "相切",
+          "相交",
+          "不相交",
+          "無法判斷"
+        ],
+        "answer": 0,
+        "explanation": "距離等於半徑,直線與圓相切。"
+      },
+      {
+        "id": "math-u11-q33",
+        "question": "圓心到直線距離為 7,圓半徑為 5,直線與圓的關係為?",
+        "options": [
+          "不相交",
+          "相交",
+          "相切",
+          "無法判斷"
+        ],
+        "answer": 0,
+        "explanation": "距離(7)大於半徑(5),直線與圓不相交。"
+      },
+      {
+        "id": "math-u11-q34",
+        "question": "圓心到直線距離為 0,圓半徑為 5,直線與圓的關係為?",
+        "options": [
+          "相交,且直線過圓心",
+          "相切",
+          "不相交",
+          "無法判斷"
+        ],
+        "answer": 0,
+        "explanation": "距離為 0 代表直線通過圓心,必定與圓相交於兩點。"
+      },
+      {
+        "id": "math-u11-q35",
+        "type": "multi",
+        "question": "關於直線方程式,下列敘述哪些正確?(多選)",
+        "options": [
+          "點斜式為 y-y₁=m(x-x₁)",
+          "斜截式為 y=mx+b,b 為 y 截距",
+          "兩直線斜率相同則平行",
+          "兩直線斜率相同則一定重合",
+          "垂直線沒有斜率(斜率不存在)"
+        ],
+        "answers": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "explanation": "斜率相同只保證平行,不保證重合,重合還需要截距也相同,「一定重合」此項敘述錯誤。"
+      },
+      {
+        "id": "math-u11-q36",
+        "type": "multi",
+        "question": "關於圓的方程式,下列敘述哪些正確?(多選)",
+        "options": [
+          "標準式為 (x-h)²+(y-k)²=r²,圓心 (h,k) 半徑 r",
+          "圓上任一點到圓心的距離都等於半徑",
+          "半徑一定為正數",
+          "圓心到圓上任一點的距離可以不同",
+          "一般式 x²+y²+Dx+Ey+F=0 可以配方轉換成標準式"
+        ],
+        "answers": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "explanation": "依圓的定義,圓心到圓上任一點的距離都相等(等於半徑),不可能不同,此項敘述錯誤。"
+      },
+      {
+        "id": "math-u11-q37",
+        "type": "numeric",
+        "question": "直線 y=2x+3 與 x 軸的交點 x 座標為多少?",
+        "answerText": "-1.5",
+        "explanation": "令 y=0:0=2x+3,x=-1.5。"
+      },
+      {
+        "id": "math-u11-q38",
+        "type": "numeric",
+        "question": "直線 y=2x+3 與 y 軸的交點 y 座標為多少?",
+        "answerText": "3",
+        "explanation": "令 x=0:y=3。"
+      },
+      {
+        "id": "math-u11-q39",
+        "type": "numeric",
+        "question": "直線 3x-4y+12=0 與 x 軸的交點 x 座標為多少?",
+        "answerText": "-4",
+        "explanation": "令 y=0:3x+12=0,x=-4。"
+      },
+      {
+        "id": "math-u11-q40",
+        "type": "numeric",
+        "question": "圓 x²+y²=25 上,當 x=3 時,y 的正值為多少?",
+        "answerText": "4",
+        "explanation": "9+y²=25,y²=16,取正值 y=4。"
+      }
+    ]
+  },
+  {
+    "id": "math-u6",
+    "title": "三角函數基礎",
+    "category": "高一",
+    "note": {
+      "sections": [
+        {
+          "heading": "重點整理",
+          "content": [
+            "弧度制:角度轉弧度公式 θ(弧度) = θ(角度) × π/180。",
+            "單位圓上,角 θ 的終邊與圓交點座標為 (cosθ, sinθ)。",
+            "基本關係式:sin²θ + cos²θ = 1;tanθ = sinθ/cosθ(cosθ≠0)。"
+          ],
+          "table": {
+            "headers": [
+              "角度",
+              "sin",
+              "cos",
+              "tan"
+            ],
+            "rows": [
+              [
+                "30°",
+                "1/2",
+                "√3/2",
+                "√3/3"
+              ],
+              [
+                "45°",
+                "√2/2",
+                "√2/2",
+                "1"
+              ],
+              [
+                "60°",
+                "√3/2",
+                "1/2",
+                "√3"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "重要定理",
+          "content": [
+            "正弦定理:a/sinA = b/sinB = c/sinC = 2R(R為外接圓半徑),適用任意三角形。",
+            "餘弦定理:c² = a² + b² - 2ab·cosC,可用於已知兩邊夾角求第三邊。"
+          ]
+        }
+      ]
+    },
+    "quiz": [
+      {
+        "id": "math-u6-q1",
+        "question": "sin30° 的值為?",
+        "options": [
+          "1/2",
+          "√2/2",
+          "√3/2",
+          "1"
+        ],
+        "answer": 0,
+        "explanation": "sin30° = 1/2,為常見特殊角三角函數值,建議熟記。"
+      },
+      {
+        "id": "math-u6-q2",
+        "question": "依 sin²θ + cos²θ = 1,若 sinθ = 3/5(θ為銳角),則 cosθ = ?",
+        "options": [
+          "4/5",
+          "3/4",
+          "5/4",
+          "2/5"
+        ],
+        "answer": 0,
+        "explanation": "cos²θ = 1 - (3/5)² = 1 - 9/25 = 16/25,θ為銳角故 cosθ = 4/5。"
+      },
+      {
+        "id": "math-u6-q3",
+        "question": "已知三角形兩邊與夾角,求第三邊長,應使用?",
+        "options": [
+          "正弦定理",
+          "餘弦定理",
+          "商高定理",
+          "對數律"
+        ],
+        "answer": 1,
+        "explanation": "已知兩邊夾角求第三邊,應使用餘弦定理 c² = a²+b²-2ab·cosC。"
+      },
+      {
+        "id": "math-u6-q4",
+        "type": "numeric",
+        "question": "sin90° 的值為多少?",
+        "answerText": "1",
+        "explanation": "sin90° = 1,單位圓上角度 90° 對應的 y 座標為 1。"
+      },
+      {
+        "id": "math-u6-q5",
+        "type": "multi",
+        "question": "關於 sinθ 與 cosθ,下列敘述哪些正確?(多選)",
+        "options": [
+          "sin²θ+cos²θ=1 恆成立",
+          "sinθ 的範圍是 [-1,1]",
+          "當 θ=90° 時 cosθ=0",
+          "tanθ=sinθ/cosθ 恆成立(cosθ≠0)",
+          "sinθ 一定大於 0"
+        ],
+        "answers": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "explanation": "sinθ 在不同角度可正可負(如 θ=270° 時 sinθ=-1),不會「一定大於0」,此項錯誤。"
+      },
+      {
+        "id": "math-u6-q6",
+        "question": "sin30° 的值為?",
+        "options": [
+          "1/2",
+          "√2/2",
+          "√3/2",
+          "1"
+        ],
+        "answer": 0,
+        "explanation": "sin30° 為特殊角三角函數值,等於 1/2。"
+      },
+      {
+        "id": "math-u6-q7",
+        "question": "cos60° 的值為?",
+        "options": [
+          "1/2",
+          "√3/2",
+          "√2/2",
+          "0"
+        ],
+        "answer": 0,
+        "explanation": "cos60° 為特殊角三角函數值,等於 1/2。"
+      },
+      {
+        "id": "math-u6-q8",
+        "question": "tan45° 的值為?",
+        "options": [
+          "1",
+          "√3",
+          "√3/3",
+          "0"
+        ],
+        "answer": 0,
+        "explanation": "tan45°=sin45°/cos45°=1。"
+      },
+      {
+        "id": "math-u6-q9",
+        "question": "sin90° 的值為?",
+        "options": [
+          "1",
+          "0",
+          "-1",
+          "1/2"
+        ],
+        "answer": 0,
+        "explanation": "單位圓上 90° 對應點的 y 座標為 1,故 sin90°=1。"
+      },
+      {
+        "id": "math-u6-q10",
+        "question": "cos0° 的值為?",
+        "options": [
+          "1",
+          "0",
+          "-1",
+          "1/2"
+        ],
+        "answer": 0,
+        "explanation": "單位圓上 0° 對應點的 x 座標為 1,故 cos0°=1。"
+      },
+      {
+        "id": "math-u6-q11",
+        "question": "sin180° 的值為?",
+        "options": [
+          "0",
+          "1",
+          "-1",
+          "1/2"
+        ],
+        "answer": 0,
+        "explanation": "單位圓上 180° 對應點的 y 座標為 0,故 sin180°=0。"
+      },
+      {
+        "id": "math-u6-q12",
+        "question": "cos90° 的值為?",
+        "options": [
+          "0",
+          "1",
+          "-1",
+          "1/2"
+        ],
+        "answer": 0,
+        "explanation": "單位圓上 90° 對應點的 x 座標為 0,故 cos90°=0。"
+      },
+      {
+        "id": "math-u6-q13",
+        "question": "tan60° 的值為?",
+        "options": [
+          "√3",
+          "1",
+          "√3/3",
+          "1/2"
+        ],
+        "answer": 0,
+        "explanation": "tan60°=sin60°/cos60°=(√3/2)/(1/2)=√3。"
+      },
+      {
+        "id": "math-u6-q14",
+        "type": "numeric",
+        "question": "若 sinθ=3/5(θ為銳角),求 cosθ。(請寫成最簡分數,例如 4/5)",
+        "answerText": "4/5",
+        "explanation": "cosθ=√(1-9/25)=√(16/25)=4/5。"
+      },
+      {
+        "id": "math-u6-q15",
+        "type": "numeric",
+        "question": "若 cosθ=12/13(θ為銳角),求 sinθ。(請寫成最簡分數,例如 5/13)",
+        "answerText": "5/13",
+        "explanation": "sinθ=√(1-144/169)=√(25/169)=5/13。"
+      },
+      {
+        "id": "math-u6-q16",
+        "type": "numeric",
+        "question": "若 sinθ=0.6(θ為銳角),求 cosθ。",
+        "answerText": "0.8",
+        "explanation": "cosθ=√(1-0.36)=√0.64=0.8。"
+      },
+      {
+        "id": "math-u6-q17",
+        "type": "numeric",
+        "question": "若 cosθ=0.8(θ為銳角),求 sinθ。",
+        "answerText": "0.6",
+        "explanation": "sinθ=√(1-0.64)=√0.36=0.6。"
+      },
+      {
+        "id": "math-u6-q18",
+        "type": "numeric",
+        "question": "若 sinθ=1/2,求 sin²θ+cos²θ 的值。",
+        "answerText": "1",
+        "explanation": "依基本關係式 sin²θ+cos²θ=1 恆成立,不需要知道 θ 的實際角度。"
+      },
+      {
+        "id": "math-u6-q19",
+        "type": "numeric",
+        "question": "三角形中 A=30°, a=5,求外接圓直徑 2R(依正弦定理)。",
+        "answerText": "10",
+        "explanation": "2R=a/sinA=5/(1/2)=10。"
+      },
+      {
+        "id": "math-u6-q20",
+        "type": "numeric",
+        "question": "三角形中 a=8, A=30°, B=90°,依正弦定理求 b。",
+        "answerText": "16",
+        "explanation": "b=a×sinB/sinA=8×1/(1/2)=16。"
+      },
+      {
+        "id": "math-u6-q21",
+        "type": "numeric",
+        "question": "直角三角形中 A=90°, B=30°,斜邊 a=10,依正弦定理求 b。",
+        "answerText": "5",
+        "explanation": "b=a×sinB/sinA=10×(1/2)/1=5。"
+      },
+      {
+        "id": "math-u6-q22",
+        "type": "numeric",
+        "question": "三角形兩邊 a=3, b=4,夾角 C=90°,依餘弦定理求 c。",
+        "answerText": "5",
+        "explanation": "c²=3²+4²-2×3×4×cos90°=9+16-0=25,c=5。"
+      },
+      {
+        "id": "math-u6-q23",
+        "type": "numeric",
+        "question": "三角形兩邊 a=5, b=5,夾角 C=60°,依餘弦定理求 c。",
+        "answerText": "5",
+        "explanation": "c²=25+25-2×5×5×cos60°=50-25=25,c=5。"
+      },
+      {
+        "id": "math-u6-q24",
+        "type": "numeric",
+        "question": "三角形兩邊 a=6, b=8,夾角 C=90°,依餘弦定理求 c。",
+        "answerText": "10",
+        "explanation": "c²=36+64-0=100,c=10。"
+      },
+      {
+        "id": "math-u6-q25",
+        "type": "numeric",
+        "question": "三角形兩邊 a=7, b=7,夾角 C=60°,依餘弦定理求 c。",
+        "answerText": "7",
+        "explanation": "c²=49+49-2×7×7×cos60°=98-49=49,c=7。"
+      },
+      {
+        "id": "math-u6-q26",
+        "type": "numeric",
+        "question": "180° = k×π 弧度,求 k 的值。",
+        "answerText": "1",
+        "explanation": "180° 恰等於 π 弧度,故 k=1。"
+      },
+      {
+        "id": "math-u6-q27",
+        "type": "numeric",
+        "question": "90° = k×π 弧度,求 k 的值。(請寫成最簡分數,例如 1/2)",
+        "answerText": "1/2",
+        "explanation": "90° 是 180° 的一半,故 k=1/2。"
+      },
+      {
+        "id": "math-u6-q28",
+        "type": "numeric",
+        "question": "360° = k×π 弧度,求 k 的值。",
+        "answerText": "2",
+        "explanation": "360° 是 180° 的兩倍,故 k=2。"
+      },
+      {
+        "id": "math-u6-q29",
+        "type": "numeric",
+        "question": "弧度 π/3 等於多少度?",
+        "answerText": "60",
+        "explanation": "π 弧度=180°,故 π/3 弧度=180°/3=60°。"
+      },
+      {
+        "id": "math-u6-q30",
+        "type": "numeric",
+        "question": "弧度 π/6 等於多少度?",
+        "answerText": "30",
+        "explanation": "π 弧度=180°,故 π/6 弧度=180°/6=30°。"
+      },
+      {
+        "id": "math-u6-q31",
+        "question": "第二象限角的 sin 值符號為?",
+        "options": [
+          "正",
+          "負",
+          "零",
+          "不確定"
+        ],
+        "answer": 0,
+        "explanation": "第二象限 y 座標為正、x 座標為負,故 sin(對應y)為正。"
+      },
+      {
+        "id": "math-u6-q32",
+        "question": "第三象限角的 cos 值符號為?",
+        "options": [
+          "負",
+          "正",
+          "零",
+          "不確定"
+        ],
+        "answer": 0,
+        "explanation": "第三象限 x 座標與 y 座標皆為負,故 cos(對應x)為負。"
+      },
+      {
+        "id": "math-u6-q33",
+        "question": "第四象限角的 tan 值符號為?",
+        "options": [
+          "負",
+          "正",
+          "零",
+          "不確定"
+        ],
+        "answer": 0,
+        "explanation": "第四象限 sin 為負、cos 為正,tan=sin/cos 為負。"
+      },
+      {
+        "id": "math-u6-q34",
+        "question": "135° 角在第幾象限?",
+        "options": [
+          "第二象限",
+          "第一象限",
+          "第三象限",
+          "第四象限"
+        ],
+        "answer": 0,
+        "explanation": "90°<135°<180°,故 135° 在第二象限。"
+      },
+      {
+        "id": "math-u6-q35",
+        "question": "200° 角在第幾象限?",
+        "options": [
+          "第三象限",
+          "第一象限",
+          "第二象限",
+          "第四象限"
+        ],
+        "answer": 0,
+        "explanation": "180°<200°<270°,故 200° 在第三象限。"
+      },
+      {
+        "id": "math-u6-q36",
+        "type": "multi",
+        "question": "關於三角函數基本關係,下列敘述哪些正確?(多選)",
+        "options": [
+          "sin²θ+cos²θ=1 恆成立",
+          "tanθ=sinθ/cosθ(cosθ≠0)",
+          "sinθ 的範圍為 [-1,1]",
+          "cosθ 的範圍為 [0,1]",
+          "sinθ 與 cosθ 不可能同時為 0"
+        ],
+        "answers": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "explanation": "cosθ 的範圍應為 [-1,1],不是 [0,1](cosθ 也可以是負值),此項敘述錯誤。"
+      },
+      {
+        "id": "math-u6-q37",
+        "type": "multi",
+        "question": "關於正弦定理與餘弦定理,下列敘述哪些正確?(多選)",
+        "options": [
+          "正弦定理適用於任意三角形",
+          "a/sinA=b/sinB=c/sinC=2R",
+          "餘弦定理只能用於直角三角形",
+          "已知兩邊夾角可用餘弦定理求第三邊",
+          "已知三邊可用餘弦定理求角度"
+        ],
+        "answers": [
+          0,
+          1,
+          3,
+          4
+        ],
+        "explanation": "餘弦定理適用於任意三角形,不是只限於直角三角形,此項敘述錯誤。"
+      },
+      {
+        "id": "math-u6-q38",
+        "type": "multi",
+        "question": "關於弧度制,下列敘述哪些正確?(多選)",
+        "options": [
+          "180°=π 弧度",
+          "弧度是角度的另一種單位",
+          "1 弧度約等於 57.3 度",
+          "弧度只能用於表示正角度",
+          "弧長公式為 s=rθ(θ為弧度)"
+        ],
+        "answers": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "explanation": "弧度也可以表示負角度(依旋轉方向而定),「只能用於正角度」此項敘述錯誤。"
+      },
+      {
+        "id": "math-u6-q39",
+        "type": "multi",
+        "question": "關於象限角,下列敘述哪些正確?(多選)",
+        "options": [
+          "第一象限 sin、cos、tan 皆為正",
+          "第二象限只有 sin 為正",
+          "第三象限只有 tan 為正",
+          "第四象限 sin、cos、tan 皆為正",
+          "象限角的判斷與角度大小有關"
+        ],
+        "answers": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "explanation": "第四象限只有 cos 為正(sin 為負,tan 為負),不是三者皆正,此項敘述錯誤。"
+      },
+      {
+        "id": "math-u6-q40",
+        "type": "numeric",
+        "question": "30-60-90 直角三角形中,最短邊(對 30° 角)為 5,依特殊比例(1:√3:2)求斜邊長。",
+        "answerText": "10",
+        "explanation": "30-60-90 三角形邊長比為 1:√3:2,斜邊是最短邊的 2 倍,故斜邊=10。"
+      },
+      {
+        "id": "math-u6-q41",
+        "type": "numeric",
+        "question": "某人距旗竿底部 20 公尺處測得旗竿頂端仰角為 45°,求旗竿高度。",
+        "answerText": "20",
+        "explanation": "tan45°=1,高度=水平距離×tan45°=20×1=20。"
+      },
+      {
+        "id": "math-u6-q42",
+        "type": "numeric",
+        "question": "30-60-90 直角三角形中,斜邊為 14,依特殊比例(1:√3:2)求最短邊(對 30° 角)長。",
+        "answerText": "7",
+        "explanation": "斜邊是最短邊的 2 倍,故最短邊=14÷2=7。"
+      },
+      {
+        "id": "math-u6-q43",
+        "type": "numeric",
+        "question": "45-45-90 直角三角形兩股皆為 x,斜邊為 8,求 x² 的值。",
+        "answerText": "32",
+        "explanation": "依畢氏定理 x²+x²=8²,2x²=64,x²=32。"
+      }
+    ]
+  },
+  {
+    "id": "math-u16",
+    "title": "三角函數應用與極座標",
+    "category": "高一",
+    "note": {
+      "sections": [
+        {
+          "heading": "重點整理",
+          "content": [
+            "三角函數應用:測量無法直接到達的距離或高度,常結合正弦定理、餘弦定理求解。",
+            "極座標 (r,θ):r 為到原點的距離,θ 為與 x 軸正向的夾角,與直角座標轉換公式為 x=r cosθ, y=r sinθ。"
+          ]
+        }
+      ]
+    },
+    "quiz": [
+      {
+        "id": "math-u16-q1",
+        "question": "極座標 (r,θ) 轉換為直角座標的公式為?",
+        "options": [
+          "x=r cosθ, y=r sinθ",
+          "x=r sinθ, y=r cosθ",
+          "x=r+θ, y=r-θ",
+          "x=rθ, y=r/θ"
+        ],
+        "answer": 0,
+        "explanation": "極座標轉直角座標的公式為 x=r cosθ, y=r sinθ。"
+      },
+      {
+        "id": "math-u16-q4",
+        "type": "numeric",
+        "question": "直角坐標 (3,4) 轉換為極座標,求 r=√(x²+y²)。",
+        "answerText": "5",
+        "explanation": "r=√(3²+4²)=√25=5。"
+      },
+      {
+        "id": "math-u16-q5",
+        "type": "numeric",
+        "question": "直角坐標 (-6,8) 轉換為極座標,求 r。",
+        "answerText": "10",
+        "explanation": "r=√((-6)²+8²)=√(36+64)=√100=10。"
+      },
+      {
+        "id": "math-u16-q6",
+        "type": "numeric",
+        "question": "直角坐標 (5,12) 轉換為極座標,求 r。",
+        "answerText": "13",
+        "explanation": "r=√(5²+12²)=√(25+144)=√169=13。"
+      },
+      {
+        "id": "math-u16-q7",
+        "type": "numeric",
+        "question": "極座標 r=4,θ=0,轉換為直角坐標,求 x(x=r cosθ)。",
+        "answerText": "4",
+        "explanation": "x=r cosθ=4×cos0°=4×1=4。"
+      },
+      {
+        "id": "math-u16-q8",
+        "type": "numeric",
+        "question": "承上題(r=4,θ=0),求 y(y=r sinθ)。",
+        "answerText": "0",
+        "explanation": "y=r sinθ=4×sin0°=4×0=0。"
+      },
+      {
+        "id": "math-u16-q9",
+        "type": "numeric",
+        "question": "極座標 r=6,θ=90°,求 y=r sinθ。",
+        "answerText": "6",
+        "explanation": "y=r sinθ=6×sin90°=6×1=6。"
+      },
+      {
+        "id": "math-u16-q24",
+        "type": "numeric",
+        "question": "三角形中,a=5,b=8,C=60°(cosC=0.5),利用餘弦定理 c²=a²+b²-2ab·cosC 求 c²。",
+        "answerText": "49",
+        "explanation": "c²=5²+8²-2×5×8×0.5=25+64-40=49。"
+      },
+      {
+        "id": "math-u16-q25",
+        "type": "numeric",
+        "question": "承上題(a=5,b=8,C=60°),求 c。",
+        "answerText": "7",
+        "explanation": "c=√49=7。"
+      },
+      {
+        "id": "math-u16-q26",
+        "type": "numeric",
+        "question": "三角形中,a=6,b=8,C=90°(cosC=0,退化為畢氏定理),求 c²。",
+        "answerText": "100",
+        "explanation": "c²=6²+8²-2×6×8×0=36+64=100。"
+      },
+      {
+        "id": "math-u16-q27",
+        "type": "numeric",
+        "question": "承上題(a=6,b=8,C=90°),求 c。",
+        "answerText": "10",
+        "explanation": "c=√100=10。"
+      },
+      {
+        "id": "math-u16-q28",
+        "type": "numeric",
+        "question": "三角形中,A=30°,a=5,B=90°,利用正弦定理 a/sinA=b/sinB 求 b。",
+        "answerText": "10",
+        "explanation": "b=a×sinB/sinA=5×sin90°/sin30°=5×1/0.5=10。"
+      },
+      {
+        "id": "math-u16-q29",
+        "type": "numeric",
+        "question": "承上題(A=30°,a=5,B=90°),求外接圓直徑 2R=a/sinA。",
+        "answerText": "10",
+        "explanation": "2R=a/sinA=5/0.5=10。"
+      },
+      {
+        "id": "math-u16-q30",
+        "type": "numeric",
+        "question": "三角形中,A=90°,a=10,B=30°,利用正弦定理求 b=a×sinB/sinA。",
+        "answerText": "5",
+        "explanation": "b=10×sin30°/sin90°=10×0.5/1=5。"
+      },
+      {
+        "id": "math-u16-q31",
+        "type": "numeric",
+        "question": "承上題(A=90°,a=10,B=30°),求外接圓半徑 R=a/(2sinA)。",
+        "answerText": "5",
+        "explanation": "R=a/(2sinA)=10/(2×1)=5。"
+      },
+      {
+        "id": "math-u16-q32",
+        "type": "multi",
+        "question": "關於極座標與直角座標的轉換,下列敘述哪些正確?(多選)",
+        "options": [
+          "x=r cosθ,y=r sinθ",
+          "r=√(x²+y²)",
+          "θ 只能為正值,不可為負值或大於360°",
+          "r 在標準定義下恆為正值(不為負)"
+        ],
+        "answers": [
+          0,
+          1,
+          3
+        ],
+        "explanation": "θ 實際上可以是任意實數(含負角、超過360°的角),故「θ 只能為正值,不可為負值或大於360°」這項錯;其餘描述皆正確。"
+      },
+      {
+        "id": "math-u16-q34",
+        "type": "multi",
+        "question": "關於正弦定理與餘弦定理的應用,下列敘述哪些正確?(多選)",
+        "options": [
+          "正弦定理:a/sinA=b/sinB=c/sinC=2R(R為外接圓半徑)",
+          "餘弦定理:c²=a²+b²-2ab·cosC",
+          "當C=90°時,餘弦定理會退化為畢氏定理",
+          "正弦定理只能用於直角三角形"
+        ],
+        "answers": [
+          0,
+          1,
+          2
+        ],
+        "explanation": "正弦定理適用於任意三角形(不限直角三角形),故「正弦定理只能用於直角三角形」這項錯;其餘描述皆正確。"
+      },
+      {
+        "id": "math-u16-q35",
+        "type": "numeric",
+        "question": "兩船從同一港口出發,甲船以正北方向航行,乙船以北偏東60°方向航行,求兩航線之間的夾角(度數)。",
+        "answerText": "60",
+        "explanation": "正北方向與北偏東60°方向之間的夾角即為60°。"
+      },
+      {
+        "id": "math-u16-q36",
+        "type": "numeric",
+        "question": "兩船從同一港口出發,兩航線的夾角為 60°。若甲船航行 8 海浬、乙船航行 6 海浬,利用餘弦定理 c²=a²+b²-2ab·cosC,求兩船距離的平方。",
+        "answerText": "52",
+        "explanation": "c²=8²+6²-2×8×6×cos60°=64+36-96×0.5=100-48=52。"
+      },
+      {
+        "id": "math-u16-q37",
+        "type": "numeric",
+        "question": "從距旗桿底30公尺處測得桿頂仰角為45°,求旗桿高度 h(h=水平距離×tan45°)。",
+        "answerText": "30",
+        "explanation": "tan45°=1,h=30×1=30公尺。"
+      },
+      {
+        "id": "math-u16-q38",
+        "type": "numeric",
+        "question": "三角形土地兩邊長分別為9公尺、12公尺,夾角為60°,利用餘弦定理求第三邊長的平方 c²。",
+        "answerText": "117",
+        "explanation": "c²=9²+12²-2×9×12×cos60°=81+144-216×0.5=225-108=117。"
+      }
+    ]
+  },
+  {
     "id": "math-u5",
     "title": "指數與對數函數",
-    "category": "高一上",
+    "category": "高二上",
     "note": {
       "sections": [
         {
@@ -2075,2068 +4733,6 @@ export default {
     ]
   },
   {
-    "id": "math-u2",
-    "title": "數列與級數",
-    "category": "高一下",
-    "note": {
-      "sections": [
-        {
-          "heading": "重點整理",
-          "content": [
-            "等差數列:aₙ = a₁ + (n-1)d,前 n 項和 Sₙ = n(a₁+aₙ)/2。",
-            "等比數列:aₙ = a₁ × r^(n-1),前 n 項和 Sₙ = a₁(1-rⁿ)/(1-r), r≠1。",
-            "無窮等比級數收斂條件:|r| < 1,和為 a₁/(1-r)。"
-          ]
-        }
-      ]
-    },
-    "quiz": [
-      {
-        "id": "math-u2-q1",
-        "question": "等差數列首項 a₁=3,公差 d=4,則第 10 項為多少?",
-        "options": [
-          "39",
-          "43",
-          "35",
-          "40"
-        ],
-        "answer": 0,
-        "explanation": "aₙ = a₁ + (n-1)d = 3 + 9×4 = 3 + 36 = 39。"
-      },
-      {
-        "id": "math-u2-q2",
-        "question": "等比數列首項 a₁=2,公比 r=3,則第 4 項為多少?",
-        "options": [
-          "54",
-          "24",
-          "18",
-          "162"
-        ],
-        "answer": 0,
-        "explanation": "aₙ = a₁ × r^(n-1) = 2 × 3³ = 2 × 27 = 54。"
-      },
-      {
-        "id": "math-u2-q3",
-        "question": "無窮等比級數收斂的條件為?",
-        "options": [
-          "|r| > 1",
-          "|r| < 1",
-          "r = 1",
-          "r = 0"
-        ],
-        "answer": 1,
-        "explanation": "無窮等比級數收斂(有和)的條件是公比絕對值 |r| < 1。"
-      },
-      {
-        "id": "math-u2-q4",
-        "type": "numeric",
-        "question": "等比數列首項 a₁=3,公比 r=2,則第 5 項為多少?",
-        "answerText": "48",
-        "explanation": "aₙ = a₁×r^(n-1) = 3×2⁴ = 3×16 = 48。"
-      },
-      {
-        "id": "math-u2-q5",
-        "type": "multi",
-        "question": "關於等差數列,下列敘述哪些正確?(多選)",
-        "options": [
-          "前 n 項和公式為 Sₙ = n(a₁+aₙ)/2",
-          "公差可以為負數",
-          "相鄰兩項的差都等於公差",
-          "一定是遞增數列",
-          "任一項都等於前一項乘以公比"
-        ],
-        "answers": [
-          0,
-          1,
-          2
-        ],
-        "explanation": "公差為負時數列遞減,故不一定遞增;「乘以公比」是等比數列的性質,不是等差數列。"
-      },
-      {
-        "id": "math-u2-q6",
-        "type": "numeric",
-        "question": "等差數列 a₁=5, d=3,求 a₁₀。",
-        "answerText": "32",
-        "explanation": "a₁₀ = 5 + 9×3 = 32。"
-      },
-      {
-        "id": "math-u2-q7",
-        "type": "numeric",
-        "question": "等差數列 a₁=-2, d=4,求 a₈。",
-        "answerText": "26",
-        "explanation": "a₈ = -2 + 7×4 = 26。"
-      },
-      {
-        "id": "math-u2-q8",
-        "type": "numeric",
-        "question": "等差數列 a₁=10, d=-3,求 a₆。",
-        "answerText": "-5",
-        "explanation": "a₆ = 10 + 5×(-3) = -5。"
-      },
-      {
-        "id": "math-u2-q9",
-        "type": "numeric",
-        "question": "等差數列 a₁=1, d=5,求 a₁₅。",
-        "answerText": "71",
-        "explanation": "a₁₅ = 1 + 14×5 = 71。"
-      },
-      {
-        "id": "math-u2-q10",
-        "type": "numeric",
-        "question": "等差數列 a₁=7, d=-2,求 a₁₂。",
-        "answerText": "-15",
-        "explanation": "a₁₂ = 7 + 11×(-2) = -15。"
-      },
-      {
-        "id": "math-u2-q11",
-        "type": "numeric",
-        "question": "等差數列 a₁=0, d=6,求 a₂₀。",
-        "answerText": "114",
-        "explanation": "a₂₀ = 0 + 19×6 = 114。"
-      },
-      {
-        "id": "math-u2-q12",
-        "type": "numeric",
-        "question": "等差數列 a₁=100, d=-8,求 a₁₁。",
-        "answerText": "20",
-        "explanation": "a₁₁ = 100 + 10×(-8) = 20。"
-      },
-      {
-        "id": "math-u2-q13",
-        "type": "numeric",
-        "question": "等差數列 a₁=-5, d=7,求 a₉。",
-        "answerText": "51",
-        "explanation": "a₉ = -5 + 8×7 = 51。"
-      },
-      {
-        "id": "math-u2-q14",
-        "type": "numeric",
-        "question": "等差數列 a₁=2, d=4,求前 10 項和 S₁₀。",
-        "answerText": "200",
-        "explanation": "a₁₀=2+9×4=38,S₁₀=10×(2+38)/2=200。"
-      },
-      {
-        "id": "math-u2-q15",
-        "type": "numeric",
-        "question": "求 1+2+3+...+20 的總和。",
-        "answerText": "210",
-        "explanation": "此為等差數列 a₁=1,d=1,n=20,S₂₀=20×(1+20)/2=210。"
-      },
-      {
-        "id": "math-u2-q16",
-        "type": "numeric",
-        "question": "等差數列 a₁=5, d=3,求前 8 項和 S₈。",
-        "answerText": "124",
-        "explanation": "a₈=5+7×3=26,S₈=8×(5+26)/2=124。"
-      },
-      {
-        "id": "math-u2-q17",
-        "type": "numeric",
-        "question": "等差數列 a₁=-3, d=2,求前 12 項和 S₁₂。",
-        "answerText": "96",
-        "explanation": "a₁₂=-3+11×2=19,S₁₂=12×(-3+19)/2=96。"
-      },
-      {
-        "id": "math-u2-q18",
-        "type": "numeric",
-        "question": "等差數列 a₁=10, d=-2,求前 6 項和 S₆。",
-        "answerText": "30",
-        "explanation": "a₆=10+5×(-2)=0,S₆=6×(10+0)/2=30。"
-      },
-      {
-        "id": "math-u2-q19",
-        "type": "numeric",
-        "question": "等差數列 a₁=3, d=5,求前 7 項和 S₇。",
-        "answerText": "126",
-        "explanation": "a₇=3+6×5=33,S₇=7×(3+33)/2=126。"
-      },
-      {
-        "id": "math-u2-q20",
-        "type": "numeric",
-        "question": "等比數列 a₁=2, r=3,求 a₄。",
-        "answerText": "54",
-        "explanation": "a₄=2×3³=2×27=54。"
-      },
-      {
-        "id": "math-u2-q21",
-        "type": "numeric",
-        "question": "等比數列 a₁=5, r=2,求 a₅。",
-        "answerText": "80",
-        "explanation": "a₅=5×2⁴=5×16=80。"
-      },
-      {
-        "id": "math-u2-q22",
-        "type": "numeric",
-        "question": "等比數列 a₁=1, r=-2,求 a₆。",
-        "answerText": "-32",
-        "explanation": "a₆=1×(-2)⁵=-32。"
-      },
-      {
-        "id": "math-u2-q23",
-        "type": "numeric",
-        "question": "等比數列 a₁=100, r=0.5,求 a₄。",
-        "answerText": "12.5",
-        "explanation": "a₄=100×0.5³=100×0.125=12.5。"
-      },
-      {
-        "id": "math-u2-q24",
-        "type": "numeric",
-        "question": "等比數列 a₁=3, r=2,求 a₆。",
-        "answerText": "96",
-        "explanation": "a₆=3×2⁵=3×32=96。"
-      },
-      {
-        "id": "math-u2-q25",
-        "type": "numeric",
-        "question": "等比數列 a₁=-4, r=3,求 a₃。",
-        "answerText": "-36",
-        "explanation": "a₃=-4×3²=-4×9=-36。"
-      },
-      {
-        "id": "math-u2-q26",
-        "type": "numeric",
-        "question": "等比數列 a₁=1, r=10,求 a₄。",
-        "answerText": "1000",
-        "explanation": "a₄=1×10³=1000。"
-      },
-      {
-        "id": "math-u2-q27",
-        "type": "numeric",
-        "question": "等比數列 a₁=64, r=0.5,求 a₅。",
-        "answerText": "4",
-        "explanation": "a₅=64×0.5⁴=64/16=4。"
-      },
-      {
-        "id": "math-u2-q28",
-        "type": "numeric",
-        "question": "等比數列 a₁=1, r=2,求前 5 項和 S₅。",
-        "answerText": "31",
-        "explanation": "S₅=1×(1-2⁵)/(1-2)=(1-32)/(-1)=31。"
-      },
-      {
-        "id": "math-u2-q29",
-        "type": "numeric",
-        "question": "等比數列 a₁=3, r=2,求前 4 項和 S₄。",
-        "answerText": "45",
-        "explanation": "S₄=3×(1-2⁴)/(1-2)=3×(-15)/(-1)=45。"
-      },
-      {
-        "id": "math-u2-q30",
-        "type": "numeric",
-        "question": "等比數列 a₁=2, r=3,求前 3 項和 S₃。",
-        "answerText": "26",
-        "explanation": "S₃=2×(1-3³)/(1-3)=2×(1-27)/(-2)=2×(-26)/(-2)=26。"
-      },
-      {
-        "id": "math-u2-q31",
-        "type": "numeric",
-        "question": "等比數列 a₁=1, r=-1,求前 5 項和 S₅。",
-        "answerText": "1",
-        "explanation": "前5項為 1,-1,1,-1,1,總和為 1。"
-      },
-      {
-        "id": "math-u2-q32",
-        "type": "numeric",
-        "question": "無窮等比級數 a₁=1, r=1/2,求其和。",
-        "answerText": "2",
-        "explanation": "S=a₁/(1-r)=1/(1-0.5)=2。"
-      },
-      {
-        "id": "math-u2-q33",
-        "type": "numeric",
-        "question": "無窮等比級數 a₁=2, r=1/2,求其和。",
-        "answerText": "4",
-        "explanation": "S=a₁/(1-r)=2/(1-0.5)=4。"
-      },
-      {
-        "id": "math-u2-q34",
-        "type": "numeric",
-        "question": "無窮等比級數 a₁=3, r=2/3,求其和。",
-        "answerText": "9",
-        "explanation": "S=a₁/(1-r)=3/(1/3)=9。"
-      },
-      {
-        "id": "math-u2-q35",
-        "type": "numeric",
-        "question": "無窮等比級數 a₁=5, r=4/5,求其和。",
-        "answerText": "25",
-        "explanation": "S=a₁/(1-r)=5/(1/5)=25。"
-      },
-      {
-        "id": "math-u2-q36",
-        "question": "等差數列 a₃=7, a₇=19,求公差 d?",
-        "options": [
-          "2",
-          "3",
-          "4",
-          "5"
-        ],
-        "answer": 1,
-        "explanation": "d=(a₇-a₃)/(7-3)=(19-7)/4=3。"
-      },
-      {
-        "id": "math-u2-q37",
-        "question": "等差數列 a₂=10, a₅=22,求公差 d?",
-        "options": [
-          "3",
-          "4",
-          "5",
-          "6"
-        ],
-        "answer": 1,
-        "explanation": "d=(a₅-a₂)/(5-2)=(22-10)/3=4。"
-      },
-      {
-        "id": "math-u2-q38",
-        "question": "等比數列 a₂=6, a₄=54,求公比 r(r>0)?",
-        "options": [
-          "2",
-          "3",
-          "4",
-          "9"
-        ],
-        "answer": 1,
-        "explanation": "r²=a₄/a₂=54/6=9,r>0 故 r=3。"
-      },
-      {
-        "id": "math-u2-q39",
-        "question": "等比數列 a₁=2, a₃=18,求公比 r(r>0)?",
-        "options": [
-          "2",
-          "3",
-          "6",
-          "9"
-        ],
-        "answer": 1,
-        "explanation": "r²=a₃/a₁=18/2=9,r>0 故 r=3。"
-      },
-      {
-        "id": "math-u2-q40",
-        "question": "等差數列 a₄=15, a₈=31,求首項 a₁?",
-        "options": [
-          "3",
-          "4",
-          "7",
-          "11"
-        ],
-        "answer": 0,
-        "explanation": "d=(31-15)/(8-4)=4,a₁=a₄-3d=15-12=3。"
-      },
-      {
-        "id": "math-u2-q41",
-        "type": "numeric",
-        "question": "5 與 13 的等差中項為多少?",
-        "answerText": "9",
-        "explanation": "等差中項 = (5+13)/2 = 9。"
-      },
-      {
-        "id": "math-u2-q42",
-        "type": "numeric",
-        "question": "4 與 36 的等比中項為多少?(取正值)",
-        "answerText": "12",
-        "explanation": "等比中項 = √(4×36) = √144 = 12。"
-      },
-      {
-        "id": "math-u2-q43",
-        "type": "numeric",
-        "question": "2 與 18 的等比中項為多少?(取正值)",
-        "answerText": "6",
-        "explanation": "等比中項 = √(2×18) = √36 = 6。"
-      },
-      {
-        "id": "math-u2-q44",
-        "type": "numeric",
-        "question": "小明第一個月存 500 元,之後每月比前一月多存 100 元,第 6 個月存多少元?",
-        "answerText": "1000",
-        "explanation": "等差數列 a₁=500,d=100,a₆=500+5×100=1000。"
-      },
-      {
-        "id": "math-u2-q45",
-        "type": "numeric",
-        "question": "小明第一個月存 500 元,之後每月比前一月多存 100 元,前 6 個月總共存了多少元?",
-        "answerText": "4500",
-        "explanation": "第 6 個月存 500+5×100=1000 元,S₆=6×(500+1000)/2=4500。"
-      },
-      {
-        "id": "math-u2-q46",
-        "type": "numeric",
-        "question": "某帳戶本金 10000 元,每年固定增加 500 元,第 5 年底餘額為多少元?",
-        "answerText": "12500",
-        "explanation": "第 n 年底餘額 = 10000+500n,第 5 年底 = 10000+500×5=12500。"
-      },
-      {
-        "id": "math-u2-q47",
-        "question": "一種細菌數量每小時增為原來的 2 倍,初始有 100 隻,經過 4 小時後有幾隻?",
-        "options": [
-          "800",
-          "1600",
-          "3200",
-          "400"
-        ],
-        "answer": 1,
-        "explanation": "等比數列 a₁=100,r=2,4 小時後為 a₅=100×2⁴=1600(經過4小時是第5個時刻的量)。"
-      },
-      {
-        "id": "math-u2-q48",
-        "type": "multi",
-        "question": "關於等比數列,下列敘述哪些正確?(多選)",
-        "options": [
-          "公比不能為 0",
-          "首項一定要是正數",
-          "r=1 時為常數數列",
-          "無窮等比級數收斂需 |r|<1",
-          "r 可以為負數"
-        ],
-        "answers": [
-          0,
-          2,
-          3,
-          4
-        ],
-        "explanation": "首項可以是負數(如 -3, -6, -12...仍是公比為2的等比數列),此項敘述錯誤。"
-      },
-      {
-        "id": "math-u2-q49",
-        "type": "multi",
-        "question": "關於數列求和,下列敘述哪些正確?(多選)",
-        "options": [
-          "等差數列前 n 項和公式為 Sₙ=n(a₁+aₙ)/2",
-          "等比數列前 n 項和公式在 r=1 時不能用 Sₙ=a₁(1-rⁿ)/(1-r)",
-          "無窮等比級數只有 |r|<1 才有和",
-          "等差數列的 Sₙ 一定是 n 的一次函數",
-          "公差為 0 的等差數列,Sₙ=n×a₁"
-        ],
-        "answers": [
-          0,
-          1,
-          2,
-          4
-        ],
-        "explanation": "等差數列的 Sₙ 通常是 n 的二次函數(除非 d=0 才是一次函數),「一定是一次函數」此項敘述錯誤。"
-      },
-      {
-        "id": "math-u2-q50",
-        "type": "multi",
-        "question": "關於數列的遞增遞減,下列敘述哪些正確?(多選)",
-        "options": [
-          "等差數列 d>0 時遞增",
-          "等差數列 d<0 時遞減",
-          "等比數列 r>1 且 a₁>0 時遞增",
-          "等比數列 0<r<1 且 a₁>0 時遞減",
-          "所有數列都是遞增或遞減"
-        ],
-        "answers": [
-          0,
-          1,
-          2,
-          3
-        ],
-        "explanation": "常數數列(d=0)或交錯數列(如公比為負的等比數列)都不是單純遞增或遞減,「所有數列」此項敘述錯誤。"
-      }
-    ]
-  },
-  {
-    "id": "math-u13",
-    "title": "數據分析與統計",
-    "category": "高一下",
-    "note": {
-      "sections": [
-        {
-          "heading": "重點整理",
-          "content": [
-            "集中趨勢量數:平均數(所有值總和除以個數)、中位數(排序後最中間的值)、眾數(出現次數最多的值)。",
-            "離散趨勢量數:全距(最大值-最小值)、變異數、標準差,衡量資料的分散程度。",
-            "標準差公式:s = √(Σ(xᵢ-x̄)²/n),標準差越大代表資料越分散。",
-            "離群值(outlier)會顯著影響平均數,但對中位數影響較小。"
-          ]
-        },
-        {
-          "heading": "補充概念",
-          "content": [
-            "盒鬚圖(box plot)用四分位數呈現資料分布,可快速判斷資料是否有離群值。",
-            "常態分布資料中,約 68% 資料落在平均數正負一個標準差範圍內。"
-          ]
-        }
-      ]
-    },
-    "quiz": [
-      {
-        "id": "math-u13-q1",
-        "question": "一組資料中出現次數最多的值稱為?",
-        "options": [
-          "平均數",
-          "中位數",
-          "眾數",
-          "全距"
-        ],
-        "answer": 2,
-        "explanation": "眾數是一組資料中出現次數最多的值。"
-      },
-      {
-        "id": "math-u13-q2",
-        "question": "下列何者最容易受離群值影響而失真?",
-        "options": [
-          "中位數",
-          "眾數",
-          "平均數",
-          "全距"
-        ],
-        "answer": 2,
-        "explanation": "平均數會受極端離群值拉動而明顯偏移,中位數與眾數則相對穩定。"
-      },
-      {
-        "id": "math-u13-q3",
-        "question": "標準差的主要作用是?",
-        "options": [
-          "代表資料的集中趨勢",
-          "衡量資料的分散程度",
-          "一定等於平均數",
-          "只能用於常態分布"
-        ],
-        "answer": 1,
-        "explanation": "標準差用來衡量資料相對於平均數的分散程度,數值越大代表資料越分散。"
-      },
-      {
-        "id": "math-u13-q4",
-        "type": "numeric",
-        "question": "一組資料 2, 4, 6, 8, 10 的平均數為多少?",
-        "answerText": "6",
-        "explanation": "平均數 = (2+4+6+8+10)/5 = 30/5 = 6。"
-      },
-      {
-        "id": "math-u13-q5",
-        "type": "multi",
-        "question": "關於統計量數,下列敘述哪些正確?(多選)",
-        "options": [
-          "平均數容易受離群值影響",
-          "中位數是資料排序後最中間的值",
-          "標準差可以是負數",
-          "眾數是出現次數最多的值",
-          "全距等於最大值減最小值"
-        ],
-        "answers": [
-          0,
-          1,
-          3,
-          4
-        ],
-        "explanation": "標準差是由平方後開根號得到,數學上不可能是負數,此項敘述錯誤。"
-      },
-      {
-        "id": "math-u13-q6",
-        "type": "numeric",
-        "question": "資料 1,2,3,4,5,6 的平均數為多少?",
-        "answerText": "3.5",
-        "explanation": "平均數=(1+2+3+4+5+6)/6=21/6=3.5。"
-      },
-      {
-        "id": "math-u13-q7",
-        "type": "numeric",
-        "question": "資料 10,20,30 的平均數為多少?",
-        "answerText": "20",
-        "explanation": "平均數=(10+20+30)/3=60/3=20。"
-      },
-      {
-        "id": "math-u13-q8",
-        "type": "numeric",
-        "question": "資料 5,5,5,5 的平均數為多少?",
-        "answerText": "5",
-        "explanation": "所有值都相同,平均數就是該值 5。"
-      },
-      {
-        "id": "math-u13-q9",
-        "type": "numeric",
-        "question": "資料 3,7,8,10,12 的平均數為多少?",
-        "answerText": "8",
-        "explanation": "平均數=(3+7+8+10+12)/5=40/5=8。"
-      },
-      {
-        "id": "math-u13-q10",
-        "type": "numeric",
-        "question": "資料 -2,0,2,4 的平均數為多少?",
-        "answerText": "1",
-        "explanation": "平均數=(-2+0+2+4)/4=4/4=1。"
-      },
-      {
-        "id": "math-u13-q11",
-        "type": "numeric",
-        "question": "資料 3,1,4,1,5 的中位數為多少?",
-        "answerText": "3",
-        "explanation": "排序後為 1,1,3,4,5,中間值為 3。"
-      },
-      {
-        "id": "math-u13-q12",
-        "type": "numeric",
-        "question": "資料 2,8,4,6 的中位數為多少?",
-        "answerText": "5",
-        "explanation": "排序後為 2,4,6,8,中間兩數 4 與 6 的平均為 5。"
-      },
-      {
-        "id": "math-u13-q13",
-        "type": "numeric",
-        "question": "資料 10,20,30,40,50 的中位數為多少?",
-        "answerText": "30",
-        "explanation": "排序後中間值為 30。"
-      },
-      {
-        "id": "math-u13-q14",
-        "type": "numeric",
-        "question": "資料 7,2,9,4 的中位數為多少?",
-        "answerText": "5.5",
-        "explanation": "排序後為 2,4,7,9,中間兩數 4 與 7 的平均為 5.5。"
-      },
-      {
-        "id": "math-u13-q15",
-        "type": "numeric",
-        "question": "資料 1,1,1,1,1 的中位數為多少?",
-        "answerText": "1",
-        "explanation": "所有值都相同,中位數就是該值 1。"
-      },
-      {
-        "id": "math-u13-q16",
-        "type": "numeric",
-        "question": "資料 2,3,3,4,5 的眾數為多少?",
-        "answerText": "3",
-        "explanation": "3 出現 2 次,次數最多,眾數為 3。"
-      },
-      {
-        "id": "math-u13-q17",
-        "type": "numeric",
-        "question": "資料 1,1,2,2,2,3 的眾數為多少?",
-        "answerText": "2",
-        "explanation": "2 出現 3 次,次數最多,眾數為 2。"
-      },
-      {
-        "id": "math-u13-q18",
-        "question": "資料 1,2,3,4 的眾數為?",
-        "options": [
-          "沒有明顯眾數(每個值出現次數相同)",
-          "1",
-          "4",
-          "無法計算"
-        ],
-        "answer": 0,
-        "explanation": "每個值都只出現一次,沒有出現次數特別多的值,故沒有明顯眾數。"
-      },
-      {
-        "id": "math-u13-q19",
-        "type": "numeric",
-        "question": "資料 5,5,7,7,7,9 的眾數為多少?",
-        "answerText": "7",
-        "explanation": "7 出現 3 次,次數最多,眾數為 7。"
-      },
-      {
-        "id": "math-u13-q20",
-        "type": "numeric",
-        "question": "資料 3,8,15,2,20 的全距為多少?",
-        "answerText": "18",
-        "explanation": "全距=最大值-最小值=20-2=18。"
-      },
-      {
-        "id": "math-u13-q21",
-        "type": "numeric",
-        "question": "資料 10,10,10,10 的全距為多少?",
-        "answerText": "0",
-        "explanation": "所有值都相同,最大值減最小值為 0。"
-      },
-      {
-        "id": "math-u13-q22",
-        "type": "numeric",
-        "question": "資料 -5,3,8,-2 的全距為多少?",
-        "answerText": "13",
-        "explanation": "全距=8-(-5)=13。"
-      },
-      {
-        "id": "math-u13-q23",
-        "type": "numeric",
-        "question": "資料 100,50,75,90 的全距為多少?",
-        "answerText": "50",
-        "explanation": "全距=100-50=50。"
-      },
-      {
-        "id": "math-u13-q24",
-        "type": "numeric",
-        "question": "資料 2,2,6,6 的變異數(母體,除以 n)為多少?",
-        "answerText": "4",
-        "explanation": "平均數=4,離差平方和=(-2)²+(-2)²+2²+2²=16,變異數=16/4=4。"
-      },
-      {
-        "id": "math-u13-q25",
-        "type": "numeric",
-        "question": "資料 2,2,6,6 的標準差(母體)為多少?",
-        "answerText": "2",
-        "explanation": "標準差為變異數開根號,√4=2。"
-      },
-      {
-        "id": "math-u13-q26",
-        "type": "numeric",
-        "question": "資料 1,1,1,5 的變異數(母體)為多少?",
-        "answerText": "3",
-        "explanation": "平均數=2,離差平方和=(-1)²×3+3²=1+1+1+9=12,變異數=12/4=3。"
-      },
-      {
-        "id": "math-u13-q27",
-        "type": "numeric",
-        "question": "資料 0,0,4,4 的變異數(母體)為多少?",
-        "answerText": "4",
-        "explanation": "平均數=2,離差平方和=(-2)²+(-2)²+2²+2²=16,變異數=16/4=4。"
-      },
-      {
-        "id": "math-u13-q28",
-        "type": "numeric",
-        "question": "資料 0,0,4,4 的標準差(母體)為多少?",
-        "answerText": "2",
-        "explanation": "標準差為變異數開根號,√4=2。"
-      },
-      {
-        "id": "math-u13-q29",
-        "type": "numeric",
-        "question": "期中考 80 分(權重 40%)與期末考 90 分(權重 60%),求加權平均。",
-        "answerText": "86",
-        "explanation": "加權平均=80×0.4+90×0.6=32+54=86。"
-      },
-      {
-        "id": "math-u13-q30",
-        "type": "numeric",
-        "question": "期中考 70 分(權重 30%)與期末考 90 分(權重 70%),求加權平均。",
-        "answerText": "84",
-        "explanation": "加權平均=70×0.3+90×0.7=21+63=84。"
-      },
-      {
-        "id": "math-u13-q31",
-        "type": "numeric",
-        "question": "平時成績 60 分(權重 20%)、期中 80 分(權重 40%)、期末 90 分(權重 40%),求加權平均。",
-        "answerText": "80",
-        "explanation": "加權平均=60×0.2+80×0.4+90×0.4=12+32+36=80。"
-      },
-      {
-        "id": "math-u13-q32",
-        "type": "multi",
-        "question": "關於集中趨勢量數,下列敘述哪些正確?(多選)",
-        "options": [
-          "平均數會受所有資料值影響",
-          "中位數不受離群值影響(較穩健)",
-          "眾數可能不只一個",
-          "平均數一定是資料中的某個值",
-          "資料筆數為偶數時,中位數取中間兩數的平均"
-        ],
-        "answers": [
-          0,
-          1,
-          2,
-          4
-        ],
-        "explanation": "平均數經常不是原始資料中的任何一個值(例如資料 1,2 的平均數 1.5),「一定是資料中的某個值」此項敘述錯誤。"
-      },
-      {
-        "id": "math-u13-q33",
-        "type": "multi",
-        "question": "關於離散趨勢量數,下列敘述哪些正確?(多選)",
-        "options": [
-          "全距=最大值減最小值",
-          "標準差恆為非負值",
-          "變異數是標準差的平方",
-          "標準差的單位與原始資料相同",
-          "全距能完整反映資料的分散情形"
-        ],
-        "answers": [
-          0,
-          1,
-          2,
-          3
-        ],
-        "explanation": "全距只考慮最大值與最小值,無法反映中間資料的分布情形,「能完整反映分散情形」此項敘述錯誤。"
-      },
-      {
-        "id": "math-u13-q34",
-        "type": "numeric",
-        "question": "5 位同學的考試分數為 70,75,80,85,90,求平均分數。",
-        "answerText": "80",
-        "explanation": "平均數=(70+75+80+85+90)/5=400/5=80。"
-      },
-      {
-        "id": "math-u13-q35",
-        "type": "numeric",
-        "question": "承上題(70,75,80,85,90),求中位數。",
-        "answerText": "80",
-        "explanation": "資料已排序,中間值為 80。"
-      },
-      {
-        "id": "math-u13-q36",
-        "type": "numeric",
-        "question": "承上題(70,75,80,85,90),求全距。",
-        "answerText": "20",
-        "explanation": "全距=90-70=20。"
-      },
-      {
-        "id": "math-u13-q37",
-        "type": "numeric",
-        "question": "一組資料的平均數為 50,標準差為 5,某考生分數為 60,求其分數距平均數幾個標準差。",
-        "answerText": "2",
-        "explanation": "(60-50)/5=2 個標準差。"
-      },
-      {
-        "id": "math-u13-q38",
-        "type": "numeric",
-        "question": "某班級 10 人期中考平均 70 分,求全班總分。",
-        "answerText": "700",
-        "explanation": "總分=平均數×人數=70×10=700。"
-      }
-    ]
-  },
-  {
-    "id": "math-u7",
-    "title": "排列組合基礎",
-    "category": "高一下",
-    "note": {
-      "sections": [
-        {
-          "heading": "重點整理",
-          "content": [
-            "排列(Permutation):由 n 個相異物取 r 個「有順序」排列,公式 P(n,r) = n!/(n-r)!。",
-            "組合(Combination):由 n 個相異物取 r 個「不考慮順序」,公式 C(n,r) = n!/(r!(n-r)!)。",
-            "分辨排列與組合的關鍵在於「順序是否重要」:排隊拍照要用排列,選代表隊不分職位用組合。"
-          ],
-          "table": {
-            "headers": [
-              "原理",
-              "說明"
-            ],
-            "rows": [
-              [
-                "加法原理",
-                "兩件事「不能同時發生」,方法數相加"
-              ],
-              [
-                "乘法原理",
-                "兩件事「依序都要發生」,方法數相乘"
-              ]
-            ]
-          }
-        },
-        {
-          "heading": "延伸概念",
-          "content": [
-            "重複排列:n 個位置每個位置有 k 種選擇且可重複,方法數為 kⁿ。",
-            "環狀排列:n 個相異物排成一圈,因旋轉視為相同,方法數為 (n-1)!。"
-          ]
-        }
-      ]
-    },
-    "quiz": [
-      {
-        "id": "math-u7-q1",
-        "question": "從 5 個人中選 3 個人排成一列,共有幾種排法?",
-        "options": [
-          "P(5,3)=60",
-          "C(5,3)=10",
-          "5³=125",
-          "5!=120"
-        ],
-        "answer": 0,
-        "explanation": "排隊有順序之分,應使用排列公式 P(5,3)=5×4×3=60。"
-      },
-      {
-        "id": "math-u7-q2",
-        "question": "從 5 個人中選 3 個人組成一個委員會(不分職位),共有幾種選法?",
-        "options": [
-          "60",
-          "10",
-          "15",
-          "125"
-        ],
-        "answer": 1,
-        "explanation": "不分職位不考慮順序,應使用組合公式 C(5,3)=10。"
-      },
-      {
-        "id": "math-u7-q3",
-        "question": "判斷排列與組合的關鍵在於?",
-        "options": [
-          "物品數量的多寡",
-          "順序是否重要",
-          "是否有重複的物品",
-          "位置是否相鄰"
-        ],
-        "answer": 1,
-        "explanation": "排列考慮順序,組合不考慮順序,這是兩者最核心的差異。"
-      },
-      {
-        "id": "math-u7-q4",
-        "type": "numeric",
-        "question": "從 4 個人中選 2 個人排成一列(有順序),共有幾種排法?",
-        "answerText": "12",
-        "explanation": "P(4,2) = 4×3 = 12。"
-      },
-      {
-        "id": "math-u7-q5",
-        "type": "multi",
-        "question": "關於排列組合,下列敘述哪些正確?(多選)",
-        "options": [
-          "C(n,r)=C(n,n-r)",
-          "P(n,r)=n!/(n-r)!",
-          "排列考慮順序,組合不考慮順序",
-          "C(n,r) 一定大於 P(n,r)",
-          "n 個相異物排成一圈的環狀排列數為 (n-1)!"
-        ],
-        "answers": [
-          0,
-          1,
-          2,
-          4
-        ],
-        "explanation": "C(n,r)=P(n,r)/r!,當 r≥2 時 r!≥2,所以 C(n,r) 通常小於或等於 P(n,r),不會「一定大於」。"
-      },
-      {
-        "id": "math-u7-q6",
-        "type": "numeric",
-        "question": "求 P(5,2) 的值。",
-        "answerText": "20",
-        "explanation": "P(5,2)=5×4=20。"
-      },
-      {
-        "id": "math-u7-q7",
-        "type": "numeric",
-        "question": "求 P(6,3) 的值。",
-        "answerText": "120",
-        "explanation": "P(6,3)=6×5×4=120。"
-      },
-      {
-        "id": "math-u7-q8",
-        "type": "numeric",
-        "question": "求 P(4,4) 的值。",
-        "answerText": "24",
-        "explanation": "P(4,4)=4!=24。"
-      },
-      {
-        "id": "math-u7-q9",
-        "type": "numeric",
-        "question": "求 P(7,1) 的值。",
-        "answerText": "7",
-        "explanation": "P(7,1)=7。"
-      },
-      {
-        "id": "math-u7-q10",
-        "type": "numeric",
-        "question": "求 P(5,5) 的值。",
-        "answerText": "120",
-        "explanation": "P(5,5)=5!=120。"
-      },
-      {
-        "id": "math-u7-q11",
-        "type": "numeric",
-        "question": "求 P(8,2) 的值。",
-        "answerText": "56",
-        "explanation": "P(8,2)=8×7=56。"
-      },
-      {
-        "id": "math-u7-q12",
-        "type": "numeric",
-        "question": "求 P(6,2) 的值。",
-        "answerText": "30",
-        "explanation": "P(6,2)=6×5=30。"
-      },
-      {
-        "id": "math-u7-q13",
-        "type": "numeric",
-        "question": "求 P(10,1) 的值。",
-        "answerText": "10",
-        "explanation": "P(10,1)=10。"
-      },
-      {
-        "id": "math-u7-q14",
-        "type": "numeric",
-        "question": "求 C(5,2) 的值。",
-        "answerText": "10",
-        "explanation": "C(5,2)=5!/(2!×3!)=10。"
-      },
-      {
-        "id": "math-u7-q15",
-        "type": "numeric",
-        "question": "求 C(6,3) 的值。",
-        "answerText": "20",
-        "explanation": "C(6,3)=6!/(3!×3!)=20。"
-      },
-      {
-        "id": "math-u7-q16",
-        "type": "numeric",
-        "question": "求 C(4,2) 的值。",
-        "answerText": "6",
-        "explanation": "C(4,2)=4!/(2!×2!)=6。"
-      },
-      {
-        "id": "math-u7-q17",
-        "type": "numeric",
-        "question": "求 C(7,2) 的值。",
-        "answerText": "21",
-        "explanation": "C(7,2)=7!/(2!×5!)=21。"
-      },
-      {
-        "id": "math-u7-q18",
-        "type": "numeric",
-        "question": "求 C(5,0) 的值。",
-        "answerText": "1",
-        "explanation": "從 5 個裡選 0 個只有一種選法(什麼都不選),C(5,0)=1。"
-      },
-      {
-        "id": "math-u7-q19",
-        "type": "numeric",
-        "question": "求 C(5,5) 的值。",
-        "answerText": "1",
-        "explanation": "從 5 個裡選全部 5 個只有一種選法,C(5,5)=1。"
-      },
-      {
-        "id": "math-u7-q20",
-        "type": "numeric",
-        "question": "求 C(8,2) 的值。",
-        "answerText": "28",
-        "explanation": "C(8,2)=8!/(2!×6!)=28。"
-      },
-      {
-        "id": "math-u7-q21",
-        "type": "numeric",
-        "question": "求 C(6,4) 的值。",
-        "answerText": "15",
-        "explanation": "C(6,4)=C(6,2)=6!/(2!×4!)=15。"
-      },
-      {
-        "id": "math-u7-q22",
-        "type": "numeric",
-        "question": "4 個人圍成一圈,環狀排列共有幾種排法?",
-        "answerText": "6",
-        "explanation": "環狀排列數為 (n-1)!=(4-1)!=3!=6。"
-      },
-      {
-        "id": "math-u7-q23",
-        "type": "numeric",
-        "question": "5 個人圍成一圈,環狀排列共有幾種排法?",
-        "answerText": "24",
-        "explanation": "環狀排列數為 (5-1)!=4!=24。"
-      },
-      {
-        "id": "math-u7-q24",
-        "type": "numeric",
-        "question": "6 個人圍成一圈,環狀排列共有幾種排法?",
-        "answerText": "120",
-        "explanation": "環狀排列數為 (6-1)!=5!=120。"
-      },
-      {
-        "id": "math-u7-q25",
-        "type": "numeric",
-        "question": "3 個位置,每個位置各有 2 種選擇(可重複),共有幾種排列方式?",
-        "answerText": "8",
-        "explanation": "重複排列數為 2³=8。"
-      },
-      {
-        "id": "math-u7-q26",
-        "type": "numeric",
-        "question": "4 個位置,每個位置各有 3 種選擇(可重複),共有幾種排列方式?",
-        "answerText": "81",
-        "explanation": "重複排列數為 3⁴=81。"
-      },
-      {
-        "id": "math-u7-q27",
-        "type": "numeric",
-        "question": "用 0-9 共 10 個數字組成 3 位數密碼(數字可重複),共有幾種可能?",
-        "answerText": "1000",
-        "explanation": "重複排列數為 10³=1000。"
-      },
-      {
-        "id": "math-u7-q28",
-        "type": "numeric",
-        "question": "4 個不同的獎品分給 4 個不同的人,每人一個,共有幾種分法?",
-        "answerText": "24",
-        "explanation": "這是 4 個相異物的排列,4!=24。"
-      },
-      {
-        "id": "math-u7-q29",
-        "type": "numeric",
-        "question": "從 10 人中選 3 人組成委員會(不分職位),共有幾種選法?",
-        "answerText": "120",
-        "explanation": "C(10,3)=10!/(3!×7!)=120。"
-      },
-      {
-        "id": "math-u7-q30",
-        "type": "numeric",
-        "question": "從 10 人中選出正副會長各一人(職位不同),共有幾種選法?",
-        "answerText": "90",
-        "explanation": "P(10,2)=10×9=90。"
-      },
-      {
-        "id": "math-u7-q31",
-        "type": "numeric",
-        "question": "7 個人排成一列,其中甲、乙兩人一定要相鄰,共有幾種排法?",
-        "answerText": "1440",
-        "explanation": "將甲乙視為一個單位,與其餘 5 人共 6 個單位排列有 6!=720 種,甲乙內部順序有 2 種,共 720×2=1440。"
-      },
-      {
-        "id": "math-u7-q32",
-        "type": "numeric",
-        "question": "從 5 件上衣、3 件褲子中各選一件搭配,共有幾種搭配方式?",
-        "answerText": "15",
-        "explanation": "依乘法原理,5×3=15。"
-      },
-      {
-        "id": "math-u7-q33",
-        "type": "numeric",
-        "question": "袋中有 3 個紅球、5 個藍球,從中任選一個球(顏色不重複計算),共有幾種選法?",
-        "answerText": "8",
-        "explanation": "依加法原理,3+5=8。"
-      },
-      {
-        "id": "math-u7-q34",
-        "type": "numeric",
-        "question": "從台北到高雄可搭火車(3 個班次可選)或客運(2 個班次可選),共有幾種搭乘方式?",
-        "answerText": "5",
-        "explanation": "依加法原理(搭火車「或」客運,擇一),3+2=5。"
-      },
-      {
-        "id": "math-u7-q35",
-        "type": "numeric",
-        "question": "一件商品有 4 種顏色、3 種尺寸可選,共有幾種顏色與尺寸的組合?",
-        "answerText": "12",
-        "explanation": "依乘法原理,4×3=12。"
-      },
-      {
-        "id": "math-u7-q36",
-        "type": "multi",
-        "question": "關於排列組合的計數原理,下列敘述哪些正確?(多選)",
-        "options": [
-          "加法原理適用於「或」的情況",
-          "乘法原理適用於「且」的情況(依序都要發生)",
-          "P(n,r)=n!/(n-r)!",
-          "C(n,r)=n!/(r!(n-r)!)",
-          "C(n,r) 一定大於 P(n,r)"
-        ],
-        "answers": [
-          0,
-          1,
-          2,
-          3
-        ],
-        "explanation": "C(n,r) 通常小於或等於 P(n,r)(因為 C(n,r)=P(n,r)/r!),不是「一定大於」,此項敘述錯誤。"
-      },
-      {
-        "id": "math-u7-q37",
-        "type": "multi",
-        "question": "關於環狀排列與重複排列,下列敘述哪些正確?(多選)",
-        "options": [
-          "n 個相異物環狀排列數為 (n-1)!",
-          "k 個位置各有 n 種選擇(可重複)方法數為 nᵏ",
-          "環狀排列因旋轉視為相同而少除一個 n",
-          "重複排列與一般排列公式完全相同",
-          "密碼鎖問題通常屬於重複排列"
-        ],
-        "answers": [
-          0,
-          1,
-          2,
-          4
-        ],
-        "explanation": "重複排列公式為 nᵏ,與一般排列公式 n!/(n-r)! 不同(一般排列不能重複選同一物),此項敘述錯誤。"
-      },
-      {
-        "id": "math-u7-q38",
-        "type": "numeric",
-        "question": "求 5! 的值。",
-        "answerText": "120",
-        "explanation": "5!=5×4×3×2×1=120。"
-      },
-      {
-        "id": "math-u7-q39",
-        "type": "numeric",
-        "question": "求 C(5,2)+C(5,3) 的值。",
-        "answerText": "20",
-        "explanation": "C(5,2)=10, C(5,3)=10(因 C(5,3)=C(5,2)),總和為 20。"
-      },
-      {
-        "id": "math-u7-q40",
-        "type": "numeric",
-        "question": "求 0! 的值。",
-        "answerText": "1",
-        "explanation": "依定義,0!=1。"
-      },
-      {
-        "id": "math-u7-q41",
-        "question": "若 C(n,2)=10,求 n 的值。",
-        "options": [
-          "5",
-          "4",
-          "10",
-          "20"
-        ],
-        "answer": 0,
-        "explanation": "C(n,2)=n(n-1)/2=10,n(n-1)=20,解得 n=5。"
-      }
-    ]
-  },
-  {
-    "id": "math-u8",
-    "title": "機率入門",
-    "category": "高一下",
-    "note": {
-      "sections": [
-        {
-          "heading": "重點整理",
-          "content": [
-            "機率定義:P(A) = 事件A發生的方法數 / 樣本空間總方法數,0 ≤ P(A) ≤ 1。",
-            "互斥事件:A、B不能同時發生,P(A∪B) = P(A) + P(B)。",
-            "獨立事件:A、B發生與否互不影響,P(A∩B) = P(A) × P(B)。",
-            "餘事件:P(A的餘事件) = 1 - P(A),常用於「至少」類型的題目。"
-          ],
-          "table": {
-            "headers": [
-              "情境",
-              "公式"
-            ],
-            "rows": [
-              [
-                "一般加法公式",
-                "P(A∪B) = P(A) + P(B) - P(A∩B)"
-              ],
-              [
-                "條件機率",
-                "P(A|B) = P(A∩B) / P(B)"
-              ]
-            ]
-          }
-        }
-      ]
-    },
-    "quiz": [
-      {
-        "id": "math-u8-q1",
-        "question": "擲一顆公正骰子,出現偶數點的機率為?",
-        "options": [
-          "1/6",
-          "1/3",
-          "1/2",
-          "2/3"
-        ],
-        "answer": 2,
-        "explanation": "偶數點有 2, 4, 6 共 3 種,樣本空間共 6 種,機率為 3/6 = 1/2。"
-      },
-      {
-        "id": "math-u8-q2",
-        "question": "已知 P(A)=0.3, P(B)=0.4,A、B互斥,則 P(A∪B) = ?",
-        "options": [
-          "0.12",
-          "0.7",
-          "0.1",
-          "1.2"
-        ],
-        "answer": 1,
-        "explanation": "互斥事件 P(A∪B) = P(A) + P(B) = 0.3 + 0.4 = 0.7。"
-      },
-      {
-        "id": "math-u8-q3",
-        "question": "「投擲兩枚硬幣,至少一枚正面」的機率,較快的計算方式是?",
-        "options": [
-          "直接列出所有情況相加",
-          "用 1 減去「兩枚都反面」的機率",
-          "用乘法定理直接相乘",
-          "無法計算"
-        ],
-        "answer": 1,
-        "explanation": "「至少一枚正面」的餘事件是「兩枚都反面」,用 1 減去餘事件機率較快速。"
-      },
-      {
-        "id": "math-u8-q4",
-        "type": "numeric",
-        "question": "投擲兩枚公正硬幣,兩枚都出現正面的機率為多少?(請寫成最簡分數,例如 1/4)",
-        "answerText": "1/4",
-        "explanation": "兩枚都正面只有 1 種情況,樣本空間共 4 種(正正、正反、反正、反反),機率為 1/4。"
-      },
-      {
-        "id": "math-u8-q5",
-        "type": "multi",
-        "question": "關於機率,下列敘述哪些正確?(多選)",
-        "options": [
-          "機率值介於 0 到 1 之間",
-          "互斥事件的機率可以相加",
-          "獨立事件的交集機率等於各自機率相乘",
-          "所有列出的事件機率總和一定等於 1",
-          "餘事件的機率等於 1 減去該事件機率"
-        ],
-        "answers": [
-          0,
-          1,
-          2,
-          4
-        ],
-        "explanation": "只有「彼此互斥且涵蓋整個樣本空間」的一組事件機率總和才會是 1,不是任意列出的事件都符合,此項錯誤。"
-      },
-      {
-        "id": "math-u8-q6",
-        "type": "numeric",
-        "question": "擲一顆公正骰子,出現 3 點的機率為多少?(請寫成最簡分數,例如 1/6)",
-        "answerText": "1/6",
-        "explanation": "樣本空間共 6 種,出現 3 點只有 1 種,機率為 1/6。"
-      },
-      {
-        "id": "math-u8-q7",
-        "type": "numeric",
-        "question": "擲一顆公正骰子,出現偶數點的機率為多少?(請寫成最簡分數)",
-        "answerText": "1/2",
-        "explanation": "偶數點有 2、4、6 共 3 種,機率為 3/6=1/2。"
-      },
-      {
-        "id": "math-u8-q8",
-        "type": "numeric",
-        "question": "從 52 張撲克牌中抽一張,抽到紅心的機率為多少?(請寫成最簡分數)",
-        "answerText": "1/4",
-        "explanation": "紅心共 13 張,機率為 13/52=1/4。"
-      },
-      {
-        "id": "math-u8-q9",
-        "type": "numeric",
-        "question": "袋中有 4 顆紅球、3 顆藍球,任取一球是紅球的機率為多少?(請寫成最簡分數)",
-        "answerText": "4/7",
-        "explanation": "總共 7 顆球,紅球 4 顆,機率為 4/7。"
-      },
-      {
-        "id": "math-u8-q10",
-        "type": "numeric",
-        "question": "擲兩枚公正硬幣,兩枚都出現正面的機率為多少?(請寫成最簡分數)",
-        "answerText": "1/4",
-        "explanation": "樣本空間共 4 種,兩枚都正面只有 1 種,機率為 1/4。"
-      },
-      {
-        "id": "math-u8-q11",
-        "type": "numeric",
-        "question": "從 1 到 10 中任選一數,選到質數(2,3,5,7)的機率為多少?(請寫成最簡分數)",
-        "answerText": "2/5",
-        "explanation": "1-10 中的質數有 2,3,5,7 共 4 個,機率為 4/10=2/5。"
-      },
-      {
-        "id": "math-u8-q12",
-        "type": "numeric",
-        "question": "擲一顆公正骰子,出現點數大於 4 的機率為多少?(請寫成最簡分數)",
-        "answerText": "1/3",
-        "explanation": "大於 4 的點數有 5、6 共 2 種,機率為 2/6=1/3。"
-      },
-      {
-        "id": "math-u8-q13",
-        "type": "numeric",
-        "question": "從一副 52 張撲克牌抽一張,抽到 A 的機率為多少?(請寫成最簡分數)",
-        "answerText": "1/13",
-        "explanation": "每種花色各有 1 張 A,共 4 張,機率為 4/52=1/13。"
-      },
-      {
-        "id": "math-u8-q14",
-        "type": "numeric",
-        "question": "P(A)=0.3, P(B)=0.5,A、B 互斥,求 P(A∪B)。",
-        "answerText": "0.8",
-        "explanation": "互斥事件 P(A∪B)=P(A)+P(B)=0.3+0.5=0.8。"
-      },
-      {
-        "id": "math-u8-q15",
-        "type": "numeric",
-        "question": "P(A)=0.2, P(B)=0.4,A、B 互斥,求 P(A∪B)。",
-        "answerText": "0.6",
-        "explanation": "P(A∪B)=0.2+0.4=0.6。"
-      },
-      {
-        "id": "math-u8-q16",
-        "type": "numeric",
-        "question": "擲一顆骰子,求出現 1 點或 6 點的機率。(請寫成最簡分數)",
-        "answerText": "1/3",
-        "explanation": "兩事件互斥,P=1/6+1/6=2/6=1/3。"
-      },
-      {
-        "id": "math-u8-q17",
-        "type": "numeric",
-        "question": "從一副撲克牌抽一張,求抽到紅心或黑桃的機率。(請寫成最簡分數)",
-        "answerText": "1/2",
-        "explanation": "兩花色互斥,P=13/52+13/52=26/52=1/2。"
-      },
-      {
-        "id": "math-u8-q18",
-        "type": "numeric",
-        "question": "P(A)=0.5, P(B)=0.4,A、B 獨立,求 P(A∩B)。",
-        "answerText": "0.2",
-        "explanation": "獨立事件 P(A∩B)=P(A)×P(B)=0.5×0.4=0.2。"
-      },
-      {
-        "id": "math-u8-q19",
-        "type": "numeric",
-        "question": "擲兩顆公正骰子,兩顆都出現 6 點的機率為多少?(請寫成最簡分數)",
-        "answerText": "1/36",
-        "explanation": "兩事件獨立,P=1/6×1/6=1/36。"
-      },
-      {
-        "id": "math-u8-q20",
-        "type": "numeric",
-        "question": "P(A)=0.6, P(B)=0.5,A、B 獨立,求 P(A∩B)。",
-        "answerText": "0.3",
-        "explanation": "P(A∩B)=0.6×0.5=0.3。"
-      },
-      {
-        "id": "math-u8-q21",
-        "type": "numeric",
-        "question": "投擲一枚公正硬幣 3 次,都出現正面的機率為多少?(請寫成最簡分數)",
-        "answerText": "1/8",
-        "explanation": "三次獨立,P=1/2×1/2×1/2=1/8。"
-      },
-      {
-        "id": "math-u8-q22",
-        "type": "numeric",
-        "question": "P(A)=0.3,求 A 的餘事件機率。",
-        "answerText": "0.7",
-        "explanation": "餘事件機率=1-P(A)=1-0.3=0.7。"
-      },
-      {
-        "id": "math-u8-q23",
-        "type": "numeric",
-        "question": "擲一顆骰子,求「不出現 6 點」的機率。(請寫成最簡分數)",
-        "answerText": "5/6",
-        "explanation": "「不出現6點」是「出現6點」的餘事件,P=1-1/6=5/6。"
-      },
-      {
-        "id": "math-u8-q24",
-        "type": "numeric",
-        "question": "投擲兩枚公正硬幣,求「至少一枚正面」的機率。(請寫成最簡分數)",
-        "answerText": "3/4",
-        "explanation": "「至少一枚正面」的餘事件是「兩枚都反面」(機率1/4),故 P=1-1/4=3/4。"
-      },
-      {
-        "id": "math-u8-q25",
-        "type": "numeric",
-        "question": "P(A)=0.65,求 A 的餘事件機率。",
-        "answerText": "0.35",
-        "explanation": "餘事件機率=1-0.65=0.35。"
-      },
-      {
-        "id": "math-u8-q26",
-        "type": "numeric",
-        "question": "P(A∩B)=0.2, P(B)=0.5,求 P(A|B)。",
-        "answerText": "0.4",
-        "explanation": "P(A|B)=P(A∩B)/P(B)=0.2/0.5=0.4。"
-      },
-      {
-        "id": "math-u8-q27",
-        "type": "numeric",
-        "question": "P(A∩B)=0.1, P(B)=0.4,求 P(A|B)。",
-        "answerText": "0.25",
-        "explanation": "P(A|B)=0.1/0.4=0.25。"
-      },
-      {
-        "id": "math-u8-q28",
-        "type": "numeric",
-        "question": "P(A∩B)=0.3, P(A)=0.6,求 P(B|A)。",
-        "answerText": "0.5",
-        "explanation": "P(B|A)=P(A∩B)/P(A)=0.3/0.6=0.5。"
-      },
-      {
-        "id": "math-u8-q29",
-        "type": "numeric",
-        "question": "P(A∩B)=0.12, P(B)=0.3,求 P(A|B)。",
-        "answerText": "0.4",
-        "explanation": "P(A|B)=0.12/0.3=0.4。"
-      },
-      {
-        "id": "math-u8-q30",
-        "type": "numeric",
-        "question": "P(A)=0.5, P(B)=0.4, P(A∩B)=0.2,求 P(A∪B)。",
-        "answerText": "0.7",
-        "explanation": "一般加法公式 P(A∪B)=P(A)+P(B)-P(A∩B)=0.5+0.4-0.2=0.7。"
-      },
-      {
-        "id": "math-u8-q31",
-        "type": "numeric",
-        "question": "P(A)=0.6, P(B)=0.3, P(A∩B)=0.1,求 P(A∪B)。",
-        "answerText": "0.8",
-        "explanation": "P(A∪B)=0.6+0.3-0.1=0.8。"
-      },
-      {
-        "id": "math-u8-q32",
-        "type": "numeric",
-        "question": "P(A)=0.7, P(B)=0.5, P(A∩B)=0.3,求 P(A∪B)。",
-        "answerText": "0.9",
-        "explanation": "P(A∪B)=0.7+0.5-0.3=0.9。"
-      },
-      {
-        "id": "math-u8-q33",
-        "type": "numeric",
-        "question": "P(A)=0.4, P(B)=0.6, P(A∩B)=0.2,求 P(A∪B)。",
-        "answerText": "0.8",
-        "explanation": "P(A∪B)=0.4+0.6-0.2=0.8。"
-      },
-      {
-        "id": "math-u8-q34",
-        "type": "multi",
-        "question": "關於機率基本性質,下列敘述哪些正確?(多選)",
-        "options": [
-          "0≤P(A)≤1 恆成立",
-          "P(樣本空間)=1",
-          "P(空集合)=0",
-          "互斥事件一定是獨立事件",
-          "P(A)+P(A 的餘事件)=1"
-        ],
-        "answers": [
-          0,
-          1,
-          2,
-          4
-        ],
-        "explanation": "互斥事件與獨立事件是不同概念,互斥事件通常不是獨立事件(除非其中一事件機率為0),此項敘述錯誤。"
-      },
-      {
-        "id": "math-u8-q35",
-        "type": "multi",
-        "question": "關於條件機率,下列敘述哪些正確?(多選)",
-        "options": [
-          "P(A|B)=P(A∩B)/P(B)(P(B)>0)",
-          "若 A、B 獨立,則 P(A|B)=P(A)",
-          "P(A|B) 一定等於 P(B|A)",
-          "條件機率的值介於 0 到 1 之間",
-          "P(A|B)×P(B)=P(A∩B)"
-        ],
-        "answers": [
-          0,
-          1,
-          3,
-          4
-        ],
-        "explanation": "P(A|B) 不一定等於 P(B|A),除非 P(A)=P(B),此項敘述錯誤。"
-      },
-      {
-        "id": "math-u8-q36",
-        "type": "numeric",
-        "question": "一個班級 30 人,18 人喜歡數學,12 人喜歡英文,6 人兩者都喜歡,求喜歡數學或英文的人數。",
-        "answerText": "24",
-        "explanation": "依一般加法原理,18+12-6=24人。"
-      },
-      {
-        "id": "math-u8-q37",
-        "question": "一個班級 30 人,18 人喜歡數學,12 人喜歡英文,6 人兩者都喜歡。從班上任選一人,此人喜歡數學或英文的機率為何?",
-        "options": [
-          "0.8",
-          "0.6",
-          "0.4",
-          "1.0"
-        ],
-        "answer": 0,
-        "explanation": "喜歡數學或英文的有 18+12-6=24 人,24人/30人=0.8。"
-      },
-      {
-        "id": "math-u8-q38",
-        "type": "numeric",
-        "question": "從 1 到 20 中,3 的倍數共有幾個?",
-        "answerText": "6",
-        "explanation": "3,6,9,12,15,18 共 6 個。"
-      },
-      {
-        "id": "math-u8-q39",
-        "type": "numeric",
-        "question": "從 1 到 20 中任選一數,選到 3 的倍數的機率為多少?",
-        "answerText": "0.3",
-        "explanation": "1 到 20 中 3 的倍數有 3、6、9、12、15、18 共 6 個,6/20=0.3。"
-      },
-      {
-        "id": "math-u8-q40",
-        "type": "numeric",
-        "question": "擲兩顆骰子,點數和為 7 的組合共有幾種?(例如 1+6 算一種)",
-        "answerText": "6",
-        "explanation": "(1,6),(2,5),(3,4),(4,3),(5,2),(6,1) 共 6 種組合。"
-      }
-    ]
-  },
-  {
-    "id": "math-u6",
-    "title": "三角函數基礎",
-    "category": "高二上",
-    "note": {
-      "sections": [
-        {
-          "heading": "重點整理",
-          "content": [
-            "弧度制:角度轉弧度公式 θ(弧度) = θ(角度) × π/180。",
-            "單位圓上,角 θ 的終邊與圓交點座標為 (cosθ, sinθ)。",
-            "基本關係式:sin²θ + cos²θ = 1;tanθ = sinθ/cosθ(cosθ≠0)。"
-          ],
-          "table": {
-            "headers": [
-              "角度",
-              "sin",
-              "cos",
-              "tan"
-            ],
-            "rows": [
-              [
-                "30°",
-                "1/2",
-                "√3/2",
-                "√3/3"
-              ],
-              [
-                "45°",
-                "√2/2",
-                "√2/2",
-                "1"
-              ],
-              [
-                "60°",
-                "√3/2",
-                "1/2",
-                "√3"
-              ]
-            ]
-          }
-        },
-        {
-          "heading": "重要定理",
-          "content": [
-            "正弦定理:a/sinA = b/sinB = c/sinC = 2R(R為外接圓半徑),適用任意三角形。",
-            "餘弦定理:c² = a² + b² - 2ab·cosC,可用於已知兩邊夾角求第三邊。"
-          ]
-        }
-      ]
-    },
-    "quiz": [
-      {
-        "id": "math-u6-q1",
-        "question": "sin30° 的值為?",
-        "options": [
-          "1/2",
-          "√2/2",
-          "√3/2",
-          "1"
-        ],
-        "answer": 0,
-        "explanation": "sin30° = 1/2,為常見特殊角三角函數值,建議熟記。"
-      },
-      {
-        "id": "math-u6-q2",
-        "question": "依 sin²θ + cos²θ = 1,若 sinθ = 3/5(θ為銳角),則 cosθ = ?",
-        "options": [
-          "4/5",
-          "3/4",
-          "5/4",
-          "2/5"
-        ],
-        "answer": 0,
-        "explanation": "cos²θ = 1 - (3/5)² = 1 - 9/25 = 16/25,θ為銳角故 cosθ = 4/5。"
-      },
-      {
-        "id": "math-u6-q3",
-        "question": "已知三角形兩邊與夾角,求第三邊長,應使用?",
-        "options": [
-          "正弦定理",
-          "餘弦定理",
-          "商高定理",
-          "對數律"
-        ],
-        "answer": 1,
-        "explanation": "已知兩邊夾角求第三邊,應使用餘弦定理 c² = a²+b²-2ab·cosC。"
-      },
-      {
-        "id": "math-u6-q4",
-        "type": "numeric",
-        "question": "sin90° 的值為多少?",
-        "answerText": "1",
-        "explanation": "sin90° = 1,單位圓上角度 90° 對應的 y 座標為 1。"
-      },
-      {
-        "id": "math-u6-q5",
-        "type": "multi",
-        "question": "關於 sinθ 與 cosθ,下列敘述哪些正確?(多選)",
-        "options": [
-          "sin²θ+cos²θ=1 恆成立",
-          "sinθ 的範圍是 [-1,1]",
-          "當 θ=90° 時 cosθ=0",
-          "tanθ=sinθ/cosθ 恆成立(cosθ≠0)",
-          "sinθ 一定大於 0"
-        ],
-        "answers": [
-          0,
-          1,
-          2,
-          3
-        ],
-        "explanation": "sinθ 在不同角度可正可負(如 θ=270° 時 sinθ=-1),不會「一定大於0」,此項錯誤。"
-      },
-      {
-        "id": "math-u6-q6",
-        "question": "sin30° 的值為?",
-        "options": [
-          "1/2",
-          "√2/2",
-          "√3/2",
-          "1"
-        ],
-        "answer": 0,
-        "explanation": "sin30° 為特殊角三角函數值,等於 1/2。"
-      },
-      {
-        "id": "math-u6-q7",
-        "question": "cos60° 的值為?",
-        "options": [
-          "1/2",
-          "√3/2",
-          "√2/2",
-          "0"
-        ],
-        "answer": 0,
-        "explanation": "cos60° 為特殊角三角函數值,等於 1/2。"
-      },
-      {
-        "id": "math-u6-q8",
-        "question": "tan45° 的值為?",
-        "options": [
-          "1",
-          "√3",
-          "√3/3",
-          "0"
-        ],
-        "answer": 0,
-        "explanation": "tan45°=sin45°/cos45°=1。"
-      },
-      {
-        "id": "math-u6-q9",
-        "question": "sin90° 的值為?",
-        "options": [
-          "1",
-          "0",
-          "-1",
-          "1/2"
-        ],
-        "answer": 0,
-        "explanation": "單位圓上 90° 對應點的 y 座標為 1,故 sin90°=1。"
-      },
-      {
-        "id": "math-u6-q10",
-        "question": "cos0° 的值為?",
-        "options": [
-          "1",
-          "0",
-          "-1",
-          "1/2"
-        ],
-        "answer": 0,
-        "explanation": "單位圓上 0° 對應點的 x 座標為 1,故 cos0°=1。"
-      },
-      {
-        "id": "math-u6-q11",
-        "question": "sin180° 的值為?",
-        "options": [
-          "0",
-          "1",
-          "-1",
-          "1/2"
-        ],
-        "answer": 0,
-        "explanation": "單位圓上 180° 對應點的 y 座標為 0,故 sin180°=0。"
-      },
-      {
-        "id": "math-u6-q12",
-        "question": "cos90° 的值為?",
-        "options": [
-          "0",
-          "1",
-          "-1",
-          "1/2"
-        ],
-        "answer": 0,
-        "explanation": "單位圓上 90° 對應點的 x 座標為 0,故 cos90°=0。"
-      },
-      {
-        "id": "math-u6-q13",
-        "question": "tan60° 的值為?",
-        "options": [
-          "√3",
-          "1",
-          "√3/3",
-          "1/2"
-        ],
-        "answer": 0,
-        "explanation": "tan60°=sin60°/cos60°=(√3/2)/(1/2)=√3。"
-      },
-      {
-        "id": "math-u6-q14",
-        "type": "numeric",
-        "question": "若 sinθ=3/5(θ為銳角),求 cosθ。(請寫成最簡分數,例如 4/5)",
-        "answerText": "4/5",
-        "explanation": "cosθ=√(1-9/25)=√(16/25)=4/5。"
-      },
-      {
-        "id": "math-u6-q15",
-        "type": "numeric",
-        "question": "若 cosθ=12/13(θ為銳角),求 sinθ。(請寫成最簡分數,例如 5/13)",
-        "answerText": "5/13",
-        "explanation": "sinθ=√(1-144/169)=√(25/169)=5/13。"
-      },
-      {
-        "id": "math-u6-q16",
-        "type": "numeric",
-        "question": "若 sinθ=0.6(θ為銳角),求 cosθ。",
-        "answerText": "0.8",
-        "explanation": "cosθ=√(1-0.36)=√0.64=0.8。"
-      },
-      {
-        "id": "math-u6-q17",
-        "type": "numeric",
-        "question": "若 cosθ=0.8(θ為銳角),求 sinθ。",
-        "answerText": "0.6",
-        "explanation": "sinθ=√(1-0.64)=√0.36=0.6。"
-      },
-      {
-        "id": "math-u6-q18",
-        "type": "numeric",
-        "question": "若 sinθ=1/2,求 sin²θ+cos²θ 的值。",
-        "answerText": "1",
-        "explanation": "依基本關係式 sin²θ+cos²θ=1 恆成立,不需要知道 θ 的實際角度。"
-      },
-      {
-        "id": "math-u6-q19",
-        "type": "numeric",
-        "question": "三角形中 A=30°, a=5,求外接圓直徑 2R(依正弦定理)。",
-        "answerText": "10",
-        "explanation": "2R=a/sinA=5/(1/2)=10。"
-      },
-      {
-        "id": "math-u6-q20",
-        "type": "numeric",
-        "question": "三角形中 a=8, A=30°, B=90°,依正弦定理求 b。",
-        "answerText": "16",
-        "explanation": "b=a×sinB/sinA=8×1/(1/2)=16。"
-      },
-      {
-        "id": "math-u6-q21",
-        "type": "numeric",
-        "question": "直角三角形中 A=90°, B=30°,斜邊 a=10,依正弦定理求 b。",
-        "answerText": "5",
-        "explanation": "b=a×sinB/sinA=10×(1/2)/1=5。"
-      },
-      {
-        "id": "math-u6-q22",
-        "type": "numeric",
-        "question": "三角形兩邊 a=3, b=4,夾角 C=90°,依餘弦定理求 c。",
-        "answerText": "5",
-        "explanation": "c²=3²+4²-2×3×4×cos90°=9+16-0=25,c=5。"
-      },
-      {
-        "id": "math-u6-q23",
-        "type": "numeric",
-        "question": "三角形兩邊 a=5, b=5,夾角 C=60°,依餘弦定理求 c。",
-        "answerText": "5",
-        "explanation": "c²=25+25-2×5×5×cos60°=50-25=25,c=5。"
-      },
-      {
-        "id": "math-u6-q24",
-        "type": "numeric",
-        "question": "三角形兩邊 a=6, b=8,夾角 C=90°,依餘弦定理求 c。",
-        "answerText": "10",
-        "explanation": "c²=36+64-0=100,c=10。"
-      },
-      {
-        "id": "math-u6-q25",
-        "type": "numeric",
-        "question": "三角形兩邊 a=7, b=7,夾角 C=60°,依餘弦定理求 c。",
-        "answerText": "7",
-        "explanation": "c²=49+49-2×7×7×cos60°=98-49=49,c=7。"
-      },
-      {
-        "id": "math-u6-q26",
-        "type": "numeric",
-        "question": "180° = k×π 弧度,求 k 的值。",
-        "answerText": "1",
-        "explanation": "180° 恰等於 π 弧度,故 k=1。"
-      },
-      {
-        "id": "math-u6-q27",
-        "type": "numeric",
-        "question": "90° = k×π 弧度,求 k 的值。(請寫成最簡分數,例如 1/2)",
-        "answerText": "1/2",
-        "explanation": "90° 是 180° 的一半,故 k=1/2。"
-      },
-      {
-        "id": "math-u6-q28",
-        "type": "numeric",
-        "question": "360° = k×π 弧度,求 k 的值。",
-        "answerText": "2",
-        "explanation": "360° 是 180° 的兩倍,故 k=2。"
-      },
-      {
-        "id": "math-u6-q29",
-        "type": "numeric",
-        "question": "弧度 π/3 等於多少度?",
-        "answerText": "60",
-        "explanation": "π 弧度=180°,故 π/3 弧度=180°/3=60°。"
-      },
-      {
-        "id": "math-u6-q30",
-        "type": "numeric",
-        "question": "弧度 π/6 等於多少度?",
-        "answerText": "30",
-        "explanation": "π 弧度=180°,故 π/6 弧度=180°/6=30°。"
-      },
-      {
-        "id": "math-u6-q31",
-        "question": "第二象限角的 sin 值符號為?",
-        "options": [
-          "正",
-          "負",
-          "零",
-          "不確定"
-        ],
-        "answer": 0,
-        "explanation": "第二象限 y 座標為正、x 座標為負,故 sin(對應y)為正。"
-      },
-      {
-        "id": "math-u6-q32",
-        "question": "第三象限角的 cos 值符號為?",
-        "options": [
-          "負",
-          "正",
-          "零",
-          "不確定"
-        ],
-        "answer": 0,
-        "explanation": "第三象限 x 座標與 y 座標皆為負,故 cos(對應x)為負。"
-      },
-      {
-        "id": "math-u6-q33",
-        "question": "第四象限角的 tan 值符號為?",
-        "options": [
-          "負",
-          "正",
-          "零",
-          "不確定"
-        ],
-        "answer": 0,
-        "explanation": "第四象限 sin 為負、cos 為正,tan=sin/cos 為負。"
-      },
-      {
-        "id": "math-u6-q34",
-        "question": "135° 角在第幾象限?",
-        "options": [
-          "第二象限",
-          "第一象限",
-          "第三象限",
-          "第四象限"
-        ],
-        "answer": 0,
-        "explanation": "90°<135°<180°,故 135° 在第二象限。"
-      },
-      {
-        "id": "math-u6-q35",
-        "question": "200° 角在第幾象限?",
-        "options": [
-          "第三象限",
-          "第一象限",
-          "第二象限",
-          "第四象限"
-        ],
-        "answer": 0,
-        "explanation": "180°<200°<270°,故 200° 在第三象限。"
-      },
-      {
-        "id": "math-u6-q36",
-        "type": "multi",
-        "question": "關於三角函數基本關係,下列敘述哪些正確?(多選)",
-        "options": [
-          "sin²θ+cos²θ=1 恆成立",
-          "tanθ=sinθ/cosθ(cosθ≠0)",
-          "sinθ 的範圍為 [-1,1]",
-          "cosθ 的範圍為 [0,1]",
-          "sinθ 與 cosθ 不可能同時為 0"
-        ],
-        "answers": [
-          0,
-          1,
-          2,
-          4
-        ],
-        "explanation": "cosθ 的範圍應為 [-1,1],不是 [0,1](cosθ 也可以是負值),此項敘述錯誤。"
-      },
-      {
-        "id": "math-u6-q37",
-        "type": "multi",
-        "question": "關於正弦定理與餘弦定理,下列敘述哪些正確?(多選)",
-        "options": [
-          "正弦定理適用於任意三角形",
-          "a/sinA=b/sinB=c/sinC=2R",
-          "餘弦定理只能用於直角三角形",
-          "已知兩邊夾角可用餘弦定理求第三邊",
-          "已知三邊可用餘弦定理求角度"
-        ],
-        "answers": [
-          0,
-          1,
-          3,
-          4
-        ],
-        "explanation": "餘弦定理適用於任意三角形,不是只限於直角三角形,此項敘述錯誤。"
-      },
-      {
-        "id": "math-u6-q38",
-        "type": "multi",
-        "question": "關於弧度制,下列敘述哪些正確?(多選)",
-        "options": [
-          "180°=π 弧度",
-          "弧度是角度的另一種單位",
-          "1 弧度約等於 57.3 度",
-          "弧度只能用於表示正角度",
-          "弧長公式為 s=rθ(θ為弧度)"
-        ],
-        "answers": [
-          0,
-          1,
-          2,
-          4
-        ],
-        "explanation": "弧度也可以表示負角度(依旋轉方向而定),「只能用於正角度」此項敘述錯誤。"
-      },
-      {
-        "id": "math-u6-q39",
-        "type": "multi",
-        "question": "關於象限角,下列敘述哪些正確?(多選)",
-        "options": [
-          "第一象限 sin、cos、tan 皆為正",
-          "第二象限只有 sin 為正",
-          "第三象限只有 tan 為正",
-          "第四象限 sin、cos、tan 皆為正",
-          "象限角的判斷與角度大小有關"
-        ],
-        "answers": [
-          0,
-          1,
-          2,
-          4
-        ],
-        "explanation": "第四象限只有 cos 為正(sin 為負,tan 為負),不是三者皆正,此項敘述錯誤。"
-      },
-      {
-        "id": "math-u6-q40",
-        "type": "numeric",
-        "question": "30-60-90 直角三角形中,最短邊(對 30° 角)為 5,依特殊比例(1:√3:2)求斜邊長。",
-        "answerText": "10",
-        "explanation": "30-60-90 三角形邊長比為 1:√3:2,斜邊是最短邊的 2 倍,故斜邊=10。"
-      },
-      {
-        "id": "math-u6-q41",
-        "type": "numeric",
-        "question": "某人距旗竿底部 20 公尺處測得旗竿頂端仰角為 45°,求旗竿高度。",
-        "answerText": "20",
-        "explanation": "tan45°=1,高度=水平距離×tan45°=20×1=20。"
-      },
-      {
-        "id": "math-u6-q42",
-        "type": "numeric",
-        "question": "30-60-90 直角三角形中,斜邊為 14,依特殊比例(1:√3:2)求最短邊(對 30° 角)長。",
-        "answerText": "7",
-        "explanation": "斜邊是最短邊的 2 倍,故最短邊=14÷2=7。"
-      },
-      {
-        "id": "math-u6-q43",
-        "type": "numeric",
-        "question": "45-45-90 直角三角形兩股皆為 x,斜邊為 8,求 x² 的值。",
-        "answerText": "32",
-        "explanation": "依畢氏定理 x²+x²=8²,2x²=64,x²=32。"
-      }
-    ]
-  },
-  {
     "id": "math-u9",
     "title": "平面向量",
     "category": "高二上",
@@ -4579,412 +5175,6 @@ export default {
     ]
   },
   {
-    "id": "math-u11",
-    "title": "直線與圓",
-    "category": "高二上",
-    "note": {
-      "sections": [
-        {
-          "heading": "重點整理",
-          "content": [
-            "直線方程式:斜截式 y=mx+b;點斜式 y-y₁=m(x-x₁);一般式 ax+by+c=0。",
-            "兩直線關係:斜率相等則平行(m₁=m₂);斜率相乘為 -1 則垂直(m₁×m₂=-1)。",
-            "點到直線距離公式:d = |ax₀+by₀+c| / √(a²+b²)。",
-            "圓方程式:標準式 (x-h)²+(y-k)²=r²,圓心 (h,k),半徑 r。"
-          ]
-        }
-      ]
-    },
-    "quiz": [
-      {
-        "id": "math-u11-q1",
-        "question": "直線 y=2x+3 與直線 y=2x-5 的關係為?",
-        "options": [
-          "垂直",
-          "平行",
-          "重合",
-          "相交於一點"
-        ],
-        "answer": 1,
-        "explanation": "兩直線斜率相同(皆為2)、截距不同,故兩直線平行且不重合。"
-      },
-      {
-        "id": "math-u11-q2",
-        "question": "圓方程式 (x-2)²+(y+1)²=9 的圓心與半徑為?",
-        "options": [
-          "圓心(2,-1),半徑3",
-          "圓心(-2,1),半徑9",
-          "圓心(2,1),半徑3",
-          "圓心(-2,-1),半徑9"
-        ],
-        "answer": 0,
-        "explanation": "標準式 (x-h)²+(y-k)²=r² 的圓心為 (h,k)=(2,-1),半徑 r=√9=3。"
-      },
-      {
-        "id": "math-u11-q3",
-        "question": "若兩直線斜率乘積為 -1,兩直線關係為?",
-        "options": [
-          "平行",
-          "垂直",
-          "重合",
-          "不相交也不垂直"
-        ],
-        "answer": 1,
-        "explanation": "兩直線斜率乘積為 -1(m₁×m₂=-1)是兩直線垂直的充要條件。"
-      },
-      {
-        "id": "math-u11-q4",
-        "type": "numeric",
-        "question": "圓 (x-2)²+(y-3)²=25 的半徑為多少?",
-        "answerText": "5",
-        "explanation": "標準式 (x-h)²+(y-k)²=r² 中 r²=25,故半徑 r=5。"
-      },
-      {
-        "id": "math-u11-q5",
-        "type": "multi",
-        "question": "關於直線與圓,下列敘述哪些正確?(多選)",
-        "options": [
-          "兩直線斜率相等則平行",
-          "兩直線斜率乘積為 -1 則垂直",
-          "圓心到直線距離大於半徑時,直線與圓不相交",
-          "圓心到直線距離小於半徑時,直線與圓相切",
-          "圓的標準式為 (x-h)²+(y-k)²=r²"
-        ],
-        "answers": [
-          0,
-          1,
-          2,
-          4
-        ],
-        "explanation": "圓心到直線距離「等於」半徑才是相切,「小於」半徑是直線與圓相交於兩點,此項敘述錯誤。"
-      },
-      {
-        "id": "math-u11-q6",
-        "type": "numeric",
-        "question": "過 (1,2) 和 (3,8) 的直線斜率為多少?",
-        "answerText": "3",
-        "explanation": "斜率=(8-2)/(3-1)=6/2=3。"
-      },
-      {
-        "id": "math-u11-q7",
-        "type": "numeric",
-        "question": "過 (0,0) 和 (4,4) 的直線斜率為多少?",
-        "answerText": "1",
-        "explanation": "斜率=(4-0)/(4-0)=1。"
-      },
-      {
-        "id": "math-u11-q8",
-        "type": "numeric",
-        "question": "過 (-1,3) 和 (2,-3) 的直線斜率為多少?",
-        "answerText": "-2",
-        "explanation": "斜率=(-3-3)/(2-(-1))=-6/3=-2。"
-      },
-      {
-        "id": "math-u11-q9",
-        "type": "numeric",
-        "question": "過 (0,5) 和 (5,0) 的直線斜率為多少?",
-        "answerText": "-1",
-        "explanation": "斜率=(0-5)/(5-0)=-1。"
-      },
-      {
-        "id": "math-u11-q10",
-        "type": "numeric",
-        "question": "過 (1,1) 和 (4,10) 的直線斜率為多少?",
-        "answerText": "3",
-        "explanation": "斜率=(10-1)/(4-1)=9/3=3。"
-      },
-      {
-        "id": "math-u11-q11",
-        "question": "過 (2,3)、斜率為 4 的直線方程式(化為斜截式)為?",
-        "options": [
-          "y=4x-5",
-          "y=4x+5",
-          "y=4x-8",
-          "y=4x+3"
-        ],
-        "answer": 0,
-        "explanation": "點斜式 y-3=4(x-2),展開得 y=4x-8+3=4x-5。"
-      },
-      {
-        "id": "math-u11-q12",
-        "question": "過 (0,3)、斜率為 -2 的直線方程式為?",
-        "options": [
-          "y=-2x+3",
-          "y=-2x-3",
-          "y=2x+3",
-          "y=-2x"
-        ],
-        "answer": 0,
-        "explanation": "y 截距為 3,斜率為 -2,故 y=-2x+3。"
-      },
-      {
-        "id": "math-u11-q13",
-        "question": "過 (1,2)、(3,6) 兩點的直線方程式為?",
-        "options": [
-          "y=2x",
-          "y=2x+2",
-          "y=2x-2",
-          "y=x+1"
-        ],
-        "answer": 0,
-        "explanation": "斜率=(6-2)/(3-1)=2,代入點斜式 y-2=2(x-1),化簡得 y=2x。"
-      },
-      {
-        "id": "math-u11-q14",
-        "type": "numeric",
-        "question": "直線 y=3x+1 與直線 y=kx-2 平行,求 k 的值。",
-        "answerText": "3",
-        "explanation": "兩直線平行時斜率相等,故 k=3。"
-      },
-      {
-        "id": "math-u11-q15",
-        "type": "numeric",
-        "question": "直線 y=2x+5 與直線 y=kx+1 垂直,求 k 的值。(請寫成最簡分數,例如 -1/2)",
-        "answerText": "-1/2",
-        "explanation": "兩直線垂直時斜率乘積為 -1:2×k=-1,k=-1/2。"
-      },
-      {
-        "id": "math-u11-q16",
-        "question": "直線 y=5x-3 與直線 y=5x+7 的關係為?",
-        "options": [
-          "平行",
-          "垂直",
-          "重合",
-          "相交但不垂直"
-        ],
-        "answer": 0,
-        "explanation": "兩直線斜率相同(皆為5)但截距不同,故平行不重合。"
-      },
-      {
-        "id": "math-u11-q17",
-        "question": "直線 y=2x+1 與直線 y=-0.5x+3 的關係為?",
-        "options": [
-          "垂直",
-          "平行",
-          "重合",
-          "無法判斷"
-        ],
-        "answer": 0,
-        "explanation": "斜率乘積 2×(-0.5)=-1,兩直線垂直。"
-      },
-      {
-        "id": "math-u11-q18",
-        "type": "numeric",
-        "question": "直線 3x+4y=12 的斜率為多少?(請寫成最簡分數,例如 -3/4)",
-        "answerText": "-3/4",
-        "explanation": "化為斜截式 y=-3/4x+3,斜率為 -3/4。"
-      },
-      {
-        "id": "math-u11-q19",
-        "type": "numeric",
-        "question": "直線 2x-y=5 的斜率為多少?",
-        "answerText": "2",
-        "explanation": "化為斜截式 y=2x-5,斜率為 2。"
-      },
-      {
-        "id": "math-u11-q20",
-        "type": "numeric",
-        "question": "點 (0,0) 到直線 3x+4y-10=0 的距離為多少?",
-        "answerText": "2",
-        "explanation": "d=|3×0+4×0-10|/√(3²+4²)=10/5=2。"
-      },
-      {
-        "id": "math-u11-q21",
-        "type": "numeric",
-        "question": "點 (1,1) 到直線 3x+4y-10=0 的距離為多少?",
-        "answerText": "0.6",
-        "explanation": "d=|3×1+4×1-10|/5=|-3|/5=0.6。"
-      },
-      {
-        "id": "math-u11-q22",
-        "type": "numeric",
-        "question": "點 (3,4) 到直線 4x-3y=0 的距離為多少?",
-        "answerText": "0",
-        "explanation": "d=|4×3-3×4|/√(4²+3²)=|12-12|/5=0,代表此點在直線上。"
-      },
-      {
-        "id": "math-u11-q23",
-        "type": "numeric",
-        "question": "點 (0,0) 到直線 6x+8y-20=0 的距離為多少?",
-        "answerText": "2",
-        "explanation": "d=|0+0-20|/√(6²+8²)=20/10=2。"
-      },
-      {
-        "id": "math-u11-q24",
-        "type": "numeric",
-        "question": "點 (5,0) 到直線 3x+4y-15=0 的距離為多少?",
-        "answerText": "0",
-        "explanation": "d=|3×5+4×0-15|/5=|0|/5=0,代表此點在直線上。"
-      },
-      {
-        "id": "math-u11-q25",
-        "question": "圓 (x-3)²+(y-2)²=16 的圓心座標為?",
-        "options": [
-          "(3,2)",
-          "(-3,-2)",
-          "(3,-2)",
-          "(-3,2)"
-        ],
-        "answer": 0,
-        "explanation": "標準式 (x-h)²+(y-k)²=r² 的圓心為 (h,k),此處為 (3,2)。"
-      },
-      {
-        "id": "math-u11-q26",
-        "type": "numeric",
-        "question": "圓 (x-3)²+(y-2)²=16 的半徑為多少?",
-        "answerText": "4",
-        "explanation": "r²=16,故 r=4。"
-      },
-      {
-        "id": "math-u11-q27",
-        "type": "numeric",
-        "question": "圓 x²+y²=49 的半徑為多少?",
-        "answerText": "7",
-        "explanation": "r²=49,故 r=7。"
-      },
-      {
-        "id": "math-u11-q28",
-        "type": "numeric",
-        "question": "圓 (x+1)²+(y-5)²=36 的半徑為多少?",
-        "answerText": "6",
-        "explanation": "r²=36,故 r=6。"
-      },
-      {
-        "id": "math-u11-q29",
-        "question": "圓心 (2,-3)、半徑 5 的圓方程式為?",
-        "options": [
-          "(x-2)²+(y+3)²=25",
-          "(x+2)²+(y-3)²=25",
-          "(x-2)²+(y+3)²=5",
-          "(x-2)²+(y-3)²=25"
-        ],
-        "answer": 0,
-        "explanation": "圓心 (2,-3) 代入標準式 (x-h)²+(y-k)²=r²,得 (x-2)²+(y+3)²=25。"
-      },
-      {
-        "id": "math-u11-q30",
-        "type": "numeric",
-        "question": "圓 x²+y²-6x-8y=0 配方後,求圓心的 x 座標。",
-        "answerText": "3",
-        "explanation": "配方:(x-3)²-9+(y-4)²-16=0,即 (x-3)²+(y-4)²=25,圓心為 (3,4)。"
-      },
-      {
-        "id": "math-u11-q31",
-        "question": "圓心到直線距離為 3,圓半徑為 5,直線與圓的關係為?",
-        "options": [
-          "相交(兩點)",
-          "相切",
-          "不相交",
-          "無法判斷"
-        ],
-        "answer": 0,
-        "explanation": "距離(3)小於半徑(5),直線與圓相交於兩點。"
-      },
-      {
-        "id": "math-u11-q32",
-        "question": "圓心到直線距離為 5,圓半徑為 5,直線與圓的關係為?",
-        "options": [
-          "相切",
-          "相交",
-          "不相交",
-          "無法判斷"
-        ],
-        "answer": 0,
-        "explanation": "距離等於半徑,直線與圓相切。"
-      },
-      {
-        "id": "math-u11-q33",
-        "question": "圓心到直線距離為 7,圓半徑為 5,直線與圓的關係為?",
-        "options": [
-          "不相交",
-          "相交",
-          "相切",
-          "無法判斷"
-        ],
-        "answer": 0,
-        "explanation": "距離(7)大於半徑(5),直線與圓不相交。"
-      },
-      {
-        "id": "math-u11-q34",
-        "question": "圓心到直線距離為 0,圓半徑為 5,直線與圓的關係為?",
-        "options": [
-          "相交,且直線過圓心",
-          "相切",
-          "不相交",
-          "無法判斷"
-        ],
-        "answer": 0,
-        "explanation": "距離為 0 代表直線通過圓心,必定與圓相交於兩點。"
-      },
-      {
-        "id": "math-u11-q35",
-        "type": "multi",
-        "question": "關於直線方程式,下列敘述哪些正確?(多選)",
-        "options": [
-          "點斜式為 y-y₁=m(x-x₁)",
-          "斜截式為 y=mx+b,b 為 y 截距",
-          "兩直線斜率相同則平行",
-          "兩直線斜率相同則一定重合",
-          "垂直線沒有斜率(斜率不存在)"
-        ],
-        "answers": [
-          0,
-          1,
-          2,
-          4
-        ],
-        "explanation": "斜率相同只保證平行,不保證重合,重合還需要截距也相同,「一定重合」此項敘述錯誤。"
-      },
-      {
-        "id": "math-u11-q36",
-        "type": "multi",
-        "question": "關於圓的方程式,下列敘述哪些正確?(多選)",
-        "options": [
-          "標準式為 (x-h)²+(y-k)²=r²,圓心 (h,k) 半徑 r",
-          "圓上任一點到圓心的距離都等於半徑",
-          "半徑一定為正數",
-          "圓心到圓上任一點的距離可以不同",
-          "一般式 x²+y²+Dx+Ey+F=0 可以配方轉換成標準式"
-        ],
-        "answers": [
-          0,
-          1,
-          2,
-          4
-        ],
-        "explanation": "依圓的定義,圓心到圓上任一點的距離都相等(等於半徑),不可能不同,此項敘述錯誤。"
-      },
-      {
-        "id": "math-u11-q37",
-        "type": "numeric",
-        "question": "直線 y=2x+3 與 x 軸的交點 x 座標為多少?",
-        "answerText": "-1.5",
-        "explanation": "令 y=0:0=2x+3,x=-1.5。"
-      },
-      {
-        "id": "math-u11-q38",
-        "type": "numeric",
-        "question": "直線 y=2x+3 與 y 軸的交點 y 座標為多少?",
-        "answerText": "3",
-        "explanation": "令 x=0:y=3。"
-      },
-      {
-        "id": "math-u11-q39",
-        "type": "numeric",
-        "question": "直線 3x-4y+12=0 與 x 軸的交點 x 座標為多少?",
-        "answerText": "-4",
-        "explanation": "令 y=0:3x+12=0,x=-4。"
-      },
-      {
-        "id": "math-u11-q40",
-        "type": "numeric",
-        "question": "圓 x²+y²=25 上,當 x=3 時,y 的正值為多少?",
-        "answerText": "4",
-        "explanation": "9+y²=25,y²=16,取正值 y=4。"
-      }
-    ]
-  },
-  {
     "id": "math-u10",
     "title": "空間向量基礎",
     "category": "高二下",
@@ -5356,377 +5546,6 @@ export default {
         "question": "已知向量 a=(2,3,6),求該向量長度的平方值。",
         "answerText": "49",
         "explanation": "|a|²=2²+3²+6²=4+9+36=49。"
-      }
-    ]
-  },
-  {
-    "id": "math-u14",
-    "title": "條件機率與貝氏定理",
-    "category": "高二下",
-    "note": {
-      "sections": [
-        {
-          "heading": "重點整理",
-          "content": [
-            "條件機率:P(A|B) = P(A∩B)/P(B),表示在 B 已發生的條件下 A 發生的機率。",
-            "貝氏定理:P(A|B) = P(B|A)×P(A) / P(B),用來根據已知結果反推原因發生的機率。",
-            "獨立事件的判斷:若 P(A|B) = P(A),則 A、B 為獨立事件。"
-          ],
-          "table": {
-            "headers": [
-              "情境",
-              "說明"
-            ],
-            "rows": [
-              [
-                "醫療檢驗",
-                "已知檢驗結果為陽性,求真的患病的機率"
-              ],
-              [
-                "品管抽驗",
-                "已知抽到瑕疵品,求來自哪條產線的機率"
-              ]
-            ]
-          }
-        }
-      ]
-    },
-    "quiz": [
-      {
-        "id": "math-u14-q1",
-        "question": "條件機率 P(A|B) 的定義式為?",
-        "options": [
-          "P(A∩B)/P(B)",
-          "P(A∪B)/P(B)",
-          "P(B∩A)/P(A)",
-          "P(A)×P(B)"
-        ],
-        "answer": 0,
-        "explanation": "條件機率的定義為 P(A|B) = P(A∩B)/P(B)。"
-      },
-      {
-        "id": "math-u14-q2",
-        "question": "若 P(A|B) = P(A),代表 A、B 兩事件為?",
-        "options": [
-          "互斥事件",
-          "獨立事件",
-          "對立事件",
-          "條件事件"
-        ],
-        "answer": 1,
-        "explanation": "若 B 是否發生不影響 A 發生的機率(P(A|B)=P(A)),則 A、B 為獨立事件。"
-      },
-      {
-        "id": "math-u14-q3",
-        "question": "貝氏定理主要用於解決什麼類型的問題?",
-        "options": [
-          "已知原因求結果的機率",
-          "已知結果反推原因發生的機率",
-          "計算排列組合方法數",
-          "求資料的標準差"
-        ],
-        "answer": 1,
-        "explanation": "貝氏定理常用於「已知某結果發生,反推是哪個原因造成」這類問題,如醫療檢驗、品管抽驗。"
-      },
-      {
-        "id": "math-u14-q4",
-        "type": "numeric",
-        "question": "擲一顆公正骰子一次,設 A=\"點數為偶數\",B=\"點數大於2\"。求 P(A|B)。",
-        "answerText": "1/2",
-        "explanation": "B={3,4,5,6},P(B)=4/6。A∩B={4,6},P(A∩B)=2/6。P(A|B)=(2/6)/(4/6)=2/4=1/2。"
-      },
-      {
-        "id": "math-u14-q5",
-        "type": "numeric",
-        "question": "擲一顆公正骰子一次,設 A=\"點數為3的倍數\",B=\"點數為偶數\"。求 P(A|B)。",
-        "answerText": "1/3",
-        "explanation": "A={3,6},B={2,4,6},A∩B={6},P(A∩B)=1/6,P(B)=1/2。P(A|B)=(1/6)/(1/2)=1/3。"
-      },
-      {
-        "id": "math-u14-q6",
-        "type": "numeric",
-        "question": "一副撲克牌(52張)抽一張,設 A=\"抽到紅心\",B=\"抽到J、Q、K中的一張\"(共12張)。求 P(A|B)。",
-        "answerText": "1/4",
-        "explanation": "B有12張,A∩B為紅心J、Q、K共3張。P(A|B)=3/12=1/4。"
-      },
-      {
-        "id": "math-u14-q7",
-        "type": "numeric",
-        "question": "從1到20的整數中隨機取一數,設 A=\"是3的倍數\",B=\"是偶數\"。求 P(A|B)。",
-        "answerText": "3/10",
-        "explanation": "B(偶數)有10個,A∩B(6的倍數)={6,12,18}共3個。P(A|B)=3/10。"
-      },
-      {
-        "id": "math-u14-q8",
-        "type": "numeric",
-        "question": "已知 P(A∩B)=0.15,P(B)=0.3,求 P(A|B)。",
-        "answerText": "0.5",
-        "explanation": "P(A|B)=P(A∩B)/P(B)=0.15/0.3=0.5。"
-      },
-      {
-        "id": "math-u14-q9",
-        "type": "numeric",
-        "question": "已知 P(A∩B)=0.12,P(A)=0.4,求 P(B|A)。",
-        "answerText": "0.3",
-        "explanation": "P(B|A)=P(A∩B)/P(A)=0.12/0.4=0.3。"
-      },
-      {
-        "id": "math-u14-q10",
-        "type": "numeric",
-        "question": "已知 P(A)=0.6,P(B)=0.5,P(A∪B)=0.8,求 P(A|B)。",
-        "answerText": "0.6",
-        "explanation": "先求 P(A∩B)=P(A)+P(B)-P(A∪B)=0.6+0.5-0.8=0.3。P(A|B)=0.3/0.5=0.6。"
-      },
-      {
-        "id": "math-u14-q11",
-        "type": "numeric",
-        "question": "某班學生中,60% 喜歡數學(A),45% 兩科都喜歡(A∩B)。求在喜歡數學的學生中,也喜歡物理的比例 P(B|A)。",
-        "answerText": "0.75",
-        "explanation": "P(B|A)=P(A∩B)/P(A)=0.45/0.6=0.75。"
-      },
-      {
-        "id": "math-u14-q12",
-        "type": "numeric",
-        "question": "已知 P(A)=0.5,P(B|A)=0.4,求 P(A∩B)。(乘法定理)",
-        "answerText": "0.2",
-        "explanation": "乘法定理:P(A∩B)=P(A)×P(B|A)=0.5×0.4=0.2。"
-      },
-      {
-        "id": "math-u14-q13",
-        "type": "numeric",
-        "question": "袋中有5顆紅球、3顆藍球,不放回連續取兩球,求兩球都是紅球的機率。",
-        "answerText": "5/14",
-        "explanation": "P=5/8×4/7=20/56=5/14。"
-      },
-      {
-        "id": "math-u14-q14",
-        "type": "numeric",
-        "question": "承上題(袋中5紅3藍,不放回取兩球),求第一球紅、第二球藍的機率。",
-        "answerText": "15/56",
-        "explanation": "P=5/8×3/7=15/56。"
-      },
-      {
-        "id": "math-u14-q15",
-        "type": "numeric",
-        "question": "一箱有10個零件,其中2個瑕疵品,不放回取兩個,求兩個都是瑕疵品的機率。",
-        "answerText": "1/45",
-        "explanation": "P=2/10×1/9=2/90=1/45。"
-      },
-      {
-        "id": "math-u14-q16",
-        "type": "numeric",
-        "question": "甲袋中有4顆白球、2顆黑球,不放回取兩球,求恰好一白一黑(不論順序)的機率。",
-        "answerText": "8/15",
-        "explanation": "P(白黑)=4/6×2/5=8/30,P(黑白)=2/6×4/5=8/30,合計=16/30=8/15。"
-      },
-      {
-        "id": "math-u14-q17",
-        "question": "擲兩顆骰子,設 A=\"第一顆為偶數\",B=\"第二顆為3\"。判斷 A、B 是否為獨立事件?",
-        "options": [
-          "獨立事件",
-          "不獨立事件",
-          "互斥事件",
-          "無法判斷"
-        ],
-        "answer": 0,
-        "explanation": "兩顆骰子的結果互不影響,P(A∩B)=1/2×1/6=1/12=P(A)×P(B),故為獨立事件。"
-      },
-      {
-        "id": "math-u14-q18",
-        "question": "已知 P(A)=0.3,P(B)=0.4,P(A∩B)=0.15,判斷 A、B 是否為獨立事件?",
-        "options": [
-          "獨立事件",
-          "不獨立事件",
-          "互斥事件",
-          "無法判斷"
-        ],
-        "answer": 1,
-        "explanation": "P(A)×P(B)=0.3×0.4=0.12≠0.15=P(A∩B),故不獨立。"
-      },
-      {
-        "id": "math-u14-q19",
-        "question": "已知 P(A)=0.5,P(B)=0.6,P(A∩B)=0.3,判斷 A、B 是否為獨立事件?",
-        "options": [
-          "獨立事件",
-          "不獨立事件",
-          "互斥事件",
-          "無法判斷"
-        ],
-        "answer": 0,
-        "explanation": "P(A)×P(B)=0.5×0.6=0.3=P(A∩B),故為獨立事件。"
-      },
-      {
-        "id": "math-u14-q20",
-        "question": "從一副52張撲克牌抽一張,設 A=\"抽到紅色牌\",B=\"抽到A(Ace)\"。判斷是否為獨立事件?",
-        "options": [
-          "獨立事件",
-          "不獨立事件",
-          "互斥事件",
-          "無法判斷"
-        ],
-        "answer": 0,
-        "explanation": "P(A)=1/2,P(B)=4/52=1/13,P(A∩B)=2/52=1/26=1/2×1/13,故為獨立事件。"
-      },
-      {
-        "id": "math-u14-q21",
-        "question": "已知 A、B 為互斥事件,且 P(A)>0、P(B)>0,判斷 A、B 是否可能為獨立事件?",
-        "options": [
-          "一定獨立",
-          "一定不獨立",
-          "可能獨立可能不獨立",
-          "無法判斷"
-        ],
-        "answer": 1,
-        "explanation": "互斥表示 P(A∩B)=0,但若獨立則 P(A∩B)=P(A)×P(B)>0,兩者矛盾,故一定不獨立。"
-      },
-      {
-        "id": "math-u14-q22",
-        "type": "numeric",
-        "question": "甲機台生產60%的產品且瑕疵率2%,乙機台生產40%的產品且瑕疵率5%。求任一產品為瑕疵品的機率 P(瑕疵)。",
-        "answerText": "0.032",
-        "explanation": "P(瑕疵)=P(甲)P(瑕疵|甲)+P(乙)P(瑕疵|乙)=0.6×0.02+0.4×0.05=0.012+0.02=0.032。"
-      },
-      {
-        "id": "math-u14-q23",
-        "type": "numeric",
-        "question": "承上題(甲機台60%/瑕疵率2%,乙機台40%/瑕疵率5%),已知抽到瑕疵品,求來自甲機台的機率 P(甲|瑕疵)。",
-        "answerText": "0.375",
-        "explanation": "P(甲|瑕疵)=P(甲)P(瑕疵|甲)/P(瑕疵)=0.012/0.032=0.375。"
-      },
-      {
-        "id": "math-u14-q24",
-        "type": "numeric",
-        "question": "承上題(甲機台60%/瑕疵率2%,乙機台40%/瑕疵率5%),已知抽到瑕疵品,求來自乙機台的機率 P(乙|瑕疵)。",
-        "answerText": "0.625",
-        "explanation": "P(乙|瑕疵)=P(乙)P(瑕疵|乙)/P(瑕疵)=0.02/0.032=0.625(或 1-0.375)。"
-      },
-      {
-        "id": "math-u14-q25",
-        "type": "numeric",
-        "question": "三個箱子各以1/3機率被選中:箱A有3紅2白,箱B有1紅4白,箱C有2紅2白。選一箱後抽一球,求抽到紅球的機率。",
-        "answerText": "13/30",
-        "explanation": "P(紅)=1/3×3/5+1/3×1/5+1/3×2/4=1/3×(3/5+1/5+1/2)=1/3×13/10=13/30。"
-      },
-      {
-        "id": "math-u14-q26",
-        "type": "numeric",
-        "question": "承上題(三箱各1/3,箱A 3紅2白、箱B 1紅4白、箱C 2紅2白),已知抽到紅球,求來自箱A的機率。",
-        "answerText": "6/13",
-        "explanation": "P(A|紅)=(1/3×3/5)/(13/30)=(1/5)/(13/30)=(1/5)×(30/13)=6/13。"
-      },
-      {
-        "id": "math-u14-q27",
-        "type": "numeric",
-        "question": "承上題(三箱各1/3,箱A 3紅2白、箱B 1紅4白、箱C 2紅2白),已知抽到紅球,求來自箱B的機率。",
-        "answerText": "2/13",
-        "explanation": "P(B|紅)=(1/3×1/5)/(13/30)=(1/15)/(13/30)=(1/15)×(30/13)=2/13。"
-      },
-      {
-        "id": "math-u14-q28",
-        "type": "numeric",
-        "question": "某疾病盛行率為1/10,檢驗敏感度(有病驗出陽性)為9/10,偽陽性率(沒病驗出陽性)為1/5。求檢驗結果為陽性的機率 P(陽)。",
-        "answerText": "27/100",
-        "explanation": "P(陽)=1/10×9/10+9/10×1/5=9/100+9/50=9/100+18/100=27/100。"
-      },
-      {
-        "id": "math-u14-q29",
-        "type": "numeric",
-        "question": "承上題(盛行率1/10,敏感度9/10,偽陽性率1/5),已知檢驗結果為陽性,求真的患病的機率 P(病|陽)。",
-        "answerText": "1/3",
-        "explanation": "P(病|陽)=(9/100)/(27/100)=9/27=1/3。這就是貝氏定理:雖然檢驗敏感度高,但因盛行率低,陽性未必真的患病。"
-      },
-      {
-        "id": "math-u14-q30",
-        "type": "numeric",
-        "question": "承上題(盛行率1/10,敏感度9/10,偽陽性率1/5),已知檢驗結果為陽性,求其實沒有患病(誤判)的機率 P(健康|陽)。",
-        "answerText": "2/3",
-        "explanation": "P(健康|陽)=1-P(病|陽)=1-1/3=2/3。"
-      },
-      {
-        "id": "math-u14-q31",
-        "type": "numeric",
-        "question": "承上題(盛行率1/10,敏感度9/10,偽陽性率1/5),求檢驗結果為陰性的機率 P(陰)。",
-        "answerText": "73/100",
-        "explanation": "P(陰)=1-P(陽)=1-27/100=73/100。"
-      },
-      {
-        "id": "math-u14-q32",
-        "type": "multi",
-        "question": "關於條件機率 P(A|B),下列敘述哪些正確?(多選)",
-        "options": [
-          "P(A|B) = P(A∩B)/P(B),其中 P(B)>0",
-          "P(A|B) 恆等於 P(B|A)",
-          "若 A、B 互斥且兩者機率皆大於0,則 P(A|B)=0",
-          "若 A、B 為獨立事件,則 P(A|B)=P(A)"
-        ],
-        "answers": [
-          0,
-          2,
-          3
-        ],
-        "explanation": "P(A|B)的定義為P(A∩B)/P(B);互斥事件A∩B=∅所以條件機率為0;獨立事件則P(A|B)=P(A)。P(A|B)與P(B|A)一般不相等(除非P(A)=P(B)),故「P(A|B) 恆等於 P(B|A)」這項錯。"
-      },
-      {
-        "id": "math-u14-q33",
-        "type": "multi",
-        "question": "關於貝氏定理的應用情境,下列敘述哪些正確?(多選)",
-        "options": [
-          "用於根據已觀察到的結果,反推可能原因發生的機率",
-          "只適用於恰好兩個原因分類的情況",
-          "醫療檢驗中可用於計算「驗出陽性但其實沒病」的機率",
-          "計算時需要先知道各原因的「事前機率」(prior)"
-        ],
-        "answers": [
-          0,
-          2,
-          3
-        ],
-        "explanation": "貝氏定理可用於多個原因分類(不限兩個),故「只適用於恰好兩個原因分類的情況」這項錯;其餘描述皆正確。"
-      },
-      {
-        "id": "math-u14-q34",
-        "type": "multi",
-        "question": "關於全機率定理與貝氏定理的關係,下列敘述哪些正確?(多選)",
-        "options": [
-          "全機率定理常用來計算貝氏定理中的分母 P(B)",
-          "全機率定理要求各原因事件必須兩兩互斥且其聯集為樣本空間",
-          "貝氏定理可以在完全不知道任何事前機率的情況下計算",
-          "全機率定理可寫成 P(B) = ΣP(Aᵢ)×P(B|Aᵢ)"
-        ],
-        "answers": [
-          0,
-          1,
-          3
-        ],
-        "explanation": "貝氏定理必須要有事前機率P(Aᵢ)才能計算,故「貝氏定理可以在完全不知道任何事前機率的情況下計算」這項錯;其餘描述皆正確。"
-      },
-      {
-        "id": "math-u14-q35",
-        "type": "numeric",
-        "question": "三家供應商供貨比例為 A:50%、B:30%、C:20%,不良率分別為 A:2%、B:4%、C:5%。求任一產品為不良品的機率 P(不良)。(全機率定理)",
-        "answerText": "0.032",
-        "explanation": "P(不良)=0.5×0.02+0.3×0.04+0.2×0.05=0.01+0.012+0.01=0.032。"
-      },
-      {
-        "id": "math-u14-q36",
-        "type": "numeric",
-        "question": "承上題(A:50%/不良率2%、B:30%/不良率4%、C:20%/不良率5%),已知為不良品,求來自供應商A的機率。",
-        "answerText": "0.3125",
-        "explanation": "P(A|不良)=0.01/0.032=0.3125。"
-      },
-      {
-        "id": "math-u14-q37",
-        "type": "numeric",
-        "question": "承上題(A:50%/不良率2%、B:30%/不良率4%、C:20%/不良率5%),已知為不良品,求來自供應商B的機率。",
-        "answerText": "0.375",
-        "explanation": "P(B|不良)=0.012/0.032=0.375。"
-      },
-      {
-        "id": "math-u14-q38",
-        "type": "numeric",
-        "question": "承上題(A:50%/不良率2%、B:30%/不良率4%、C:20%/不良率5%),求該產品為良品(非不良品)的機率 P(良品)。",
-        "answerText": "0.968",
-        "explanation": "P(良品)=1-P(不良)=1-0.032=0.968。"
       }
     ]
   },
@@ -6114,721 +5933,380 @@ export default {
     ]
   },
   {
-    "id": "math-u15",
-    "title": "圓錐曲線基礎",
-    "category": "高三上",
-    "note": {
-      "sections": [
-        {
-          "heading": "圓錐曲線標準式(以原點為中心)",
-          "table": {
-            "headers": [
-              "曲線",
-              "標準式",
-              "特徵"
-            ],
-            "rows": [
-              [
-                "橢圓",
-                "x²/a² + y²/b² = 1 (a>b>0)",
-                "兩焦點距離和為定值 2a"
-              ],
-              [
-                "雙曲線",
-                "x²/a² - y²/b² = 1",
-                "兩焦點距離差的絕對值為定值 2a"
-              ],
-              [
-                "拋物線",
-                "y² = 4px",
-                "焦點到曲線上任一點距離,等於該點到準線距離"
-              ]
-            ]
-          }
-        },
-        {
-          "heading": "離心率概念",
-          "content": [
-            "橢圓的離心率 e = c/a(0<e<1),e 越接近 0 橢圓越接近圓形。",
-            "雙曲線的離心率 e = c/a(e>1);拋物線的離心率恰好等於 1。"
-          ]
-        }
-      ]
-    },
-    "quiz": [
-      {
-        "id": "math-u15-q1",
-        "question": "橢圓標準式 x²/a² + y²/b² = 1 中,若 a>b,則兩焦點所在的軸為?",
-        "options": [
-          "x 軸",
-          "y 軸",
-          "不一定",
-          "沒有焦點"
-        ],
-        "answer": 0,
-        "explanation": "當 a>b 時,長軸在 x 軸上,兩焦點位於 x 軸上。"
-      },
-      {
-        "id": "math-u15-q2",
-        "question": "拋物線上任一點到焦點的距離,等於該點到什麼的距離?",
-        "options": [
-          "原點",
-          "準線",
-          "x軸",
-          "y軸"
-        ],
-        "answer": 1,
-        "explanation": "拋物線的定義是:曲線上任一點到焦點的距離,等於該點到準線的距離。"
-      },
-      {
-        "id": "math-u15-q3",
-        "question": "下列關於離心率 e 的敘述,何者正確?",
-        "options": [
-          "橢圓的離心率 e>1",
-          "雙曲線的離心率 0<e<1",
-          "拋物線的離心率恰好等於 1",
-          "離心率與曲線形狀無關"
-        ],
-        "answer": 2,
-        "explanation": "拋物線的離心率恰好等於 1;橢圓 0<e<1;雙曲線 e>1。"
-      },
-      {
-        "id": "math-u15-q4",
-        "type": "numeric",
-        "question": "橢圓 x²/25 + y²/9 = 1,求 a 的值。",
-        "answerText": "5",
-        "explanation": "較大分母為25(在x²項),a²=25,a=5(因25>9,長軸在x軸)。"
-      },
-      {
-        "id": "math-u15-q5",
-        "type": "numeric",
-        "question": "承上題(x²/25+y²/9=1),求 b 的值。",
-        "answerText": "3",
-        "explanation": "較小分母為9(在y²項),b²=9,b=3。"
-      },
-      {
-        "id": "math-u15-q6",
-        "type": "numeric",
-        "question": "承上題(x²/25+y²/9=1),求 c 的值(c²=a²-b²)。",
-        "answerText": "4",
-        "explanation": "c²=a²-b²=25-9=16,c=4。"
-      },
-      {
-        "id": "math-u15-q7",
-        "type": "numeric",
-        "question": "承上題(x²/25+y²/9=1),求長軸長 2a。",
-        "answerText": "10",
-        "explanation": "長軸長=2a=2×5=10。"
-      },
-      {
-        "id": "math-u15-q8",
-        "type": "numeric",
-        "question": "承上題(x²/25+y²/9=1),求短軸長 2b。",
-        "answerText": "6",
-        "explanation": "短軸長=2b=2×3=6。"
-      },
-      {
-        "id": "math-u15-q9",
-        "type": "numeric",
-        "question": "橢圓 x²/16 + y²/25 = 1,由於25>16,求 a(較大分母開根號)。",
-        "answerText": "5",
-        "explanation": "較大分母25在y²項,a²=25,a=5(此時長軸在y軸)。"
-      },
-      {
-        "id": "math-u15-q10",
-        "type": "numeric",
-        "question": "承上題(x²/16+y²/25=1),求 b。",
-        "answerText": "4",
-        "explanation": "較小分母16在x²項,b²=16,b=4。"
-      },
-      {
-        "id": "math-u15-q11",
-        "type": "numeric",
-        "question": "承上題(x²/16+y²/25=1),求 c(c²=a²-b²)。",
-        "answerText": "3",
-        "explanation": "c²=25-16=9,c=3。"
-      },
-      {
-        "id": "math-u15-q12",
-        "question": "承上題(x²/16+y²/25=1),兩焦點位於哪一軸?",
-        "options": [
-          "x 軸",
-          "y 軸",
-          "原點",
-          "無法判斷"
-        ],
-        "answer": 1,
-        "explanation": "較大分母25在y²項,表示長軸(與焦點)在y軸上。"
-      },
-      {
-        "id": "math-u15-q13",
-        "type": "numeric",
-        "question": "橢圓 4x²+9y²=36,兩邊同除以36化為標準式後,求 a(較大分母開根號)。",
-        "answerText": "3",
-        "explanation": "化簡得 x²/9+y²/4=1,較大分母為9,a²=9,a=3。"
-      },
-      {
-        "id": "math-u15-q14",
-        "type": "numeric",
-        "question": "雙曲線 x²/16 - y²/9 = 1,求 a。",
-        "answerText": "4",
-        "explanation": "a²=16,a=4。"
-      },
-      {
-        "id": "math-u15-q15",
-        "type": "numeric",
-        "question": "承上題(x²/16-y²/9=1),求 b。",
-        "answerText": "3",
-        "explanation": "b²=9,b=3。"
-      },
-      {
-        "id": "math-u15-q16",
-        "type": "numeric",
-        "question": "承上題(x²/16-y²/9=1),求 c(c²=a²+b²)。",
-        "answerText": "5",
-        "explanation": "c²=a²+b²=16+9=25,c=5。"
-      },
-      {
-        "id": "math-u15-q17",
-        "type": "numeric",
-        "question": "承上題(x²/16-y²/9=1),求漸近線斜率(取正值 b/a)。",
-        "answerText": "3/4",
-        "explanation": "雙曲線 x²/a²-y²/b²=1 的漸近線為 y=±(b/a)x,斜率=b/a=3/4。"
-      },
-      {
-        "id": "math-u15-q18",
-        "type": "numeric",
-        "question": "雙曲線 x²/9 - y²/16 = 1,求 a。",
-        "answerText": "3",
-        "explanation": "a²=9,a=3。"
-      },
-      {
-        "id": "math-u15-q19",
-        "type": "numeric",
-        "question": "承上題(x²/9-y²/16=1),求 c(c²=a²+b²)。",
-        "answerText": "5",
-        "explanation": "c²=9+16=25,c=5。"
-      },
-      {
-        "id": "math-u15-q20",
-        "type": "numeric",
-        "question": "承上題(x²/9-y²/16=1),求漸近線斜率(取正值 b/a)。",
-        "answerText": "4/3",
-        "explanation": "漸近線斜率=b/a=4/3。"
-      },
-      {
-        "id": "math-u15-q21",
-        "type": "numeric",
-        "question": "雙曲線 y²/4 - x²/12 = 1(焦點在y軸型),求 a(此時 a² 對應 y² 的分母)。",
-        "answerText": "2",
-        "explanation": "此形式為 y²/a²-x²/b²=1,a²=4,a=2。"
-      },
-      {
-        "id": "math-u15-q22",
-        "type": "numeric",
-        "question": "拋物線 y²=8x,求 p 的值(y²=4px形式)。",
-        "answerText": "2",
-        "explanation": "4p=8,p=2。"
-      },
-      {
-        "id": "math-u15-q23",
-        "type": "numeric",
-        "question": "承上題(y²=8x),求焦點座標的 x 坐標(焦點為(p,0))。",
-        "answerText": "2",
-        "explanation": "焦點為(p,0)=(2,0),x坐標為2。"
-      },
-      {
-        "id": "math-u15-q24",
-        "type": "numeric",
-        "question": "承上題(y²=8x),準線方程為 x=-p,求此方程中的常數(即 -p 的值)。",
-        "answerText": "-2",
-        "explanation": "準線為 x=-p=-2。"
-      },
-      {
-        "id": "math-u15-q25",
-        "type": "numeric",
-        "question": "拋物線 y²=20x,求 p。",
-        "answerText": "5",
-        "explanation": "4p=20,p=5。"
-      },
-      {
-        "id": "math-u15-q26",
-        "type": "numeric",
-        "question": "承上題(y²=20x),求焦點座標的 x 坐標。",
-        "answerText": "5",
-        "explanation": "焦點為(p,0)=(5,0)。"
-      },
-      {
-        "id": "math-u15-q27",
-        "type": "numeric",
-        "question": "拋物線 x²=12y(開口向上,焦點在y軸),求 p(x²=4py形式)。",
-        "answerText": "3",
-        "explanation": "4p=12,p=3。"
-      },
-      {
-        "id": "math-u15-q28",
-        "type": "numeric",
-        "question": "承上題(x²=12y),求焦點座標的 y 坐標。",
-        "answerText": "3",
-        "explanation": "焦點為(0,p)=(0,3)。"
-      },
-      {
-        "id": "math-u15-q29",
-        "type": "numeric",
-        "question": "拋物線 x²=-16y(開口向下),求 |p|(絕對值)。",
-        "answerText": "4",
-        "explanation": "4p=-16,p=-4,|p|=4。"
-      },
-      {
-        "id": "math-u15-q30",
-        "type": "numeric",
-        "question": "橢圓 x²/25+y²/9=1,求離心率 e=c/a。",
-        "answerText": "4/5",
-        "explanation": "a=5,c=4(見前題),e=c/a=4/5。"
-      },
-      {
-        "id": "math-u15-q31",
-        "type": "numeric",
-        "question": "雙曲線 x²/16-y²/9=1,求離心率 e=c/a。",
-        "answerText": "5/4",
-        "explanation": "a=4,c=5,e=c/a=5/4。"
-      },
-      {
-        "id": "math-u15-q32",
-        "type": "numeric",
-        "question": "橢圓 x²/169+y²/25=1,求離心率 e。",
-        "answerText": "12/13",
-        "explanation": "a²=169(a=13),b²=25(b=5),c²=169-25=144(c=12),e=c/a=12/13。"
-      },
-      {
-        "id": "math-u15-q33",
-        "type": "numeric",
-        "question": "雙曲線 x²/9-y²/16=1,求離心率 e。",
-        "answerText": "5/3",
-        "explanation": "a=3,c=5(見前題),e=c/a=5/3。"
-      },
-      {
-        "id": "math-u15-q34",
-        "type": "multi",
-        "question": "關於橢圓 x²/a²+y²/b²=1(a>b>0),下列敘述哪些正確?(多選)",
-        "options": [
-          "兩焦點在x軸上",
-          "焦點到中心的距離為c,其中c²=a²-b²",
-          "離心率 e=c/a 且 0<e<1",
-          "長軸長為a,短軸長為b"
-        ],
-        "answers": [
-          0,
-          1,
-          2
-        ],
-        "explanation": "長軸長應為2a,短軸長應為2b(而非a、b本身),故「長軸長為a,短軸長為b」這項錯;其餘描述皆正確。"
-      },
-      {
-        "id": "math-u15-q35",
-        "type": "multi",
-        "question": "關於雙曲線與拋物線,下列敘述哪些正確?(多選)",
-        "options": [
-          "雙曲線的離心率 e>1",
-          "拋物線的離心率 e=1",
-          "雙曲線有漸近線,橢圓和拋物線沒有",
-          "拋物線有兩個焦點"
-        ],
-        "answers": [
-          0,
-          1,
-          2
-        ],
-        "explanation": "拋物線只有一個焦點(而非兩個),故「拋物線有兩個焦點」這項錯;其餘描述皆正確。"
-      },
-      {
-        "id": "math-u15-q36",
-        "type": "multi",
-        "question": "關於圓錐曲線的一般性質,下列敘述哪些正確?(多選)",
-        "options": [
-          "若 e=0,可視為圓(特殊橢圓)",
-          "橢圓上任一點到兩焦點距離之和為定值2a",
-          "雙曲線上任一點到兩焦點距離差的絕對值為定值2a",
-          "離心率e越大,橢圓越接近正圓"
-        ],
-        "answers": [
-          0,
-          1,
-          2
-        ],
-        "explanation": "離心率e越小(越接近0),橢圓才越接近正圓,故「離心率e越大,橢圓越接近正圓」這項錯;其餘描述皆正確。"
-      },
-      {
-        "id": "math-u15-q37",
-        "type": "numeric",
-        "question": "已知橢圓中心在原點、焦點在x軸上,長軸長10、短軸長6,求 c。",
-        "answerText": "4",
-        "explanation": "a=5,b=3,c²=a²-b²=25-9=16,c=4。"
-      },
-      {
-        "id": "math-u15-q38",
-        "type": "numeric",
-        "question": "已知雙曲線中心在原點、焦點在x軸上,a=6、c=10,求 b(b²=c²-a²)。",
-        "answerText": "8",
-        "explanation": "b²=c²-a²=100-36=64,b=8。"
-      }
-    ]
-  },
-  {
-    "id": "math-u16",
-    "title": "三角函數應用與極座標",
-    "category": "高三上",
+    "id": "math-u14",
+    "title": "條件機率與貝氏定理",
+    "category": "高二下",
     "note": {
       "sections": [
         {
           "heading": "重點整理",
           "content": [
-            "三角函數應用:測量無法直接到達的距離或高度,常結合正弦定理、餘弦定理求解。",
-            "極座標 (r,θ):r 為到原點的距離,θ 為與 x 軸正向的夾角,與直角座標轉換公式為 x=r cosθ, y=r sinθ。",
-            "複數的極式:z = r(cosθ + i sinθ),可用棣美弗定理計算複數的乘冪。"
-          ]
-        },
-        {
-          "heading": "棣美弗定理",
-          "content": [
-            "[r(cosθ+isinθ)]ⁿ = rⁿ(cos(nθ)+isin(nθ)),用於快速計算複數的次方。"
-          ]
+            "條件機率:P(A|B) = P(A∩B)/P(B),表示在 B 已發生的條件下 A 發生的機率。",
+            "貝氏定理:P(A|B) = P(B|A)×P(A) / P(B),用來根據已知結果反推原因發生的機率。",
+            "獨立事件的判斷:若 P(A|B) = P(A),則 A、B 為獨立事件。"
+          ],
+          "table": {
+            "headers": [
+              "情境",
+              "說明"
+            ],
+            "rows": [
+              [
+                "醫療檢驗",
+                "已知檢驗結果為陽性,求真的患病的機率"
+              ],
+              [
+                "品管抽驗",
+                "已知抽到瑕疵品,求來自哪條產線的機率"
+              ]
+            ]
+          }
         }
       ]
     },
     "quiz": [
       {
-        "id": "math-u16-q1",
-        "question": "極座標 (r,θ) 轉換為直角座標的公式為?",
+        "id": "math-u14-q1",
+        "question": "條件機率 P(A|B) 的定義式為?",
         "options": [
-          "x=r cosθ, y=r sinθ",
-          "x=r sinθ, y=r cosθ",
-          "x=r+θ, y=r-θ",
-          "x=rθ, y=r/θ"
+          "P(A∩B)/P(B)",
+          "P(A∪B)/P(B)",
+          "P(B∩A)/P(A)",
+          "P(A)×P(B)"
         ],
         "answer": 0,
-        "explanation": "極座標轉直角座標的公式為 x=r cosθ, y=r sinθ。"
+        "explanation": "條件機率的定義為 P(A|B) = P(A∩B)/P(B)。"
       },
       {
-        "id": "math-u16-q2",
-        "question": "複數的極式 z=r(cosθ+isinθ) 中,r 代表?",
+        "id": "math-u14-q2",
+        "question": "若 P(A|B) = P(A),代表 A、B 兩事件為?",
         "options": [
-          "複數的實部",
-          "複數的虛部",
-          "複數到原點的距離(絕對值)",
-          "複數的角度"
-        ],
-        "answer": 2,
-        "explanation": "r 代表複數在複數平面上到原點的距離,也就是該複數的絕對值。"
-      },
-      {
-        "id": "math-u16-q3",
-        "question": "棣美弗定理主要用來簡化計算什麼?",
-        "options": [
-          "複數的加法",
-          "複數的乘冪",
-          "三角函數的微分",
-          "向量的內積"
+          "互斥事件",
+          "獨立事件",
+          "對立事件",
+          "條件事件"
         ],
         "answer": 1,
-        "explanation": "棣美弗定理可將複數的 n 次方計算簡化為 rⁿ(cos(nθ)+isin(nθ))。"
+        "explanation": "若 B 是否發生不影響 A 發生的機率(P(A|B)=P(A)),則 A、B 為獨立事件。"
       },
       {
-        "id": "math-u16-q4",
-        "type": "numeric",
-        "question": "直角坐標 (3,4) 轉換為極座標,求 r=√(x²+y²)。",
-        "answerText": "5",
-        "explanation": "r=√(3²+4²)=√25=5。"
-      },
-      {
-        "id": "math-u16-q5",
-        "type": "numeric",
-        "question": "直角坐標 (-6,8) 轉換為極座標,求 r。",
-        "answerText": "10",
-        "explanation": "r=√((-6)²+8²)=√(36+64)=√100=10。"
-      },
-      {
-        "id": "math-u16-q6",
-        "type": "numeric",
-        "question": "直角坐標 (5,12) 轉換為極座標,求 r。",
-        "answerText": "13",
-        "explanation": "r=√(5²+12²)=√(25+144)=√169=13。"
-      },
-      {
-        "id": "math-u16-q7",
-        "type": "numeric",
-        "question": "極座標 r=4,θ=0,轉換為直角坐標,求 x(x=r cosθ)。",
-        "answerText": "4",
-        "explanation": "x=r cosθ=4×cos0°=4×1=4。"
-      },
-      {
-        "id": "math-u16-q8",
-        "type": "numeric",
-        "question": "承上題(r=4,θ=0),求 y(y=r sinθ)。",
-        "answerText": "0",
-        "explanation": "y=r sinθ=4×sin0°=4×0=0。"
-      },
-      {
-        "id": "math-u16-q9",
-        "type": "numeric",
-        "question": "極座標 r=6,θ=90°,求 y=r sinθ。",
-        "answerText": "6",
-        "explanation": "y=r sinθ=6×sin90°=6×1=6。"
-      },
-      {
-        "id": "math-u16-q10",
-        "type": "numeric",
-        "question": "複數 z=3+4i,求 r=|z|=√(a²+b²)。",
-        "answerText": "5",
-        "explanation": "r=√(3²+4²)=√25=5。"
-      },
-      {
-        "id": "math-u16-q11",
-        "type": "numeric",
-        "question": "複數 z=-6+8i,求 r=|z|。",
-        "answerText": "10",
-        "explanation": "r=√((-6)²+8²)=√100=10。"
-      },
-      {
-        "id": "math-u16-q12",
-        "type": "numeric",
-        "question": "複數 z=5+12i,求 r=|z|。",
-        "answerText": "13",
-        "explanation": "r=√(5²+12²)=√169=13。"
-      },
-      {
-        "id": "math-u16-q13",
-        "type": "numeric",
-        "question": "複數 z=1+i,求 r²(即 |z|² = a²+b²)。",
-        "answerText": "2",
-        "explanation": "r²=1²+1²=2(r=√2,但此處只需求 r² 即可避免根號)。"
-      },
-      {
-        "id": "math-u16-q14",
-        "question": "複數 z=1+i 的輻角 θ 為多少度?",
+        "id": "math-u14-q3",
+        "question": "貝氏定理主要用於解決什麼類型的問題?",
         "options": [
-          "30°",
-          "45°",
-          "60°",
-          "90°"
+          "已知原因求結果的機率",
+          "已知結果反推原因發生的機率",
+          "計算排列組合方法數",
+          "求資料的標準差"
         ],
         "answer": 1,
-        "explanation": "實部虛部相等且皆為正,位於第一象限,tanθ=1/1=1,θ=45°。"
+        "explanation": "貝氏定理常用於「已知某結果發生,反推是哪個原因造成」這類問題,如醫療檢驗、品管抽驗。"
       },
       {
-        "id": "math-u16-q15",
+        "id": "math-u14-q4",
         "type": "numeric",
-        "question": "複數 z=√3+i,求 r=|z|。",
-        "answerText": "2",
-        "explanation": "r=√((√3)²+1²)=√(3+1)=√4=2。"
+        "question": "擲一顆公正骰子一次,設 A=\"點數為偶數\",B=\"點數大於2\"。求 P(A|B)。",
+        "answerText": "1/2",
+        "explanation": "B={3,4,5,6},P(B)=4/6。A∩B={4,6},P(A∩B)=2/6。P(A|B)=(2/6)/(4/6)=2/4=1/2。"
       },
       {
-        "id": "math-u16-q16",
-        "question": "承上題(z=√3+i)的輻角 θ 為多少度?",
+        "id": "math-u14-q5",
+        "type": "numeric",
+        "question": "擲一顆公正骰子一次,設 A=\"點數為3的倍數\",B=\"點數為偶數\"。求 P(A|B)。",
+        "answerText": "1/3",
+        "explanation": "A={3,6},B={2,4,6},A∩B={6},P(A∩B)=1/6,P(B)=1/2。P(A|B)=(1/6)/(1/2)=1/3。"
+      },
+      {
+        "id": "math-u14-q6",
+        "type": "numeric",
+        "question": "一副撲克牌(52張)抽一張,設 A=\"抽到紅心\",B=\"抽到J、Q、K中的一張\"(共12張)。求 P(A|B)。",
+        "answerText": "1/4",
+        "explanation": "B有12張,A∩B為紅心J、Q、K共3張。P(A|B)=3/12=1/4。"
+      },
+      {
+        "id": "math-u14-q7",
+        "type": "numeric",
+        "question": "從1到20的整數中隨機取一數,設 A=\"是3的倍數\",B=\"是偶數\"。求 P(A|B)。",
+        "answerText": "3/10",
+        "explanation": "B(偶數)有10個,A∩B(6的倍數)={6,12,18}共3個。P(A|B)=3/10。"
+      },
+      {
+        "id": "math-u14-q8",
+        "type": "numeric",
+        "question": "已知 P(A∩B)=0.15,P(B)=0.3,求 P(A|B)。",
+        "answerText": "0.5",
+        "explanation": "P(A|B)=P(A∩B)/P(B)=0.15/0.3=0.5。"
+      },
+      {
+        "id": "math-u14-q9",
+        "type": "numeric",
+        "question": "已知 P(A∩B)=0.12,P(A)=0.4,求 P(B|A)。",
+        "answerText": "0.3",
+        "explanation": "P(B|A)=P(A∩B)/P(A)=0.12/0.4=0.3。"
+      },
+      {
+        "id": "math-u14-q10",
+        "type": "numeric",
+        "question": "已知 P(A)=0.6,P(B)=0.5,P(A∪B)=0.8,求 P(A|B)。",
+        "answerText": "0.6",
+        "explanation": "先求 P(A∩B)=P(A)+P(B)-P(A∪B)=0.6+0.5-0.8=0.3。P(A|B)=0.3/0.5=0.6。"
+      },
+      {
+        "id": "math-u14-q11",
+        "type": "numeric",
+        "question": "某班學生中,60% 喜歡數學(A),45% 兩科都喜歡(A∩B)。求在喜歡數學的學生中,也喜歡物理的比例 P(B|A)。",
+        "answerText": "0.75",
+        "explanation": "P(B|A)=P(A∩B)/P(A)=0.45/0.6=0.75。"
+      },
+      {
+        "id": "math-u14-q12",
+        "type": "numeric",
+        "question": "已知 P(A)=0.5,P(B|A)=0.4,求 P(A∩B)。(乘法定理)",
+        "answerText": "0.2",
+        "explanation": "乘法定理:P(A∩B)=P(A)×P(B|A)=0.5×0.4=0.2。"
+      },
+      {
+        "id": "math-u14-q13",
+        "type": "numeric",
+        "question": "袋中有5顆紅球、3顆藍球,不放回連續取兩球,求兩球都是紅球的機率。",
+        "answerText": "5/14",
+        "explanation": "P=5/8×4/7=20/56=5/14。"
+      },
+      {
+        "id": "math-u14-q14",
+        "type": "numeric",
+        "question": "承上題(袋中5紅3藍,不放回取兩球),求第一球紅、第二球藍的機率。",
+        "answerText": "15/56",
+        "explanation": "P=5/8×3/7=15/56。"
+      },
+      {
+        "id": "math-u14-q15",
+        "type": "numeric",
+        "question": "一箱有10個零件,其中2個瑕疵品,不放回取兩個,求兩個都是瑕疵品的機率。",
+        "answerText": "1/45",
+        "explanation": "P=2/10×1/9=2/90=1/45。"
+      },
+      {
+        "id": "math-u14-q16",
+        "type": "numeric",
+        "question": "甲袋中有4顆白球、2顆黑球,不放回取兩球,求恰好一白一黑(不論順序)的機率。",
+        "answerText": "8/15",
+        "explanation": "P(白黑)=4/6×2/5=8/30,P(黑白)=2/6×4/5=8/30,合計=16/30=8/15。"
+      },
+      {
+        "id": "math-u14-q17",
+        "question": "擲兩顆骰子,設 A=\"第一顆為偶數\",B=\"第二顆為3\"。判斷 A、B 是否為獨立事件?",
         "options": [
-          "30°",
-          "45°",
-          "60°",
-          "90°"
+          "獨立事件",
+          "不獨立事件",
+          "互斥事件",
+          "無法判斷"
         ],
         "answer": 0,
-        "explanation": "tanθ=1/√3,位於第一象限,θ=30°。"
+        "explanation": "兩顆骰子的結果互不影響,P(A∩B)=1/2×1/6=1/12=P(A)×P(B),故為獨立事件。"
       },
       {
-        "id": "math-u16-q17",
-        "question": "複數 z=-1+i 的輻角 θ 為多少度?",
+        "id": "math-u14-q18",
+        "question": "已知 P(A)=0.3,P(B)=0.4,P(A∩B)=0.15,判斷 A、B 是否為獨立事件?",
         "options": [
-          "45°",
-          "135°",
-          "225°",
-          "315°"
+          "獨立事件",
+          "不獨立事件",
+          "互斥事件",
+          "無法判斷"
         ],
         "answer": 1,
-        "explanation": "實部為負、虛部為正,位於第二象限,參考角45°,θ=180°-45°=135°。"
+        "explanation": "P(A)×P(B)=0.3×0.4=0.12≠0.15=P(A∩B),故不獨立。"
       },
       {
-        "id": "math-u16-q18",
+        "id": "math-u14-q19",
+        "question": "已知 P(A)=0.5,P(B)=0.6,P(A∩B)=0.3,判斷 A、B 是否為獨立事件?",
+        "options": [
+          "獨立事件",
+          "不獨立事件",
+          "互斥事件",
+          "無法判斷"
+        ],
+        "answer": 0,
+        "explanation": "P(A)×P(B)=0.5×0.6=0.3=P(A∩B),故為獨立事件。"
+      },
+      {
+        "id": "math-u14-q20",
+        "question": "從一副52張撲克牌抽一張,設 A=\"抽到紅色牌\",B=\"抽到A(Ace)\"。判斷是否為獨立事件?",
+        "options": [
+          "獨立事件",
+          "不獨立事件",
+          "互斥事件",
+          "無法判斷"
+        ],
+        "answer": 0,
+        "explanation": "P(A)=1/2,P(B)=4/52=1/13,P(A∩B)=2/52=1/26=1/2×1/13,故為獨立事件。"
+      },
+      {
+        "id": "math-u14-q21",
+        "question": "已知 A、B 為互斥事件,且 P(A)>0、P(B)>0,判斷 A、B 是否可能為獨立事件?",
+        "options": [
+          "一定獨立",
+          "一定不獨立",
+          "可能獨立可能不獨立",
+          "無法判斷"
+        ],
+        "answer": 1,
+        "explanation": "互斥表示 P(A∩B)=0,但若獨立則 P(A∩B)=P(A)×P(B)>0,兩者矛盾,故一定不獨立。"
+      },
+      {
+        "id": "math-u14-q22",
         "type": "numeric",
-        "question": "複數 z=2(cos30°+isin30°),利用棣美弗定理求 z³ 的絕對值(rⁿ)。",
-        "answerText": "8",
-        "explanation": "z³的絕對值=r³=2³=8。"
+        "question": "甲機台生產60%的產品且瑕疵率2%,乙機台生產40%的產品且瑕疵率5%。求任一產品為瑕疵品的機率 P(瑕疵)。",
+        "answerText": "0.032",
+        "explanation": "P(瑕疵)=P(甲)P(瑕疵|甲)+P(乙)P(瑕疵|乙)=0.6×0.02+0.4×0.05=0.012+0.02=0.032。"
       },
       {
-        "id": "math-u16-q19",
+        "id": "math-u14-q23",
         "type": "numeric",
-        "question": "承上題(z=2(cos30°+isin30°)),求 z³ 的輻角(度數,nθ)。",
-        "answerText": "90",
-        "explanation": "z³的輻角=3θ=3×30°=90°。"
+        "question": "承上題(甲機台60%/瑕疵率2%,乙機台40%/瑕疵率5%),已知抽到瑕疵品,求來自甲機台的機率 P(甲|瑕疵)。",
+        "answerText": "0.375",
+        "explanation": "P(甲|瑕疵)=P(甲)P(瑕疵|甲)/P(瑕疵)=0.012/0.032=0.375。"
       },
       {
-        "id": "math-u16-q20",
+        "id": "math-u14-q24",
         "type": "numeric",
-        "question": "複數 z=3(cos60°+isin60°),求 z² 的絕對值。",
-        "answerText": "9",
-        "explanation": "z²的絕對值=r²=3²=9。"
+        "question": "承上題(甲機台60%/瑕疵率2%,乙機台40%/瑕疵率5%),已知抽到瑕疵品,求來自乙機台的機率 P(乙|瑕疵)。",
+        "answerText": "0.625",
+        "explanation": "P(乙|瑕疵)=P(乙)P(瑕疵|乙)/P(瑕疵)=0.02/0.032=0.625(或 1-0.375)。"
       },
       {
-        "id": "math-u16-q21",
+        "id": "math-u14-q25",
         "type": "numeric",
-        "question": "承上題(z=3(cos60°+isin60°)),求 z² 的輻角(度數)。",
-        "answerText": "120",
-        "explanation": "z²的輻角=2θ=2×60°=120°。"
+        "question": "三個箱子各以1/3機率被選中:箱A有3紅2白,箱B有1紅4白,箱C有2紅2白。選一箱後抽一球,求抽到紅球的機率。",
+        "answerText": "13/30",
+        "explanation": "P(紅)=1/3×3/5+1/3×1/5+1/3×2/4=1/3×(3/5+1/5+1/2)=1/3×13/10=13/30。"
       },
       {
-        "id": "math-u16-q22",
+        "id": "math-u14-q26",
         "type": "numeric",
-        "question": "複數 z=cos45°+isin45°(r=1),求 z⁴ 的絕對值。",
-        "answerText": "1",
-        "explanation": "z⁴的絕對值=r⁴=1⁴=1。"
+        "question": "承上題(三箱各1/3,箱A 3紅2白、箱B 1紅4白、箱C 2紅2白),已知抽到紅球,求來自箱A的機率。",
+        "answerText": "6/13",
+        "explanation": "P(A|紅)=(1/3×3/5)/(13/30)=(1/5)/(13/30)=(1/5)×(30/13)=6/13。"
       },
       {
-        "id": "math-u16-q23",
+        "id": "math-u14-q27",
         "type": "numeric",
-        "question": "承上題(z=cos45°+isin45°),求 z⁴ 的輻角(度數,化簡至0°~360°之間)。",
-        "answerText": "180",
-        "explanation": "z⁴的輻角=4×45°=180°。"
+        "question": "承上題(三箱各1/3,箱A 3紅2白、箱B 1紅4白、箱C 2紅2白),已知抽到紅球,求來自箱B的機率。",
+        "answerText": "2/13",
+        "explanation": "P(B|紅)=(1/3×1/5)/(13/30)=(1/15)/(13/30)=(1/15)×(30/13)=2/13。"
       },
       {
-        "id": "math-u16-q24",
+        "id": "math-u14-q28",
         "type": "numeric",
-        "question": "三角形中,a=5,b=8,C=60°(cosC=0.5),利用餘弦定理 c²=a²+b²-2ab·cosC 求 c²。",
-        "answerText": "49",
-        "explanation": "c²=5²+8²-2×5×8×0.5=25+64-40=49。"
+        "question": "某疾病盛行率為1/10,檢驗敏感度(有病驗出陽性)為9/10,偽陽性率(沒病驗出陽性)為1/5。求檢驗結果為陽性的機率 P(陽)。",
+        "answerText": "27/100",
+        "explanation": "P(陽)=1/10×9/10+9/10×1/5=9/100+9/50=9/100+18/100=27/100。"
       },
       {
-        "id": "math-u16-q25",
+        "id": "math-u14-q29",
         "type": "numeric",
-        "question": "承上題(a=5,b=8,C=60°),求 c。",
-        "answerText": "7",
-        "explanation": "c=√49=7。"
+        "question": "承上題(盛行率1/10,敏感度9/10,偽陽性率1/5),已知檢驗結果為陽性,求真的患病的機率 P(病|陽)。",
+        "answerText": "1/3",
+        "explanation": "P(病|陽)=(9/100)/(27/100)=9/27=1/3。這就是貝氏定理:雖然檢驗敏感度高,但因盛行率低,陽性未必真的患病。"
       },
       {
-        "id": "math-u16-q26",
+        "id": "math-u14-q30",
         "type": "numeric",
-        "question": "三角形中,a=6,b=8,C=90°(cosC=0,退化為畢氏定理),求 c²。",
-        "answerText": "100",
-        "explanation": "c²=6²+8²-2×6×8×0=36+64=100。"
+        "question": "承上題(盛行率1/10,敏感度9/10,偽陽性率1/5),已知檢驗結果為陽性,求其實沒有患病(誤判)的機率 P(健康|陽)。",
+        "answerText": "2/3",
+        "explanation": "P(健康|陽)=1-P(病|陽)=1-1/3=2/3。"
       },
       {
-        "id": "math-u16-q27",
+        "id": "math-u14-q31",
         "type": "numeric",
-        "question": "承上題(a=6,b=8,C=90°),求 c。",
-        "answerText": "10",
-        "explanation": "c=√100=10。"
+        "question": "承上題(盛行率1/10,敏感度9/10,偽陽性率1/5),求檢驗結果為陰性的機率 P(陰)。",
+        "answerText": "73/100",
+        "explanation": "P(陰)=1-P(陽)=1-27/100=73/100。"
       },
       {
-        "id": "math-u16-q28",
-        "type": "numeric",
-        "question": "三角形中,A=30°,a=5,B=90°,利用正弦定理 a/sinA=b/sinB 求 b。",
-        "answerText": "10",
-        "explanation": "b=a×sinB/sinA=5×sin90°/sin30°=5×1/0.5=10。"
-      },
-      {
-        "id": "math-u16-q29",
-        "type": "numeric",
-        "question": "承上題(A=30°,a=5,B=90°),求外接圓直徑 2R=a/sinA。",
-        "answerText": "10",
-        "explanation": "2R=a/sinA=5/0.5=10。"
-      },
-      {
-        "id": "math-u16-q30",
-        "type": "numeric",
-        "question": "三角形中,A=90°,a=10,B=30°,利用正弦定理求 b=a×sinB/sinA。",
-        "answerText": "5",
-        "explanation": "b=10×sin30°/sin90°=10×0.5/1=5。"
-      },
-      {
-        "id": "math-u16-q31",
-        "type": "numeric",
-        "question": "承上題(A=90°,a=10,B=30°),求外接圓半徑 R=a/(2sinA)。",
-        "answerText": "5",
-        "explanation": "R=a/(2sinA)=10/(2×1)=5。"
-      },
-      {
-        "id": "math-u16-q32",
+        "id": "math-u14-q32",
         "type": "multi",
-        "question": "關於極座標與直角座標的轉換,下列敘述哪些正確?(多選)",
+        "question": "關於條件機率 P(A|B),下列敘述哪些正確?(多選)",
         "options": [
-          "x=r cosθ,y=r sinθ",
-          "r=√(x²+y²)",
-          "θ 只能為正值,不可為負值或大於360°",
-          "r 在標準定義下恆為正值(不為負)"
+          "P(A|B) = P(A∩B)/P(B),其中 P(B)>0",
+          "P(A|B) 恆等於 P(B|A)",
+          "若 A、B 互斥且兩者機率皆大於0,則 P(A|B)=0",
+          "若 A、B 為獨立事件,則 P(A|B)=P(A)"
+        ],
+        "answers": [
+          0,
+          2,
+          3
+        ],
+        "explanation": "P(A|B)的定義為P(A∩B)/P(B);互斥事件A∩B=∅所以條件機率為0;獨立事件則P(A|B)=P(A)。P(A|B)與P(B|A)一般不相等(除非P(A)=P(B)),故「P(A|B) 恆等於 P(B|A)」這項錯。"
+      },
+      {
+        "id": "math-u14-q33",
+        "type": "multi",
+        "question": "關於貝氏定理的應用情境,下列敘述哪些正確?(多選)",
+        "options": [
+          "用於根據已觀察到的結果,反推可能原因發生的機率",
+          "只適用於恰好兩個原因分類的情況",
+          "醫療檢驗中可用於計算「驗出陽性但其實沒病」的機率",
+          "計算時需要先知道各原因的「事前機率」(prior)"
+        ],
+        "answers": [
+          0,
+          2,
+          3
+        ],
+        "explanation": "貝氏定理可用於多個原因分類(不限兩個),故「只適用於恰好兩個原因分類的情況」這項錯;其餘描述皆正確。"
+      },
+      {
+        "id": "math-u14-q34",
+        "type": "multi",
+        "question": "關於全機率定理與貝氏定理的關係,下列敘述哪些正確?(多選)",
+        "options": [
+          "全機率定理常用來計算貝氏定理中的分母 P(B)",
+          "全機率定理要求各原因事件必須兩兩互斥且其聯集為樣本空間",
+          "貝氏定理可以在完全不知道任何事前機率的情況下計算",
+          "全機率定理可寫成 P(B) = ΣP(Aᵢ)×P(B|Aᵢ)"
         ],
         "answers": [
           0,
           1,
           3
         ],
-        "explanation": "θ 實際上可以是任意實數(含負角、超過360°的角),故「θ 只能為正值,不可為負值或大於360°」這項錯;其餘描述皆正確。"
+        "explanation": "貝氏定理必須要有事前機率P(Aᵢ)才能計算,故「貝氏定理可以在完全不知道任何事前機率的情況下計算」這項錯;其餘描述皆正確。"
       },
       {
-        "id": "math-u16-q33",
-        "type": "multi",
-        "question": "關於複數的極式與棣美弗定理,下列敘述哪些正確?(多選)",
-        "options": [
-          "z=r(cosθ+isinθ) 中,r=|z| 表示複數的絕對值",
-          "棣美弗定理:[r(cosθ+isinθ)]ⁿ=rⁿ(cos(nθ)+isin(nθ))",
-          "複數相乘時,極式的 r 相加、θ 相乘",
-          "複數的輻角 θ 會隨著所在象限不同而有不同的計算方式"
-        ],
-        "answers": [
-          0,
-          1,
-          3
-        ],
-        "explanation": "複數相乘時應為「r相乘、θ相加」(而非r相加θ相乘),故「複數相乘時,極式的 r 相加、θ 相乘」這項錯;其餘描述皆正確。"
-      },
-      {
-        "id": "math-u16-q34",
-        "type": "multi",
-        "question": "關於正弦定理與餘弦定理的應用,下列敘述哪些正確?(多選)",
-        "options": [
-          "正弦定理:a/sinA=b/sinB=c/sinC=2R(R為外接圓半徑)",
-          "餘弦定理:c²=a²+b²-2ab·cosC",
-          "當C=90°時,餘弦定理會退化為畢氏定理",
-          "正弦定理只能用於直角三角形"
-        ],
-        "answers": [
-          0,
-          1,
-          2
-        ],
-        "explanation": "正弦定理適用於任意三角形(不限直角三角形),故「正弦定理只能用於直角三角形」這項錯;其餘描述皆正確。"
-      },
-      {
-        "id": "math-u16-q35",
+        "id": "math-u14-q35",
         "type": "numeric",
-        "question": "兩船從同一港口出發,甲船以正北方向航行,乙船以北偏東60°方向航行,求兩航線之間的夾角(度數)。",
-        "answerText": "60",
-        "explanation": "正北方向與北偏東60°方向之間的夾角即為60°。"
+        "question": "三家供應商供貨比例為 A:50%、B:30%、C:20%,不良率分別為 A:2%、B:4%、C:5%。求任一產品為不良品的機率 P(不良)。(全機率定理)",
+        "answerText": "0.032",
+        "explanation": "P(不良)=0.5×0.02+0.3×0.04+0.2×0.05=0.01+0.012+0.01=0.032。"
       },
       {
-        "id": "math-u16-q36",
+        "id": "math-u14-q36",
         "type": "numeric",
-        "question": "兩船從同一港口出發,兩航線的夾角為 60°。若甲船航行 8 海浬、乙船航行 6 海浬,利用餘弦定理 c²=a²+b²-2ab·cosC,求兩船距離的平方。",
-        "answerText": "52",
-        "explanation": "c²=8²+6²-2×8×6×cos60°=64+36-96×0.5=100-48=52。"
+        "question": "承上題(A:50%/不良率2%、B:30%/不良率4%、C:20%/不良率5%),已知為不良品,求來自供應商A的機率。",
+        "answerText": "0.3125",
+        "explanation": "P(A|不良)=0.01/0.032=0.3125。"
       },
       {
-        "id": "math-u16-q37",
+        "id": "math-u14-q37",
         "type": "numeric",
-        "question": "從距旗桿底30公尺處測得桿頂仰角為45°,求旗桿高度 h(h=水平距離×tan45°)。",
-        "answerText": "30",
-        "explanation": "tan45°=1,h=30×1=30公尺。"
+        "question": "承上題(A:50%/不良率2%、B:30%/不良率4%、C:20%/不良率5%),已知為不良品,求來自供應商B的機率。",
+        "answerText": "0.375",
+        "explanation": "P(B|不良)=0.012/0.032=0.375。"
       },
       {
-        "id": "math-u16-q38",
+        "id": "math-u14-q38",
         "type": "numeric",
-        "question": "三角形土地兩邊長分別為9公尺、12公尺,夾角為60°,利用餘弦定理求第三邊長的平方 c²。",
-        "answerText": "117",
-        "explanation": "c²=9²+12²-2×9×12×cos60°=81+144-216×0.5=225-108=117。"
+        "question": "承上題(A:50%/不良率2%、B:30%/不良率4%、C:20%/不良率5%),求該產品為良品(非不良品)的機率 P(良品)。",
+        "answerText": "0.968",
+        "explanation": "P(良品)=1-P(不良)=1-0.032=0.968。"
       }
     ]
   },
   {
     "id": "math-u17",
     "title": "學測數學混合題型技巧",
-    "category": "高三總複習",
+    "category": "總複習",
     "note": {
       "sections": [
         {
@@ -7064,20 +6542,6 @@ export default {
         "explanation": "a·b=2×1+3×(-1)=2-3=-1。"
       },
       {
-        "id": "math-u17-q28",
-        "type": "numeric",
-        "question": "複數 (1+i)+(2-3i) 的實部為多少?",
-        "answerText": "3",
-        "explanation": "實部相加:1+2=3。"
-      },
-      {
-        "id": "math-u17-q29",
-        "type": "numeric",
-        "question": "承上題((1+i)+(2-3i)),虛部為多少?",
-        "answerText": "-2",
-        "explanation": "虛部相加:1+(-3)=-2。"
-      },
-      {
         "id": "math-u17-q30",
         "question": "二次函數 y=x²-4x+3 與 x 軸的交點有幾個?",
         "options": [
@@ -7088,57 +6552,6 @@ export default {
         ],
         "answer": 2,
         "explanation": "判別式Δ=(-4)²-4×1×3=16-12=4>0,有兩個相異實根,與x軸有2個交點。"
-      },
-      {
-        "id": "math-u17-q31",
-        "type": "multi",
-        "question": "關於學測數學混合題的作答策略,下列敘述哪些正確?(多選)",
-        "options": [
-          "非選擇題即使沒把握算出最終答案,寫出正確解題過程或列式也可能拿到部分分數",
-          "混合題組中,後面小題通常會用到前面小題的答案或觀念",
-          "選擇題與非選擇題的計分方式完全相同",
-          "檢查答案是否符合合理範圍(如長度、機率不能是負數)可快速抓出計算錯誤"
-        ],
-        "answers": [
-          0,
-          1,
-          3
-        ],
-        "explanation": "選擇題通常需完全答對才給分,非選擇題則可依步驟給部分分,計分方式不同,故「選擇題與非選擇題的計分方式完全相同」這項錯;其餘描述皆正確。"
-      },
-      {
-        "id": "math-u17-q32",
-        "type": "multi",
-        "question": "關於圖表判讀題的作答技巧,下列敘述哪些正確?(多選)",
-        "options": [
-          "圖表判讀題通常不需要額外背誦公式,重點是正確讀出數據",
-          "讀圖時應特別注意座標軸的單位與刻度",
-          "圖表判讀題一定比純計算題簡單",
-          "遇到長條圖或折線圖,應先確認橫軸與縱軸各自代表的意義"
-        ],
-        "answers": [
-          0,
-          1,
-          3
-        ],
-        "explanation": "圖表判讀題的難易度視題目設計而定,並非一定比純計算題簡單,故「圖表判讀題一定比純計算題簡單」這項錯;其餘描述皆正確。"
-      },
-      {
-        "id": "math-u17-q33",
-        "type": "multi",
-        "question": "關於考前複習與時間分配,下列敘述哪些正確?(多選)",
-        "options": [
-          "考前衝刺階段建議以限時模擬完整份考古題為主",
-          "應把因「粗心計算錯誤」與因「觀念不熟」的錯題分開處理",
-          "作答時應該從第一題依序作答到最後一題,絕不能跳題",
-          "高一、高二學過的基礎觀念是後續單元的基礎,複習不能略過"
-        ],
-        "answers": [
-          0,
-          1,
-          3
-        ],
-        "explanation": "建議先作答有把握的題目、跳過卡關的題目最後再回來處理,故「作答時應該從第一題依序作答到最後一題,絕不能跳題」這項錯;其餘描述皆正確。"
       },
       {
         "id": "math-u17-q34",
@@ -7180,7 +6593,7 @@ export default {
   {
     "id": "math-u18",
     "title": "歷屆試題主題整理",
-    "category": "高三總複習",
+    "category": "總複習",
     "note": {
       "sections": [
         {
