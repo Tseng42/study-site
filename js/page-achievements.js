@@ -2,7 +2,7 @@
 // 徽章牆塞在個人資料頁裡一次全部攤開,使用者覺得太滿,改成從頭像下拉選單進來)。
 // 「已看過」的標記(NEW 標籤/發光動畫/頭像紅點的清除)只在這一頁做——只有真正
 // 點進來看過完整徽章牆,才算「看過」。
-import { getAchievementState, getNewlyUnlockedIds, computeStats, CATEGORIES } from './achievements.js';
+import { getAchievementState, getNewlyUnlockedIds, CATEGORIES } from './achievements.js';
 import { markAchievementsSeen } from './storage.js';
 import { el, icon, progressBar } from './render.js';
 import { initHeader, renderUserMenu } from './layout.js';
@@ -18,8 +18,7 @@ renderAchievements();
 
 function renderAchievements() {
   const container = document.getElementById('achievements-grid');
-  const stats = computeStats();
-  const achievements = getAchievementState(stats);
+  const achievements = getAchievementState();
   // 先算好這次有哪些是「已解鎖但還沒看過」的,渲染完馬上標記已看過 ——
   // 下次再進這個頁面就不會重複顯示 NEW 標籤/慶祝效果了。
   const newlyUnlocked = new Set(getNewlyUnlockedIds(achievements));
@@ -27,13 +26,6 @@ function renderAchievements() {
   const earnedCount = achievements.filter((a) => a.earned).length;
   const summaryEl = document.getElementById('achievements-summary');
   if (summaryEl) summaryEl.textContent = `${earnedCount}/${achievements.length} 已解鎖`;
-
-  // 標題下一行:目前連續/累積的登入天數跟作答天數(連續的今天還沒來不算斷,見 achievements.js 的 currentRun)。
-  const streakRow = el('div', { class: 'achievements-streaks' }, [
-    el('span', {}, `目前連續登入 ${stats.currentLoginRun} 天・累積登入 ${stats.loginDays} 天`),
-    el('span', {}, `目前連續作答 ${stats.currentStudyRun} 天・累積作答 ${stats.studyDays} 天`),
-  ]);
-  container.before(streakRow);
 
   // 十幾個分類、近兩百張卡片排成一長條,先放一列可以直接跳到各分類的捷徑。
   const jumpRow = el('nav', { class: 'filter-chips filter-chips-scroll', 'aria-label': '成就分類' });

@@ -2,7 +2,7 @@ import { getAllSubjects, getSubject, getUnit, getQuestion } from './subjects-reg
 import { getSubjectProgress, getQuizResults, getExamDate, setExamDate, getMockExamHistory } from './storage.js';
 import { getReviewableWrongQuestions } from './wrong-utils.js';
 import { resolveExamDate, getDaysRemaining } from './study-plan.js';
-import { getAchievementState, getHighestTier, TIER_LABEL } from './achievements.js';
+import { getAchievementState, getHighestTier, computeStats, TIER_LABEL } from './achievements.js';
 import { el, icon } from './render.js';
 import { initHeader, renderUserMenu, formatRelativeDate } from './layout.js';
 import { ensureSignedIn } from './auth.js';
@@ -88,11 +88,16 @@ function renderStats() {
     studyDays.add(new Date(r.takenAt).toDateString());
   }
   const accuracy = totalAnswered ? Math.round((totalCorrect / totalAnswered) * 100) : 0;
+  // 連續/登入天數的算法跟成就徽章共用(見 achievements.js 的 currentRun、loginDays)。
+  const streaks = computeStats();
 
   const tiles = [
     { iconName: 'layers', value: `${completedUnits}/${totalUnits}`, label: '已完成單元' },
     { iconName: 'target', value: `${accuracy}%`, label: '測驗正確率' },
     { iconName: 'trendUp', value: `${studyDays.size}`, label: '已作答天數' },
+    { iconName: 'flame', value: `${streaks.currentStudyRun}`, label: '連續作答天數' },
+    { iconName: 'flame', value: `${streaks.currentLoginRun}`, label: '連續登入天數' },
+    { iconName: 'calendar', value: `${streaks.loginDays}`, label: '累積登入天數' },
   ];
   for (const t of tiles) {
     container.append(

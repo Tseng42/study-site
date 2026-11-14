@@ -778,15 +778,6 @@ a.timeline-row:hover {
 .achievements-categories {
   margin-bottom: 32px;
 }
-.achievements-streaks {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px 16px;
-  margin: -4px 0 12px;
-  font-size: 0.85rem;
-  color: var(--ink-muted);
-  font-variant-numeric: tabular-nums;
-}
 /* 個人資料頁上的成就摘要卡(連去 achievements.html 的完整徽章牆),
    借用 .achievement-card 同一套卡片外觀跟 tier 邊框色。 */
 .achievements-summary-link {
