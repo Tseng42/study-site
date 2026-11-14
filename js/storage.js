@@ -295,6 +295,28 @@ export function markAchievementsSeen(ids) {
   writeJSON('seenAchievements', [...seen]);
 }
 
+// ---- 登入日 ----
+// 有打開網站的日期(本機時區的 YYYY-MM-DD),給「登入天數」成就用。一天只寫一次,
+// 所以一天最多多觸發一次雲端同步。2026-11 才開始記,之前的日子由 achievements.js
+// 拿「有作答的日子」補(有作答一定有登入)。
+function localDateString(date = new Date()) {
+  const pad = (n) => String(n).padStart(2, '0');
+  return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}`;
+}
+
+export function getVisitDays() {
+  return readJSON('visitDays', []);
+}
+
+// 回傳 true 代表今天是第一次記,呼叫端要推一次雲端。
+export function recordVisitDay() {
+  const today = localDateString();
+  const days = getVisitDays();
+  if (days.includes(today)) return false;
+  writeJSON('visitDays', [...days, today].sort());
+  return true;
+}
+
 // ---- 雲端同步用:整包快照存取(見 cloud-sync.js) ----
 
 export function getSnapshot() {
@@ -305,6 +327,7 @@ export function getSnapshot() {
     mockExamHistory: readJSON('mockExamHistory', []),
     examDate: getExamDate(),
     seenAchievements: getSeenAchievements(),
+    visitDays: getVisitDays(),
     updatedAt: localStorage.getItem(key('updatedAt')) || null,
   };
 }
@@ -335,6 +358,7 @@ function contentKey(s) {
     s.mockExamHistory || [],
     s.examDate || null,
     [...(s.seenAchievements || [])].sort(),
+    [...(s.visitDays || [])].sort(),
   ]);
 }
 
@@ -362,6 +386,7 @@ export function mergeSnapshot(remote) {
     mockExamHistory: unionRecords(preferred.mockExamHistory, other.mockExamHistory),
     examDate: preferred.examDate || other.examDate || null,
     seenAchievements: [...new Set([...(local.seenAchievements || []), ...(remote.seenAchievements || [])])],
+    visitDays: [...new Set([...(local.visitDays || []), ...(remote.visitDays || [])])].sort(),
   };
 
   const hasNewForRemote = contentKey(merged) !== contentKey(remote);
@@ -376,6 +401,7 @@ export function mergeSnapshot(remote) {
   localStorage.setItem(key('mockExamHistory'), JSON.stringify(merged.mockExamHistory));
   if (merged.examDate) localStorage.setItem(key('examDate'), JSON.stringify(merged.examDate));
   localStorage.setItem(key('seenAchievements'), JSON.stringify(merged.seenAchievements));
+  localStorage.setItem(key('visitDays'), JSON.stringify(merged.visitDays));
   if (merged.updatedAt) localStorage.setItem(key('updatedAt'), merged.updatedAt);
   return hasNewForRemote;
 }

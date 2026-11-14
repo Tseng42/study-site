@@ -1,5 +1,5 @@
 // 成就徽章系統:全部從既有的進度/測驗/模擬考資料「算出來」,不另外存一份
-// 「解鎖了哪些成就」的狀態 —— 這樣就不用再多同步一種雲端資料,換裝置登入
+// 「解鎖了哪些成就」的狀態(唯一例外是登入天數,要另外記「哪天有打開網站」,見 storage.js 的 recordVisitDay) —— 這樣就不用再多同步一種雲端資料,換裝置登入
 // 直接用當下的作答資料重新算一次就跟原本裝置一致。
 //
 // 每個成就有一個 tier(bronze/silver/gold/diamond),頭像外框顏色用「目前
@@ -26,6 +26,7 @@ import {
   getMockExamHistory,
   getMasteredCount,
   getSeenAchievements,
+  getVisitDays,
 } from './storage.js';
 import { subjectsMeta } from '../data/subjects-meta.js';
 import { fiveStandardsReference } from '../data/mock-exam-config.js';
@@ -147,6 +148,19 @@ const CORE_ACHIEVEMENTS = [
   counter({ id: 'run-30', title: '月度連勝', tier: 'gold', category: 'habit', icon: 'flame', desc: '連續 30 天每天都有作答紀錄', stat: 'longestRun', target: 30, unit: '天' }),
   counter({ id: 'run-60', title: '雙月連勝', tier: 'gold', category: 'habit', icon: 'flame', desc: '連續 60 天每天都有作答紀錄', stat: 'longestRun', target: 60, unit: '天' }),
   counter({ id: 'run-100', title: '百日連勝', tier: 'diamond', category: 'habit', icon: 'flame', desc: '連續 100 天每天都有作答紀錄', stat: 'longestRun', target: 100, unit: '天' }),
+
+  // ---- 讀書習慣:登入天數(2026-11 加)----
+  // 只要有打開網站就算,不一定要作答;2026-11 以前的日子用「有作答的日子」補。
+  // 使用者選了只做學測前(約 60 天內)拿得到的門檻。
+  counter({ id: 'login-days-7', title: '報到一週', tier: 'bronze', category: 'habit', icon: 'calendar', desc: '累積 7 天有登入', stat: 'loginDays', target: 7, unit: '天' }),
+  counter({ id: 'login-days-14', title: '報到兩週', tier: 'bronze', category: 'habit', icon: 'calendar', desc: '累積 14 天有登入', stat: 'loginDays', target: 14, unit: '天' }),
+  counter({ id: 'login-days-30', title: '報到一個月', tier: 'silver', category: 'habit', icon: 'calendar', desc: '累積 30 天有登入', stat: 'loginDays', target: 30, unit: '天' }),
+  counter({ id: 'login-days-45', title: '報到四十五天', tier: 'silver', category: 'habit', icon: 'calendar', desc: '累積 45 天有登入', stat: 'loginDays', target: 45, unit: '天' }),
+  counter({ id: 'login-days-60', title: '報到兩個月', tier: 'gold', category: 'habit', icon: 'calendar', desc: '累積 60 天有登入', stat: 'loginDays', target: 60, unit: '天' }),
+  counter({ id: 'login-run-3', title: '連續報到 3 天', tier: 'bronze', category: 'habit', icon: 'flame', desc: '連續 3 天每天都有登入', stat: 'longestLoginRun', target: 3, unit: '天' }),
+  counter({ id: 'login-run-7', title: '連續報到一週', tier: 'bronze', category: 'habit', icon: 'flame', desc: '連續 7 天每天都有登入', stat: 'longestLoginRun', target: 7, unit: '天' }),
+  counter({ id: 'login-run-14', title: '連續報到兩週', tier: 'silver', category: 'habit', icon: 'flame', desc: '連續 14 天每天都有登入', stat: 'longestLoginRun', target: 14, unit: '天' }),
+  counter({ id: 'login-run-30', title: '連續報到一個月', tier: 'gold', category: 'habit', icon: 'flame', desc: '連續 30 天每天都有登入', stat: 'longestLoginRun', target: 30, unit: '天' }),
 
   // ---- 錯題本 ----
   counter({ id: 'mastered-1', title: '第一次訂正', tier: 'bronze', category: 'wrongbook', icon: 'flag', desc: '在錯題本標記第 1 題已熟練', stat: 'masteredCount', target: 1, unit: '題' }),
@@ -354,6 +368,24 @@ function dayIndexOf(date) {
   return Math.floor(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()) / 86400000);
 }
 
+// 到今天為止連續幾天:今天還沒來不算斷(只要昨天有),過了今天才歸零。
+function currentRun(daySet) {
+  const today = dayIndexOf(new Date());
+  let d = daySet.has(today) ? today : today - 1;
+  let run = 0;
+  while (daySet.has(d)) {
+    run += 1;
+    d -= 1;
+  }
+  return run;
+}
+
+// storage.js 存的登入日是本機時區的 YYYY-MM-DD,換成跟 dayIndexOf 一樣的整數。
+function dayIndexOfDateString(str) {
+  const [y, m, d] = str.split('-').map(Number);
+  return Math.floor(Date.UTC(y, m - 1, d) / 86400000);
+}
+
 function longestRun(dayIndexes) {
   const sorted = [...dayIndexes].sort((a, b) => a - b);
   let best = 0;
@@ -479,6 +511,8 @@ export function computeStats() {
   const dayIndexes = [...dayStats.keys()];
   const maxDayAnswered = dayList.reduce((max, d) => Math.max(max, d.count), 0);
   const maxDaySubjects = dayList.reduce((max, d) => Math.max(max, d.subjects.size), 0);
+  // 登入日 = 有記到的登入日 ∪ 有作答的日子(有作答一定有登入,也補上開始記登入以前的日子)。
+  const loginDaySet = new Set([...getVisitDays().map(dayIndexOfDateString).filter(Number.isFinite), ...dayIndexes]);
   const longestHeavyRun = longestRun(dayIndexes.filter((d) => dayStats.get(d).count >= 100));
   // 週六(getUTCDay()===6)的隔天週日也有作答,算同一個週末。
   let retestImproved = false;
@@ -537,6 +571,10 @@ export function computeStats() {
     accuracy,
     studyDays: dayStats.size,
     longestRun: longestRun(dayIndexes),
+    currentStudyRun: currentRun(new Set(dayIndexes)),
+    loginDays: loginDaySet.size,
+    longestLoginRun: longestRun([...loginDaySet]),
+    currentLoginRun: currentRun(loginDaySet),
     masteredCount: getMasteredCount(),
     wrongCount: getReviewableWrongQuestions().length,
     minSubjectPercent: subjectPercents.length ? Math.min(...subjectPercents) : 0,
@@ -573,8 +611,8 @@ export function computeStats() {
 
 // 每個成就加上 earned(布林)、progress(給還沒解鎖的成就看目前進度到哪的文字)、
 // ratio(0~1 的進度比例,給進度條用;算不出比例的成就是 null)。
-export function getAchievementState() {
-  const stats = computeStats();
+// 已經算過 computeStats() 的呼叫端可以把結果傳進來,省掉再算一次。
+export function getAchievementState(stats = computeStats()) {
   return ACHIEVEMENTS.map((a) => ({
     ...a,
     earned: a.check(stats),

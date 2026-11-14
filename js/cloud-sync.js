@@ -9,7 +9,7 @@ import {
   getDoc,
   setDoc,
 } from 'https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js';
-import { getSnapshot, mergeSnapshot, getLocalUpdatedAt, getContentFingerprint, onChange, setActiveUser } from './storage.js';
+import { getSnapshot, mergeSnapshot, getLocalUpdatedAt, getContentFingerprint, onChange, setActiveUser, recordVisitDay } from './storage.js';
 
 let currentUid = null;
 let pushTimer = null;
@@ -53,6 +53,9 @@ export async function initCloudSync(uid) {
     })
     .finally(() => {
       syncReady = true;
+      // 記下「今天有登入」(登入天數成就用)。等跟雲端合併完才寫,不然網路慢的時候
+      // 這筆寫入會讓本機 updatedAt 比雲端新,合併時本機的舊進度反而優先。
+      if (recordVisitDay()) pendingPush = true;
       if (pendingPush) {
         pendingPush = false;
         scheduleCloudPush();
