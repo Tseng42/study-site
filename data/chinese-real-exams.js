@@ -35,7 +35,7 @@ export const chineseRealExams = [
           "「剜」肉補瘡／壯士斷「腕」"
         ],
         "answer": 0,
-        "explanation": "(111學測國文第1題,官方答案A)"
+        "explanation": "(111學測國文第1題)"
       },
       {
         "id": "chinese-real-111-q2",
@@ -49,7 +49,7 @@ export const chineseRealExams = [
           "有些人誤以為投資一本萬利,因而錯判形勢,終至傾家蕩產"
         ],
         "answer": 1,
-        "explanation": "(111學測國文第2題,官方答案B)"
+        "explanation": "(111學測國文第2題)"
       },
       {
         "id": "chinese-real-111-q3",
@@ -63,7 +63,7 @@ export const chineseRealExams = [
           "他們陷入進退維谷的狀態,心慌意亂,難以抉擇"
         ],
         "answer": 0,
-        "explanation": "(111學測國文第3題,官方答案A)"
+        "explanation": "(111學測國文第3題)"
       },
       {
         "id": "chinese-real-111-q4",
@@ -77,7 +77,7 @@ export const chineseRealExams = [
           "大正六年,已有逾半數族人移住他鄉,且多遷居豬勝束社"
         ],
         "answer": 2,
-        "explanation": "(111學測國文第4題,官方答案C)"
+        "explanation": "(111學測國文第4題)"
       },
       {
         "id": "chinese-real-111-q5",
@@ -91,7 +91,7 @@ export const chineseRealExams = [
           "應契合社會公認的審美內涵"
         ],
         "answer": 0,
-        "explanation": "(111學測國文第5題,官方答案A)"
+        "explanation": "(111學測國文第5題)"
       },
       {
         "id": "chinese-real-111-q6",
@@ -105,7 +105,7 @@ export const chineseRealExams = [
           "朗朗／瑟瑟／纖纖"
         ],
         "answer": 1,
-        "explanation": "(111學測國文第6題,官方答案B)"
+        "explanation": "(111學測國文第6題)"
       },
       {
         "id": "chinese-real-111-q7",
@@ -119,7 +119,7 @@ export const chineseRealExams = [
           "吳王為爭奪它派遣軍隊攻越"
         ],
         "answer": 1,
-        "explanation": "(111學測國文第7題,官方答案B)"
+        "explanation": "(111學測國文第7題)"
       },
       {
         "id": "chinese-real-111-q8",
@@ -133,7 +133,7 @@ export const chineseRealExams = [
           "貧窮到無法自給之人與九十歲以上待養的長者,適用同樣的紓困方案"
         ],
         "answer": 1,
-        "explanation": "(111學測國文第8題,官方答案B)"
+        "explanation": "(111學測國文第8題)"
       },
       {
         "id": "chinese-real-111-q9",
@@ -150,7 +150,7 @@ export const chineseRealExams = [
           "《康熙字典》釋為女子寫得一手好字"
         ],
         "answer": 2,
-        "explanation": "(111學測國文第9題,官方答案C)"
+        "explanation": "(111學測國文第9題)"
       },
       {
         "id": "chinese-real-111-q10",
@@ -167,7 +167,7 @@ export const chineseRealExams = [
           "相較於从女从貞的寓意,作者更喜愛女巫形象"
         ],
         "answer": 1,
-        "explanation": "(111學測國文第10題,官方答案B)"
+        "explanation": "(111學測國文第10題)"
       },
       {
         "id": "chinese-real-111-q11",
@@ -181,7 +181,7 @@ export const chineseRealExams = [
           "①③④⑤⑥若不出現,亦可清楚表達而不影響語意"
         ],
         "answer": 1,
-        "explanation": "(111學測國文第11題,官方答案B)"
+        "explanation": "(111學測國文第11題)"
       },
       {
         "id": "chinese-real-111-q12",
@@ -198,7 +198,7 @@ export const chineseRealExams = [
           "早年已悟繁華如夢,遂於書中深自懺悔"
         ],
         "answer": 0,
-        "explanation": "(111學測國文第12題,官方答案A)"
+        "explanation": "(111學測國文第12題)"
       },
       {
         "id": "chinese-real-111-q13",
@@ -215,7 +215,7 @@ export const chineseRealExams = [
           "寒士名落孫山,對於學識缺乏信心,疑其非夢"
         ],
         "answer": 2,
-        "explanation": "此題官方答案為(C)「腳夫失足破甕,無以償,寧願相信這是一場夢;寒士鄉試中式,反倒懷疑自己是不是在作夢——兩人面對眼前的境遇(不論好壞),都寧可把它當成一場夢,藉此獲得心理上的解脫,展現的是癡人式的豁達。(111學測國文第13題,官方答案C)』"
+        "explanation": "腳夫失足破甕,無以償,寧願相信這是一場夢;寒士鄉試中式,反倒懷疑自己是不是在作夢——兩人面對眼前的境遇(不論好壞),都寧可把它當成一場夢,藉此獲得心理上的解脫,展現的是癡人式的豁達,對應「腳夫和寒士各以豁達心境待人接物,均非真事」這個選項。(111學測國文第13題)"
       },
       {
         "id": "chinese-real-111-q14",
@@ -232,7 +232,7 @@ export const chineseRealExams = [
           "以率意塗抹謙稱自己的畫作,凸顯想要創作的欲望非常強烈"
         ],
         "answer": 0,
-        "explanation": "(111學測國文第14題,官方答案A)"
+        "explanation": "(111學測國文第14題)"
       },
       {
         "id": "chinese-real-111-q15",
@@ -249,7 +249,7 @@ export const chineseRealExams = [
           "女子創作可不忌裁紅刻翠,但直寫自己的真誠感受"
         ],
         "answer": 3,
-        "explanation": "(111學測國文第15題,官方答案D)"
+        "explanation": "(111學測國文第15題)"
       },
       {
         "id": "chinese-real-111-q16",
@@ -266,7 +266,7 @@ export const chineseRealExams = [
           "乙文所舉前輩作家,較甲文所舉前輩作家更具破除當時性別刻板印象的意味"
         ],
         "answer": 2,
-        "explanation": "(111學測國文第16題,官方答案C)"
+        "explanation": "(111學測國文第16題)"
       },
       {
         "id": "chinese-real-111-q17",
@@ -283,7 +283,7 @@ export const chineseRealExams = [
           "游宦成羈旅。短檣吟倚閒愁疊。萬水千山迷遠近,想鄉關何處"
         ],
         "answer": 1,
-        "explanation": "(111學測國文第17題,官方答案B)"
+        "explanation": "(111學測國文第17題)"
       },
       {
         "id": "chinese-real-111-q18",
@@ -300,7 +300,7 @@ export const chineseRealExams = [
           "近世「厭」常而反古,專尚奇麗。吾為衣食所迫,不能免俗"
         ],
         "answer": 0,
-        "explanation": "(111學測國文第18題,官方答案A)"
+        "explanation": "(111學測國文第18題)"
       },
       {
         "id": "chinese-real-111-q19",
@@ -317,7 +317,7 @@ export const chineseRealExams = [
           "芮季和君子相同,都認為芮伯之舉使王想得更多馬"
         ],
         "answer": 3,
-        "explanation": "(111學測國文第19題,官方答案D)"
+        "explanation": "(111學測國文第19題)"
       },
       {
         "id": "chinese-real-111-q20",
@@ -334,7 +334,7 @@ export const chineseRealExams = [
           "妻子姓陳,仙逝較早,故於鄭崇和過世後同葬"
         ],
         "answer": 2,
-        "explanation": "(111學測國文第20題,官方答案C)"
+        "explanation": "(111學測國文第20題)"
       },
       {
         "id": "chinese-real-111-q21",
@@ -351,7 +351,7 @@ export const chineseRealExams = [
           "「祀鄉賢祠」記於墓碑,可見既是當時官方認可功績,家族也視為無上光榮"
         ],
         "answer": 3,
-        "explanation": "(111學測國文第21題,官方答案D)"
+        "explanation": "(111學測國文第21題)"
       },
       {
         "id": "chinese-real-111-q22",
@@ -368,7 +368,7 @@ export const chineseRealExams = [
           "①無法判斷,②正確"
         ],
         "answer": 3,
-        "explanation": "(111學測國文第22題,官方答案D)"
+        "explanation": "(111學測國文第22題)"
       },
       {
         "id": "chinese-real-111-q23",
@@ -385,7 +385,7 @@ export const chineseRealExams = [
           "小人不畏天命,遂輕慢位高權重之人"
         ],
         "answer": 2,
-        "explanation": "(111學測國文第23題,官方答案C)"
+        "explanation": "(111學測國文第23題)"
       },
       {
         "id": "chinese-real-111-q24",
@@ -402,7 +402,7 @@ export const chineseRealExams = [
           "楊素:奢貴自奉,禮異人臣。每公卿入言,賓客上謁,未嘗踞床而見"
         ],
         "answer": 3,
-        "explanation": "(111學測國文第24題,官方答案D)"
+        "explanation": "(111學測國文第24題)"
       },
       {
         "id": "chinese-real-111-q25",
@@ -419,7 +419,7 @@ export const chineseRealExams = [
           "孟子提出藐大人的說法,是因自己本無意於大人之位"
         ],
         "answer": 2,
-        "explanation": "(111學測國文第25題,官方答案C)"
+        "explanation": "(111學測國文第25題)"
       },
       {
         "id": "chinese-real-111-q26",
@@ -438,7 +438,7 @@ export const chineseRealExams = [
           1,
           3
         ],
-        "explanation": "(111學測國文第26題,官方答案BD)"
+        "explanation": "(111學測國文第26題)"
       },
       {
         "id": "chinese-real-111-q27",
@@ -458,7 +458,7 @@ export const chineseRealExams = [
           3,
           4
         ],
-        "explanation": "(111學測國文第27題,官方答案ADE)"
+        "explanation": "(111學測國文第27題)"
       },
       {
         "id": "chinese-real-111-q28",
@@ -477,7 +477,7 @@ export const chineseRealExams = [
           2,
           4
         ],
-        "explanation": "(111學測國文第28題,官方答案CE)"
+        "explanation": "(111學測國文第28題)"
       },
       {
         "id": "chinese-real-111-q29",
@@ -497,7 +497,7 @@ export const chineseRealExams = [
           1,
           2
         ],
-        "explanation": "(111學測國文第29題,官方答案ABC)"
+        "explanation": "(111學測國文第29題)"
       },
       {
         "id": "chinese-real-111-q30",
@@ -517,7 +517,7 @@ export const chineseRealExams = [
           1,
           3
         ],
-        "explanation": "(111學測國文第30題,官方答案ABD)"
+        "explanation": "(111學測國文第30題)"
       },
       {
         "id": "chinese-real-111-q31",
@@ -539,7 +539,7 @@ export const chineseRealExams = [
           2,
           4
         ],
-        "explanation": "(111學測國文第31題,官方答案CE)"
+        "explanation": "(111學測國文第31題)"
       },
       {
         "id": "chinese-real-111-q32",
@@ -561,7 +561,7 @@ export const chineseRealExams = [
           0,
           1
         ],
-        "explanation": "(111學測國文第32題,官方答案AB)"
+        "explanation": "(111學測國文第32題)"
       },
       {
         "id": "chinese-real-111-q33",
@@ -578,7 +578,7 @@ export const chineseRealExams = [
           "甲文藉妻「揶揄」與王生「慚忿」的對比,凸顯王生的愧疚;乙文藉宋清遠「謝」與友人「悵然」的對比,凸顯宋清遠的清高"
         ],
         "answer": 1,
-        "explanation": "(111學測國文第33題,占2分單選,官方答案B)"
+        "explanation": "(111學測國文第33題,占2分單選)"
       },
       {
         "id": "chinese-real-111-q34",
@@ -628,7 +628,7 @@ export const chineseRealExams = [
           "①②④"
         ],
         "answer": 1,
-        "explanation": "(111學測國文第37題,占2分單選,官方答案B)"
+        "explanation": "(111學測國文第37題,占2分單選)"
       }
     ],
   },
@@ -656,7 +656,7 @@ export const chineseRealExams = [
           "「吁」嗟而去／「迂」談闊論"
         ],
         "answer": 0,
-        "explanation": "(112學測國文第1題,官方答案A)"
+        "explanation": "(112學測國文第1題)"
       },
       {
         "id": "chinese-real-112-q2",
@@ -670,7 +670,7 @@ export const chineseRealExams = [
           "天燈乘載大家的願望,在歡呼聲中冉冉升空"
         ],
         "answer": 2,
-        "explanation": "(112學測國文第2題,官方答案C)"
+        "explanation": "(112學測國文第2題)"
       },
       {
         "id": "chinese-real-112-q3",
@@ -684,7 +684,7 @@ export const chineseRealExams = [
           "闖過準決賽就能占到得隴望蜀的位置,可望角逐冠軍"
         ],
         "answer": 0,
-        "explanation": "(112學測國文第3題,官方答案A)"
+        "explanation": "(112學測國文第3題)"
       },
       {
         "id": "chinese-real-112-q4",
@@ -701,7 +701,7 @@ export const chineseRealExams = [
           "李白有不少詩是因問候、懷想親友而寫,但對象不含王維"
         ],
         "answer": 3,
-        "explanation": "(112學測國文第4題,官方答案D)"
+        "explanation": "(112學測國文第4題)"
       },
       {
         "id": "chinese-real-112-q5",
@@ -715,7 +715,7 @@ export const chineseRealExams = [
           "甲:受話者處於被辜負的角色;乙:受話者處於辜負人的角色"
         ],
         "answer": 3,
-        "explanation": "(112學測國文第5題,官方答案D)"
+        "explanation": "(112學測國文第5題)"
       },
       {
         "id": "chinese-real-112-q6",
@@ -729,7 +729,7 @@ export const chineseRealExams = [
           "尤所難免／疑懼／伺守"
         ],
         "answer": 3,
-        "explanation": "(112學測國文第6題,官方答案D)"
+        "explanation": "(112學測國文第6題)"
       },
       {
         "id": "chinese-real-112-q7",
@@ -743,7 +743,7 @@ export const chineseRealExams = [
           "料理講究發揮個別的特長,作文亦以呈顯本色為尚"
         ],
         "answer": 3,
-        "explanation": "(112學測國文第7題,官方答案D)"
+        "explanation": "(112學測國文第7題)"
       },
       {
         "id": "chinese-real-112-q8",
@@ -760,7 +760,7 @@ export const chineseRealExams = [
           "不可等閒視之,而是應該追蹤的警訊"
         ],
         "answer": 0,
-        "explanation": "(112學測國文第8題,官方答案A)"
+        "explanation": "(112學測國文第8題)"
       },
       {
         "id": "chinese-real-112-q9",
@@ -777,7 +777,7 @@ export const chineseRealExams = [
           "以三人觀點的出現順序,隱然表達對製造「狼英雄」的質疑"
         ],
         "answer": 3,
-        "explanation": "(112學測國文第9題,官方答案D)"
+        "explanation": "(112學測國文第9題)"
       },
       {
         "id": "chinese-real-112-q10",
@@ -794,7 +794,7 @@ export const chineseRealExams = [
           "木星、土星與太陽的距離,較地球與太陽的距離遠"
         ],
         "answer": 2,
-        "explanation": "(112學測國文第10題,官方答案C)"
+        "explanation": "(112學測國文第10題)"
       },
       {
         "id": "chinese-real-112-q11",
@@ -811,7 +811,7 @@ export const chineseRealExams = [
           "古人只知木星、土星同向移動,不知二者會逆向靠近"
         ],
         "answer": 2,
-        "explanation": "(112學測國文第11題,官方答案C)"
+        "explanation": "(112學測國文第11題)"
       },
       {
         "id": "chinese-real-112-q12",
@@ -828,7 +828,7 @@ export const chineseRealExams = [
           "歲星與填星鬥,此謂離德,不出三月,必有亡國"
         ],
         "answer": 0,
-        "explanation": "(112學測國文第12題,官方答案A)"
+        "explanation": "(112學測國文第12題)"
       },
       {
         "id": "chinese-real-112-q13",
@@ -845,7 +845,7 @@ export const chineseRealExams = [
           "丁"
         ],
         "answer": 1,
-        "explanation": "(112學測國文第13題,官方答案B)"
+        "explanation": "(112學測國文第13題)"
       },
       {
         "id": "chinese-real-112-q14",
@@ -862,7 +862,7 @@ export const chineseRealExams = [
           "濃翠亮麗點綴暗沉砂石,凸顯庭園色澤對比"
         ],
         "answer": 2,
-        "explanation": "(112學測國文第14題,官方答案C)"
+        "explanation": "(112學測國文第14題)"
       },
       {
         "id": "chinese-real-112-q15",
@@ -879,7 +879,7 @@ export const chineseRealExams = [
           "從軍民齊心的優勢判斷可無懼陸戰"
         ],
         "answer": 1,
-        "explanation": "(112學測國文第15題,官方答案B)"
+        "explanation": "(112學測國文第15題)"
       },
       {
         "id": "chinese-real-112-q16",
@@ -896,7 +896,7 @@ export const chineseRealExams = [
           "①無法判斷,②符合"
         ],
         "answer": 0,
-        "explanation": "(112學測國文第16題,官方答案A)"
+        "explanation": "(112學測國文第16題)"
       },
       {
         "id": "chinese-real-112-q17",
@@ -913,7 +913,7 @@ export const chineseRealExams = [
           "外援力量"
         ],
         "answer": 3,
-        "explanation": "(112學測國文第17題,官方答案D)"
+        "explanation": "(112學測國文第17題)"
       },
       {
         "id": "chinese-real-112-q18",
@@ -930,7 +930,7 @@ export const chineseRealExams = [
           "訓誨陸游之言響若鐘鳴,示現剛毅氣節,令人激昂"
         ],
         "answer": 2,
-        "explanation": "(112學測國文第18題,官方答案C)"
+        "explanation": "(112學測國文第18題)"
       },
       {
         "id": "chinese-real-112-q19",
@@ -947,7 +947,7 @@ export const chineseRealExams = [
           "追述昔日共聚議事的情景,感嘆故人遠謫而難再見"
         ],
         "answer": 2,
-        "explanation": "(112學測國文第19題,官方答案C)"
+        "explanation": "(112學測國文第19題)"
       },
       {
         "id": "chinese-real-112-q20",
@@ -964,7 +964,7 @@ export const chineseRealExams = [
           "三人移席,漸入月中。眾視三人坐月中飲,鬚眉畢見,如影之在鏡中"
         ],
         "answer": 1,
-        "explanation": "(112學測國文第20題,官方答案B)"
+        "explanation": "(112學測國文第20題)"
       },
       {
         "id": "chinese-real-112-q21",
@@ -981,7 +981,7 @@ export const chineseRealExams = [
           "菲飲食,而致孝乎鬼神;惡衣服,而致美乎黻冕"
         ],
         "answer": 1,
-        "explanation": "(112學測國文第21題,官方答案B)"
+        "explanation": "(112學測國文第21題)"
       },
       {
         "id": "chinese-real-112-q22",
@@ -998,7 +998,7 @@ export const chineseRealExams = [
           "讀書之樂來自探求作品真實體會,進而連結經典與以形成興發的力量"
         ],
         "answer": 1,
-        "explanation": "(112學測國文第22題,官方答案B)"
+        "explanation": "(112學測國文第22題)"
       },
       {
         "id": "chinese-real-112-q23",
@@ -1015,7 +1015,7 @@ export const chineseRealExams = [
           "世界衛生組織證實檳榔鹼會刺激腎上腺素分泌,致食用成癮"
         ],
         "answer": 1,
-        "explanation": "(112學測國文第23題,官方答案B)"
+        "explanation": "(112學測國文第23題)"
       },
       {
         "id": "chinese-real-112-q24",
@@ -1032,7 +1032,7 @@ export const chineseRealExams = [
           "二文皆提及食用者親身經驗,點出嚼食檳榔後的成癮現象"
         ],
         "answer": 3,
-        "explanation": "(112學測國文第24題,官方答案D)"
+        "explanation": "(112學測國文第24題)"
       },
       {
         "id": "chinese-real-112-q25",
@@ -1049,7 +1049,7 @@ export const chineseRealExams = [
           "淡可療飢醫苦口,津能分潤滴枯腸"
         ],
         "answer": 1,
-        "explanation": "(112學測國文第25題,官方答案B)"
+        "explanation": "(112學測國文第25題)"
       },
       {
         "id": "chinese-real-112-q26",
@@ -1068,7 +1068,7 @@ export const chineseRealExams = [
           0,
           1
         ],
-        "explanation": "(112學測國文第26題,官方答案AB)"
+        "explanation": "(112學測國文第26題)"
       },
       {
         "id": "chinese-real-112-q27",
@@ -1088,7 +1088,7 @@ export const chineseRealExams = [
           1,
           2
         ],
-        "explanation": "(112學測國文第27題,官方答案ABC)"
+        "explanation": "(112學測國文第27題)"
       },
       {
         "id": "chinese-real-112-q28",
@@ -1108,7 +1108,7 @@ export const chineseRealExams = [
           2,
           3
         ],
-        "explanation": "(112學測國文第28題,官方答案BCD)"
+        "explanation": "(112學測國文第28題)"
       },
       {
         "id": "chinese-real-112-q29",
@@ -1127,7 +1127,7 @@ export const chineseRealExams = [
           1,
           4
         ],
-        "explanation": "(112學測國文第29題,官方答案BE)"
+        "explanation": "(112學測國文第29題)"
       },
       {
         "id": "chinese-real-112-q30",
@@ -1146,7 +1146,7 @@ export const chineseRealExams = [
           1,
           4
         ],
-        "explanation": "(112學測國文第30題,官方答案BE)"
+        "explanation": "(112學測國文第30題)"
       },
       {
         "id": "chinese-real-112-q31",
@@ -1169,7 +1169,7 @@ export const chineseRealExams = [
           2,
           4
         ],
-        "explanation": "(112學測國文第31題,官方答案BCE)"
+        "explanation": "(112學測國文第31題)"
       },
       {
         "id": "chinese-real-112-q32",
@@ -1192,7 +1192,7 @@ export const chineseRealExams = [
           3,
           4
         ],
-        "explanation": "(112學測國文第32題,官方答案BDE)"
+        "explanation": "(112學測國文第32題)"
       },
       {
         "id": "chinese-real-112-q33",
@@ -1220,7 +1220,7 @@ export const chineseRealExams = [
           "二文皆主張藉由同情共感的體證,可消解字面理解障礙"
         ],
         "answer": 0,
-        "explanation": "(112學測國文第34題,占2分單選,官方答案A)"
+        "explanation": "(112學測國文第34題,占2分單選)"
       },
       {
         "id": "chinese-real-112-q35",
@@ -1248,7 +1248,7 @@ export const chineseRealExams = [
           "瞄準市場需求,審慎投注資源"
         ],
         "answer": 0,
-        "explanation": "(112學測國文第36題,占2分單選,官方答案A)"
+        "explanation": "(112學測國文第36題,占2分單選)"
       },
       {
         "id": "chinese-real-112-q37",
@@ -1287,7 +1287,7 @@ export const chineseRealExams = [
           "切勿「逡」巡／為惡不「悛」"
         ],
         "answer": 0,
-        "explanation": "(113學測國文第1題,官方答案A)"
+        "explanation": "(113學測國文第1題)"
       },
       {
         "id": "chinese-real-113-q2",
@@ -1301,7 +1301,7 @@ export const chineseRealExams = [
           "離鄉背井的學子負趿北上,在外租屋不易"
         ],
         "answer": 0,
-        "explanation": "(113學測國文第2題,官方答案A)"
+        "explanation": "(113學測國文第2題)"
       },
       {
         "id": "chinese-real-113-q3",
@@ -1315,7 +1315,7 @@ export const chineseRealExams = [
           "以禮樂形式中所隱含的精神,改變子路的浮躁好勇"
         ],
         "answer": 2,
-        "explanation": "(113學測國文第3題,官方答案C)"
+        "explanation": "(113學測國文第3題)"
       },
       {
         "id": "chinese-real-113-q4",
@@ -1329,7 +1329,7 @@ export const chineseRealExams = [
           "偏才不足以經周用,隻長不足以濟眾短"
         ],
         "answer": 3,
-        "explanation": "(113學測國文第4題,官方答案D)"
+        "explanation": "(113學測國文第4題)"
       },
       {
         "id": "chinese-real-113-q5",
@@ -1343,7 +1343,7 @@ export const chineseRealExams = [
           "丙乙丁甲"
         ],
         "answer": 3,
-        "explanation": "(113學測國文第5題,官方答案D)"
+        "explanation": "(113學測國文第5題)"
       },
       {
         "id": "chinese-real-113-q6",
@@ -1360,7 +1360,7 @@ export const chineseRealExams = [
           "婚前:娘樓是女性接受體制外知識之處;婚後:娘樓是女性情感寄託的依憑"
         ],
         "answer": 3,
-        "explanation": "(113學測國文第6題,官方答案D)"
+        "explanation": "(113學測國文第6題)"
       },
       {
         "id": "chinese-real-113-q7",
@@ -1377,7 +1377,7 @@ export const chineseRealExams = [
           "藉由女書音聲與表意的交織,女性藉以面對現實困境、悲訴社會的不公"
         ],
         "answer": 2,
-        "explanation": "(113學測國文第7題,官方答案C)"
+        "explanation": "(113學測國文第7題)"
       },
       {
         "id": "chinese-real-113-q8",
@@ -1394,7 +1394,7 @@ export const chineseRealExams = [
           "他娘心中用計策,暗中叫子到別州。瞞起佗身不知得,不知丈夫到哪方"
         ],
         "answer": 1,
-        "explanation": "(113學測國文第8題,官方答案B)"
+        "explanation": "(113學測國文第8題)"
       },
       {
         "id": "chinese-real-113-q9",
@@ -1411,7 +1411,7 @@ export const chineseRealExams = [
           "人們不在意字型美醜"
         ],
         "answer": 1,
-        "explanation": "(113學測國文第9題,官方答案B)"
+        "explanation": "(113學測國文第9題)"
       },
       {
         "id": "chinese-real-113-q10",
@@ -1428,7 +1428,7 @@ export const chineseRealExams = [
           "撰寫學術報告為彰顯專業且予人簡潔的感受,宜選用黑體"
         ],
         "answer": 0,
-        "explanation": "(113學測國文第10題,官方答案A)"
+        "explanation": "(113學測國文第10題)"
       },
       {
         "id": "chinese-real-113-q11",
@@ -1445,7 +1445,7 @@ export const chineseRealExams = [
           "藉陳述感染者與未感染者的體悟,隱含盲與不盲無須分辨的論述"
         ],
         "answer": 2,
-        "explanation": "(113學測國文第11題,官方答案C)"
+        "explanation": "(113學測國文第11題)"
       },
       {
         "id": "chinese-real-113-q12",
@@ -1462,7 +1462,7 @@ export const chineseRealExams = [
           "①無法判斷,②符合"
         ],
         "answer": 0,
-        "explanation": "(113學測國文第12題,官方答案A)"
+        "explanation": "(113學測國文第12題)"
       },
       {
         "id": "chinese-real-113-q13",
@@ -1479,7 +1479,7 @@ export const chineseRealExams = [
           "丁"
         ],
         "answer": 1,
-        "explanation": "(113學測國文第13題,官方答案B)"
+        "explanation": "(113學測國文第13題)"
       },
       {
         "id": "chinese-real-113-q14",
@@ -1496,7 +1496,7 @@ export const chineseRealExams = [
           "《世說新語》增加里人相慶、周處聞知情節,以突出周處悔悟自新的轉折"
         ],
         "answer": 2,
-        "explanation": "(113學測國文第14題,官方答案C)"
+        "explanation": "(113學測國文第14題)"
       },
       {
         "id": "chinese-real-113-q15",
@@ -1513,7 +1513,7 @@ export const chineseRealExams = [
           "三害概念模仿傳說,將猛虎惡蛟轉為兩大通緝要犯,並創發貪嗔痴的新義"
         ],
         "answer": 3,
-        "explanation": "(113學測國文第15題,官方答案D)"
+        "explanation": "(113學測國文第15題)"
       },
       {
         "id": "chinese-real-113-q16",
@@ -1530,7 +1530,7 @@ export const chineseRealExams = [
           "賈政認為寶玉應該為家人興建與世無爭、遠離廟堂的烏托邦"
         ],
         "answer": 0,
-        "explanation": "(113學測國文第16題,官方答案A)"
+        "explanation": "(113學測國文第16題)"
       },
       {
         "id": "chinese-real-113-q17",
@@ -1547,7 +1547,7 @@ export const chineseRealExams = [
           "指出在現實人生中,可以選擇浪漫地或理性地過生活"
         ],
         "answer": 1,
-        "explanation": "(113學測國文第17題,官方答案B)"
+        "explanation": "(113學測國文第17題)"
       },
       {
         "id": "chinese-real-113-q18",
@@ -1564,7 +1564,7 @@ export const chineseRealExams = [
           "情緒訊號系統總是開啟的,通常從身體動作最先出現訊號"
         ],
         "answer": 2,
-        "explanation": "(113學測國文第18題,官方答案C)"
+        "explanation": "(113學測國文第18題)"
       },
       {
         "id": "chinese-real-113-q19",
@@ -1581,7 +1581,7 @@ export const chineseRealExams = [
           "親賢臣,遠小人,此先漢所以興隆也;親小人,遠賢臣,此後漢所以傾頹也。先帝在時,每與臣論此事,未嘗不嘆息痛恨於桓、靈也——劉備低聲嘆息,凸顯其極力壓抑面部表情與聲音"
         ],
         "answer": 0,
-        "explanation": "(113學測國文第19題,官方答案A)"
+        "explanation": "(113學測國文第19題)"
       },
       {
         "id": "chinese-real-113-q20",
@@ -1598,7 +1598,7 @@ export const chineseRealExams = [
           "聖人所以治人七情,修十義,講信修睦,尚辭讓,去爭奪,舍禮何以治之"
         ],
         "answer": 3,
-        "explanation": "(113學測國文第20題,官方答案D)"
+        "explanation": "(113學測國文第20題)"
       },
       {
         "id": "chinese-real-113-q21",
@@ -1615,7 +1615,7 @@ export const chineseRealExams = [
           "理由:鄭七已撫養元老三年;元老已對生父心懷不滿"
         ],
         "answer": 1,
-        "explanation": "(113學測國文第21題,官方答案B)"
+        "explanation": "(113學測國文第21題)"
       },
       {
         "id": "chinese-real-113-q22",
@@ -1632,7 +1632,7 @@ export const chineseRealExams = [
           "時見教化口吻,除對悖倫者嚴辭訓斥,並期免受託者負起維護禮教之責"
         ],
         "answer": 3,
-        "explanation": "(113學測國文第22題,官方答案D)"
+        "explanation": "(113學測國文第22題)"
       },
       {
         "id": "chinese-real-113-q23",
@@ -1649,7 +1649,7 @@ export const chineseRealExams = [
           "柳宗元、崔群對座主門生關係的認知,不脫時人之見"
         ],
         "answer": 3,
-        "explanation": "(113學測國文第23題,官方答案D)"
+        "explanation": "(113學測國文第23題)"
       },
       {
         "id": "chinese-real-113-q24",
@@ -1666,7 +1666,7 @@ export const chineseRealExams = [
           "提醒崔群以陸贄為戒,買田躬耕"
         ],
         "answer": 1,
-        "explanation": "(113學測國文第24題,官方答案B)"
+        "explanation": "(113學測國文第24題)"
       },
       {
         "id": "chinese-real-113-q25",
@@ -1686,7 +1686,7 @@ export const chineseRealExams = [
           1,
           2
         ],
-        "explanation": "(113學測國文第25題,官方答案ABC)"
+        "explanation": "(113學測國文第25題)"
       },
       {
         "id": "chinese-real-113-q26",
@@ -1706,7 +1706,7 @@ export const chineseRealExams = [
           2,
           4
         ],
-        "explanation": "(113學測國文第26題,官方答案ACE)"
+        "explanation": "(113學測國文第26題)"
       },
       {
         "id": "chinese-real-113-q27",
@@ -1725,7 +1725,7 @@ export const chineseRealExams = [
           1,
           4
         ],
-        "explanation": "(113學測國文第27題,官方答案BE)"
+        "explanation": "(113學測國文第27題)"
       },
       {
         "id": "chinese-real-113-q28",
@@ -1748,7 +1748,7 @@ export const chineseRealExams = [
           3,
           4
         ],
-        "explanation": "(113學測國文第28題,官方答案ADE)"
+        "explanation": "(113學測國文第28題)"
       },
       {
         "id": "chinese-real-113-q29",
@@ -1771,7 +1771,7 @@ export const chineseRealExams = [
           2,
           4
         ],
-        "explanation": "(113學測國文第29題,官方答案BCE)"
+        "explanation": "(113學測國文第29題)"
       },
       {
         "id": "chinese-real-113-q30",
@@ -1793,7 +1793,7 @@ export const chineseRealExams = [
           0,
           4
         ],
-        "explanation": "(113學測國文第30題,官方答案AE)"
+        "explanation": "(113學測國文第30題)"
       },
       {
         "id": "chinese-real-113-q31",
@@ -1815,7 +1815,7 @@ export const chineseRealExams = [
           2,
           4
         ],
-        "explanation": "(113學測國文第31題,官方答案CE)"
+        "explanation": "(113學測國文第31題)"
       },
       {
         "id": "chinese-real-113-q32",
@@ -1854,7 +1854,7 @@ export const chineseRealExams = [
           "夢醒後,對照夢境與當前的境遇,皆萌生壯志未酬之嘆"
         ],
         "answer": 1,
-        "explanation": "(113學測國文第34題,占2分單選,官方答案B)"
+        "explanation": "(113學測國文第34題,占2分單選)"
       },
       {
         "id": "chinese-real-113-q35",
@@ -1871,7 +1871,7 @@ export const chineseRealExams = [
           "①不適當,②適當"
         ],
         "answer": 3,
-        "explanation": "(113學測國文第35題,占2分單選,官方答案D)"
+        "explanation": "(113學測國文第35題,占2分單選)"
       },
       {
         "id": "chinese-real-113-q36",
@@ -1910,7 +1910,7 @@ export const chineseRealExams = [
           "若分「畛」域／暴「殄」天物"
         ],
         "answer": 0,
-        "explanation": "(114學測國文第1題,官方答案A)"
+        "explanation": "(114學測國文第1題)"
       },
       {
         "id": "chinese-real-114-q2",
@@ -1924,7 +1924,7 @@ export const chineseRealExams = [
           "他剽竊別人智慧,還恬不知恥地炫耀"
         ],
         "answer": 3,
-        "explanation": "(114學測國文第2題,官方答案D)"
+        "explanation": "(114學測國文第2題)"
       },
       {
         "id": "chinese-real-114-q3",
@@ -1938,7 +1938,7 @@ export const chineseRealExams = [
           "舊報紙／皎潔／貧血"
         ],
         "answer": 1,
-        "explanation": "(114學測國文第3題,官方答案B)"
+        "explanation": "(114學測國文第3題)"
       },
       {
         "id": "chinese-real-114-q4",
@@ -1952,7 +1952,7 @@ export const chineseRealExams = [
           "數學家的意圖,如同「比興」言在此而意在彼,有待讀者解謎"
         ],
         "answer": 2,
-        "explanation": "(114學測國文第4題,官方答案C)"
+        "explanation": "(114學測國文第4題)"
       },
       {
         "id": "chinese-real-114-q5",
@@ -1966,7 +1966,7 @@ export const chineseRealExams = [
           "後之在位者,蓋未嘗求其說而試之以實也"
         ],
         "answer": 0,
-        "explanation": "(114學測國文第5題,官方答案A)"
+        "explanation": "(114學測國文第5題)"
       },
       {
         "id": "chinese-real-114-q6",
@@ -1983,7 +1983,7 @@ export const chineseRealExams = [
           "《廣辭苑》對季節語的解釋,和《山水訓》不完全相同"
         ],
         "answer": 3,
-        "explanation": "(114學測國文第6題,官方答案D)"
+        "explanation": "(114學測國文第6題)"
       },
       {
         "id": "chinese-real-114-q7",
@@ -2000,7 +2000,7 @@ export const chineseRealExams = [
           "能查證俳句發展脈絡而感到驕傲"
         ],
         "answer": 2,
-        "explanation": "(114學測國文第7題,官方答案C)"
+        "explanation": "(114學測國文第7題)"
       },
       {
         "id": "chinese-real-114-q8",
@@ -2017,7 +2017,7 @@ export const chineseRealExams = [
           "八十原來是太公,看看晚景遇文王。目下緊事休相問,勸君且守待運通"
         ],
         "answer": 2,
-        "explanation": "(114學測國文第8題,官方答案C)"
+        "explanation": "(114學測國文第8題)"
       },
       {
         "id": "chinese-real-114-q9",
@@ -2034,7 +2034,7 @@ export const chineseRealExams = [
           "日本積極在殖民地推動糖業現代化,期能解決對進口糖的依賴"
         ],
         "answer": 3,
-        "explanation": "(114學測國文第9題,官方答案D)"
+        "explanation": "(114學測國文第9題)"
       },
       {
         "id": "chinese-real-114-q10",
@@ -2051,7 +2051,7 @@ export const chineseRealExams = [
           "洪愛珠陳述啃甘蔗時口腔中進行的連續動作,呈現焦桐所謂的複雜"
         ],
         "answer": 2,
-        "explanation": "(114學測國文第10題,官方答案C)"
+        "explanation": "(114學測國文第10題)"
       },
       {
         "id": "chinese-real-114-q11",
@@ -2068,7 +2068,7 @@ export const chineseRealExams = [
           "能引領世風正向發展"
         ],
         "answer": 1,
-        "explanation": "(114學測國文第11題,官方答案B)"
+        "explanation": "(114學測國文第11題)"
       },
       {
         "id": "chinese-real-114-q12",
@@ -2085,7 +2085,7 @@ export const chineseRealExams = [
           "必須致力讓小人改邪歸正"
         ],
         "answer": 1,
-        "explanation": "(114學測國文第12題,官方答案B)"
+        "explanation": "(114學測國文第12題)"
       },
       {
         "id": "chinese-real-114-q13",
@@ -2102,7 +2102,7 @@ export const chineseRealExams = [
           "FJ／TP"
         ],
         "answer": 0,
-        "explanation": "(114學測國文第13題,官方答案A)"
+        "explanation": "(114學測國文第13題)"
       },
       {
         "id": "chinese-real-114-q14",
@@ -2119,7 +2119,7 @@ export const chineseRealExams = [
           "④理義之悅我心,猶芻豢之悅我口"
         ],
         "answer": 3,
-        "explanation": "(114學測國文第14題,官方答案D)"
+        "explanation": "(114學測國文第14題)"
       },
       {
         "id": "chinese-real-114-q15",
@@ -2136,7 +2136,7 @@ export const chineseRealExams = [
           "「銅雀」指銅雀臺,藉空間的閉鎖以暗示政治權力轉移"
         ],
         "answer": 0,
-        "explanation": "(114學測國文第15題,官方答案A)"
+        "explanation": "(114學測國文第15題)"
       },
       {
         "id": "chinese-real-114-q16",
@@ -2153,7 +2153,7 @@ export const chineseRealExams = [
           "經由磨洗動作暗示真相難明,並批判梟雄的野心"
         ],
         "answer": 2,
-        "explanation": "(114學測國文第16題,官方答案C)"
+        "explanation": "(114學測國文第16題)"
       },
       {
         "id": "chinese-real-114-q17",
@@ -2170,7 +2170,7 @@ export const chineseRealExams = [
           "開展想像,呈顯空明飄逸的主體心境"
         ],
         "answer": 1,
-        "explanation": "(114學測國文第17題,官方答案B)"
+        "explanation": "(114學測國文第17題)"
       },
       {
         "id": "chinese-real-114-q18",
@@ -2187,7 +2187,7 @@ export const chineseRealExams = [
           "①無法判斷,②不適當"
         ],
         "answer": 1,
-        "explanation": "(114學測國文第18題,官方答案B)"
+        "explanation": "(114學測國文第18題)"
       },
       {
         "id": "chinese-real-114-q19",
@@ -2204,7 +2204,7 @@ export const chineseRealExams = [
           "均透過人與自然的對比,凸顯文學書寫對生命有限的突破"
         ],
         "answer": 1,
-        "explanation": "(114學測國文第19題,官方答案B)"
+        "explanation": "(114學測國文第19題)"
       },
       {
         "id": "chinese-real-114-q20",
@@ -2221,7 +2221,7 @@ export const chineseRealExams = [
           "邀請名家實畫景物於壁面,並融入個人喜好選擇題材"
         ],
         "answer": 3,
-        "explanation": "(114學測國文第20題,官方答案D)"
+        "explanation": "(114學測國文第20題)"
       },
       {
         "id": "chinese-real-114-q21",
@@ -2238,7 +2238,7 @@ export const chineseRealExams = [
           "發現裝置能操控鸚鵡,使其動靜自如,顯現主人深知鳥性"
         ],
         "answer": 2,
-        "explanation": "(114學測國文第21題,官方答案C)"
+        "explanation": "(114學測國文第21題)"
       },
       {
         "id": "chinese-real-114-q22",
@@ -2255,7 +2255,7 @@ export const chineseRealExams = [
           "積極保存古代醫典所載的名藥"
         ],
         "answer": 0,
-        "explanation": "(114學測國文第22題,官方答案A)"
+        "explanation": "(114學測國文第22題)"
       },
       {
         "id": "chinese-real-114-q23",
@@ -2272,7 +2272,7 @@ export const chineseRealExams = [
           "益黃散／瀉青丸"
         ],
         "answer": 2,
-        "explanation": "(114學測國文第23題,官方答案C)"
+        "explanation": "(114學測國文第23題)"
       },
       {
         "id": "chinese-real-114-q24",
@@ -2289,7 +2289,7 @@ export const chineseRealExams = [
           "①不符合,②符合"
         ],
         "answer": 0,
-        "explanation": "(114學測國文第24題,官方答案A)"
+        "explanation": "(114學測國文第24題)"
       },
       {
         "id": "chinese-real-114-q25",
@@ -2308,7 +2308,7 @@ export const chineseRealExams = [
           2,
           4
         ],
-        "explanation": "(114學測國文第25題,官方答案CE)"
+        "explanation": "(114學測國文第25題)"
       },
       {
         "id": "chinese-real-114-q26",
@@ -2327,7 +2327,7 @@ export const chineseRealExams = [
           0,
           4
         ],
-        "explanation": "(114學測國文第26題,官方答案AE)"
+        "explanation": "(114學測國文第26題)"
       },
       {
         "id": "chinese-real-114-q27",
@@ -2349,7 +2349,7 @@ export const chineseRealExams = [
           2,
           4
         ],
-        "explanation": "(114學測國文第27題,官方答案CE)"
+        "explanation": "(114學測國文第27題)"
       },
       {
         "id": "chinese-real-114-q28",
@@ -2371,7 +2371,7 @@ export const chineseRealExams = [
           1,
           3
         ],
-        "explanation": "(114學測國文第28題,官方答案BD)"
+        "explanation": "(114學測國文第28題)"
       },
       {
         "id": "chinese-real-114-q29",
@@ -2390,7 +2390,7 @@ export const chineseRealExams = [
           0,
           4
         ],
-        "explanation": "(114學測國文第29題,官方答案AE)"
+        "explanation": "(114學測國文第29題)"
       },
       {
         "id": "chinese-real-114-q30",
@@ -2413,7 +2413,7 @@ export const chineseRealExams = [
           1,
           3
         ],
-        "explanation": "(114學測國文第30題,官方答案ABD)"
+        "explanation": "(114學測國文第30題)"
       },
       {
         "id": "chinese-real-114-q31",
@@ -2436,7 +2436,7 @@ export const chineseRealExams = [
           3,
           4
         ],
-        "explanation": "(114學測國文第31題,官方答案BDE)"
+        "explanation": "(114學測國文第31題)"
       },
       {
         "id": "chinese-real-114-q32",
@@ -2453,7 +2453,7 @@ export const chineseRealExams = [
           "①不符合,②符合"
         ],
         "answer": 3,
-        "explanation": "(114學測國文第32題,占2分單選,官方答案D)"
+        "explanation": "(114學測國文第32題,占2分單選)"
       },
       {
         "id": "chinese-real-114-q33",
@@ -2470,7 +2470,7 @@ export const chineseRealExams = [
           "若亡鄭而有益於君,敢以煩執事。越國以鄙遠,君知其難也,焉用亡鄭以陪鄰"
         ],
         "answer": 3,
-        "explanation": "(114學測國文第33題,占2分單選,官方答案D)"
+        "explanation": "(114學測國文第33題,占2分單選)"
       },
       {
         "id": "chinese-real-114-q34",
@@ -2531,7 +2531,7 @@ export const chineseRealExams = [
           "燎原莫「遏」／登門拜「謁」"
         ],
         "answer": 2,
-        "explanation": "(115學測國文第1題,官方答案C)"
+        "explanation": "(115學測國文第1題)"
       },
       {
         "id": "chinese-real-115-q2",
@@ -2545,7 +2545,7 @@ export const chineseRealExams = [
           "老吳自詡滿腹經綸,卻昧於人情事故"
         ],
         "answer": 0,
-        "explanation": "(115學測國文第2題,官方答案A)"
+        "explanation": "(115學測國文第2題)"
       },
       {
         "id": "chinese-real-115-q3",
@@ -2562,7 +2562,7 @@ export const chineseRealExams = [
           "若鄭用錫同時寫信向林祥雲致賀,可稱林祥雲「姻兄」"
         ],
         "answer": 3,
-        "explanation": "(115學測國文第3題,官方答案D)"
+        "explanation": "(115學測國文第3題)"
       },
       {
         "id": "chinese-real-115-q4",
@@ -2579,7 +2579,7 @@ export const chineseRealExams = [
           "《孟子》中,孟子舉出「塗有餓莩而不知發,人死,則曰:『非我也,歲也。』」的荒謬,意在警示執政者勿陷入⑤"
         ],
         "answer": 1,
-        "explanation": "(115學測國文第4題,官方答案B)"
+        "explanation": "(115學測國文第4題)"
       },
       {
         "id": "chinese-real-115-q5",
@@ -2593,7 +2593,7 @@ export const chineseRealExams = [
           "戊丙甲丁"
         ],
         "answer": 2,
-        "explanation": "(115學測國文第5題,官方答案C)"
+        "explanation": "(115學測國文第5題)"
       },
       {
         "id": "chinese-real-115-q6",
@@ -2610,7 +2610,7 @@ export const chineseRealExams = [
           "引學者看法,指出時空環境對臺灣杉分布的影響,第四紀冰河期尤為關鍵"
         ],
         "answer": 3,
-        "explanation": "(115學測國文第6題,官方答案D)"
+        "explanation": "(115學測國文第6題)"
       },
       {
         "id": "chinese-real-115-q7",
@@ -2627,7 +2627,7 @@ export const chineseRealExams = [
           "①不符合,②符合"
         ],
         "answer": 2,
-        "explanation": "(115學測國文第7題,官方答案C)"
+        "explanation": "(115學測國文第7題)"
       },
       {
         "id": "chinese-real-115-q8",
@@ -2644,7 +2644,7 @@ export const chineseRealExams = [
           "二者立場皆客觀,但□是研究者自述成果,_____是寫作者綜述既有成果"
         ],
         "answer": 3,
-        "explanation": "(115學測國文第8題,官方答案D)"
+        "explanation": "(115學測國文第8題)"
       },
       {
         "id": "chinese-real-115-q9",
@@ -2661,7 +2661,7 @@ export const chineseRealExams = [
           "福爾摩斯不能坦誠面對錯誤"
         ],
         "answer": 0,
-        "explanation": "(115學測國文第9題,官方答案A)"
+        "explanation": "(115學測國文第9題)"
       },
       {
         "id": "chinese-real-115-q10",
@@ -2678,7 +2678,7 @@ export const chineseRealExams = [
           "柯南‧道爾總能在作品中呈現醫生專業,並常借用小說批判現實中的醫學"
         ],
         "answer": 2,
-        "explanation": "(115學測國文第10題,官方答案C)"
+        "explanation": "(115學測國文第10題)"
       },
       {
         "id": "chinese-real-115-q11",
@@ -2695,7 +2695,7 @@ export const chineseRealExams = [
           "俠風狂放進取的一面,與儒者不屈服的批判精神相契"
         ],
         "answer": 3,
-        "explanation": "(115學測國文第11題,官方答案D)"
+        "explanation": "(115學測國文第11題)"
       },
       {
         "id": "chinese-real-115-q12",
@@ -2712,7 +2712,7 @@ export const chineseRealExams = [
           "①不符合,②無法判斷"
         ],
         "answer": 1,
-        "explanation": "(115學測國文第12題,官方答案B)"
+        "explanation": "(115學測國文第12題)"
       },
       {
         "id": "chinese-real-115-q13",
@@ -2729,7 +2729,7 @@ export const chineseRealExams = [
           "紂之不善,不如是之甚也,是以君子惡居下流,天下之惡皆歸焉"
         ],
         "answer": 1,
-        "explanation": "(115學測國文第13題,官方答案B)"
+        "explanation": "(115學測國文第13題)"
       },
       {
         "id": "chinese-real-115-q14",
@@ -2746,7 +2746,7 @@ export const chineseRealExams = [
           "②④⑤／①③"
         ],
         "answer": 1,
-        "explanation": "(115學測國文第14題,官方答案B)"
+        "explanation": "(115學測國文第14題)"
       },
       {
         "id": "chinese-real-115-q15",
@@ -2763,7 +2763,7 @@ export const chineseRealExams = [
           "二者都可凸顯事物或動作的形象性,藉以營造出鮮明具體的畫面感"
         ],
         "answer": 0,
-        "explanation": "(115學測國文第15題,官方答案A)"
+        "explanation": "(115學測國文第15題)"
       },
       {
         "id": "chinese-real-115-q16",
@@ -2780,7 +2780,7 @@ export const chineseRealExams = [
           "皂莢名「皂」,與顏色有關;肥皂莢名「肥」,與莢果有關"
         ],
         "answer": 3,
-        "explanation": "(115學測國文第16題,官方答案D)"
+        "explanation": "(115學測國文第16題)"
       },
       {
         "id": "chinese-real-115-q17",
@@ -2797,7 +2797,7 @@ export const chineseRealExams = [
           "展現工藝水準,配合不同功能需求而客製化"
         ],
         "answer": 1,
-        "explanation": "(115學測國文第17題,官方答案B)"
+        "explanation": "(115學測國文第17題)"
       },
       {
         "id": "chinese-real-115-q18",
@@ -2814,7 +2814,7 @@ export const chineseRealExams = [
           "前者成分較天然,洗後肌膚不乾澀;後者保存期限長,銷售價格低"
         ],
         "answer": 3,
-        "explanation": "(115學測國文第18題,官方答案D)"
+        "explanation": "(115學測國文第18題)"
       },
       {
         "id": "chinese-real-115-q19",
@@ -2831,7 +2831,7 @@ export const chineseRealExams = [
           "心手相師,乍看怪異不合常規,卻能引發觀者多重的聯想"
         ],
         "answer": 3,
-        "explanation": "(115學測國文第19題,官方答案D)"
+        "explanation": "(115學測國文第19題)"
       },
       {
         "id": "chinese-real-115-q20",
@@ -2848,7 +2848,7 @@ export const chineseRealExams = [
           "後人可從中了解懷素的交遊、師承,以及書寫時的構思和創作理念"
         ],
         "answer": 0,
-        "explanation": "(115學測國文第20題,官方答案A)"
+        "explanation": "(115學測國文第20題)"
       },
       {
         "id": "chinese-real-115-q21",
@@ -2865,7 +2865,7 @@ export const chineseRealExams = [
           "揭示法度為浪漫得以穩定的憑藉"
         ],
         "answer": 0,
-        "explanation": "(115學測國文第21題,官方答案A)"
+        "explanation": "(115學測國文第21題)"
       },
       {
         "id": "chinese-real-115-q22",
@@ -2882,7 +2882,7 @@ export const chineseRealExams = [
           "「咫尺波濤永相失」感嘆竭澤而漁將造成長遠的損失"
         ],
         "answer": 2,
-        "explanation": "(115學測國文第22題,官方答案C)"
+        "explanation": "(115學測國文第22題)"
       },
       {
         "id": "chinese-real-115-q23",
@@ -2899,7 +2899,7 @@ export const chineseRealExams = [
           "錯認秃尾、槎頭與魴魚同類"
         ],
         "answer": 1,
-        "explanation": "(115學測國文第23題,官方答案B)"
+        "explanation": "(115學測國文第23題)"
       },
       {
         "id": "chinese-real-115-q24",
@@ -2916,7 +2916,7 @@ export const chineseRealExams = [
           "不忍戕物,諷諫主政者不可魚肉百姓"
         ],
         "answer": 2,
-        "explanation": "(115學測國文第24題,官方答案C)"
+        "explanation": "(115學測國文第24題)"
       },
       {
         "id": "chinese-real-115-q25",
@@ -2935,7 +2935,7 @@ export const chineseRealExams = [
           1,
           4
         ],
-        "explanation": "(115學測國文第25題,官方答案BE)"
+        "explanation": "(115學測國文第25題)"
       },
       {
         "id": "chinese-real-115-q26",
@@ -2955,7 +2955,7 @@ export const chineseRealExams = [
           1,
           3
         ],
-        "explanation": "(115學測國文第26題,官方答案ABD)"
+        "explanation": "(115學測國文第26題)"
       },
       {
         "id": "chinese-real-115-q27",
@@ -2978,7 +2978,7 @@ export const chineseRealExams = [
           1,
           3
         ],
-        "explanation": "(115學測國文第27題,官方答案ABD)"
+        "explanation": "(115學測國文第27題)"
       },
       {
         "id": "chinese-real-115-q28",
@@ -2999,7 +2999,7 @@ export const chineseRealExams = [
           3,
           4
         ],
-        "explanation": "(115學測國文第28題,官方答案ACDE)"
+        "explanation": "(115學測國文第28題)"
       },
       {
         "id": "chinese-real-115-q29",
@@ -3021,7 +3021,7 @@ export const chineseRealExams = [
           2,
           3
         ],
-        "explanation": "(115學測國文第29題,官方答案CD)"
+        "explanation": "(115學測國文第29題)"
       },
       {
         "id": "chinese-real-115-q30",
@@ -3043,7 +3043,7 @@ export const chineseRealExams = [
           2,
           3
         ],
-        "explanation": "(115學測國文第30題,官方答案CD)"
+        "explanation": "(115學測國文第30題)"
       },
       {
         "id": "chinese-real-115-q31",
@@ -3066,7 +3066,7 @@ export const chineseRealExams = [
           1,
           4
         ],
-        "explanation": "(115學測國文第31題,官方答案ABE)"
+        "explanation": "(115學測國文第31題)"
       },
       {
         "id": "chinese-real-115-q32",
@@ -3116,7 +3116,7 @@ export const chineseRealExams = [
           "三文皆呈現不同世代女性的聲音,代間隔閡雖不免形成對立,最終仍能找到平衡點"
         ],
         "answer": 2,
-        "explanation": "(115學測國文第35題,占2分單選,官方答案C)"
+        "explanation": "(115學測國文第35題,占2分單選)"
       },
       {
         "id": "chinese-real-115-q36",
@@ -3133,7 +3133,7 @@ export const chineseRealExams = [
           "①正確,②錯誤,③無法判斷"
         ],
         "answer": 0,
-        "explanation": "(115學測國文第36題,占2分單選,官方答案A)"
+        "explanation": "(115學測國文第36題,占2分單選)"
       }
     ],
   },

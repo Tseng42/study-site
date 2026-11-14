@@ -54,7 +54,7 @@ export const scienceRealExams = [
           "1.86"
         ],
         "answer": 1,
-        "explanation": "(111學測自然第3題,官方答案B)"
+        "explanation": "(111學測自然第3題)"
       },
       {
         "id": "science-real-111-q4",
@@ -74,7 +74,7 @@ export const scienceRealExams = [
           3,
           4
         ],
-        "explanation": "(111學測自然第4題,官方答案DE)"
+        "explanation": "(111學測自然第4題)"
       },
       {
         "id": "science-real-111-q5",
@@ -90,7 +90,7 @@ export const scienceRealExams = [
           "10⁶"
         ],
         "answer": 0,
-        "explanation": "(111學測自然第5題,官方答案A)"
+        "explanation": "(111學測自然第5題)"
       },
       {
         "id": "science-real-111-q8",
@@ -113,7 +113,7 @@ export const scienceRealExams = [
           1,
           4
         ],
-        "explanation": "(111學測自然第8題,官方答案BE)"
+        "explanation": "(111學測自然第8題)"
       },
       {
         "id": "science-real-111-q9",
@@ -129,7 +129,7 @@ export const scienceRealExams = [
           "波耳氫原子模型的建構比拉塞福的原子模型來得早"
         ],
         "answer": 1,
-        "explanation": "(111學測自然第9題,官方答案B)"
+        "explanation": "(111學測自然第9題)"
       },
       {
         "id": "science-real-111-q10",
@@ -145,7 +145,7 @@ export const scienceRealExams = [
           "Li⁺ = H⁺ > He²⁺"
         ],
         "answer": 0,
-        "explanation": "(111學測自然第10題,官方答案A)"
+        "explanation": "(111學測自然第10題)"
       },
       {
         "id": "science-real-111-q13",
@@ -161,7 +161,7 @@ export const scienceRealExams = [
           "甲:CH₃COOH(aq);乙:NH₃(aq)"
         ],
         "answer": 4,
-        "explanation": "(111學測自然第13題,官方答案E)"
+        "explanation": "(111學測自然第13題)"
       },
       {
         "id": "science-real-111-q14",
@@ -177,7 +177,7 @@ export const scienceRealExams = [
           "54"
         ],
         "answer": 2,
-        "explanation": "(111學測自然第14題,官方答案C)"
+        "explanation": "(111學測自然第14題)"
       },
       {
         "id": "science-real-111-q15",
@@ -193,7 +193,7 @@ export const scienceRealExams = [
           "5.3"
         ],
         "answer": 3,
-        "explanation": "(111學測自然第15題,官方答案D)"
+        "explanation": "(111學測自然第15題)"
       },
       {
         "id": "science-real-111-q16",
@@ -209,7 +209,7 @@ export const scienceRealExams = [
           "10"
         ],
         "answer": 1,
-        "explanation": "(111學測自然第16題,官方答案B)"
+        "explanation": "(111學測自然第16題)"
       },
       {
         "id": "science-real-111-q17",
@@ -229,7 +229,7 @@ export const scienceRealExams = [
           0,
           4
         ],
-        "explanation": "(111學測自然第17題,官方答案AE)"
+        "explanation": "(111學測自然第17題)"
       },
       {
         "id": "science-real-111-q18",
@@ -249,7 +249,7 @@ export const scienceRealExams = [
           0,
           3
         ],
-        "explanation": "(111學測自然第18題,官方答案AD)"
+        "explanation": "(111學測自然第18題)"
       },
       {
         "id": "science-real-111-q19",
@@ -268,7 +268,7 @@ export const scienceRealExams = [
           "細胞完成DNA複製後進入間期,此時螢光強度最強"
         ],
         "answer": 1,
-        "explanation": "(111學測自然第19題,官方答案B)"
+        "explanation": "(111學測自然第19題)"
       },
       {
         "id": "science-real-111-q20",
@@ -291,7 +291,7 @@ export const scienceRealExams = [
           1,
           2
         ],
-        "explanation": "(111學測自然第20題,官方答案BC)"
+        "explanation": "(111學測自然第20題)"
       },
       {
         "id": "science-real-111-q21",
@@ -312,7 +312,7 @@ export const scienceRealExams = [
           2,
           4
         ],
-        "explanation": "(111學測自然第21題,官方答案ACE)"
+        "explanation": "(111學測自然第21題)"
       },
       {
         "id": "science-real-111-q22",
@@ -332,7 +332,7 @@ export const scienceRealExams = [
           1,
           2
         ],
-        "explanation": "(111學測自然第22題,官方答案BC)"
+        "explanation": "(111學測自然第22題)"
       },
       {
         "id": "science-real-111-q23",
@@ -352,7 +352,7 @@ export const scienceRealExams = [
           2,
           3
         ],
-        "explanation": "(111學測自然第23題,官方答案CD)"
+        "explanation": "(111學測自然第23題)"
       },
       {
         "id": "science-real-111-q24",
@@ -375,7 +375,7 @@ export const scienceRealExams = [
           2,
           3
         ],
-        "explanation": "(111學測自然第24題,官方答案CD)"
+        "explanation": "(111學測自然第24題)"
       },
       {
         "id": "science-real-111-q25",
@@ -399,7 +399,7 @@ export const scienceRealExams = [
           3,
           4
         ],
-        "explanation": "(111學測自然第25題,官方答案CDE)"
+        "explanation": "(111學測自然第25題)"
       },
       {
         "id": "science-real-111-q26",
@@ -419,7 +419,7 @@ export const scienceRealExams = [
           2,
           3
         ],
-        "explanation": "(111學測自然第26題,官方答案CD)"
+        "explanation": "(111學測自然第26題)"
       },
       {
         "id": "science-real-111-q27",
@@ -440,7 +440,7 @@ export const scienceRealExams = [
           2,
           4
         ],
-        "explanation": "(111學測自然第27題,官方答案BCE)"
+        "explanation": "(111學測自然第27題)"
       },
       {
         "id": "science-real-111-q28",
@@ -463,7 +463,7 @@ export const scienceRealExams = [
           0,
           4
         ],
-        "explanation": "(111學測自然第28題,官方答案AE)"
+        "explanation": "(111學測自然第28題)"
       },
       {
         "id": "science-real-111-q31",
@@ -479,7 +479,7 @@ export const scienceRealExams = [
           "火星的發光能力比心宿二強"
         ],
         "answer": 0,
-        "explanation": "(111學測自然第31題,官方答案A)"
+        "explanation": "(111學測自然第31題)"
       },
       {
         "id": "science-real-111-q32",
@@ -500,7 +500,7 @@ export const scienceRealExams = [
           3,
           4
         ],
-        "explanation": "(111學測自然第32題,官方答案ADE)"
+        "explanation": "(111學測自然第32題)"
       },
       {
         "id": "science-real-111-q33",
@@ -516,7 +516,7 @@ export const scienceRealExams = [
           "丙→丁→甲→乙"
         ],
         "answer": 3,
-        "explanation": "(111學測自然第33題,官方答案D)"
+        "explanation": "(111學測自然第33題)"
       },
       {
         "id": "science-real-111-q35",
@@ -535,7 +535,7 @@ export const scienceRealExams = [
           "近岸海水及河流的污染,及生態環境破壞,可能是鰻魚產量變少的原因之一"
         ],
         "answer": 2,
-        "explanation": "(111學測自然第35題,官方答案C)"
+        "explanation": "(111學測自然第35題)"
       },
       {
         "id": "science-real-111-q36",
@@ -554,7 +554,7 @@ export const scienceRealExams = [
           "1:2"
         ],
         "answer": 0,
-        "explanation": "(111學測自然第36題,官方答案A)"
+        "explanation": "(111學測自然第36題)"
       },
       {
         "id": "science-real-111-q37",
@@ -577,7 +577,7 @@ export const scienceRealExams = [
           2,
           4
         ],
-        "explanation": "(111學測自然第37題,官方答案CE)"
+        "explanation": "(111學測自然第37題)"
       },
       {
         "id": "science-real-111-q38",
@@ -612,7 +612,7 @@ export const scienceRealExams = [
           0,
           3
         ],
-        "explanation": "(111學測自然第39題,官方答案AD)"
+        "explanation": "(111學測自然第39題)"
       },
       {
         "id": "science-real-111-q40",
@@ -643,7 +643,7 @@ export const scienceRealExams = [
           "通入氫氣反應,測量生成的甲烷體積"
         ],
         "answer": 3,
-        "explanation": "(111學測自然第41題,官方答案D)"
+        "explanation": "(111學測自然第41題)"
       },
       {
         "id": "science-real-111-q42",
@@ -667,7 +667,7 @@ export const scienceRealExams = [
           1,
           4
         ],
-        "explanation": "(111學測自然第42題,官方答案ABE)"
+        "explanation": "(111學測自然第42題)"
       },
       {
         "id": "science-real-111-q43",
@@ -686,7 +686,7 @@ export const scienceRealExams = [
           "大地震瞬間抬升"
         ],
         "answer": 2,
-        "explanation": "(111學測自然第43題,官方答案C)"
+        "explanation": "(111學測自然第43題)"
       },
       {
         "id": "science-real-111-q44",
@@ -709,7 +709,7 @@ export const scienceRealExams = [
           0,
           1
         ],
-        "explanation": "(111學測自然第44題,官方答案AB)"
+        "explanation": "(111學測自然第44題)"
       },
       {
         "id": "science-real-111-q45",
@@ -745,7 +745,7 @@ export const scienceRealExams = [
           2,
           3
         ],
-        "explanation": "(111學測自然第46題,官方答案ACD)"
+        "explanation": "(111學測自然第46題)"
       },
       {
         "id": "science-real-111-q47",
@@ -768,7 +768,7 @@ export const scienceRealExams = [
           2,
           3
         ],
-        "explanation": "(111學測自然第47題,官方答案CD)"
+        "explanation": "(111學測自然第47題)"
       },
       {
         "id": "science-real-111-q49",
@@ -791,7 +791,7 @@ export const scienceRealExams = [
           1,
           3
         ],
-        "explanation": "(111學測自然第49題,官方答案BD)"
+        "explanation": "(111學測自然第49題)"
       },
       {
         "id": "science-real-111-q50",
@@ -810,7 +810,7 @@ export const scienceRealExams = [
           "λ_I = λ_R"
         ],
         "answer": 3,
-        "explanation": "(111學測自然第50題,官方答案D)"
+        "explanation": "(111學測自然第50題)"
       },
       {
         "id": "science-real-111-q51",
@@ -841,7 +841,7 @@ export const scienceRealExams = [
           "能量產生"
         ],
         "answer": 1,
-        "explanation": "(111學測自然第52題,官方答案B)"
+        "explanation": "(111學測自然第52題)"
       },
       {
         "id": "science-real-111-q53",
@@ -860,7 +860,7 @@ export const scienceRealExams = [
           "水"
         ],
         "answer": 0,
-        "explanation": "(111學測自然第53題,官方答案A)"
+        "explanation": "(111學測自然第53題)"
       },
       {
         "id": "science-real-111-q54",
@@ -896,7 +896,7 @@ export const scienceRealExams = [
           3,
           4
         ],
-        "explanation": "(111學測自然第55題,官方答案ADE)"
+        "explanation": "(111學測自然第55題)"
       },
       {
         "id": "science-real-111-q56",
@@ -920,7 +920,7 @@ export const scienceRealExams = [
           1,
           4
         ],
-        "explanation": "(111學測自然第56題,官方答案ABE)"
+        "explanation": "(111學測自然第56題)"
       },
       {
         "id": "science-real-111-q57",
@@ -951,7 +951,7 @@ export const scienceRealExams = [
           "磁場"
         ],
         "answer": 0,
-        "explanation": "(111學測自然第58題,官方答案A)"
+        "explanation": "(111學測自然第58題)"
       },
       {
         "id": "science-real-111-q60",
@@ -1017,7 +1017,7 @@ export const scienceRealExams = [
           0,
           1
         ],
-        "explanation": "(112學測自然第1題,官方答案AB)"
+        "explanation": "(112學測自然第1題)"
       },
       {
         "id": "science-real-112-q2",
@@ -1033,7 +1033,7 @@ export const scienceRealExams = [
           "該種農作物在未來氣候可適應機率較現今氣候高"
         ],
         "answer": 0,
-        "explanation": "(112學測自然第2題,官方答案A)"
+        "explanation": "(112學測自然第2題)"
       },
       {
         "id": "science-real-112-q3",
@@ -1049,7 +1049,7 @@ export const scienceRealExams = [
           "該隕石外觀焦黑,有火燒的痕跡"
         ],
         "answer": 2,
-        "explanation": "(112學測自然第3題,官方答案C)"
+        "explanation": "(112學測自然第3題)"
       },
       {
         "id": "science-real-112-q4",
@@ -1065,7 +1065,7 @@ export const scienceRealExams = [
           "因颱風造成土石崩落產生的海嘯"
         ],
         "answer": 1,
-        "explanation": "(112學測自然第4題,官方答案B)"
+        "explanation": "(112學測自然第4題)"
       },
       {
         "id": "science-real-112-q6",
@@ -1086,7 +1086,7 @@ export const scienceRealExams = [
           0,
           4
         ],
-        "explanation": "(112學測自然第6題,官方答案AE)"
+        "explanation": "(112學測自然第6題)"
       },
       {
         "id": "science-real-112-q7",
@@ -1102,7 +1102,7 @@ export const scienceRealExams = [
           "若排除僅發生雨跡的日數,臺北測站2010年降雨日數仍超過半年以上"
         ],
         "answer": 3,
-        "explanation": "(112學測自然第7題,官方答案D)"
+        "explanation": "(112學測自然第7題)"
       },
       {
         "id": "science-real-112-q8",
@@ -1124,7 +1124,7 @@ export const scienceRealExams = [
           3,
           5
         ],
-        "explanation": "(112學測自然第8題,官方答案ADF)"
+        "explanation": "(112學測自然第8題)"
       },
       {
         "id": "science-real-112-q9",
@@ -1140,7 +1140,7 @@ export const scienceRealExams = [
           "臺灣位在此地震帶上,表示臺灣島與太平洋板塊相接"
         ],
         "answer": 2,
-        "explanation": "(112學測自然第9題,官方答案C)"
+        "explanation": "(112學測自然第9題)"
       },
       {
         "id": "science-real-112-q10",
@@ -1159,7 +1159,7 @@ export const scienceRealExams = [
           "縱軸為相對病毒量:H 約 0.05,CMV 約 0.9,CMV-2b 約 0.95"
         ],
         "answer": 3,
-        "explanation": "(112學測自然第10題,官方答案D)"
+        "explanation": "(112學測自然第10題)"
       },
       {
         "id": "science-real-112-q11",
@@ -1182,7 +1182,7 @@ export const scienceRealExams = [
           1,
           2
         ],
-        "explanation": "(112學測自然第11題,官方答案BC)"
+        "explanation": "(112學測自然第11題)"
       },
       {
         "id": "science-real-112-q12",
@@ -1203,7 +1203,7 @@ export const scienceRealExams = [
           1,
           2
         ],
-        "explanation": "(112學測自然第12題,官方答案ABC)"
+        "explanation": "(112學測自然第12題)"
       },
       {
         "id": "science-real-112-q13",
@@ -1219,7 +1219,7 @@ export const scienceRealExams = [
           "將材料直接放置於載玻片上"
         ],
         "answer": 1,
-        "explanation": "(112學測自然第13題,官方答案B)"
+        "explanation": "(112學測自然第13題)"
       },
       {
         "id": "science-real-112-q14",
@@ -1235,7 +1235,7 @@ export const scienceRealExams = [
           "內質網"
         ],
         "answer": 3,
-        "explanation": "(112學測自然第14題,官方答案D)"
+        "explanation": "(112學測自然第14題)"
       },
       {
         "id": "science-real-112-q15",
@@ -1251,7 +1251,7 @@ export const scienceRealExams = [
           "該物種精子中的染色體數是3"
         ],
         "answer": 3,
-        "explanation": "(112學測自然第15題,官方答案D)"
+        "explanation": "(112學測自然第15題)"
       },
       {
         "id": "science-real-112-q16",
@@ -1271,7 +1271,7 @@ export const scienceRealExams = [
           1,
           2
         ],
-        "explanation": "(112學測自然第16題,官方答案BC)"
+        "explanation": "(112學測自然第16題)"
       },
       {
         "id": "science-real-112-q17",
@@ -1291,7 +1291,7 @@ export const scienceRealExams = [
           0,
           1
         ],
-        "explanation": "(112學測自然第17題,官方答案AB)"
+        "explanation": "(112學測自然第17題)"
       },
       {
         "id": "science-real-112-q18",
@@ -1307,7 +1307,7 @@ export const scienceRealExams = [
           "若甲和乙皆為顯性同型合子,進行互交,得子代果實較甲乙小,則可證實"
         ],
         "answer": 0,
-        "explanation": "(112學測自然第18題,官方答案A)"
+        "explanation": "(112學測自然第18題)"
       },
       {
         "id": "science-real-112-q19",
@@ -1323,7 +1323,7 @@ export const scienceRealExams = [
           "用甲基紅和酚紅的混合物當指示劑可更有效辨識強酸和強鹼"
         ],
         "answer": 0,
-        "explanation": "(112學測自然第19題,官方答案A)"
+        "explanation": "(112學測自然第19題)"
       },
       {
         "id": "science-real-112-q20",
@@ -1339,7 +1339,7 @@ export const scienceRealExams = [
           "已知一混合物中含有等重量的 KNO₃ 和KCl,文強根據他的實驗結果,可利用加熱蒸發濃縮、冷卻結晶、過濾的方法將兩者分離"
         ],
         "answer": 3,
-        "explanation": "(112學測自然第20題,官方答案D)"
+        "explanation": "(112學測自然第20題)"
       },
       {
         "id": "science-real-112-q22",
@@ -1355,7 +1355,7 @@ export const scienceRealExams = [
           "此過程產生的對流層臭氧可幫助修復臭氧層破洞"
         ],
         "answer": 4,
-        "explanation": "(112學測自然第22題,官方答案E)"
+        "explanation": "(112學測自然第22題)"
       },
       {
         "id": "science-real-112-q23",
@@ -1376,7 +1376,7 @@ export const scienceRealExams = [
           3,
           4
         ],
-        "explanation": "(112學測自然第23題,官方答案ADE)"
+        "explanation": "(112學測自然第23題)"
       },
       {
         "id": "science-real-112-q24",
@@ -1397,7 +1397,7 @@ export const scienceRealExams = [
           2,
           4
         ],
-        "explanation": "(112學測自然第24題,官方答案BCE)"
+        "explanation": "(112學測自然第24題)"
       },
       {
         "id": "science-real-112-q25",
@@ -1420,7 +1420,7 @@ export const scienceRealExams = [
           2,
           4
         ],
-        "explanation": "(112學測自然第25題,官方答案CE)"
+        "explanation": "(112學測自然第25題)"
       },
       {
         "id": "science-real-112-q26",
@@ -1439,7 +1439,7 @@ export const scienceRealExams = [
           "丁容器內的固體質量總和等於甲容器中的固體質量總和"
         ],
         "answer": 1,
-        "explanation": "(112學測自然第26題,官方答案B)"
+        "explanation": "(112學測自然第26題)"
       },
       {
         "id": "science-real-112-q27",
@@ -1460,7 +1460,7 @@ export const scienceRealExams = [
           3,
           4
         ],
-        "explanation": "(112學測自然第27題,官方答案BDE)"
+        "explanation": "(112學測自然第27題)"
       },
       {
         "id": "science-real-112-q28",
@@ -1476,7 +1476,7 @@ export const scienceRealExams = [
           "甲乙丁己"
         ],
         "answer": 3,
-        "explanation": "(112學測自然第28題,官方答案D)"
+        "explanation": "(112學測自然第28題)"
       },
       {
         "id": "science-real-112-q29",
@@ -1497,7 +1497,7 @@ export const scienceRealExams = [
           3,
           4
         ],
-        "explanation": "(112學測自然第29題,官方答案ADE)"
+        "explanation": "(112學測自然第29題)"
       },
       {
         "id": "science-real-112-q30",
@@ -1516,7 +1516,7 @@ export const scienceRealExams = [
           "10⁻¹⁶"
         ],
         "answer": 2,
-        "explanation": "(112學測自然第30題,官方答案C)"
+        "explanation": "(112學測自然第30題)"
       },
       {
         "id": "science-real-112-q31",
@@ -1539,7 +1539,7 @@ export const scienceRealExams = [
           2,
           3
         ],
-        "explanation": "(112學測自然第31題,官方答案CD)"
+        "explanation": "(112學測自然第31題)"
       },
       {
         "id": "science-real-112-q32",
@@ -1555,7 +1555,7 @@ export const scienceRealExams = [
           "f₁ = f < f₂"
         ],
         "answer": 1,
-        "explanation": "(112學測自然第32題,官方答案B)"
+        "explanation": "(112學測自然第32題)"
       },
       {
         "id": "science-real-112-q33",
@@ -1571,7 +1571,7 @@ export const scienceRealExams = [
           "β = 2"
         ],
         "answer": 4,
-        "explanation": "(112學測自然第33題,官方答案E)"
+        "explanation": "(112學測自然第33題)"
       },
       {
         "id": "science-real-112-q34",
@@ -1587,7 +1587,7 @@ export const scienceRealExams = [
           "甲丙"
         ],
         "answer": 4,
-        "explanation": "(112學測自然第34題,官方答案E)"
+        "explanation": "(112學測自然第34題)"
       },
       {
         "id": "science-real-112-q35",
@@ -1607,7 +1607,7 @@ export const scienceRealExams = [
           2,
           4
         ],
-        "explanation": "(112學測自然第35題,官方答案CE)"
+        "explanation": "(112學測自然第35題)"
       },
       {
         "id": "science-real-112-q36",
@@ -1623,7 +1623,7 @@ export const scienceRealExams = [
           "乙與兩直桿間必須有摩擦力,才能維持靜止"
         ],
         "answer": 1,
-        "explanation": "(112學測自然第36題,官方答案B)"
+        "explanation": "(112學測自然第36題)"
       },
       {
         "id": "science-real-112-q37",
@@ -1642,7 +1642,7 @@ export const scienceRealExams = [
           "10⁴"
         ],
         "answer": 3,
-        "explanation": "(112學測自然第37題,官方答案D)"
+        "explanation": "(112學測自然第37題)"
       },
       {
         "id": "science-real-112-q38",
@@ -1661,7 +1661,7 @@ export const scienceRealExams = [
           "丁戊"
         ],
         "answer": 1,
-        "explanation": "(112學測自然第38題,官方答案B)"
+        "explanation": "(112學測自然第38題)"
       },
       {
         "id": "science-real-112-q39",
@@ -1680,7 +1680,7 @@ export const scienceRealExams = [
           "甲丁戊己"
         ],
         "answer": 0,
-        "explanation": "(112學測自然第39題,官方答案A)"
+        "explanation": "(112學測自然第39題)"
       },
       {
         "id": "science-real-112-q40",
@@ -1711,7 +1711,7 @@ export const scienceRealExams = [
           "自轉週期與地球相當,因此日夜溫度變化的週期與地球類似"
         ],
         "answer": 4,
-        "explanation": "(112學測自然第41題,官方答案E)"
+        "explanation": "(112學測自然第41題)"
       },
       {
         "id": "science-real-112-q42",
@@ -1730,7 +1730,7 @@ export const scienceRealExams = [
           "紫色"
         ],
         "answer": 3,
-        "explanation": "(112學測自然第42題,官方答案D)"
+        "explanation": "(112學測自然第42題)"
       },
       {
         "id": "science-real-112-q43",
@@ -1749,7 +1749,7 @@ export const scienceRealExams = [
           "火星抵禦太陽風或宇宙射線的能力遠高於地球"
         ],
         "answer": 0,
-        "explanation": "(112學測自然第43題,官方答案A)"
+        "explanation": "(112學測自然第43題)"
       },
       {
         "id": "science-real-112-q44",
@@ -1780,7 +1780,7 @@ export const scienceRealExams = [
           "減少約10 %"
         ],
         "answer": 2,
-        "explanation": "(112學測自然第45題,官方答案C)"
+        "explanation": "(112學測自然第45題)"
       },
       {
         "id": "science-real-112-q46",
@@ -1803,7 +1803,7 @@ export const scienceRealExams = [
           3,
           4
         ],
-        "explanation": "(112學測自然第46題,官方答案DE)"
+        "explanation": "(112學測自然第46題)"
       },
       {
         "id": "science-real-112-q47",
@@ -1839,7 +1839,7 @@ export const scienceRealExams = [
           2,
           4
         ],
-        "explanation": "(112學測自然第48題,官方答案ACE)"
+        "explanation": "(112學測自然第48題)"
       },
       {
         "id": "science-real-112-q49",
@@ -1863,7 +1863,7 @@ export const scienceRealExams = [
           2,
           3
         ],
-        "explanation": "(112學測自然第49題,官方答案BCD)"
+        "explanation": "(112學測自然第49題)"
       },
       {
         "id": "science-real-112-q50",
@@ -1898,7 +1898,7 @@ export const scienceRealExams = [
           0,
           4
         ],
-        "explanation": "(112學測自然第51題,官方答案AE)"
+        "explanation": "(112學測自然第51題)"
       },
       {
         "id": "science-real-112-q52",
@@ -1929,7 +1929,7 @@ export const scienceRealExams = [
           "英國於2000年起禁用有鉛汽油,因此同湖泊近年的 ²⁰⁶Pb/²⁰⁷Pb 比例應為0"
         ],
         "answer": 3,
-        "explanation": "(112學測自然第53題,官方答案D)"
+        "explanation": "(112學測自然第53題)"
       },
       {
         "id": "science-real-112-q54",
@@ -1960,7 +1960,7 @@ export const scienceRealExams = [
           "細菌X會促進細菌Y的生長"
         ],
         "answer": 0,
-        "explanation": "(112學測自然第55題,官方答案A)"
+        "explanation": "(112學測自然第55題)"
       },
       {
         "id": "science-real-112-q56",
@@ -1979,7 +1979,7 @@ export const scienceRealExams = [
           "抗生素劑量隨時間先呈階梯狀逐步上升,到中段升到最高,之後又逐步下降(倒 V 形)"
         ],
         "answer": 0,
-        "explanation": "(112學測自然第56題,官方答案A)"
+        "explanation": "(112學測自然第56題)"
       },
       {
         "id": "science-real-112-q57",
@@ -2010,7 +2010,7 @@ export const scienceRealExams = [
           "葡萄糖"
         ],
         "answer": 2,
-        "explanation": "(112學測自然第58題,官方答案C)"
+        "explanation": "(112學測自然第58題)"
       },
       {
         "id": "science-real-112-q59",
@@ -2034,7 +2034,7 @@ export const scienceRealExams = [
           2,
           4
         ],
-        "explanation": "(112學測自然第59題,官方答案ACE)"
+        "explanation": "(112學測自然第59題)"
       },
       {
         "id": "science-real-112-q60",
@@ -2096,7 +2096,7 @@ export const scienceRealExams = [
           "水蘊草葉片"
         ],
         "answer": 1,
-        "explanation": "(113學測自然第1題,官方答案B)"
+        "explanation": "(113學測自然第1題)"
       },
       {
         "id": "science-real-113-q2",
@@ -2116,7 +2116,7 @@ export const scienceRealExams = [
           2,
           3
         ],
-        "explanation": "(113學測自然第2題,官方答案CD)"
+        "explanation": "(113學測自然第2題)"
       },
       {
         "id": "science-real-113-q3",
@@ -2137,7 +2137,7 @@ export const scienceRealExams = [
           3,
           4
         ],
-        "explanation": "(113學測自然第3題,官方答案BDE)"
+        "explanation": "(113學測自然第3題)"
       },
       {
         "id": "science-real-113-q4",
@@ -2158,7 +2158,7 @@ export const scienceRealExams = [
           1,
           2
         ],
-        "explanation": "(113學測自然第4題,官方答案ABC)"
+        "explanation": "(113學測自然第4題)"
       },
       {
         "id": "science-real-113-q5",
@@ -2179,7 +2179,7 @@ export const scienceRealExams = [
           3,
           4
         ],
-        "explanation": "(113學測自然第5題,官方答案CDE)"
+        "explanation": "(113學測自然第5題)"
       },
       {
         "id": "science-real-113-q6",
@@ -2195,7 +2195,7 @@ export const scienceRealExams = [
           "鳥糞嘌呤與胞嘧啶個數相加等於腺嘌呤個數"
         ],
         "answer": 4,
-        "explanation": "(113學測自然第6題,官方答案E)"
+        "explanation": "(113學測自然第6題)"
       },
       {
         "id": "science-real-113-q7",
@@ -2215,7 +2215,7 @@ export const scienceRealExams = [
           1,
           4
         ],
-        "explanation": "(113學測自然第7題,官方答案BE)"
+        "explanation": "(113學測自然第7題)"
       },
       {
         "id": "science-real-113-q9",
@@ -2231,7 +2231,7 @@ export const scienceRealExams = [
           "屬是將(物)種加以歸類後的第一個層級"
         ],
         "answer": 4,
-        "explanation": "(113學測自然第9題,官方答案E)"
+        "explanation": "(113學測自然第9題)"
       },
       {
         "id": "science-real-113-q10",
@@ -2247,7 +2247,7 @@ export const scienceRealExams = [
           "戊"
         ],
         "answer": 3,
-        "explanation": "(113學測自然第10題,官方答案D)"
+        "explanation": "(113學測自然第10題)"
       },
       {
         "id": "science-real-113-q11",
@@ -2268,7 +2268,7 @@ export const scienceRealExams = [
           3,
           4
         ],
-        "explanation": "(113學測自然第11題,官方答案BDE)"
+        "explanation": "(113學測自然第11題)"
       },
       {
         "passageId": "science-real-113-g12",
@@ -2287,7 +2287,7 @@ export const scienceRealExams = [
           "KCl(aq)"
         ],
         "answer": 1,
-        "explanation": "(113學測自然第12題,官方答案B)"
+        "explanation": "(113學測自然第12題)"
       },
       {
         "passageId": "science-real-113-g12",
@@ -2311,7 +2311,7 @@ export const scienceRealExams = [
           2,
           4
         ],
-        "explanation": "(113學測自然第13題,官方答案ACE)"
+        "explanation": "(113學測自然第13題)"
       },
       {
         "id": "science-real-113-q14",
@@ -2327,7 +2327,7 @@ export const scienceRealExams = [
           "6.00"
         ],
         "answer": 2,
-        "explanation": "(113學測自然第14題,官方答案C)"
+        "explanation": "(113學測自然第14題)"
       },
       {
         "id": "science-real-113-q15",
@@ -2343,7 +2343,7 @@ export const scienceRealExams = [
           "氧氣"
         ],
         "answer": 2,
-        "explanation": "(113學測自然第15題,官方答案C)"
+        "explanation": "(113學測自然第15題)"
       },
       {
         "passageId": "science-real-113-g16",
@@ -2362,7 +2362,7 @@ export const scienceRealExams = [
           "碳化後的咖啡粉不易吸水,水就容易揮發"
         ],
         "answer": 3,
-        "explanation": "(113學測自然第16題,官方答案D)"
+        "explanation": "(113學測自然第16題)"
       },
       {
         "passageId": "science-real-113-g16",
@@ -2385,7 +2385,7 @@ export const scienceRealExams = [
           0,
           4
         ],
-        "explanation": "(113學測自然第17題,官方答案AE)"
+        "explanation": "(113學測自然第17題)"
       },
       {
         "id": "science-real-113-q18",
@@ -2406,7 +2406,7 @@ export const scienceRealExams = [
           2,
           4
         ],
-        "explanation": "(113學測自然第18題,官方答案ACE)"
+        "explanation": "(113學測自然第18題)"
       },
       {
         "id": "science-real-113-q19",
@@ -2427,7 +2427,7 @@ export const scienceRealExams = [
           2,
           4
         ],
-        "explanation": "(113學測自然第19題,官方答案ACE)"
+        "explanation": "(113學測自然第19題)"
       },
       {
         "id": "science-real-113-q20",
@@ -2447,7 +2447,7 @@ export const scienceRealExams = [
           2,
           3
         ],
-        "explanation": "(113學測自然第20題,官方答案CD)"
+        "explanation": "(113學測自然第20題)"
       },
       {
         "id": "science-real-113-q21",
@@ -2463,7 +2463,7 @@ export const scienceRealExams = [
           "若成像模糊,照相機是調整鏡頭與感光元件的距離,而眼睛則只靠縮放瞳孔,使成像清晰"
         ],
         "answer": 3,
-        "explanation": "(113學測自然第21題,官方答案D)"
+        "explanation": "(113學測自然第21題)"
       },
       {
         "passageId": "science-real-113-g22",
@@ -2486,7 +2486,7 @@ export const scienceRealExams = [
           2,
           4
         ],
-        "explanation": "(113學測自然第22題,官方答案CE)"
+        "explanation": "(113學測自然第22題)"
       },
       {
         "passageId": "science-real-113-g22",
@@ -2509,7 +2509,7 @@ export const scienceRealExams = [
           1,
           3
         ],
-        "explanation": "(113學測自然第23題,官方答案BD)"
+        "explanation": "(113學測自然第23題)"
       },
       {
         "passageId": "science-real-113-g24",
@@ -2532,7 +2532,7 @@ export const scienceRealExams = [
           0,
           2
         ],
-        "explanation": "(113學測自然第24題,官方答案AC)"
+        "explanation": "(113學測自然第24題)"
       },
       {
         "passageId": "science-real-113-g24",
@@ -2551,7 +2551,7 @@ export const scienceRealExams = [
           "1.4×10⁷ J"
         ],
         "answer": 2,
-        "explanation": "(113學測自然第25題,官方答案C)"
+        "explanation": "(113學測自然第25題)"
       },
       {
         "passageId": "science-real-113-g26",
@@ -2570,7 +2570,7 @@ export const scienceRealExams = [
           "50 ms"
         ],
         "answer": 2,
-        "explanation": "(113學測自然第26題,官方答案C)"
+        "explanation": "(113學測自然第26題)"
       },
       {
         "passageId": "science-real-113-g26",
@@ -2589,7 +2589,7 @@ export const scienceRealExams = [
           "250 N"
         ],
         "answer": 1,
-        "explanation": "(113學測自然第27題,官方答案B)"
+        "explanation": "(113學測自然第27題)"
       },
       {
         "id": "science-real-113-q28",
@@ -2609,7 +2609,7 @@ export const scienceRealExams = [
           0,
           3
         ],
-        "explanation": "(113學測自然第28題,官方答案AD)"
+        "explanation": "(113學測自然第28題)"
       },
       {
         "id": "science-real-113-q29",
@@ -2625,7 +2625,7 @@ export const scienceRealExams = [
           "乙戊甲丙丁"
         ],
         "answer": 1,
-        "explanation": "(113學測自然第29題,官方答案B)"
+        "explanation": "(113學測自然第29題)"
       },
       {
         "id": "science-real-113-q30",
@@ -2645,7 +2645,7 @@ export const scienceRealExams = [
           3,
           4
         ],
-        "explanation": "(113學測自然第30題,官方答案DE)"
+        "explanation": "(113學測自然第30題)"
       },
       {
         "id": "science-real-113-q31",
@@ -2661,7 +2661,7 @@ export const scienceRealExams = [
           "50"
         ],
         "answer": 2,
-        "explanation": "(113學測自然第31題,官方答案C)"
+        "explanation": "(113學測自然第31題)"
       },
       {
         "id": "science-real-113-q32",
@@ -2677,7 +2677,7 @@ export const scienceRealExams = [
           "乙地點的天氣是陰雨天"
         ],
         "answer": 3,
-        "explanation": "(113學測自然第32題,官方答案D)"
+        "explanation": "(113學測自然第32題)"
       },
       {
         "id": "science-real-113-q33",
@@ -2698,7 +2698,7 @@ export const scienceRealExams = [
           1,
           4
         ],
-        "explanation": "(113學測自然第33題,官方答案ABE)"
+        "explanation": "(113學測自然第33題)"
       },
       {
         "id": "science-real-113-q34",
@@ -2718,7 +2718,7 @@ export const scienceRealExams = [
           1,
           4
         ],
-        "explanation": "(113學測自然第34題,官方答案BE)"
+        "explanation": "(113學測自然第34題)"
       },
       {
         "id": "science-real-113-q35",
@@ -2738,7 +2738,7 @@ export const scienceRealExams = [
           1,
           3
         ],
-        "explanation": "(113學測自然第35題,官方答案BD)"
+        "explanation": "(113學測自然第35題)"
       },
       {
         "id": "science-real-113-q36",
@@ -2754,7 +2754,7 @@ export const scienceRealExams = [
           "海底火山噴發"
         ],
         "answer": 2,
-        "explanation": "(113學測自然第36題,官方答案C)"
+        "explanation": "(113學測自然第36題)"
       },
       {
         "passageId": "science-real-113-g37",
@@ -2773,7 +2773,7 @@ export const scienceRealExams = [
           "飼料配方是否改變也應加入探討育種計畫的成效"
         ],
         "answer": 0,
-        "explanation": "(113學測自然第37題,官方答案A)"
+        "explanation": "(113學測自然第37題)"
       },
       {
         "passageId": "science-real-113-g37",
@@ -2804,7 +2804,7 @@ export const scienceRealExams = [
           "還沒找到有潛力可靠的可轉殖基因"
         ],
         "answer": 1,
-        "explanation": "(113學測自然第39題,官方答案B)"
+        "explanation": "(113學測自然第39題)"
       },
       {
         "passageId": "science-real-113-g40",
@@ -2823,7 +2823,7 @@ export const scienceRealExams = [
           "僅電位改變,細胞膜施加於細胞壁的壓力維持不變"
         ],
         "answer": 1,
-        "explanation": "(113學測自然第40題,官方答案B)"
+        "explanation": "(113學測自然第40題)"
       },
       {
         "passageId": "science-real-113-g40",
@@ -2858,7 +2858,7 @@ export const scienceRealExams = [
           2,
           3
         ],
-        "explanation": "(113學測自然第42題,官方答案CD)"
+        "explanation": "(113學測自然第42題)"
       },
       {
         "passageId": "science-real-113-g40",
@@ -2889,7 +2889,7 @@ export const scienceRealExams = [
           "若迴路對移動磁鐵棒施加磁力,則其方向恆向上"
         ],
         "answer": 4,
-        "explanation": "(113學測自然第44題,官方答案E)"
+        "explanation": "(113學測自然第44題)"
       },
       {
         "passageId": "science-real-113-g44",
@@ -2912,7 +2912,7 @@ export const scienceRealExams = [
           1,
           3
         ],
-        "explanation": "(113學測自然第45題,官方答案BD)"
+        "explanation": "(113學測自然第45題)"
       },
       {
         "passageId": "science-real-113-g44",
@@ -2947,7 +2947,7 @@ export const scienceRealExams = [
           0,
           3
         ],
-        "explanation": "(113學測自然第47題,官方答案AD)"
+        "explanation": "(113學測自然第47題)"
       },
       {
         "passageId": "science-real-113-g47",
@@ -2971,7 +2971,7 @@ export const scienceRealExams = [
           1,
           4
         ],
-        "explanation": "(113學測自然第48題,官方答案ABE)"
+        "explanation": "(113學測自然第48題)"
       },
       {
         "passageId": "science-real-113-g47",
@@ -3007,7 +3007,7 @@ export const scienceRealExams = [
           2,
           4
         ],
-        "explanation": "(113學測自然第50題,官方答案BCE)"
+        "explanation": "(113學測自然第50題)"
       },
       {
         "passageId": "science-real-113-g50",
@@ -3043,7 +3043,7 @@ export const scienceRealExams = [
           2,
           4
         ],
-        "explanation": "(113學測自然第52題,官方答案ACE)"
+        "explanation": "(113學測自然第52題)"
       },
       {
         "passageId": "science-real-113-g50",
@@ -3078,7 +3078,7 @@ export const scienceRealExams = [
           2,
           3
         ],
-        "explanation": "(113學測自然第54題,官方答案CD)"
+        "explanation": "(113學測自然第54題)"
       },
       {
         "passageId": "science-real-113-g54",
@@ -3097,7 +3097,7 @@ export const scienceRealExams = [
           "遙遠的天體會隨著宇宙膨脹而變大,所以需要大口徑望遠鏡"
         ],
         "answer": 2,
-        "explanation": "(113學測自然第55題,官方答案C)"
+        "explanation": "(113學測自然第55題)"
       },
       {
         "passageId": "science-real-113-g54",
@@ -3162,7 +3162,7 @@ export const scienceRealExams = [
           "減數分裂使生物體親代與子代的體細胞染色體數目相同"
         ],
         "answer": 4,
-        "explanation": "(114學測自然第1題,官方答案E)"
+        "explanation": "(114學測自然第1題)"
       },
       {
         "id": "science-real-114-q2",
@@ -3182,7 +3182,7 @@ export const scienceRealExams = [
           2,
           3
         ],
-        "explanation": "(114學測自然第2題,官方答案CD)"
+        "explanation": "(114學測自然第2題)"
       },
       {
         "id": "science-real-114-q3",
@@ -3198,7 +3198,7 @@ export const scienceRealExams = [
           "為了區別細胞膜和細胞壁,需先將下表皮樣本浸泡在亞甲藍液中"
         ],
         "answer": 2,
-        "explanation": "(114學測自然第3題,官方答案C)"
+        "explanation": "(114學測自然第3題)"
       },
       {
         "id": "science-real-114-q4",
@@ -3219,7 +3219,7 @@ export const scienceRealExams = [
           2,
           3
         ],
-        "explanation": "(114學測自然第4題,官方答案BCD)"
+        "explanation": "(114學測自然第4題)"
       },
       {
         "id": "science-real-114-q5",
@@ -3240,7 +3240,7 @@ export const scienceRealExams = [
           1,
           3
         ],
-        "explanation": "(114學測自然第5題,官方答案ABD)"
+        "explanation": "(114學測自然第5題)"
       },
       {
         "id": "science-real-114-q6",
@@ -3260,7 +3260,7 @@ export const scienceRealExams = [
           2,
           4
         ],
-        "explanation": "(114學測自然第6題,官方答案CE)"
+        "explanation": "(114學測自然第6題)"
       },
       {
         "id": "science-real-114-q7",
@@ -3279,7 +3279,7 @@ export const scienceRealExams = [
           "辛"
         ],
         "answer": 3,
-        "explanation": "(114學測自然第7題,官方答案D)"
+        "explanation": "(114學測自然第7題)"
       },
       {
         "id": "science-real-114-q8",
@@ -3303,7 +3303,7 @@ export const scienceRealExams = [
           2,
           3
         ],
-        "explanation": "(114學測自然第8題,官方答案ACD)"
+        "explanation": "(114學測自然第8題)"
       },
       {
         "id": "science-real-114-q9",
@@ -3324,7 +3324,7 @@ export const scienceRealExams = [
           2,
           3
         ],
-        "explanation": "(114學測自然第9題,官方答案ACD)"
+        "explanation": "(114學測自然第9題)"
       },
       {
         "id": "science-real-114-q10",
@@ -3345,7 +3345,7 @@ export const scienceRealExams = [
           2,
           4
         ],
-        "explanation": "(114學測自然第10題,官方答案BCE)"
+        "explanation": "(114學測自然第10題)"
       },
       {
         "id": "science-real-114-q11",
@@ -3366,7 +3366,7 @@ export const scienceRealExams = [
           2,
           3
         ],
-        "explanation": "(114學測自然第11題,官方答案BCD)"
+        "explanation": "(114學測自然第11題)"
       },
       {
         "id": "science-real-114-q12",
@@ -3382,7 +3382,7 @@ export const scienceRealExams = [
           "發生日全食的時候,月面會呈現暗紅色"
         ],
         "answer": 3,
-        "explanation": "(114學測自然第12題,官方答案D)"
+        "explanation": "(114學測自然第12題)"
       },
       {
         "id": "science-real-114-q13",
@@ -3398,7 +3398,7 @@ export const scienceRealExams = [
           "夾角 0°,地軸直立(與垂直方向一致),兩處地軸皆未傾斜"
         ],
         "answer": 0,
-        "explanation": "(114學測自然第13題,官方答案A)"
+        "explanation": "(114學測自然第13題)"
       },
       {
         "id": "science-real-114-q14",
@@ -3418,7 +3418,7 @@ export const scienceRealExams = [
           0,
           4
         ],
-        "explanation": "(114學測自然第14題,官方答案AE)"
+        "explanation": "(114學測自然第14題)"
       },
       {
         "id": "science-real-114-q15",
@@ -3434,7 +3434,7 @@ export const scienceRealExams = [
           "平移斷層型"
         ],
         "answer": 1,
-        "explanation": "(114學測自然第15題,官方答案B)"
+        "explanation": "(114學測自然第15題)"
       },
       {
         "id": "science-real-114-q16",
@@ -3454,7 +3454,7 @@ export const scienceRealExams = [
           2,
           4
         ],
-        "explanation": "(114學測自然第16題,官方答案CE)"
+        "explanation": "(114學測自然第16題)"
       },
       {
         "id": "science-real-114-q17",
@@ -3470,7 +3470,7 @@ export const scienceRealExams = [
           "北極海(北冰洋)上層海水的鹽度比印度洋上層海水鹽度較低"
         ],
         "answer": 0,
-        "explanation": "(114學測自然第17題,官方答案A)"
+        "explanation": "(114學測自然第17題)"
       },
       {
         "id": "science-real-114-q18",
@@ -3486,7 +3486,7 @@ export const scienceRealExams = [
           "X 依照地球與太陽的距離而不一定"
         ],
         "answer": 2,
-        "explanation": "(114學測自然第18題,官方答案C)"
+        "explanation": "(114學測自然第18題)"
       },
       {
         "id": "science-real-114-q19",
@@ -3506,7 +3506,7 @@ export const scienceRealExams = [
           3,
           4
         ],
-        "explanation": "(114學測自然第19題,官方答案DE)"
+        "explanation": "(114學測自然第19題)"
       },
       {
         "id": "science-real-114-q20",
@@ -3525,7 +3525,7 @@ export const scienceRealExams = [
           "10²⁴"
         ],
         "answer": 1,
-        "explanation": "(114學測自然第20題,官方答案B)"
+        "explanation": "(114學測自然第20題)"
       },
       {
         "id": "science-real-114-q21",
@@ -3544,7 +3544,7 @@ export const scienceRealExams = [
           "10¹⁴"
         ],
         "answer": 0,
-        "explanation": "(114學測自然第21題,官方答案A)"
+        "explanation": "(114學測自然第21題)"
       },
       {
         "id": "science-real-114-q22",
@@ -3563,7 +3563,7 @@ export const scienceRealExams = [
           "10⁸ m/s"
         ],
         "answer": 2,
-        "explanation": "(114學測自然第22題,官方答案C)"
+        "explanation": "(114學測自然第22題)"
       },
       {
         "id": "science-real-114-q23",
@@ -3586,7 +3586,7 @@ export const scienceRealExams = [
           0,
           3
         ],
-        "explanation": "(114學測自然第23題,官方答案AD)"
+        "explanation": "(114學測自然第23題)"
       },
       {
         "id": "science-real-114-q24",
@@ -3602,7 +3602,7 @@ export const scienceRealExams = [
           "原子中的電子從一個能階躍遷到另一個能量較低的能階時,會放出光子"
         ],
         "answer": 3,
-        "explanation": "(114學測自然第24題,官方答案D)"
+        "explanation": "(114學測自然第24題)"
       },
       {
         "id": "science-real-114-q26",
@@ -3618,7 +3618,7 @@ export const scienceRealExams = [
           "強力仍不足以克服質子間的相斥靜電力,須加上弱力才能使質子束縛於原子核中"
         ],
         "answer": 1,
-        "explanation": "(114學測自然第26題,官方答案B)"
+        "explanation": "(114學測自然第26題)"
       },
       {
         "id": "science-real-114-q27",
@@ -3634,7 +3634,7 @@ export const scienceRealExams = [
           "充電器上的線圈會隨時間漸漸發熱,手機上的線圈不會"
         ],
         "answer": 3,
-        "explanation": "(114學測自然第27題,官方答案D)"
+        "explanation": "(114學測自然第27題)"
       },
       {
         "id": "science-real-114-q29",
@@ -3657,7 +3657,7 @@ export const scienceRealExams = [
           0,
           4
         ],
-        "explanation": "(114學測自然第29題,官方答案AE)"
+        "explanation": "(114學測自然第29題)"
       },
       {
         "id": "science-real-114-q30",
@@ -3677,7 +3677,7 @@ export const scienceRealExams = [
           0,
           2
         ],
-        "explanation": "(114學測自然第30題,官方答案AC)"
+        "explanation": "(114學測自然第30題)"
       },
       {
         "id": "science-real-114-q31",
@@ -3698,7 +3698,7 @@ export const scienceRealExams = [
           3,
           4
         ],
-        "explanation": "(114學測自然第31題,官方答案BDE)"
+        "explanation": "(114學測自然第31題)"
       },
       {
         "id": "science-real-114-q32",
@@ -3714,7 +3714,7 @@ export const scienceRealExams = [
           "C₁₇H₂₁N₂O₃"
         ],
         "answer": 2,
-        "explanation": "(114學測自然第32題,官方答案C)"
+        "explanation": "(114學測自然第32題)"
       },
       {
         "id": "science-real-114-q33",
@@ -3734,7 +3734,7 @@ export const scienceRealExams = [
           0,
           4
         ],
-        "explanation": "(114學測自然第33題,官方答案AE)"
+        "explanation": "(114學測自然第33題)"
       },
       {
         "id": "science-real-114-q34",
@@ -3750,7 +3750,7 @@ export const scienceRealExams = [
           "乙與丙"
         ],
         "answer": 4,
-        "explanation": "(114學測自然第34題,官方答案E)"
+        "explanation": "(114學測自然第34題)"
       },
       {
         "id": "science-real-114-q35",
@@ -3774,7 +3774,7 @@ export const scienceRealExams = [
           2,
           4
         ],
-        "explanation": "(114學測自然第35題,官方答案ACE)"
+        "explanation": "(114學測自然第35題)"
       },
       {
         "id": "science-real-114-q36",
@@ -3793,7 +3793,7 @@ export const scienceRealExams = [
           "1.2"
         ],
         "answer": 2,
-        "explanation": "(114學測自然第36題,官方答案C)"
+        "explanation": "(114學測自然第36題)"
       },
       {
         "id": "science-real-114-q37",
@@ -3817,7 +3817,7 @@ export const scienceRealExams = [
           2,
           3
         ],
-        "explanation": "(114學測自然第37題,官方答案ACD)"
+        "explanation": "(114學測自然第37題)"
       },
       {
         "id": "science-real-114-q38",
@@ -3853,7 +3853,7 @@ export const scienceRealExams = [
           3,
           4
         ],
-        "explanation": "(114學測自然第39題,官方答案CDE)"
+        "explanation": "(114學測自然第39題)"
       },
       {
         "id": "science-real-114-q42",
@@ -3876,7 +3876,7 @@ export const scienceRealExams = [
           2,
           4
         ],
-        "explanation": "(114學測自然第42題,官方答案CE)"
+        "explanation": "(114學測自然第42題)"
       },
       {
         "id": "science-real-114-q43",
@@ -3911,7 +3911,7 @@ export const scienceRealExams = [
           2,
           4
         ],
-        "explanation": "(114學測自然第44題,官方答案CE)"
+        "explanation": "(114學測自然第44題)"
       },
       {
         "id": "science-real-114-q45",
@@ -3930,7 +3930,7 @@ export const scienceRealExams = [
           "曲線近乎水平的一條直線,幾乎沒有變化"
         ],
         "answer": 1,
-        "explanation": "(114學測自然第45題,官方答案B)"
+        "explanation": "(114學測自然第45題)"
       },
       {
         "id": "science-real-114-q46",
@@ -3965,7 +3965,7 @@ export const scienceRealExams = [
           0,
           4
         ],
-        "explanation": "(114學測自然第47題,官方答案AE)"
+        "explanation": "(114學測自然第47題)"
       },
       {
         "id": "science-real-114-q48",
@@ -3984,7 +3984,7 @@ export const scienceRealExams = [
           "38/36"
         ],
         "answer": 2,
-        "explanation": "(114學測自然第48題,官方答案C)"
+        "explanation": "(114學測自然第48題)"
       },
       {
         "id": "science-real-114-q49",
@@ -4019,7 +4019,7 @@ export const scienceRealExams = [
           1,
           4
         ],
-        "explanation": "(114學測自然第50題,官方答案BE)"
+        "explanation": "(114學測自然第50題)"
       },
       {
         "id": "science-real-114-q51",
@@ -4054,7 +4054,7 @@ export const scienceRealExams = [
           2,
           4
         ],
-        "explanation": "(114學測自然第52題,官方答案CE)"
+        "explanation": "(114學測自然第52題)"
       },
       {
         "id": "science-real-114-q53",
@@ -4097,7 +4097,7 @@ export const scienceRealExams = [
           "由表3資料,可以推測己烷的莫耳燃燒熱約為6200(千焦耳/莫耳)"
         ],
         "answer": 1,
-        "explanation": "(114學測自然第55題,官方答案B)"
+        "explanation": "(114學測自然第55題)"
       },
       {
         "id": "science-real-114-q56",
@@ -4132,7 +4132,7 @@ export const scienceRealExams = [
           0,
           4
         ],
-        "explanation": "(114學測自然第57題,官方答案AE)"
+        "explanation": "(114學測自然第57題)"
       }
     ],
   },
@@ -4193,7 +4193,7 @@ export const scienceRealExams = [
           "100"
         ],
         "answer": 2,
-        "explanation": "(115學測自然第1題,官方答案C)"
+        "explanation": "(115學測自然第1題)"
       },
       {
         "id": "science-real-115-q2",
@@ -4209,7 +4209,7 @@ export const scienceRealExams = [
           "同一星系內的不同星團,其年齡不盡相同"
         ],
         "answer": 2,
-        "explanation": "(115學測自然第2題,官方答案C)"
+        "explanation": "(115學測自然第2題)"
       },
       {
         "id": "science-real-115-q3",
@@ -4225,7 +4225,7 @@ export const scienceRealExams = [
           "大氣中的臭氧會吸收紫外線,其主要分布在中氣層內"
         ],
         "answer": 3,
-        "explanation": "(115學測自然第3題,官方答案D)"
+        "explanation": "(115學測自然第3題)"
       },
       {
         "id": "science-real-115-q4",
@@ -4241,7 +4241,7 @@ export const scienceRealExams = [
           "在房間打開電暖氣,室內的空氣會產生類似由乙→丁的過程"
         ],
         "answer": 0,
-        "explanation": "(115學測自然第4題,官方答案A)"
+        "explanation": "(115學測自然第4題)"
       },
       {
         "id": "science-real-115-q5",
@@ -4257,7 +4257,7 @@ export const scienceRealExams = [
           "千年後,地球一年的天數與現在相同"
         ],
         "answer": 3,
-        "explanation": "(115學測自然第5題,官方答案D)"
+        "explanation": "(115學測自然第5題)"
       },
       {
         "id": "science-real-115-q6",
@@ -4273,7 +4273,7 @@ export const scienceRealExams = [
           "8 月 17 日到 8 月 19 日期間,太平洋副熱帶高壓強度較強且位置偏西"
         ],
         "answer": 0,
-        "explanation": "(115學測自然第6題,官方答案A)"
+        "explanation": "(115學測自然第6題)"
       },
       {
         "id": "science-real-115-q7",
@@ -4296,7 +4296,7 @@ export const scienceRealExams = [
           0,
           4
         ],
-        "explanation": "(115學測自然第7題,官方答案AE)"
+        "explanation": "(115學測自然第7題)"
       },
       {
         "id": "science-real-115-q8",
@@ -4319,7 +4319,7 @@ export const scienceRealExams = [
           1,
           3
         ],
-        "explanation": "(115學測自然第8題,官方答案BD)"
+        "explanation": "(115學測自然第8題)"
       },
       {
         "id": "science-real-115-q10",
@@ -4335,7 +4335,7 @@ export const scienceRealExams = [
           "整個過程中汽車的位移為 200 公尺"
         ],
         "answer": 2,
-        "explanation": "(115學測自然第10題,官方答案C)"
+        "explanation": "(115學測自然第10題)"
       },
       {
         "id": "science-real-115-q11",
@@ -4358,7 +4358,7 @@ export const scienceRealExams = [
           3,
           4
         ],
-        "explanation": "(115學測自然第11題,官方答案DE)"
+        "explanation": "(115學測自然第11題)"
       },
       {
         "id": "science-real-115-q12",
@@ -4381,7 +4381,7 @@ export const scienceRealExams = [
           1,
           4
         ],
-        "explanation": "(115學測自然第12題,官方答案BE)"
+        "explanation": "(115學測自然第12題)"
       },
       {
         "id": "science-real-115-q14",
@@ -4397,7 +4397,7 @@ export const scienceRealExams = [
           "甲 > 乙 > 丙 > 丁"
         ],
         "answer": 2,
-        "explanation": "(115學測自然第14題,官方答案C)"
+        "explanation": "(115學測自然第14題)"
       },
       {
         "id": "science-real-115-q15",
@@ -4413,7 +4413,7 @@ export const scienceRealExams = [
           "N²/C"
         ],
         "answer": 1,
-        "explanation": "(115學測自然第15題,官方答案B)"
+        "explanation": "(115學測自然第15題)"
       },
       {
         "id": "science-real-115-q17",
@@ -4432,7 +4432,7 @@ export const scienceRealExams = [
           "394/140"
         ],
         "answer": 4,
-        "explanation": "(115學測自然第17題,官方答案E)"
+        "explanation": "(115學測自然第17題)"
       },
       {
         "id": "science-real-115-q18",
@@ -4451,7 +4451,7 @@ export const scienceRealExams = [
           "R_N 約為 3×10¹⁹ Hz"
         ],
         "answer": 4,
-        "explanation": "(115學測自然第18題,官方答案E)"
+        "explanation": "(115學測自然第18題)"
       },
       {
         "id": "science-real-115-q19",
@@ -4467,7 +4467,7 @@ export const scienceRealExams = [
           "小蘇打溶於水中"
         ],
         "answer": 3,
-        "explanation": "(115學測自然第19題,官方答案D)"
+        "explanation": "(115學測自然第19題)"
       },
       {
         "id": "science-real-115-q21",
@@ -4483,7 +4483,7 @@ export const scienceRealExams = [
           "丙 > 乙 > 丁"
         ],
         "answer": 4,
-        "explanation": "(115學測自然第21題,官方答案E)"
+        "explanation": "(115學測自然第21題)"
       },
       {
         "id": "science-real-115-q22",
@@ -4499,7 +4499,7 @@ export const scienceRealExams = [
           "−232 kJ"
         ],
         "answer": 2,
-        "explanation": "(115學測自然第22題,官方答案C)"
+        "explanation": "(115學測自然第22題)"
       },
       {
         "id": "science-real-115-q23",
@@ -4519,7 +4519,7 @@ export const scienceRealExams = [
           0,
           4
         ],
-        "explanation": "(115學測自然第23題,官方答案AE)"
+        "explanation": "(115學測自然第23題)"
       },
       {
         "id": "science-real-115-q24",
@@ -4535,7 +4535,7 @@ export const scienceRealExams = [
           "(E)圖"
         ],
         "answer": 1,
-        "explanation": "(115學測自然第24題,官方答案B)"
+        "explanation": "(115學測自然第24題)"
       },
       {
         "id": "science-real-115-q25",
@@ -4558,7 +4558,7 @@ export const scienceRealExams = [
           2,
           3
         ],
-        "explanation": "(115學測自然第25題,官方答案CD)"
+        "explanation": "(115學測自然第25題)"
       },
       {
         "id": "science-real-115-q26",
@@ -4582,7 +4582,7 @@ export const scienceRealExams = [
           1,
           2
         ],
-        "explanation": "(115學測自然第26題,官方答案ABC)"
+        "explanation": "(115學測自然第26題)"
       },
       {
         "id": "science-real-115-q27",
@@ -4606,7 +4606,7 @@ export const scienceRealExams = [
           1,
           4
         ],
-        "explanation": "(115學測自然第27題,官方答案ABE,對應選項為「可能產生氣體」、「Cl 被還原」、「平衡反應式的最小整數係數和為 4」)"
+        "explanation": "(115學測自然第27題,答案為「可能產生氣體」、「Cl 被還原」、「平衡反應式的最小整數係數和為 4」)"
       },
       {
         "id": "science-real-115-q29",
@@ -4622,7 +4622,7 @@ export const scienceRealExams = [
           "固碳反應停止,細胞為維持適當機能而分解醣類"
         ],
         "answer": 4,
-        "explanation": "(115學測自然第29題,官方答案E)"
+        "explanation": "(115學測自然第29題)"
       },
       {
         "id": "science-real-115-q30",
@@ -4638,7 +4638,7 @@ export const scienceRealExams = [
           "魏修研究細胞的生長後,認為所有的細胞都由既存的細胞產生"
         ],
         "answer": 4,
-        "explanation": "(115學測自然第30題,官方答案E)"
+        "explanation": "(115學測自然第30題)"
       },
       {
         "id": "science-real-115-q32",
@@ -4658,7 +4658,7 @@ export const scienceRealExams = [
           2,
           3
         ],
-        "explanation": "(115學測自然第32題,官方答案CD)"
+        "explanation": "(115學測自然第32題)"
       },
       {
         "id": "science-real-115-q33",
@@ -4674,7 +4674,7 @@ export const scienceRealExams = [
           "與草莓萃取的 DNA 混合會形成完全互補之雙股 DNA"
         ],
         "answer": 1,
-        "explanation": "(115學測自然第33題,官方答案B)"
+        "explanation": "(115學測自然第33題)"
       },
       {
         "id": "science-real-115-q34",
@@ -4690,7 +4690,7 @@ export const scienceRealExams = [
           "地球生命史上生物多樣性的高低,僅由滅絕速率的高低所決定"
         ],
         "answer": 0,
-        "explanation": "(115學測自然第34題,官方答案A)"
+        "explanation": "(115學測自然第34題)"
       },
       {
         "id": "science-real-115-q35",
@@ -4710,7 +4710,7 @@ export const scienceRealExams = [
           3,
           4
         ],
-        "explanation": "(115學測自然第35題,官方答案DE)"
+        "explanation": "(115學測自然第35題)"
       },
       {
         "id": "science-real-115-q36",
@@ -4726,7 +4726,7 @@ export const scienceRealExams = [
           "⑤"
         ],
         "answer": 0,
-        "explanation": "(115學測自然第36題,官方答案A;圖12分支位置為非官方文字重繪,可能與原圖精確節點對應略有差異)"
+        "explanation": "(115學測自然第36題;圖12分支位置為非官方文字重繪,可能與原圖精確節點對應略有差異)"
       },
       {
         "id": "science-real-115-q37",
@@ -4750,7 +4750,7 @@ export const scienceRealExams = [
           3,
           4
         ],
-        "explanation": "(115學測自然第37題,官方答案BDE)"
+        "explanation": "(115學測自然第37題)"
       },
       {
         "id": "science-real-115-q38",
@@ -4781,7 +4781,7 @@ export const scienceRealExams = [
           "本結果已達成基改使果實成熟率提升的目的"
         ],
         "answer": 4,
-        "explanation": "(115學測自然第40題,官方答案E)"
+        "explanation": "(115學測自然第40題)"
       },
       {
         "id": "science-real-115-q41",
@@ -4816,7 +4816,7 @@ export const scienceRealExams = [
           0,
           1
         ],
-        "explanation": "(115學測自然第44題,官方答案AB)"
+        "explanation": "(115學測自然第44題)"
       },
       {
         "id": "science-real-115-q45",
@@ -4840,7 +4840,7 @@ export const scienceRealExams = [
           1,
           2
         ],
-        "explanation": "(115學測自然第45題,官方答案ABC)"
+        "explanation": "(115學測自然第45題)"
       },
       {
         "id": "science-real-115-q46",
@@ -4871,7 +4871,7 @@ export const scienceRealExams = [
           "E₃ → E₄"
         ],
         "answer": 1,
-        "explanation": "(115學測自然第47題,官方答案B;E₁−E₄ = −1.6−(−5.0) = 3.4 eV,與題幹範例「365 nm 紫外光光子能量為 3.4 eV」完全對應)"
+        "explanation": "(115學測自然第47題;E₁−E₄ = −1.6−(−5.0) = 3.4 eV,與題幹範例「365 nm 紫外光光子能量為 3.4 eV」完全對應)"
       },
       {
         "id": "science-real-115-q48",
@@ -4894,7 +4894,7 @@ export const scienceRealExams = [
           0,
           3
         ],
-        "explanation": "(115學測自然第48題,官方答案AD)"
+        "explanation": "(115學測自然第48題)"
       },
       {
         "id": "science-real-115-q49",
@@ -4937,7 +4937,7 @@ export const scienceRealExams = [
           "23-24 時"
         ],
         "answer": 1,
-        "explanation": "(115學測自然第51題,官方答案B)"
+        "explanation": "(115學測自然第51題)"
       },
       {
         "id": "science-real-115-q52",
@@ -4960,7 +4960,7 @@ export const scienceRealExams = [
           3,
           4
         ],
-        "explanation": "(115學測自然第52題,官方答案DE)"
+        "explanation": "(115學測自然第52題)"
       },
       {
         "id": "science-real-115-q53",
@@ -5003,7 +5003,7 @@ export const scienceRealExams = [
           "隕石中含有與地球上類似的礦物,此礦物比太陽系更老"
         ],
         "answer": 1,
-        "explanation": "(115學測自然第55題,官方答案B)"
+        "explanation": "(115學測自然第55題)"
       },
       {
         "id": "science-real-115-q56",
@@ -5022,7 +5022,7 @@ export const scienceRealExams = [
           "天王星"
         ],
         "answer": 1,
-        "explanation": "(115學測自然第56題,官方答案B)"
+        "explanation": "(115學測自然第56題)"
       }
     ],
   },
