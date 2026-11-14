@@ -1,5 +1,5 @@
-import { markQuestionMastered } from './storage.js';
-import { getReviewableWrongQuestions } from './wrong-utils.js';
+import { markQuestionMastered, localDayIndex, REVIEW_STAGES } from './storage.js';
+import { getReviewableWrongQuestions, byLastWrongDesc } from './wrong-utils.js';
 import { getQuestion, getUnit, getSubject } from './subjects-registry.js';
 import { prepareGroupedQuestions, renderAnswerReview } from './quiz-utils.js';
 import { runQuiz } from './quiz-runner.js';
@@ -29,9 +29,10 @@ let entries = loadEntries();
 let activeSubject = 'all';
 let rendered = 0; // 目前畫面上有幾張卡片(篩選後清單的前 rendered 筆)
 let retestCount = '10'; // 重練題數下拉選單記住上次的選擇('all' 或數字)
+let retestScope = null; // 'due'(今天到期)或 'all'(全部錯題);null 代表還沒選過,有到期的就預設 'due'
 
 function loadEntries() {
-  return getReviewableWrongQuestions().sort((a, b) => new Date(b.lastAttemptAt) - new Date(a.lastAttemptAt));
+  return getReviewableWrongQuestions().sort(byLastWrongDesc);
 }
 
 function filtered() {
@@ -62,7 +63,8 @@ function renderSummary() {
     return;
   }
 
-  summary.append(el('p', {}, `目前共有 ${entries.length} 題待複習(最近答錯的排前面)。`));
+  const dueTotal = entries.filter((w) => w.isDue).length;
+  summary.append(el('p', {}, `目前共有 ${entries.length} 題待複習,今天到期 ${dueTotal} 題(最近答錯的排前面)。`));
 
   const counts = new Map();
   for (const w of entries) counts.set(w.subjectId, (counts.get(w.subjectId) || 0) + 1);
@@ -87,8 +89,20 @@ function renderSummary() {
     summary.append(chips);
   }
 
-  const pool = retestPool();
-  if (pool.length) {
+  const duePool = retestPool('due');
+  const allPool = retestPool('all');
+  if (allPool.length) {
+    if (retestScope === null || (retestScope === 'due' && !duePool.length)) retestScope = duePool.length ? 'due' : 'all';
+    const pool = retestScope === 'due' ? duePool : allPool;
+    const scopeSelect = el('select', { class: 'quiz-count-select', 'aria-label': '重練範圍' }, [
+      el('option', { value: 'due', ...(duePool.length ? {} : { disabled: '' }) }, `今天到期(${duePool.length})`),
+      el('option', { value: 'all' }, `全部錯題(${allPool.length})`),
+    ]);
+    scopeSelect.value = retestScope;
+    scopeSelect.addEventListener('change', () => {
+      retestScope = scopeSelect.value;
+      renderSummary();
+    });
     const counts5 = [5, 10, 20].filter((n) => n < pool.length);
     const select = el('select', { class: 'quiz-count-select', 'aria-label': '重練題數' }, [
       ...counts5.map((n) => el('option', { value: String(n) }, `${n} 題`)),
@@ -102,23 +116,24 @@ function renderSummary() {
     const startBtn = el('button', { class: 'btn-pill btn-pill-dark' }, '開始重練');
     startBtn.addEventListener('click', () => startRetest(retestCount === 'all' ? pool.length : Number(retestCount)));
     summary.append(
-      el('div', { class: 'retest-row' }, [el('span', { class: 'retest-label' }, '重練這些錯題:'), select, startBtn]),
-      el('p', { class: 'retest-hint' }, '隨機抽題重新作答,即時看答案。答對的題目會離開錯題本,答錯的會留著。')
+      el('div', { class: 'retest-row' }, [el('span', { class: 'retest-label' }, '重練:'), scopeSelect, select, startBtn]),
+      el('p', { class: 'retest-hint' }, '到期的錯題答對會排到下一次(隔 3 天、再隔 7 天),' + REVIEW_STAGES + ' 次都答對才離開錯題本;答錯就從隔天重新開始。還沒到期的題目答對不會往前推。')
     );
   }
 }
 
 // 目前篩選條件下可以重練的錯題。純寫答的非選擇題(跟 hybrid 的簡答部分)要自己對答案,
 // 沒辦法在這裡自動判分,不放進重練。
-function retestPool() {
+function retestPool(scope = retestScope) {
   return filtered()
+    .filter((w) => scope !== 'due' || w.isDue)
     .filter((w) => !w.questionId.endsWith('-written'))
     .map((w) => ({ ...getQuestion(w.subjectId, w.unitId, w.questionId), _loc: { subjectId: w.subjectId, unitId: w.unitId } }))
     .filter((q) => ['single', 'multi', 'numeric', 'numeric-multi', undefined].includes(q.type));
 }
 
 // 把錯題清單換成一份即時判分的測驗。作答結果照一般作答紀錄存(依題目原本的單元),
-// 所以答對的題目「最近一次作答是對的」,自然就從錯題本消失;答錯的留著。
+// 錯題本的複習排程是從作答紀錄推算的(見 storage.js 的 getWrongQuestions),所以不用另外處理。
 function startRetest(n) {
   const pool = retestPool();
   if (!pool.length) {
@@ -143,7 +158,9 @@ function startRetest(n) {
     },
     extraActions: () => [backBtn],
     finishNote: (wrongCount, total) =>
-      wrongCount ? `答對 ${total - wrongCount} 題,已離開錯題本;${wrongCount} 題答錯,留在錯題本。` : `${total} 題全部答對,都已離開錯題本!`,
+      wrongCount
+        ? `答對 ${total - wrongCount} 題,到期的會排到下一次複習;${wrongCount} 題答錯,從隔天重新開始。`
+        : `${total} 題全部答對!到期的會排到下一次複習,${REVIEW_STAGES} 次都答對就離開錯題本。`,
   });
 }
 
@@ -170,6 +187,16 @@ function renderMore(count) {
   }
 }
 
+// 卡片上的複習排程:「今天到期 · 第 1/3 次複習」或「11/17(3 天後)到期 · 第 2/3 次複習」。
+function scheduleText(w) {
+  const step = `第 ${w.stage + 1}/${REVIEW_STAGES} 次複習`;
+  if (w.isDue) return `今天到期 · ${step}`;
+  const daysLeft = w.dueDay - localDayIndex();
+  const due = new Date(w.dueDay * 86400000);
+  const when = daysLeft === 1 ? '明天' : `${due.getUTCMonth() + 1}/${due.getUTCDate()}(${daysLeft} 天後)`;
+  return `${when}到期 · ${step}`;
+}
+
 function buildCard(w) {
   const subject = getSubject(w.subjectId);
   const unit = getUnit(w.subjectId, w.unitId);
@@ -178,7 +205,8 @@ function buildCard(w) {
   const card = el('div', { class: 'wrong-card' });
   card.style.setProperty('--row-color', subject?.color || '#201c2b');
   card.append(
-    el('p', { class: 'wrong-meta' }, `${subject?.name || ''} · ${unit?.title || ''} · ${formatRelativeDate(w.lastAttemptAt)}答錯`)
+    el('p', { class: 'wrong-meta' }, `${subject?.name || ''} · ${unit?.title || ''} · ${formatRelativeDate(w.lastWrongAt || w.lastAttemptAt)}答錯`),
+    el('p', { class: `wrong-schedule${w.isDue ? ' is-due' : ''}` }, scheduleText(w))
   );
   if (question.passageId) card.append(renderPassage(question));
   card.append(attachTranslation(renderRichText(question.question, { className: 'wrong-question' }), question.questionZh));

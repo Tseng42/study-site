@@ -1,6 +1,6 @@
 import { getAllSubjects, getSubject, getUnit, getQuestion } from './subjects-registry.js';
 import { getSubjectProgress, getQuizResults, getExamDate, setExamDate, getMockExamHistory } from './storage.js';
-import { getReviewableWrongQuestions } from './wrong-utils.js';
+import { getReviewableWrongQuestions, byLastWrongDesc } from './wrong-utils.js';
 import { resolveExamDate, getDaysRemaining } from './study-plan.js';
 import { getAchievementState, getHighestTier, computeStats, TIER_LABEL } from './achievements.js';
 import { el, icon } from './render.js';
@@ -14,6 +14,9 @@ await initCloudSync(user.uid);
 renderUserMenu(user);
 
 const subjects = getAllSubjects();
+// 「最需要加強的單元」的門檻(見 weakestUnits)。要放在下面那一串 render 呼叫之前,不然會踩到 TDZ。
+const WEAK_UNIT_MIN_QUESTIONS = 10;
+const WEAK_UNIT_LIMIT = 5;
 
 // 歷屆試題模擬考紀錄的 subjectId 是虛擬的「{科目}-real」,不是真正的科目,顯示用的
 // 標籤/連結要另外處理。這個 const 一定要放在 renderMockExamHistory() 被呼叫(見下面
@@ -58,6 +61,7 @@ try {
 renderReviewList();
 renderRecentQuizzes();
 renderMockExamHistory();
+renderWeakUnits();
 
 function subjectAccuracy(subjectId) {
   const results = getQuizResults(subjectId);
@@ -258,7 +262,7 @@ function renderAccuracyChart() {
 
 function renderReviewList() {
   const container = document.getElementById('review-list');
-  const allWrongs = getReviewableWrongQuestions().sort((a, b) => new Date(b.lastAttemptAt) - new Date(a.lastAttemptAt));
+  const allWrongs = getReviewableWrongQuestions().sort(byLastWrongDesc);
   const wrongs = allWrongs.slice(0, 5);
 
   if (!wrongs.length) {
@@ -287,6 +291,55 @@ function renderReviewList() {
   }
   if (allWrongs.length > wrongs.length) {
     container.append(el('a', { href: 'wrongbook.html', class: 'timeline-row-empty timeline-row-more' }, `查看全部 ${allWrongs.length} 題待複習 →`));
+  }
+}
+
+// 「最需要加強的單元」:每題只看最近一次作答的對錯(練好之後排名會跟著變好,不會被
+// 以前答錯的紀錄一直拖著),至少答過 WEAK_UNIT_MIN_QUESTIONS 題不同題目的單元才列入,
+// 避免只做兩三題就排上去。只看一般單元:歷屆試題的「年度考卷」不算單元;模擬考答的
+// 題目紀錄本來就寫在題目原本所屬的單元底下,會一起算。已經從題庫刪掉的題目不算。
+
+function weakestUnits() {
+  const latest = new Map();
+  const results = getQuizResults().slice().sort((a, b) => new Date(a.takenAt) - new Date(b.takenAt));
+  for (const r of results) {
+    for (const a of r.answers) latest.set(`${r.subjectId}/${r.unitId}/${a.questionId}`, a.isCorrect);
+  }
+  const rows = [];
+  for (const subject of subjects) {
+    for (const unit of subject.units) {
+      let answered = 0;
+      let correct = 0;
+      for (const q of unit.quiz || []) {
+        const isCorrect = latest.get(`${subject.id}/${unit.id}/${q.id}`);
+        if (isCorrect === undefined) continue;
+        answered += 1;
+        if (isCorrect) correct += 1;
+      }
+      if (answered < WEAK_UNIT_MIN_QUESTIONS) continue;
+      rows.push({ subject, unit, answered, accuracy: Math.round((correct / answered) * 100) });
+    }
+  }
+  return rows.sort((a, b) => a.accuracy - b.accuracy || b.answered - a.answered).slice(0, WEAK_UNIT_LIMIT);
+}
+
+function renderWeakUnits() {
+  const container = document.getElementById('weak-units');
+  const rows = weakestUnits();
+  if (!rows.length) {
+    container.append(el('div', { class: 'timeline-row-empty' }, `單元至少作答 ${WEAK_UNIT_MIN_QUESTIONS} 題之後,這裡會列出正確率最低的單元。`));
+    return;
+  }
+  for (const { subject, unit, answered, accuracy } of rows) {
+    const row = el('a', { class: 'timeline-row', href: unitHref(subject.id, unit.id) });
+    row.style.setProperty('--row-color', subject.color || '#201c2b');
+    row.append(
+      el('div', { class: 'timeline-row-body' }, [
+        el('div', { class: 'timeline-row-title' }, unit.title),
+        el('div', { class: 'timeline-row-meta' }, `${subject.name} · 正確率 ${accuracy}% · 做過 ${answered} 題(每題看最近一次)`),
+      ])
+    );
+    container.append(row);
   }
 }
 

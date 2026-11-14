@@ -108,8 +108,8 @@ export function upsertQuizResult(record) {
 
 // ---- 錯題本 ----
 // wrongBookState: { [questionId]: { mastered: boolean, everMastered?: boolean } }
-// 錯題本內容不另外重複儲存題目,而是即時從 quizResults 彙整「每題最近一次作答結果」，
-// 取出最近一次答錯、且尚未被標記「已熟練」的題目。
+// 錯題本內容不另外重複儲存題目,而是即時從 quizResults 依時間順序推算每題的複習排程
+// (見下面的 getWrongQuestions),取出還在排程裡、且尚未被標記「已熟練」的題目。
 // 已標記熟練的題目之後如果又答錯,mastered 會被清掉、題目回到錯題本(見
 // reopenMasteredIfWrong);everMastered 記住「曾經熟練過」,讓成就用的熟練題數不會
 // 因為重新答錯就倒退。
@@ -137,28 +137,68 @@ function reopenMasteredIfWrong(record) {
   if (changed) writeJSON('wrongBookState', state);
 }
 
-export function getWrongQuestions() {
+// ---- 錯題間隔複習(2026-11-14 起)----
+// 答錯的題目隔 1 天到期;到期後答對,下一次排在 3 天後,再答對排 7 天後,7 天那次也答對
+// 才離開錯題本。中途任何一次答錯,就從隔天重新開始;還沒到期就答對不會往前推。
+// 依據:間隔複習比一次答對就算會更能長期記住(Cepeda et al. 2008;Karpicke & Roediger 2007)。
+// 排程不另外存,每次都從作答紀錄依時間順序推算,換裝置同步也不會不一致。
+// SPACED_REVIEW_START 之前的作答維持舊規則(答對一次就離開錯題本),不然以前答對過、
+// 已經離開的題目會全部跑回來。
+const REVIEW_INTERVALS = [1, 3, 7];
+const SPACED_REVIEW_START = new Date('2026-11-14T00:00:00+08:00').getTime();
+export const REVIEW_STAGES = REVIEW_INTERVALS.length;
+
+// 本機時區的「第幾天」整數(跟 achievements.js 的 dayIndexOf 一樣),比較日期用。
+export function localDayIndex(date = new Date()) {
+  return Math.floor(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()) / 86400000);
+}
+
+// lastReviewDay:最晚的複習日(考試前一天的 localDayIndex),排到這天之後的複習會提前到這天。
+export function getWrongQuestions({ lastReviewDay = null } = {}) {
   const results = readJSON('quizResults', [])
     .slice()
     .sort((a, b) => new Date(a.takenAt) - new Date(b.takenAt));
   const state = getWrongBookState();
-  const latestByQuestion = new Map();
+  const tracks = new Map();
 
   for (const result of results) {
+    const takenAt = new Date(result.takenAt);
+    const day = localDayIndex(takenAt);
+    const spaced = takenAt.getTime() >= SPACED_REVIEW_START;
     for (const ans of result.answers) {
-      latestByQuestion.set(ans.questionId, {
+      const prev = tracks.get(ans.questionId);
+      let next;
+      if (!ans.isCorrect) {
+        next = { inBook: true, stage: 0, dueDay: day + REVIEW_INTERVALS[0] };
+      } else if (!prev?.inBook) {
+        next = { inBook: false };
+      } else if (!spaced) {
+        next = { inBook: false };
+      } else if (day >= prev.dueDay) {
+        const stage = prev.stage + 1;
+        next = stage >= REVIEW_INTERVALS.length ? { inBook: false } : { inBook: true, stage, dueDay: day + REVIEW_INTERVALS[stage] };
+      } else {
+        next = { ...prev };
+      }
+      if (next.inBook && lastReviewDay != null && next.dueDay > lastReviewDay) {
+        next.dueDay = Math.max(day + 1, lastReviewDay);
+      }
+      tracks.set(ans.questionId, {
+        ...next,
         subjectId: result.subjectId,
         unitId: result.unitId,
         questionId: ans.questionId,
         isCorrect: ans.isCorrect,
         lastAttemptAt: result.takenAt,
+        lastWrongAt: ans.isCorrect ? prev?.lastWrongAt || null : result.takenAt,
       });
     }
   }
 
-  return Array.from(latestByQuestion.values()).filter(
-    (q) => !q.isCorrect && !state[q.questionId]?.mastered
-  );
+  const today = localDayIndex();
+  return Array.from(tracks.values())
+    .filter((t) => t.inBook && !state[t.questionId]?.mastered)
+    .map(({ inBook, ...t }) => ({ ...t, isDue: t.dueDay <= today }));
 }
 
 // ---- 模擬考紀錄(每次模擬考一筆整體摘要,個別題目的對錯另外分散寫進 quizResults) ----

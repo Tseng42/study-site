@@ -1496,6 +1496,18 @@ a.timeline-row:hover {
   text-transform: uppercase;
   letter-spacing: 0.02em;
 }
+.weak-units-section {
+  margin-bottom: 32px;
+}
+.wrong-schedule {
+  color: var(--ink-muted);
+  font-size: 0.8rem;
+  margin: -2px 0 8px;
+}
+.wrong-schedule.is-due {
+  color: var(--ink);
+  font-weight: 700;
+}
 .wrong-question {
   font-weight: 700;
   font-family: var(--font-display);
