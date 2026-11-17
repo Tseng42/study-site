@@ -2302,3 +2302,13 @@ a.timeline-row:hover {
     grid-column: 1 / -1;
   }
 }
+
+/* 個人資料頁最底下的網站版本號 */
+.app-version {
+  margin: 32px 0 8px;
+  text-align: center;
+  font-family: var(--font-numeric);
+  font-size: 0.8rem;
+  color: var(--ink-muted);
+  letter-spacing: 0.04em;
+}
